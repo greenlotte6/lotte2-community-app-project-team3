@@ -27,20 +27,190 @@ h1 {
   display: flex;
   flex-direction: column;
   min-height: 700px;
-  /* 필요한 만큼 높이 확보 (원하는 숫자로 조절) */
 }
 
-/* SAVE 버튼 디자인 */
-.btn {
-  text-align: right;
-}
-
-.btn button {
-  height: 40px;
-  width: 120px;
-  margin: 40px 5px 0 0;
-  border: 3px solid #104e4a;
-  border-radius: 10px;
+.head button {
+  float: right;
+  width: 80px;
+  height: 30px;
+  border: 3px solid #1ab9af;
   background-color: transparent;
-  color: #104e4a;
+  border-radius: 10px;
+  color: #0c5550;
+  margin-top: -30px;
+}
+
+.body {
+  margin-top: 40px;
+  border: 1px solid #dfdfdf;
+}
+
+/* 수정하기 버튼 */
+.body button {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #98cfcc;
+  padding: 5px;
+  font-size: 13px;
+}
+
+/* 리스트 디자인 */
+table {
+  border-spacing: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+th {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+th:nth-last-child(1) {
+  width: 20%;
+}
+
+th:nth-last-child(2) {
+  width: 20%;
+}
+
+td {
+  padding: 12px;
+  text-align: center;
+}
+
+/* 모달창 디자인 */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-content label {
+  margin-top: 10px;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1ab9af;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.modal-content button:hover {
+  background-color: #0c5550;
+}
+
+/* On/Off 스위치 디자인 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  margin-left: 350px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #104e4a;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* 공유할 멤버 추가 */
+#memberInputContainer {
+  display: none;
+  margin-top: 10px;
+}
+
+#memberTagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+/* 삭제버튼 */
+button.deleteBtn {
+  width: 50px;
+  padding: 4px;
+  background: none;
+  border: 1px solid darkred;
+  color: orangered;
+  margin-left: 30px;
+}
+
+button.deleteBtn:hover {
+  background-color: #0c5550;
+  color: white;
 }
