@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>채팅메인</title>
+    <link rel="stylesheet" href="/view/css/chat/main.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- 사이드바 - 채팅방 목록 -->
+      <aside>
+        <div class="sidebar-header">
+          <div class="sidebar-title">채팅</div>
+          <div class="sidebar-actions">
+            <button class="icon-btn">⚙️</button>
+            <button class="icon-btn">✏️</button>
+          </div>
+        </div>
+
+        <div class="search-container">
+          <input type="text" class="search-box" placeholder="채팅방 검색..." />
+        </div>
+
+        <div class="chat-list">
+          <div class="chat-item active">
+            <div class="profile-pic">김</div>
+            <div class="chat-info">
+              <div class="chat-name">김민수</div>
+              <div class="chat-preview">안녕하세요! 오늘 회의 시간이...</div>
+            </div>
+            <div class="chat-time">오후 2:30</div>
+          </div>
+
+          <div class="chat-item">
+            <div class="profile-pic">이</div>
+            <div class="chat-info">
+              <div class="chat-name">이영희</div>
+              <div class="chat-preview">네, 알겠습니다.</div>
+            </div>
+            <div class="chat-time">오후 1:15</div>
+          </div>
+
+          <div class="chat-item">
+            <div class="profile-pic">박</div>
+            <div class="chat-info">
+              <div class="chat-name">박철수</div>
+              <div class="chat-preview">프로젝트 진행 상황이 어떻게...</div>
+            </div>
+            <div class="chat-time">오전 11:20</div>
+          </div>
+
+          <div class="chat-item">
+            <div class="profile-pic">최</div>
+            <div class="chat-info">
+              <div class="chat-name">최수진</div>
+              <div class="chat-preview">내일 저녁에 시간 되시나요?</div>
+            </div>
+            <div class="chat-time">오전 9:45</div>
+          </div>
+
+          <div class="chat-item">
+            <div class="profile-pic">정</div>
+            <div class="chat-info">
+              <div class="chat-name">정한솔</div>
+              <div class="chat-preview">좋은 아이디어네요!</div>
+            </div>
+            <div class="chat-time">어제</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 메인 채팅 영역 -->
+      <main>
+        <!-- 채팅 헤더 -->
+        <div class="chat-header">
+          <div class="chat-user-info">
+            <div class="chat-user-pic">김</div>
+            <div class="chat-user-details">
+              <h3>김민수</h3>
+              <div class="chat-user-status">온라인</div>
+            </div>
+          </div>
+          <div class="chat-actions">
+            <button class="icon-btn">📞</button>
+            <button class="icon-btn">📹</button>
+            <button class="icon-btn">ℹ️</button>
+            <button class="icon-btn">⋯</button>
+          </div>
+        </div>
+
+        <!-- 채팅 메시지 영역 -->
+        <div class="chat-messages">
+          <div class="message received">
+            <div class="message-avatar">김</div>
+            <div class="message-bubble">
+              안녕하세요! 오늘 회의 시간이 몇 시인지 확인해주실 수 있나요?
+            </div>
+          </div>
+
+          <div class="message sent">
+            <div class="message-bubble">
+              네, 오후 3시에 회의실 A에서 진행됩니다.
+            </div>
+          </div>
+
+          <div class="message received">
+            <div class="message-avatar">김</div>
+            <div class="message-bubble">
+              감사합니다! 미리 준비해서 참석하겠습니다.
+            </div>
+          </div>
+
+          <div class="message sent">
+            <div class="message-bubble">
+              네, 좋습니다. 필요한 자료가 있으시면 미리 말씀해주세요.
+            </div>
+          </div>
+
+          <div class="message received">
+            <div class="message-avatar">김</div>
+            <div class="message-bubble">
+              혹시 프레젠테이션 자료도 준비해야 할까요?
+            </div>
+          </div>
+        </div>
+
+        <!-- 메시지 입력 영역 -->
+        <div class="chat-input">
+          <div class="input-container">
+            <button class="icon-btn">📎</button>
+            <input
+              type="text"
+              class="message-input"
+              placeholder="메시지를 입력하세요..."
+            />
+            <button class="icon-btn">😊</button>
+            <button class="send-btn">→</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
