@@ -1,0 +1,13 @@
+.setting1 h3::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  background-image: url("/images/back24.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
