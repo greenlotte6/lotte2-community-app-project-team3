@@ -17,11 +17,13 @@ body {
   flex-direction: column;
 }
 
+/* 메인 콘텐츠 영역 (헤더/푸터 제외하고 좌우로 배치) */
 .main-layout {
   display: flex;
   flex: 1;
 }
 
+/* 좌측 사이드바 스타일 */
 .sidebar {
   width: 200px;
   background: #fff;
@@ -60,6 +62,7 @@ body {
   color: #e63946;
 }
 
+/* 상단 헤더 영역 */
 .header {
   height: 50px;
   background: #fff;
@@ -83,6 +86,7 @@ body {
   margin-left: 10px;
 }
 
+/* 하단 푸터 영역 */
 .footer {
   text-align: center;
   padding: 10px;
