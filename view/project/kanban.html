@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>프로젝트 메인</title>
+    <link rel="stylesheet" href="/view/css/project/kanban.css" />
+    <link rel="stylesheet" href="/view/css/index.css" />
+  </head>
+  <body>
+    <div class="header">
+      <span class="status">STATUS?</span>
+      <img
+        src="https://via.placeholder.com/40x40/1877f2/ffffff?text=MR"
+        alt="admin"
+      />
+      <span class="admin">Moni Roy<br />Admin</span>
+    </div>
+
+    <div id="wrapper">
+      <!-- 사이드바 -->
+      <aside>
+        <h2 class="sidebar-title">My Project</h2>
+        <button class="new-project-btn">
+          <span>➕</span>
+          NEW PROJECT
+        </button>
+      </aside>
+
+      <!-- 메인 영역 -->
+      <main>
+        <!-- 칸반 헤더 -->
+        <div class="kanban-header">
+          <h1 class="kanban-title">Kanban Dashboard</h1>
+          <div class="kanban-actions">
+            <button class="search-btn" title="검색">🔍</button>
+            <button class="add-btn" title="새 작업 추가">➕</button>
+          </div>
+        </div>
+
+        <!-- 칸반 보드 -->
+        <div class="kanban-board">
+          <!-- TO DO 컬럼 -->
+          <div class="kanban-column todo">
+            <div class="column-header">
+              <div class="column-title">
+                <span class="column-name">To Do</span>
+                <span class="task-count">3</span>
+              </div>
+              <button class="column-menu">⋯</button>
+            </div>
+
+            <div class="task-list">
+              <div class="task-card priority-high">
+                <div class="task-title">로그인 페이지 디자인 수정</div>
+                <div class="task-description">
+                  사용자 피드백을 반영하여 로그인 페이지의 UI/UX를 개선합니다.
+                </div>
+                <div class="task-meta">
+                  <div class="task-tags">
+                    <span class="task-tag frontend">Frontend</span>
+                    <span class="task-tag design">Design</span>
+                  </div>
+                  <div class="task-assignee">
+                    <div class="assignee-avatar">김</div>
+                    <span class="task-date">12/15</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="task-card priority-medium">
+                <div class="task-title">데이터베이스 스키마 설계</div>
+                <div class="task-description">
+                  새로운 기능을 위한 데이터베이스 테이블 구조를 설계합니다.
+                </div>
+                <div class="task-meta">
+                  <div class="task-tags">
+                    <span class="task-tag backend">Backend</span>
+                  </div>
+                  <div class="task-assignee">
+                    <div class="assignee-avatar">이</div>
+                    <span class="task-date">12/20</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="task-card priority-low">
+                <div class="task-title">문서 업데이트</div>
+                <div class="task-description">
+                  API 문서를 최신 버전으로 업데이트합니다.
+                </div>
+                <div class="task-meta">
+                  <div class="task-tags">
+                    <span class="task-tag">Documentation</span>
+                  </div>
+                  <div class="task-assignee">
+                    <div class="assignee-avatar">박</div>
+                    <span class="task-date">12/25</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="add-task-btn">+ 새 작업 추가</button>
+          </div>
+
+          <!-- IN PROGRESS 컬럼 -->
+          <div class="kanban-column progress">
+            <div class="column-header">
+              <div class="column-title">
+                <span class="column-name">In Progress</span>
+                <span class="task-count">2</span>
+              </div>
+              <button class="column-menu">⋯</button>
+            </div>
+
+            <div class="task-list">
+              <div class="task-card priority-high">
+                <div class="task-title">결제 시스템 구현</div>
+                <div class="task-description">
+                  PG사 연동을 통한 결제 기능을 개발 중입니다.
+                </div>
+                <div class="task-meta">
+                  <div class="task-tags">
+                    <span class="task-tag backend">Backend</span>
+                    <span class="task-tag frontend">Frontend</span>
+                  </div>
+                  <div class="task-assignee">
+                    <div class="assignee-avatar">최</div>
+                    <span class="task-date">12/18</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="task-card priority-medium">
+                <div class="task-title">모바일 반응형 작업</div>
+                <div class="task-description">
+                  메인 페이지의 모바일 반응형을 구현하고 있습니다.
+                </div>
+                <div class="task-meta">
+                  <div class="task-tags">
+                    <span class="task-tag frontend">Frontend</span>
+                  </div>
+                  <div class="task-assignee">
+                    <div class="assignee-avatar">정</div>
+                    <span class="task-date">12/22</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="add-task-btn">+ 새 작업 추가</button>
+          </div>
+
+          <!-- REVIEW 컬럼 -->
+          <div class="kanban-column review">
+            <div class="column-header">
+              <div class="column-title">
+                <span class="column-name">Review</span>
+                <span class="task-count">1</span>
+              </div>
+              <button class="column-menu">⋯</button>
+            </div>
+
+            <div class="task-list">
+              <div class="task-card priority-medium">
+                <div class="task-title">사용자 권한 관리 기능</div>
+                <div class="task-description">
+                  관리자 패널에서 사용자 권한을 관리할 수 있는 기능입니다.
+                </div>
+                <div class="task-meta">
+                  <div class="task-tags">
+                    <span class="task-tag backend">Backend</span>
+                  </div>
+                  <div class="task-assignee">
+                    <div class="assignee-avatar">김</div>
+                    <span class="task-date">12/16</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="add-task-btn">+ 새 작업 추가</button>
+          </div>
+
+          <!-- DONE 컬럼 -->
+          <div class="kanban-column done">
+            <div class="column-header">
+              <div class="column-title">
+                <span class="column-name">Done</span>
+                <span class="task-count">4</span>
+              </div>
+              <button class="column-menu">⋯</button>
+            </div>
+
+            <div class="task-list">
+              <div class="task-card priority-high">
+                <div class="task-title">회원가입 기능 완성</div>
+                <div class="task-description">
+                  이메일 인증을 포함한 회원가입 시스템이 완료되었습니다.
+                </div>
+                <div class="task-meta">
+                  <div class="task-tags">
+                    <span class="task-tag backend">Backend</span>
+                    <span class="task-tag frontend">Frontend</span>
+                  </div>
+                  <div class="task-assignee">
+                    <div class="assignee-avatar">이</div>
+                    <span class="task-date">12/10</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="task-card priority-medium">
+                <div class="task-title">프로젝트 초기 설정</div>
+                <div class="task-description">
+                  개발 환경 설정과 기본 프로젝트 구조가 완성되었습니다.
+                </div>
+                <div class="task-meta">
+                  <div class="task-tags">
+                    <span class="task-tag">Setup</span>
+                  </div>
+                  <div class="task-assignee">
+                    <div class="assignee-avatar">박</div>
+                    <span class="task-date">12/05</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="task-card priority-low">
+                <div class="task-title">로고 디자인</div>
+                <div class="task-description">
+                  브랜드 아이덴티티에 맞는 로고 디자인이 완료되었습니다.
+                </div>
+                <div class="task-meta">
+                  <div class="task-tags">
+                    <span class="task-tag design">Design</span>
+                  </div>
+                  <div class="task-assignee">
+                    <div class="assignee-avatar">최</div>
+                    <span class="task-date">12/08</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="task-card priority-medium">
+                <div class="task-title">데이터베이스 구축</div>
+                <div class="task-description">
+                  기본 테이블과 관계 설정이 완료되었습니다.
+                </div>
+                <div class="task-meta">
+                  <div class="task-tags">
+                    <span class="task-tag backend">Backend</span>
+                  </div>
+                  <div class="task-assignee">
+                    <div class="assignee-avatar">정</div>
+                    <span class="task-date">12/12</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button class="add-task-btn">+ 새 작업 추가</button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="footer">
+      version 0.0.1 | License | More Themes | Documentation | Support
+    </div>
+
+    <!-- 새 작업 추가 모달 -->
+    <div class="modal-overlay" id="taskModal">
+      <div class="task-modal">
+        <div class="modal-header">
+          <div class="modal-title">새 작업 추가</div>
+          <div class="modal-subtitle">새로운 작업을 생성해보세요</div>
+        </div>
+
+        <div class="modal-form">
+          <div class="form-group">
+            <label class="form-label" for="taskTitle">작업 제목 *</label>
+            <input
+              type="text"
+              id="taskTitle"
+              class="form-input"
+              placeholder="작업 제목을 입력하세요"
+              maxlength="100"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="taskContent">작업 내용</label>
+            <textarea
+              id="taskContent"
+              class="form-input form-textarea"
+              placeholder="작업에 대한 자세한 설명을 입력하세요 (선택사항)"
+              maxlength="500"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="modal-btn modal-btn-cancel" id="cancelTaskBtn">
+            취소
+          </button>
+          <button class="modal-btn modal-btn-save" id="saveTaskBtn" disabled>
+            저장
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="/view/js/project/kanbanModal.js"></script>
+</html>
