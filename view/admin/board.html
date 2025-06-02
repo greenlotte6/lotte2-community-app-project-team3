@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/admin/board.css">
+    <title>게시판 설정</title>
+</head>
+<style>
+    .head button {
+        float: right;
+        width: 80px;
+        height: 30px;
+        border: 3px solid #1ab9af;
+        background-color: transparent;
+        border-radius: 10px;
+        color: #0c5550;
+        margin-top: -30px;
+    }
+
+    .body {
+        margin-top: 40px;
+        border: 1px solid #dfdfdf;
+    }
+
+    th {
+        width: 32%;
+    }
+
+    td {
+        width: 30%;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo">
+                <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+                <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+            </div>
+            <span class="status">ONLINE <span>●</span></span>
+            <img src="/images/profile1.png" alt="프로필이미지" />
+            <span class="admin">김팀장<br>Admin</span>
+        </div>
+
+        <div class="main-layout">
+            <!-- 사이드메뉴 시작 -->
+            <aside class="sidebar">
+                <div>
+                    <div class="section-title">BOARDS</div>
+                    <ul>
+                        <li>Notices</li>
+                        <li>Department</li>
+                        <li>Free</li>
+                        <li>Q&A</li>
+                        <li>Album</li>
+                        <li>Menu</li>
+                    </ul>
+                    <div class="section-title">MENU</div>
+                    <ul>
+                        <li>Messages</li>
+                        <li>Calender</li>
+                        <li>Projects</li>
+                        <li>Pages</li>
+                        <li>Drive</li>
+                    </ul>
+                    <div class="section-title">SETTINGS</div>
+                    <ul>
+                        <li>프로필</li>
+                        <li>알림</li>
+                        <li>캘린더</li>
+                        <li>페이지</li>
+                        <li>메시지</li>
+                        <li>내 드라이브</li>
+                        <li>프로젝트</li>
+                        <li>-------------------</li>
+                        <li>게시판</li>
+                        <li>플랜</li>
+                    </ul>
+                </div>
+                <div>
+                    <li>Logout</li>
+                </div>
+            </aside>
+            <!-- 사이드메뉴 끝 -->
+
+            <main class="main-content">
+
+                <article class="main-content">
+                    <!-- 메인 시작 -->
+                    <div class="title">
+                        <h1>게시판 설정</h1>
+                    </div>
+                    <div class="board-setting">
+                        <div class="board">
+                            <div class="head">
+                                <p>게시판을 추가하거나 멤버 권한, 타입을 설정할 수 있습니다.</p>
+                                <p>카테고리를 추가하거나 게시판 순서를 변경하려면 Admin 으로 접속 해주세요.</p>
+                                <button>ADD</button>
+                            </div>
+                            <div class="body">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>게시판명</th>
+                                            <th>작성권한</th>
+                                            <th>타입</th>
+                                            <th>관리</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>공지사항</td>
+                                            <td>Admin</td>
+                                            <td>게시판</td>
+                                            <td>수정</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- 메인 끝 -->
+
+                    <div class="btn">
+                        <button>S A V E</button>
+                    </div>
+
+                </article>
+
+            </main>
+        </div>
+
+
+        <div class="footer">
+            version 0.0.1 | License | More Themes | Documentation | Support
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

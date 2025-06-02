@@ -1,0 +1,46 @@
+/* 설정 타이틀 */
+h1 {
+  margin: 0 0 30px 10px;
+}
+
+.status span {
+  color: green;
+}
+
+/* 메인 */
+.main-content {
+  flex: 1;
+  padding: 2% 4%;
+}
+
+.board-setting {
+  display: flex;
+  border: 1px solid #dedede;
+  background: #ffffff;
+  border-radius: 30px;
+  height: 100%;
+}
+
+.board {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  min-height: 700px;
+  /* 필요한 만큼 높이 확보 (원하는 숫자로 조절) */
+}
+
+/* SAVE 버튼 디자인 */
+.btn {
+  text-align: right;
+}
+
+.btn button {
+  height: 40px;
+  width: 120px;
+  margin: 40px 5px 0 0;
+  border: 3px solid #104e4a;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #104e4a;
+}
