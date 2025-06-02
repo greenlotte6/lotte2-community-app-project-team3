@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>프로젝트 메인</title>
+    <link rel="stylesheet" href="/view/css/project/main.css" />
+  </head>
+  <body>
+    <div id="wrapper">
+      <!-- 사이드바 -->
+      <aside>
+        <h2 class="sidebar-title">My Project</h2>
+        <button class="new-project-btn">
+          <span>➕</span>
+          NEW PROJECT
+        </button>
+      </aside>
+
+      <!-- 메인 영역 -->
+      <main>
+        <div class="main-header">
+          <h1 class="main-title">My Project</h1>
+
+          <!-- 검색창 -->
+          <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="프로젝트 검색..."
+              id="searchInput"
+            />
+          </div>
+        </div>
+
+        <!-- 프로젝트 목록 -->
+        <div class="projects-container" id="projectsContainer">
+          <!-- 프로젝트 아이템들 -->
+          <div class="project-item">
+            <div class="project-icon type-web">W</div>
+            <div class="project-info">
+              <div class="project-name">웹사이트 리뉴얼</div>
+              <div class="project-details">
+                <span class="project-type">웹 개발</span>
+                <span class="project-date">2024.11.15</span>
+              </div>
+              <div class="project-description">
+                반응형 웹사이트 리뉴얼 프로젝트입니다. 모던한 디자인과 사용자
+                경험을 개선합니다.
+              </div>
+            </div>
+            <div class="project-actions">
+              <button class="action-btn edit-btn" title="편집">✏️</button>
+              <button class="action-btn delete-btn" title="삭제">🗑️</button>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-icon type-mobile">M</div>
+            <div class="project-info">
+              <div class="project-name">모바일 앱 개발</div>
+              <div class="project-details">
+                <span class="project-type">모바일</span>
+                <span class="project-date">2024.11.10</span>
+              </div>
+              <div class="project-description">
+                크로스 플랫폼 모바일 애플리케이션 개발 프로젝트입니다.
+              </div>
+            </div>
+            <div class="project-actions">
+              <button class="action-btn edit-btn" title="편집">✏️</button>
+              <button class="action-btn delete-btn" title="삭제">🗑️</button>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-icon type-design">D</div>
+            <div class="project-info">
+              <div class="project-name">브랜드 디자인</div>
+              <div class="project-details">
+                <span class="project-type">디자인</span>
+                <span class="project-date">2024.11.05</span>
+              </div>
+              <div class="project-description">
+                새로운 브랜드 아이덴티티 및 로고 디자인 프로젝트입니다.
+              </div>
+            </div>
+            <div class="project-actions">
+              <button class="action-btn edit-btn" title="편집">✏️</button>
+              <button class="action-btn delete-btn" title="삭제">🗑️</button>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-icon">E</div>
+            <div class="project-info">
+              <div class="project-name">이커머스 플랫폼</div>
+              <div class="project-details">
+                <span class="project-type">풀스택</span>
+                <span class="project-date">2024.10.28</span>
+              </div>
+              <div class="project-description">
+                온라인 쇼핑몰 개발 프로젝트입니다. 결제 시스템과 관리자 페이지를
+                포함합니다.
+              </div>
+            </div>
+            <div class="project-actions">
+              <button class="action-btn edit-btn" title="편집">✏️</button>
+              <button class="action-btn delete-btn" title="삭제">🗑️</button>
+            </div>
+          </div>
+
+          <div class="project-item">
+            <div class="project-icon type-web">C</div>
+            <div class="project-info">
+              <div class="project-name">채팅 시스템</div>
+              <div class="project-details">
+                <span class="project-type">웹 개발</span>
+                <span class="project-date">2024.10.20</span>
+              </div>
+              <div class="project-description">
+                실시간 채팅 시스템 개발 프로젝트입니다. WebSocket을 사용한
+                실시간 통신을 구현합니다.
+              </div>
+            </div>
+            <div class="project-actions">
+              <button class="action-btn edit-btn" title="편집">✏️</button>
+              <button class="action-btn delete-btn" title="삭제">🗑️</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- 프로젝트 생성 모달 -->
+    <div class="modal-overlay" id="projectModal">
+      <div class="project-modal">
+        <div class="modal-header">
+          <div class="modal-icon">📁</div>
+          <div class="modal-title">새 프로젝트 생성</div>
+          <div class="modal-subtitle">새로운 프로젝트를 시작해보세요</div>
+        </div>
+
+        <div class="modal-body">
+          <!-- 프로젝트 이름 -->
+          <div class="form-section">
+            <label class="form-label" for="projectName">프로젝트 이름 *</label>
+            <input
+              type="text"
+              id="projectName"
+              class="form-input"
+              placeholder="프로젝트 이름을 입력하세요"
+              maxlength="50"
+            />
+          </div>
+
+          <!-- 프로젝트 설명 -->
+          <div class="form-section">
+            <label class="form-label" for="projectDescription"
+              >프로젝트 설명</label
+            >
+            <textarea
+              id="projectDescription"
+              class="form-input"
+              placeholder="프로젝트에 대한 간단한 설명을 입력하세요 (선택사항)"
+              rows="3"
+              maxlength="200"
+              style="resize: vertical; min-height: 80px"
+            ></textarea>
+          </div>
+
+          <!-- 프로젝트 타입 -->
+          <div class="form-section">
+            <label class="form-label">프로젝트 타입 *</label>
+            <div class="project-types">
+              <div class="type-option" data-type="web">
+                <div class="type-icon">🌐</div>
+                <div class="type-name">웹 개발</div>
+              </div>
+              <div class="type-option" data-type="mobile">
+                <div class="type-icon">📱</div>
+                <div class="type-name">모바일</div>
+              </div>
+              <div class="type-option" data-type="design">
+                <div class="type-icon">🎨</div>
+                <div class="type-name">디자인</div>
+              </div>
+              <div class="type-option" data-type="data">
+                <div class="type-icon">📊</div>
+                <div class="type-name">데이터</div>
+              </div>
+              <div class="type-option" data-type="ai">
+                <div class="type-icon">🤖</div>
+                <div class="type-name">AI/ML</div>
+              </div>
+              <div class="type-option" data-type="other">
+                <div class="type-icon">📋</div>
+                <div class="type-name">기타</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 팀 멤버 초대 -->
+          <div class="form-section">
+            <label class="form-label">팀 멤버 초대</label>
+            <div class="invite-section">
+              <div class="invite-header">
+                <span class="invite-title">이메일로 멤버 초대</span>
+                <button class="invite-btn" type="button">
+                  <span>📧</span>
+                  초대 링크 생성
+                </button>
+              </div>
+
+              <div class="invite-input-container">
+                <input
+                  type="email"
+                  class="invite-input"
+                  placeholder="이메일 주소를 입력하세요"
+                  id="memberEmail"
+                />
+                <button class="add-member-btn" type="button" id="addMemberBtn">
+                  추가
+                </button>
+              </div>
+
+              <div class="invited-members" id="invitedMembers">
+                <div class="empty-members">
+                  아직 초대된 멤버가 없습니다.<br />
+                  이메일을 입력하여 팀원을 초대해보세요.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="modal-btn modal-btn-cancel" id="cancelProjectBtn">
+            취소
+          </button>
+          <button
+            class="modal-btn modal-btn-create"
+            id="createProjectBtn"
+            disabled
+          >
+            프로젝트 생성
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="/view/js/project/projectCreateModal.js"></script>
+</html>
