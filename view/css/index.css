@@ -5,9 +5,10 @@
 }
 
 body {
-  font-family: "Arial", sans-serif;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   background: #f8f8f8;
   color: #333;
+  font-size: 14px;
 }
 
 .container {
