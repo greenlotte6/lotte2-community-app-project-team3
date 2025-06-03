@@ -99,3 +99,7 @@
 .modal-buttons button[type="button"]:not(.submit-btn):not(.delete-btn):hover {
   background-color: #e0e0e0;
 }
+
+input[type="color"] {
+  height: 50px;
+}
