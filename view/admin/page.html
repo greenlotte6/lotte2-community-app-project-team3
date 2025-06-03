@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="/css/index.css" />
-    <link rel="stylesheet" href="/css/admin/board.css">
-    <title>게시판 설정</title>
+    <link rel="stylesheet" href="/css/admin/page.css">
+    <title>페이지 설정</title>
 </head>
 <style>
-
+    input[name="fontsize"] {
+        width: 30px;
+        margin: 10px 0 15px -5px;
+    }
 </style>
 
 <body>
@@ -71,37 +74,36 @@
                 <article class="main-content">
                     <!-- 메인 시작 -->
                     <div class="title">
-                        <h1>게시판 설정</h1>
+                        <h1>페이지 설정</h1>
                     </div>
                     <div class="board-setting">
                         <div class="board">
                             <div class="head">
-                                <p>게시판을 추가하거나 멤버 권한, 타입을 설정할 수 있습니다.</p>
-                                <p>카테고리를 추가하거나 게시판 순서를 변경하려면 Admin 으로 접속 해주세요.</p>
-                                <button onclick="">ADD</button>
+                                <p>페이지를 추가하거나 멤버 권한, 공개여부를 설정할 수 있습니다.</p>
+                                <button onclick="openModal('addModal')">ADD</button>
                             </div>
                             <div class="body">
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>게시판명</th> <!-- 클릭시 수정 페이지로 이동 -->
+                                            <th>페이지명</th>
                                             <th>작성권한</th>
                                             <th>마스터</th>
-                                            <th>타입</th>
+                                            <th>작성날짜</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="title">공지사항</td>
-                                            <td>관리자</td>
+                                            <td class="title">page1</td>
+                                            <td>허용멤버만</td>
                                             <td>kim0531</td>
-                                            <td>게시판</td>
+                                            <td>2025.06.03</td>
                                         </tr>
                                         <tr>
-                                            <td class="title">자유게시판</td>
+                                            <td class="title">page2</td>
                                             <td>제한없음</td>
                                             <td>kim0531</td>
-                                            <td>게시판</td>
+                                            <td>2025.06.03</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -121,39 +123,75 @@
 
     </div>
 
+    <!-- ADD Modal -->
+    <div id="addModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('addModal')">&times;</span>
+            <h2>페이지 추가</h2>
+            <label>페이지명</label>
+            <input type="text" placeholder="페이지명을 입력해 주세요." />
+
+            <label>페이지 설명</label>
+            <input type="text" placeholder="설명을 입력해 주세요." />
+
+            <label>공유 범위</label>
+            <select id="shareScope" onchange="handleShareScopeChange()">
+                <option value="all">전체공개</option>
+                <option value="member">멤버공개</option>
+            </select>
+
+            <!-- 멤버 입력 필드 (기본은 숨김) -->
+            <div id="memberInputContainer">
+                <label>공유할 멤버</label>
+                <input type="text" id="memberInput" placeholder="이메일 또는 아이디 입력 후 Enter" onkeydown="addMember(event)" />
+                <div id="memberTagContainer"></div>
+            </div>
+
+            <label>작성 권한</label>
+            <select>
+                <option>마스터만</option>
+                <option>전체</option>
+            </select>
+
+            <button onclick="closeModal('addModal')">저장</button>
+        </div>
+    </div>
+
     <!-- MODIFY Modal -->
     <div id="modifyModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('modifyModal')">&times;</span>
-            <h2>게시판 수정</h2>
-            <label>게시판명</label>
-            <input type="text" placeholder="게시판명을 입력해 주세요." />
+            <h2>페이지 수정</h2>
+            <label>페이지명</label>
+            <input type="text" placeholder="페이지명을 입력해 주세요." />
 
-            <label>게시판 설명</label>
+            <label>페이지 설명</label>
             <input type="text" placeholder="설명을 입력해 주세요." />
 
             <label>작성 권한</label>
             <select>
-                <option>관리자 및 게시판마스터만</option>
+                <option>마스터만</option>
                 <option>전체</option>
             </select>
 
-            <label>타입</label>
-            <select>
-                <option>게시판</option>
-                <option>미리보기</option>
-                <option>앨범</option>
-            </select>
+            <label>글자 크기</label>
+            <section class="radios">
+                <label>
+                    <input name="fontsize" class="basic" type="radio" value="basic">기본
+                </label>
+                <label>
+                    <input name="fontsize" class="big" type="radio" value="big">크게
+                </label>
+                <label>
+                    <input name="fontsize" class="small" type="radio" value="small">작게
+                </label>
+            </section>
 
-            <label>댓글허용</label>
-            <label class="switch">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
+            <label>삭제</label>
+            <label>
+                <button class="deleteBtn" onclick="confirmDelete()">삭제</button>
             </label>
-
-
             <button onclick="closeModal('modifyModal')">수정</button>
-
         </div>
     </div>
 
