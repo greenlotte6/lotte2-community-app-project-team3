@@ -35,7 +35,6 @@ textarea {
 .header-wrapper {
   display: flex;
   justify-content: center;
-
   width: 100%;
   height: 70px;
 }
@@ -60,7 +59,7 @@ textarea {
 .header-left a {
   color: #4a5568;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   transition: color 0.3s;
 }
@@ -76,15 +75,10 @@ textarea {
   transform: translateX(-50%);
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #2d3748;
-  text-decoration: none;
-}
-
-.logo:hover {
-  color: #4299e1;
+.logo img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
 }
 
 /* 헤더 오른쪽 로그인 */
@@ -130,35 +124,35 @@ main {
 .main-content {
   width: 100%;
   max-width: 1200px;
-  padding: 0 20px;
+  padding: 0 40px;
   display: flex;
-  gap: 60px; /* 두 섹션 사이 간격 */
-  align-items: flex-start; /* 상단 정렬 */
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-section {
-  width: 570px;
-  height: 570px;
-
+  width: 580px;
+  height: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 40px;
+  padding: 40px 20px;
   box-sizing: border-box;
   flex-shrink: 0;
 }
 
 .hero-section h1 {
   font-family: "Media Sans Bold", "Arial Black", "Helvetica", sans-serif;
-  font-size: 72px; /* 48px → 72px로 증가 */
+  font-size: 72px;
   font-weight: 900;
   color: #2d3748;
   margin-bottom: 20px;
-  line-height: 1; /* 줄간격 줄임 */
-  text-transform: uppercase;
-  letter-spacing: -2px; /* 글자간격 더 좁게 */
-  text-align: left; /* 왼쪽 정렬 */
+  line-height: 1;
+
+  letter-spacing: -2px;
+  text-align: left;
 }
 
 .hero-section p {
@@ -190,23 +184,22 @@ main {
 }
 
 .features-section {
-  width: 570px;
-  height: 570px;
-
-  border-radius: 20px; /* 모서리 둥글게 */
+  width: 700px;
+  height: 700px;
+  border-radius: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  overflow: hidden; /* 이미지가 모서리 밖으로 나가지 않도록 */
-  background-color: #f8f9fa; /* 기본 배경색 */
+  overflow: hidden;
+  background-color: #f8f9fa;
 }
 
 .features-section img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 이미지 비율 유지하면서 영역 채움 */
-  object-position: center; /* 이미지 중앙 정렬 */
+  object-fit: contain;
+  object-position: center;
 }
 
 /* 이미지가 없을 때 플레이스홀더 */
@@ -217,6 +210,8 @@ main {
   justify-content: center;
   color: #a0aec0;
   text-align: center;
+  width: 100%;
+  height: 100%;
 }
 
 .image-placeholder-icon {
@@ -227,6 +222,194 @@ main {
 .image-placeholder-text {
   font-size: 16px;
   font-weight: 500;
+}
+
+.workspace-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  padding: 0 20px;
+}
+
+.workspace-title h1 {
+  font-family: "Media Sans Bold", "Arial Black", "Helvetica", sans-serif;
+  font-size: 72px;
+  font-weight: 900;
+  color: #2d3748;
+  text-transform: uppercase;
+  letter-spacing: -3px;
+  text-align: center;
+  line-height: 1;
+  margin: 0 0 30px 0;
+}
+
+.workspace-title-content {
+  text-align: center;
+  max-width: 800px;
+}
+
+main > p {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  color: #718096;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 🚀 스크롤 인터랙션 섹션 */
+.interactive-section {
+  width: 100%;
+  height: 400vh; /* 긴 스크롤 영역 */
+  position: relative;
+  margin-top: 80px;
+}
+
+.sticky-container {
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+  box-sizing: border-box;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 40px;
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 왼쪽 상자 영역 */
+.demo-box {
+  width: 600px;
+  height: 600px;
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.demo-content {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+  width: calc(100% - 80px); /* padding 40px * 2 = 80px 빼기 */
+  height: calc(100% - 80px); /* padding 40px * 2 = 80px 빼기 */
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 40px; /* padding 값 */
+  left: 40px; /* padding 값 */
+  z-index: 1;
+}
+
+.demo-content.active {
+  opacity: 1;
+  transform: translateY(0);
+  z-index: 10;
+}
+.demo-content h3 {
+  font-size: 32px;
+  font-weight: 900;
+  color: #2d3748;
+  margin-bottom: 20px;
+}
+
+.demo-content p {
+  font-size: 18px;
+  color: #718096;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.demo-visual {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* 이미지가 넘치지 않도록 */
+}
+
+.demo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 비율 유지하면서 박스 채우기 */
+  object-position: center; /* 중앙 정렬 */
+  border-radius: 12px;
+}
+
+/* 오른쪽 단계 표시 */
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.4s ease;
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #718096;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
+}
+
+.step-item.active .step-number {
+  background: #4299e1;
+  color: white;
+  border-color: #2d3748;
+  transform: scale(1.1);
+}
+
+.step-content {
+  opacity: 0.6;
+  transition: all 0.4s ease;
+}
+
+.step-item.active .step-content {
+  opacity: 1;
+}
+
+.step-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+.step-description {
+  font-size: 16px;
+  color: #718096;
+  line-height: 1.4;
+  max-width: 300px;
 }
 
 footer {
@@ -244,6 +427,68 @@ footer {
     flex-direction: column;
     align-items: center;
     gap: 40px;
+  }
+
+  .content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .demo-box {
+    width: 90%;
+    max-width: 500px;
+  }
+
+  .steps-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* 더 작은 화면에서는 섹션 크기 조정 */
+@media (max-width: 620px) {
+  .hero-section,
+  .features-section {
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+  }
+}
+
+footer {
+  height: 60px;
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 반응형 - 작은 화면에서는 세로로 배치 */
+@media (max-width: 1240px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .demo-box {
+    width: 90%;
+    max-width: 500px;
+  }
+
+  .steps-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
