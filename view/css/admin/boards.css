@@ -23,73 +23,63 @@ h1 {
 
 .board {
   flex: 1;
-  padding: 30px;
   display: flex;
   flex-direction: column;
-  min-height: 700px;
+  min-height: 400px;
 }
 
-.head button {
-  float: right;
-  width: 80px;
-  height: 30px;
-  border: 3px solid #1ab9af;
-  background-color: transparent;
+.board-setting input {
+  padding: 10px;
+  margin: 10px 20px 18px 100px;
+  width: 100%;
+  height: 37px;
   border-radius: 10px;
-  color: #0c5550;
-  margin-top: -30px;
-}
-
-.body {
-  margin-top: 40px;
+  background: #efefef;
   border: 1px solid #dfdfdf;
 }
 
-/* 수정하기 버튼 */
-.body button {
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid #98cfcc;
-  padding: 5px;
-  font-size: 13px;
-}
-
-/* 리스트 디자인 */
-table {
-  border-spacing: 0;
+.body div {
   width: 100%;
-  table-layout: fixed;
-}
-
-th {
-  padding: 12px;
-  text-align: center;
+  height: 80px;
   border-bottom: 1px solid #dfdfdf;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-th:nth-last-child(1) {
-  width: 20%;
+.body div:nth-last-child(1) {
+  border-bottom: none;
 }
 
-th:nth-last-child(2) {
-  width: 20%;
+.body > div h4 {
+  flex-shrink: 0;
+  width: 120px;
+  margin: 15px;
 }
 
-td {
-  padding: 12px;
-  text-align: center;
+select {
+  margin-right: 20px;
+  width: 15%;
 }
 
-td.title::before {
-  content: "";
-  display: inline-block;
-  background-image: url("/images/documents.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 18px;
-  height: 18px;
-  margin-right: 6px;
-  vertical-align: middle;
+.body > div label.switch {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+/* save 버튼 디자인 */
+.btn {
+  text-align: right;
+}
+
+.btn button {
+  height: 40px;
+  width: 120px;
+  margin: 40px 5px 0 0;
+  border: 3px solid #104e4a;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #104e4a;
 }
 
 /* On/Off 스위치 디자인 */
@@ -159,7 +149,7 @@ button.deleteBtn {
   background: none;
   border: 1px solid darkred;
   color: orangered;
-  margin-left: 30px;
+  margin-right: 20px;
 }
 
 button.deleteBtn:hover {
