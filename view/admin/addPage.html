@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="/css/index.css" />
     <link rel="stylesheet" href="/css/admin/pages.css">
-    <title>게시판 추가</title>
+    <title>페이지 추가</title>
 </head>
 <style>
 
@@ -70,56 +70,34 @@
                 <article class="main-content">
                     <!-- 메인 시작 -->
                     <div class="title">
-                        <h1>게시판 추가</h1>
+                        <h1>페이지 추가</h1>
                     </div>
-                    <div class="board-setting">
-                        <div class="board">
+                    <div class="page-setting">
+                        <div class="page">
                             <div class="body">
                                 <div>
-                                    <h4>게시판명</h4>
-                                    <input type="text" placeholder="게시판명을 입력해 주세요." />
+                                    <h4>페이지명</h4>
+                                    <input type="text" placeholder="페이지명을 입력해 주세요." />
                                 </div>
                                 <div>
-                                    <h4>게시판 설명</h4>
+                                    <h4>페이지 설명</h4>
                                     <input type="text" placeholder="설명을 입력해 주세요." />
                                 </div>
                                 <div>
                                     <h4>공유 범위</h4>
                                     <select id="shareScope" onchange="handleShareScopeChange()">
                                         <option value="all">전체공개</option>
+                                        <option value="none">비공개</option>
                                         <option value="member">멤버공개</option>
                                     </select>
-                                    <!-- 멤버 입력 필드 (기본은 숨김) -->
-                                    <div id="memberInputContainer">
-                                        <h4>공유할 멤버</h4>
-                                        <input type="text" id="memberInput" placeholder="이메일 또는 아이디 입력 후 Enter"
-                                            onkeydown="addMember(event)" />
-                                        <div id="memberTagContainer"></div>
-                                    </div>
                                 </div>
                                 <div>
                                     <h4>작성 권한</h4>
                                     <select>
-                                        <option>관리자 및 게시판마스터만</option>
+                                        <option>관리자 및 페이지마스터만</option>
                                         <option>전체</option>
                                     </select>
                                 </div>
-                                <div>
-                                    <h4>타입</h4>
-                                    <select>
-                                        <option>게시판</option>
-                                        <option>미리보기</option>
-                                        <option>앨범</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <h4>댓글허용</h4>
-                                    <label class="switch">
-                                        <input type="checkbox" checked>
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -135,66 +113,11 @@
         <div class="footer">
             version 0.0.1 | License | More Themes | Documentation | Support
         </div>
-
     </div>
-
-    </div>
-    <script>
-        function handleShareScopeChange() {
-            const shareSelect = document.getElementById('shareScope');
-            const memberInput = document.getElementById('memberInputContainer');
-
-            if (shareSelect.value === 'member') {
-                memberInput.style.display = 'block';
-            } else {
-                memberInput.style.display = 'none';
-            }
-        }
-        let sharedMembers = [];
-
-        function addMember(event) {
-            const input = document.getElementById('memberInput');
-            const container = document.getElementById('memberTagContainer');
-
-            if (event.key === 'Enter' && input.value.trim() !== '') {
-                event.preventDefault(); // form 제출 방지
-                const value = input.value.trim();
-
-                // 중복 체크
-                if (sharedMembers.includes(value)) {
-                    alert('이미 추가된 멤버입니다.');
-                    input.value = '';
-                    return;
-                }
-
-                sharedMembers.push(value);
-
-                const tag = document.createElement('div');
-                tag.className = 'tag';
-                tag.style.cssText = `
-                    background-color: #e0f7f6;
-                    padding: 5px 10px;
-                    border-radius: 20px;
-                    font-size: 12px;
-                    display: flex;
-                    align-items: center;
-                `;
-                tag.innerHTML = `
-                    ${value}
-                    <span style="margin-left:8px; cursor:pointer; color: #999;" onclick="removeMember('${value}', this)">×</span>
-                `;
-
-                container.appendChild(tag);
-                input.value = '';
-            }
-        }
-
-        function removeMember(value, element) {
-            sharedMembers = sharedMembers.filter(item => item !== value);
-            element.parentElement.remove();
-        }
-    </script>
 
 </body>
+<script src="/js/setting/hidden.js"></script>
+<script src="/js/setting/members.js"></script>
+<script src="/js/setting/delete.js"></script>
 
 </html>
