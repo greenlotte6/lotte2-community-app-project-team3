@@ -6,12 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="/css/index.css" />
-    <link rel="stylesheet" href="/css/admin/boards.css">
-    <title>게시판 추가</title>
-</head>
-<style>
+    <link rel="stylesheet" href="/css/admin/drive.css">
 
-</style>
+    <title>드라이브 설정</title>
+
+    <style>
+        select#order,
+        select#view {
+            width: 120px;
+        }
+
+        .list2 p:nth-child(2) {
+            margin-right: 70%;
+        }
+
+        .list2 p:nth-child(2) span {
+            color: #104E4A;
+            font-weight: bold;
+        }
+    </style>
+</head>
 
 <body>
     <div class="container">
@@ -53,8 +67,8 @@
                         <li>캘린더</li>
                         <li>페이지</li>
                         <li>메시지</li>
-                        <li>내 드라이브</li>
                         <li>프로젝트</li>
+                        <li>내 드라이브</li>
                         <li>-------------------</li>
                         <li>게시판</li>
                         <li>플랜</li>
@@ -67,52 +81,60 @@
             <!-- 사이드메뉴 끝 -->
 
             <main class="main-content">
+
                 <article class="main-content">
                     <!-- 메인 시작 -->
                     <div class="title">
-                        <h1>게시판 추가</h1>
+                        <h1>드라이브 설정</h1>
                     </div>
-                    <div class="board-setting">
-                        <div class="board">
-                            <div class="body">
-                                <div>
-                                    <h4>게시판명</h4>
-                                    <input type="text" placeholder="게시판명을 입력해 주세요." />
-                                </div>
-                                <div>
-                                    <h4>게시판 설명</h4>
-                                    <input type="text" placeholder="설명을 입력해 주세요." />
-                                </div>
-                                <div>
-                                    <h4>공유 범위</h4>
-                                    <select id="shareScope" onchange="handleShareScopeChange()">
-                                        <option value="all">전체공개</option>
-                                        <option value="member">멤버공개</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <h4>작성 권한</h4>
-                                    <select>
-                                        <option>관리자 및 게시판마스터만</option>
-                                        <option>전체</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <h4>타입</h4>
-                                    <select>
-                                        <option>게시판</option>
-                                        <option>미리보기</option>
-                                        <option>앨범</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <h4>댓글허용</h4>
-                                    <label class="switch">
-                                        <input type="checkbox" checked>
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
 
+                    <div class="drive">
+                        <div class="setting1">
+                            <h3>기본 설정</h3>
+                            <div class="list1">
+                                <section>
+                                    파일 정렬 기준
+                                    <label class="order">
+                                        <select name="order" id="order">
+                                            <option value="name">이름순</option>
+                                            <option value="regDate">날짜순</option>
+                                            <option value="size">크기순</option>
+                                        </select>
+                                    </label>
+                                </section>
+                                <section>
+                                    기본보기 방식
+                                    <label class="view">
+                                        <select name="view" id="view">
+                                            <option value="list">목록</option>
+                                            <option value="grid">그리드</option>
+                                        </select>
+                                    </label>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="setting2">
+                            <h3>드라이브 정보</h3>
+                            <div class="list2">
+                                <section>
+                                    <p>내 드라이브 용량 : <span>0.0KB</span></p>
+                                    <p>사용 가능한 용량 : <span>5.0GB</span></p>
+                                </section>
+
+                                <section>
+                                    <p>유형</p>
+                                    <span>크기</span>
+                                </section>
+
+                                <section>
+                                    <p> 폴더 및 파일</p>
+                                    <span>0.0KB</span>
+                                </section>
+
+                                <section>
+                                    <p>휴지통</p>
+                                    <span>0.0KB</span>
+                                </section>
                             </div>
                         </div>
                     </div>
@@ -121,18 +143,20 @@
                     <div class="btn">
                         <button>S A V E</button>
                     </div>
+
                 </article>
+
             </main>
         </div>
+
 
         <div class="footer">
             version 0.0.1 | License | More Themes | Documentation | Support
         </div>
+
     </div>
 
+
 </body>
-<script src="/js/setting/hidden.js"></script>
-<script src="/js/setting/members.js"></script>
-<script src="/js/setting/delete.js"></script>
 
 </html>

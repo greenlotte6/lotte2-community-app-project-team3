@@ -67,6 +67,15 @@ select {
   margin-right: 20px;
 }
 
+/* hidden div 세팅 */
+div#memberInputContainer {
+  display: inline-table;
+}
+
+.hidden {
+  border-bottom: none !important;
+}
+
 /* save 버튼 디자인 */
 .btn {
   text-align: right;
@@ -130,16 +139,11 @@ input:checked + .slider:before {
 }
 
 /* 공유할 멤버 추가 */
-#memberInputContainer {
-  display: none;
-  margin-top: 10px;
-}
-
 #memberTagContainer {
   display: flex;
-  flex-wrap: wrap;
   gap: 5px;
-  margin-bottom: 10px;
+  justify-content: center;
+  padding: 0 10px 0 250px;
 }
 
 /* 삭제버튼 */

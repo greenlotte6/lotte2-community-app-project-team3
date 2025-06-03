@@ -10,10 +10,7 @@
     <title>페이지 설정</title>
 </head>
 <style>
-    input[name="fontsize"] {
-        width: 30px;
-        margin: 10px 0 15px -5px;
-    }
+
 </style>
 
 <body>
@@ -76,8 +73,8 @@
                     <div class="title">
                         <h1>페이지 설정</h1>
                     </div>
-                    <div class="board-setting">
-                        <div class="board">
+                    <div class="page-setting">
+                        <div class="page">
                             <div class="head">
                                 <p>페이지를 추가하거나 멤버 권한, 공개여부를 설정할 수 있습니다.</p>
                                 <button onclick="openModal('addModal')">ADD</button>
@@ -116,86 +113,10 @@
             </main>
         </div>
 
-
         <div class="footer">
             version 0.0.1 | License | More Themes | Documentation | Support
         </div>
-
     </div>
-
-    <!-- ADD Modal -->
-    <div id="addModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('addModal')">&times;</span>
-            <h2>페이지 추가</h2>
-            <label>페이지명</label>
-            <input type="text" placeholder="페이지명을 입력해 주세요." />
-
-            <label>페이지 설명</label>
-            <input type="text" placeholder="설명을 입력해 주세요." />
-
-            <label>공유 범위</label>
-            <select id="shareScope" onchange="handleShareScopeChange()">
-                <option value="all">전체공개</option>
-                <option value="member">멤버공개</option>
-            </select>
-
-            <!-- 멤버 입력 필드 (기본은 숨김) -->
-            <div id="memberInputContainer">
-                <label>공유할 멤버</label>
-                <input type="text" id="memberInput" placeholder="이메일 또는 아이디 입력 후 Enter" onkeydown="addMember(event)" />
-                <div id="memberTagContainer"></div>
-            </div>
-
-            <label>작성 권한</label>
-            <select>
-                <option>마스터만</option>
-                <option>전체</option>
-            </select>
-
-            <button onclick="closeModal('addModal')">저장</button>
-        </div>
-    </div>
-
-    <!-- MODIFY Modal -->
-    <div id="modifyModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('modifyModal')">&times;</span>
-            <h2>페이지 수정</h2>
-            <label>페이지명</label>
-            <input type="text" placeholder="페이지명을 입력해 주세요." />
-
-            <label>페이지 설명</label>
-            <input type="text" placeholder="설명을 입력해 주세요." />
-
-            <label>작성 권한</label>
-            <select>
-                <option>마스터만</option>
-                <option>전체</option>
-            </select>
-
-            <label>글자 크기</label>
-            <section class="radios">
-                <label>
-                    <input name="fontsize" class="basic" type="radio" value="basic">기본
-                </label>
-                <label>
-                    <input name="fontsize" class="big" type="radio" value="big">크게
-                </label>
-                <label>
-                    <input name="fontsize" class="small" type="radio" value="small">작게
-                </label>
-            </section>
-
-            <label>삭제</label>
-            <label>
-                <button class="deleteBtn" onclick="confirmDelete()">삭제</button>
-            </label>
-            <button onclick="closeModal('modifyModal')">수정</button>
-        </div>
-    </div>
-
-
 </body>
 
 </html>

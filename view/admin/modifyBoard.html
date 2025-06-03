@@ -89,13 +89,6 @@
                                         <option value="all">전체공개</option>
                                         <option value="member">멤버공개</option>
                                     </select>
-                                    <!-- 멤버 입력 필드 (기본은 숨김) -->
-                                    <div id="memberInputContainer">
-                                        <h4>공유할 멤버</h4>
-                                        <input type="text" id="memberInput" placeholder="이메일 또는 아이디 입력 후 Enter"
-                                            onkeydown="addMember(event)" />
-                                        <div id="memberTagContainer"></div>
-                                    </div>
                                 </div>
                                 <div>
                                     <h4>작성 권한</h4>
@@ -143,74 +136,9 @@
 
     </div>
 
-    </div>
-    <script>
-        function handleShareScopeChange() {
-            const shareSelect = document.getElementById('shareScope');
-            const memberInput = document.getElementById('memberInputContainer');
-
-            if (shareSelect.value === 'member') {
-                memberInput.style.display = 'block';
-            } else {
-                memberInput.style.display = 'none';
-            }
-        }
-        let sharedMembers = [];
-
-        function addMember(event) {
-            const input = document.getElementById('memberInput');
-            const container = document.getElementById('memberTagContainer');
-
-            if (event.key === 'Enter' && input.value.trim() !== '') {
-                event.preventDefault(); // form 제출 방지
-                const value = input.value.trim();
-
-                // 중복 체크
-                if (sharedMembers.includes(value)) {
-                    alert('이미 추가된 멤버입니다.');
-                    input.value = '';
-                    return;
-                }
-
-                sharedMembers.push(value);
-
-                const tag = document.createElement('div');
-                tag.className = 'tag';
-                tag.style.cssText = `
-                    background-color: #e0f7f6;
-                    padding: 5px 10px;
-                    border-radius: 20px;
-                    font-size: 12px;
-                    display: flex;
-                    align-items: center;
-                `;
-                tag.innerHTML = `
-                    ${value}
-                    <span style="margin-left:8px; cursor:pointer; color: #999;" onclick="removeMember('${value}', this)">×</span>
-                `;
-
-                container.appendChild(tag);
-                input.value = '';
-            }
-        }
-
-        function removeMember(value, element) {
-            sharedMembers = sharedMembers.filter(item => item !== value);
-            element.parentElement.remove();
-        }
-
-        function confirmDelete() {
-            const confirmed = confirm("정말 삭제하시겠습니까?");
-            if (confirmed) {
-                // 실제 삭제 처리 로직이 있다면 여기에 추가
-                // 예: 서버로 delete 요청 보내기 등
-
-                closeModal('modifyModal'); // 수정 모달 닫기
-                alert("삭제되었습니다."); // 필요 시 사용자 알림
-            }
-        }
-    </script>
-
 </body>
+<script src="/js/setting/hidden.js"></script>
+<script src="/js/setting/members.js"></script>
+<script src="/js/setting/delete.js"></script>
 
 </html>
