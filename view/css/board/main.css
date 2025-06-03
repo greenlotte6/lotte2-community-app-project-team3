@@ -1,0 +1,74 @@
+/* 헤더 + 타이틀 */
+h1 {
+  margin: 0 0 40px 10px;
+}
+
+.status span {
+  color: green;
+}
+
+/* 메인 */
+.row1,
+.row2 {
+  display: flex;
+  gap: 20px;
+}
+
+.row1 > div {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2% 4%;
+}
+.main-content h3 {
+  font-weight: 500;
+}
+
+.free article,
+.library article,
+.menu article {
+  margin: 10px 5px 5px 5px;
+  border: 1px solid #dfdfdf;
+}
+
+/* 공지사항 */
+.notices {
+  height: 180px;
+  padding: 15px;
+  border: 1px solid red;
+}
+.notices table {
+  border-spacing: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* 자유게시판 */
+.free {
+  height: 420px;
+  width: 40%;
+  padding: 15px;
+  margin-top: 30px;
+  border: 1px solid blue;
+}
+
+/* NEW */
+.library {
+  height: 420px;
+  width: 40%;
+  padding: 15px;
+  margin-top: 30px;
+  border: 1px solid black;
+}
+
+/* 식단표 */
+.menu {
+  height: 420px;
+  width: 25%;
+  padding: 15px;
+  margin-top: 30px;
+  border: 1px solid purple;
+}
