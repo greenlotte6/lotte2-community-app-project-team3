@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      width: 450px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .step {
+      font-size: 12px;
+      color: #888;
+      text-align: right;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    p.description {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .agreement {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background-color: #f5f7fa;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .agreement input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    .button-group {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .button-group button {
+      padding: 10px 20px;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .prev {
+      background-color: transparent;
+      color: #4e88ff;
+    }
+
+    .next {
+      background-color: #4e88ff;
+      color: white;
+    }
+
+    /* 모달 스타일 */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .modal h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .modal p {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .agree-btn {
+      background-color: #4e88ff;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+    <div class="step">2/4</div>
+    <h2>약관 및 개인정보 수집, 이용 안내에 동의해주세요.</h2>
+    <p class="description">네이버 클라우드 플랫폼 이용을 위해 약관 및 개인정보 수집 및 이용 안내 동의가 필요합니다.</p>
+
+    <div class="agreement" onclick="toggleModal('all')">
+      <label><input type="checkbox" id="checkbox-all"> 전체 동의</label>
+    </div>
+
+    <div class="agreement" onclick="toggleModal('terms')">
+      <label><input type="checkbox" id="checkbox-terms"> [필수] 서비스 이용 약관</label>
+      <span>열람</span>
+    </div>
+
+    <div class="agreement" onclick="toggleModal('privacy')">
+      <label><input type="checkbox" id="checkbox-privacy"> [필수] 개인정보 수집 및 이용 안내</label>
+      <span>열람</span>
+    </div>
+
+    <div class="agreement" onclick="toggleModal('marketing')">
+      <label><input type="checkbox" id="checkbox-marketing"> [선택] 광고성 정보 수신</label>
+      <span>열람</span>
+    </div>
+
+    <div class="button-group">
+      <button class="prev">&lt; 이전</button>
+      <button class="next">다음 &gt;</button>
+    </div>
+  </div>
+
+  <!-- 모달 영역 -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalText"></p>
+      <button class="agree-btn" onclick="agree()">동의하기</button>
+    </div>
+  </div>
+
+<script>
+  const modal = document.getElementById("modal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalText = document.getElementById("modalText");
+
+  let currentType = "";
+
+  const termsData = {
+    all: {
+      title: "전체 동의",
+      text: "모든 약관에 동의합니다."
+    },
+    terms: {
+      title: "서비스 이용 약관",
+      text: "이용 약관 상세 내용입니다. 여기에 이용약관 전문을 입력하세요."
+    },
+    privacy: {
+      title: "개인정보 수집 및 이용 안내",
+      text: "개인정보 수집 및 이용에 대한 안내입니다. 여기에 안내 전문을 입력하세요."
+    },
+    marketing: {
+      title: "광고성 정보 수신",
+      text: "광고성 정보 수신에 대한 설명입니다. 수신 여부는 선택사항입니다."
+    }
+  };
+
+  function toggleModal(type) {
+    currentType = type;
+    modalTitle.innerText = termsData[type].title;
+    modalText.innerText = termsData[type].text;
+    modal.style.display = "block";
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+  }
+
+  function agree() {
+    if (currentType === 'all') {
+      ['terms', 'privacy', 'marketing'].forEach(id => {
+        document.getElementById(`checkbox-${id}`).checked = true;
+      });
+      document.getElementById('checkbox-all').checked = true;
+    } else {
+      document.getElementById(`checkbox-${currentType}`).checked = true;
+      updateAllAgreement();
+    }
+
+    closeModal();
+  }
+
+  // 전체 체크박스 클릭 시 처리
+  document.getElementById('checkbox-all').addEventListener('click', function (e) {
+    const checked = e.target.checked;
+    ['terms', 'privacy', 'marketing'].forEach(id => {
+      document.getElementById(`checkbox-${id}`).checked = checked;
+    });
+  });
+
+  // 개별 체크박스가 모두 체크됐는지 확인하여 '전체 동의' 상태 갱신
+  ['checkbox-terms', 'checkbox-privacy', 'checkbox-marketing'].forEach(id => {
+    document.getElementById(id).addEventListener('change', updateAllAgreement);
+  });
+
+  function updateAllAgreement() {
+    const allChecked = ['checkbox-terms', 'checkbox-privacy', 'checkbox-marketing'].every(id =>
+      document.getElementById(id).checked
+    );
+    document.getElementById('checkbox-all').checked = allChecked;
+  }
+
+  // 모달 외부 클릭 시 닫기
+  window.onclick = function (event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  };
+</script>
+</body>
+</html>
