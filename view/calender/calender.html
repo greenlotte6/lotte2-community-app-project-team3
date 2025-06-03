@@ -9,6 +9,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/Calender.css" />
     <link href="/js/core/main.css" rel="stylesheet" />
     <link href="/js/daygrid/main.css" rel="stylesheet" />
     <link href="/js/timegrid/main.css" rel="stylesheet" />
@@ -17,46 +18,169 @@
     <script src="/js/daygrid/main.js"></script>
     <script src="/js/timegrid/main.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById("calendar");
+      function closeModal() {
+        document.querySelector(".event-modal").style.display = "none";
+      }
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+      document.addEventListener("DOMContentLoaded", function () {
+        const allDayCheckbox = document.getElementById("allDayCheckbox");
+        const startInput = document.getElementById("eventStart");
+        const endInput = document.getElementById("eventEnd");
+
+        allDayCheckbox.addEventListener("change", function () {
+          const isChecked = this.checked;
+
+          const toDateOnly = (datetimeValue) => {
+            const date = new Date(datetimeValue);
+            const yyyy = date.getFullYear();
+            const mm = String(date.getMonth() + 1).padStart(2, "0");
+            const dd = String(date.getDate()).padStart(2, "0");
+            return `${yyyy}-${mm}-${dd}`;
+          };
+
+          const getNowDateTimeLocal = () => {
+            const now = new Date();
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, "0");
+            const dd = String(now.getDate()).padStart(2, "0");
+            const hh = String(now.getHours()).padStart(2, "0");
+            const mi = String(now.getMinutes()).padStart(2, "0");
+            return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
+          };
+
+          if (isChecked) {
+            startInput.type = "date";
+            endInput.type = "date";
+            if (startInput.value)
+              startInput.value = toDateOnly(startInput.value);
+            if (endInput.value) endInput.value = toDateOnly(endInput.value);
+          } else {
+            startInput.type = "datetime-local";
+            endInput.type = "datetime-local";
+            startInput.value = getNowDateTimeLocal();
+            endInput.value = getNowDateTimeLocal();
+          }
+        });
+
+        const eventForm = document.getElementById("eventForm");
+        if (eventForm) {
+          eventForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const title = document.getElementById("eventTitle").value;
+            const start = startInput.value;
+            const end = endInput.value;
+            const location = document.getElementById("eventLocation").value;
+            const description =
+              document.getElementById("eventDescription").value;
+            const allDay = allDayCheckbox.checked;
+
+            if (title && start) {
+              calendar.addEvent({
+                title: title + (location ? ` @ ${location}` : ""),
+                start: start,
+                end: end,
+                allDay: allDay,
+                extendedProps: {
+                  description: description,
+                  location: location,
+                },
+              });
+
+              closeModal();
+              this.reset();
+
+              startInput.type = "datetime-local";
+              endInput.type = "datetime-local";
+            }
+          });
+        }
+
+        const calendarEl = document.getElementById("calendar");
+
+        window.calendar = new FullCalendar.Calendar(calendarEl, {
           plugins: ["interaction", "dayGrid", "timeGrid"],
           header: {
-            left: "prev,next today",
+            left: "prev,next today addEventButton",
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay",
           },
           defaultDate: "2025-06-02",
+          nowIndicator: true,
           locale: "ko",
+          buttonText: {
+            today: "오늘",
+            month: "월별",
+            week: "주간",
+            day: "일간",
+          },
           timeZone: "Asia/Seoul",
           navLinks: true,
           selectable: true,
           selectMirror: true,
+
           select: function (arg) {
-            var title = prompt("Event Title:");
-            if (title) {
-              calendar.addEvent({
-                title: title,
-                start: arg.start,
-                end: arg.end,
-                allDay: arg.allDay,
-              });
+            const modal = document.querySelector(".event-modal");
+            modal.style.display = "flex";
+
+            const startDate = new Date(arg.start);
+            const endDate = new Date(arg.end);
+            const dayDiff = (endDate - startDate) / (1000 * 60 * 60 * 24);
+
+            if (dayDiff > 1) {
+              allDayCheckbox.checked = true;
+              startInput.type = "date";
+              endInput.type = "date";
+              startInput.value = arg.startStr;
+              endInput.value = arg.endStr;
+            } else {
+              allDayCheckbox.checked = false;
+              startInput.type = "datetime-local";
+              endInput.type = "datetime-local";
+
+              const formatDateTimeLocal = (dateObj) => {
+                const date = new Date(dateObj);
+                const yyyy = date.getFullYear();
+                const mm = String(date.getMonth() + 1).padStart(2, "0");
+                const dd = String(date.getDate()).padStart(2, "0");
+                const hh = String(date.getHours()).padStart(2, "0");
+                const mi = String(date.getMinutes()).padStart(2, "0");
+                return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
+              };
+
+              const startVal = formatDateTimeLocal(
+                new Date(startDate.setHours(0, 0, 0, 0))
+              );
+              const endVal = formatDateTimeLocal(
+                new Date(startDate.setHours(23, 59, 59, 59))
+              );
+
+              startInput.value = startVal;
+              endInput.value = endVal;
             }
+
             calendar.unselect();
           },
+
+          customButtons: {
+            addEventButton: {
+              text: "일정 등록",
+              click: function () {
+                document.querySelector(".event-modal").style.display = "flex";
+                allDayCheckbox.checked = false;
+                startInput.type = "datetime-local";
+                endInput.type = "datetime-local";
+                startInput.value = "";
+                endInput.value = "";
+              },
+            },
+          },
+
           editable: true,
-          eventLimit: true, // allow "more" link when too many events
+          eventLimit: true,
+
           events: [
-            {
-              title: "All Day Event",
-              start: "2025-06-01",
-            },
-            {
-              title: "Long Event",
-              start: "2025-06-07",
-              end: "2025-06-10",
-            },
+            { title: "All Day Event", start: "2025-06-01" },
+            { title: "Long Event", start: "2025-06-07", end: "2025-06-10" },
             {
               groupId: 999,
               title: "Repeating Event",
@@ -67,36 +191,17 @@
               title: "Repeating Event",
               start: "2025-06-16T16:00:00",
             },
-            {
-              title: "Conference",
-              start: "2025-06-11",
-              end: "2025-06-13",
-            },
+            { title: "Conference", start: "2025-06-11", end: "2025-06-13" },
             {
               title: "Meeting",
               start: "2025-06-12T10:30:00",
               end: "2025-06-12T12:30:00",
             },
-            {
-              title: "Lunch",
-              start: "2025-06-12T12:00:00",
-            },
-            {
-              title: "Meeting",
-              start: "2025-06-12T14:30:00",
-            },
-            {
-              title: "Happy Hour",
-              start: "2025-06-12T17:30:00",
-            },
-            {
-              title: "Dinner",
-              start: "2025-06-12T20:00:00",
-            },
-            {
-              title: "Birthday Party",
-              start: "2025-06-13T07:00:00",
-            },
+            { title: "Lunch", start: "2025-06-12T12:00:00" },
+            { title: "Meeting", start: "2025-06-12T14:30:00" },
+            { title: "Happy Hour", start: "2025-06-12T17:30:00" },
+            { title: "Dinner", start: "2025-06-12T20:00:00" },
+            { title: "Birthday Party", start: "2025-06-13T07:00:00" },
             {
               title: "Click for Google",
               url: "http://google.com/",
@@ -121,12 +226,17 @@
   <body>
     <div class="container">
       <div class="header">
-        <span class="status">STATUS?</span>
-        <img
-          src="https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&ssc=tab.nx.all&query=%EC%95%84%EC%9D%B4%EC%9C%A0&oquery=%EC%9D%B4%EB%AF%B8%EC%A7%80&tqi=jvy5Ksqo1SCssjjsUpsssssssIo-237789&ackey=73tul3fj#"
-          alt="admin"
-        />
-        <span class="admin">Moni Roy<br />Admin</span>
+        <div class="header-logo">
+          <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+          <img
+            src="/images/logo_title.png"
+            class="logo-title"
+            alt="로고타이틀"
+          />
+        </div>
+        <span class="status">ONLINE <span>●</span></span>
+        <img src="/images/profile1.png" alt="프로필이미지" />
+        <span class="admin">김팀장<br />Admin</span>
       </div>
 
       <div class="main-layout">
@@ -167,6 +277,48 @@
         <main class="main-content">
           <div id="calendar"></div>
         </main>
+
+        <!-- 일정 등록 모달 -->
+        <div class="event-modal" style="display: none">
+          <div class="modal-content">
+            <h3>일정 등록</h3>
+            <form id="eventForm">
+              <label>일정 이름</label>
+              <input type="text" id="eventTitle" required />
+
+              <div style="display: flex; gap: 10px">
+                <div style="flex: 1">
+                  <label>시작 시간</label>
+                  <input type="datetime-local" id="eventStart" required />
+                </div>
+                <div style="flex: 1">
+                  <label>종료 시간</label>
+                  <input type="datetime-local" id="eventEnd" required />
+                </div>
+              </div>
+
+              <div class="allday-field">
+                <label for="allDayCheckbox">종일 일정</label>
+                <input type="checkbox" id="allDayCheckbox" />
+              </div>
+
+              <label>장소</label>
+              <input
+                type="text"
+                id="eventLocation"
+                placeholder="예: 개발팀 회의실"
+              />
+
+              <label>일정 내용</label>
+              <textarea id="eventDescription" rows="3"></textarea>
+
+              <div class="modal-buttons">
+                <button type="submit" class="submit-btn">일정 등록</button>
+                <button type="button" onclick="closeModal()">취소</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="footer">
