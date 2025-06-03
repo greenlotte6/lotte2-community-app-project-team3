@@ -18,11 +18,15 @@
     <script src="/js/daygrid/main.js"></script>
     <script src="/js/timegrid/main.js"></script>
     <script>
-      function closeModal() {
-        document.querySelector(".event-modal").style.display = "none";
-      }
-
       document.addEventListener("DOMContentLoaded", function () {
+        let selectedEvent = null;
+
+        window.closeModal = function () {
+          document.querySelectorAll(".event-modal").forEach((modal) => {
+            modal.style.display = "none";
+          });
+        };
+
         const allDayCheckbox = document.getElementById("allDayCheckbox");
         const startInput = document.getElementById("eventStart");
         const endInput = document.getElementById("eventEnd");
@@ -32,10 +36,7 @@
 
           const toDateOnly = (datetimeValue) => {
             const date = new Date(datetimeValue);
-            const yyyy = date.getFullYear();
-            const mm = String(date.getMonth() + 1).padStart(2, "0");
-            const dd = String(date.getDate()).padStart(2, "0");
-            return `${yyyy}-${mm}-${dd}`;
+            return date.toISOString().split("T")[0];
           };
 
           const getNowDateTimeLocal = () => {
@@ -73,13 +74,16 @@
             const description =
               document.getElementById("eventDescription").value;
             const allDay = allDayCheckbox.checked;
+            const color = document.getElementById("eventColor").value;
 
             if (title && start) {
               calendar.addEvent({
-                title: title + (location ? ` @ ${location}` : ""),
+                title: title + (location ? ` / ${location}` : ""),
                 start: start,
                 end: end,
                 allDay: allDay,
+                backgroundColor: color,
+                borderColor: color,
                 extendedProps: {
                   description: description,
                   location: location,
@@ -88,7 +92,6 @@
 
               closeModal();
               this.reset();
-
               startInput.type = "datetime-local";
               endInput.type = "datetime-local";
             }
@@ -104,7 +107,7 @@
             center: "title",
             right: "dayGridMonth,timeGridWeek,timeGridDay",
           },
-          defaultDate: "2025-06-02",
+          defaultDate: new Date(),
           nowIndicator: true,
           locale: "ko",
           buttonText: {
@@ -138,24 +141,16 @@
               endInput.type = "datetime-local";
 
               const formatDateTimeLocal = (dateObj) => {
-                const date = new Date(dateObj);
-                const yyyy = date.getFullYear();
-                const mm = String(date.getMonth() + 1).padStart(2, "0");
-                const dd = String(date.getDate()).padStart(2, "0");
-                const hh = String(date.getHours()).padStart(2, "0");
-                const mi = String(date.getMinutes()).padStart(2, "0");
+                const yyyy = dateObj.getFullYear();
+                const mm = String(dateObj.getMonth() + 1).padStart(2, "0");
+                const dd = String(dateObj.getDate()).padStart(2, "0");
+                const hh = String(dateObj.getHours()).padStart(2, "0");
+                const mi = String(dateObj.getMinutes()).padStart(2, "0");
                 return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
               };
 
-              const startVal = formatDateTimeLocal(
-                new Date(startDate.setHours(0, 0, 0, 0))
-              );
-              const endVal = formatDateTimeLocal(
-                new Date(startDate.setHours(23, 59, 59, 59))
-              );
-
-              startInput.value = startVal;
-              endInput.value = endVal;
+              startInput.value = formatDateTimeLocal(startDate);
+              endInput.value = formatDateTimeLocal(endDate);
             }
 
             calendar.unselect();
@@ -179,38 +174,169 @@
           eventLimit: true,
 
           events: [
-            { title: "All Day Event", start: "2025-06-01" },
-            { title: "Long Event", start: "2025-06-07", end: "2025-06-10" },
+            {
+              title: "All Day Event",
+              start: "2025-06-01",
+              backgroundColor: "#009900",
+            },
+            {
+              title: "Long Event",
+              start: "2025-06-07",
+              end: "2025-06-10",
+              backgroundColor: "#FF0000",
+            },
             {
               groupId: 999,
               title: "Repeating Event",
               start: "2025-06-09T16:00:00",
+              backgroundColor: "#009900",
             },
             {
               groupId: 999,
               title: "Repeating Event",
               start: "2025-06-16T16:00:00",
+              backgroundColor: "#000080",
             },
-            { title: "Conference", start: "2025-06-11", end: "2025-06-13" },
+            {
+              title: "Conference",
+              start: "2025-06-11",
+              end: "2025-06-13",
+              backgroundColor: "#000080",
+            },
             {
               title: "Meeting",
               start: "2025-06-12T10:30:00",
               end: "2025-06-12T12:30:00",
+              backgroundColor: "#FF0000",
             },
-            { title: "Lunch", start: "2025-06-12T12:00:00" },
-            { title: "Meeting", start: "2025-06-12T14:30:00" },
-            { title: "Happy Hour", start: "2025-06-12T17:30:00" },
-            { title: "Dinner", start: "2025-06-12T20:00:00" },
-            { title: "Birthday Party", start: "2025-06-13T07:00:00" },
+            {
+              title: "Lunch",
+              start: "2025-06-12T12:00:00",
+              backgroundColor: "#00FFFF",
+            },
+            {
+              title: "Meeting",
+              start: "2025-06-12T14:30:00",
+              backgroundColor: "#800080",
+            },
+            {
+              title: "Happy Hour",
+              start: "2025-06-12T17:30:00",
+              backgroundColor: "#009900",
+            },
+            {
+              title: "Dinner",
+              start: "2025-06-12T20:00:00",
+              backgroundColor: "#FF0000",
+            },
+            {
+              title: "Birthday Party",
+              start: "2025-06-13T07:00:00",
+              backgroundColor: "#000080",
+            },
             {
               title: "Click for Google",
               url: "http://google.com/",
               start: "2025-06-28",
+              backgroundColor: "#FF0000",
             },
           ],
+
+          eventClick: function (info) {
+            const event = info.event;
+            selectedEvent = event;
+
+            document.querySelector(".detail-modal").style.display = "flex";
+
+            document.getElementById("detailTitle").value =
+              event.title.split(" / ")[0];
+            document.getElementById("detailLocation").value =
+              event.extendedProps.location || "";
+            document.getElementById("detailDescription").value =
+              event.extendedProps.description || "";
+
+            const detailStart = document.getElementById("detailStart");
+            const detailEnd = document.getElementById("detailEnd");
+            const detailAllDay = document.getElementById("detailAllDay");
+
+            const formatDateTimeLocal = (dateObj) => {
+              const yyyy = dateObj.getFullYear();
+              const mm = String(dateObj.getMonth() + 1).padStart(2, "0");
+              const dd = String(dateObj.getDate()).padStart(2, "0");
+              const hh = String(dateObj.getHours()).padStart(2, "0");
+              const mi = String(dateObj.getMinutes()).padStart(2, "0");
+              return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
+            };
+
+            const formatDateOnly = (dateObj) => {
+              const yyyy = dateObj.getFullYear();
+              const mm = String(dateObj.getMonth() + 1).padStart(2, "0");
+              const dd = String(dateObj.getDate()).padStart(2, "0");
+              return `${yyyy}-${mm}-${dd}`;
+            };
+
+            if (event.allDay) {
+              detailAllDay.checked = true;
+              detailStart.type = "date";
+              detailEnd.type = "date";
+              detailStart.value = formatDateOnly(event.start);
+              detailEnd.value = formatDateOnly(event.end || event.start);
+            } else {
+              detailAllDay.checked = false;
+              detailStart.type = "datetime-local";
+              detailEnd.type = "datetime-local";
+              detailStart.value = formatDateTimeLocal(event.start);
+              detailEnd.value = formatDateTimeLocal(event.end || event.start);
+            }
+
+            document.getElementById("detailColor").value =
+              event.backgroundColor || "#3788d8";
+          },
         });
 
         calendar.render();
+
+        // 수정
+        document
+          .getElementById("detailForm")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            if (!selectedEvent) return;
+
+            const newTitle = document.getElementById("detailTitle").value;
+            const newStart = document.getElementById("detailStart").value;
+            const newEnd = document.getElementById("detailEnd").value;
+            const newLocation = document.getElementById("detailLocation").value;
+            const newDescription =
+              document.getElementById("detailDescription").value;
+            const isAllDay = document.getElementById("detailAllDay").checked;
+            const newColor = document.getElementById("detailColor").value;
+
+            selectedEvent.setProp(
+              "title",
+              newTitle + (newLocation ? ` / ${newLocation}` : "")
+            );
+            selectedEvent.setStart(newStart);
+            selectedEvent.setEnd(newEnd);
+            selectedEvent.setAllDay(isAllDay);
+            selectedEvent.setExtendedProp("location", newLocation);
+            selectedEvent.setExtendedProp("description", newDescription);
+            selectedEvent.setProp("backgroundColor", newColor);
+            selectedEvent.setProp("borderColor", newColor);
+
+            closeModal();
+          });
+
+        // 삭제
+        document
+          .querySelector(".delete-btn")
+          .addEventListener("click", function () {
+            if (selectedEvent) {
+              selectedEvent.remove();
+              closeModal();
+              selectedEvent = null;
+            }
+          });
       });
     </script>
 
@@ -242,36 +368,40 @@
       <div class="main-layout">
         <aside class="sidebar">
           <div>
-            <h2>사내 게시판 프로젝트</h2>
             <div class="section-title">BOARDS</div>
             <ul>
               <li>Notices</li>
               <li>Department</li>
               <li>Free</li>
               <li>Q&A</li>
-              <li>Suggestion</li>
+              <li>Album</li>
               <li>Menu</li>
             </ul>
             <div class="section-title">MENU</div>
             <ul>
               <li>Messages</li>
-              <li>Calender</li>
+              <a href="/calender/calender.html"><li>캘린더</li></a>
               <li>Projects</li>
               <li>Pages</li>
               <li>Drive</li>
             </ul>
             <div class="section-title">SETTINGS</div>
             <ul>
-              <li>General</li>
-              <li>Projects</li>
-              <li>Pages</li>
-              <li>Plan</li>
-              <li>Messages</li>
-              <li>Drive</li>
-              <li>Calender</li>
+              <li>프로필</li>
+              <li>알림</li>
+              <li>캘린더</li>
+              <li>페이지</li>
+              <li>메시지</li>
+              <li>내 드라이브</li>
+              <li>프로젝트</li>
+              <li>-------------------</li>
+              <li>게시판</li>
+              <li>플랜</li>
             </ul>
           </div>
-          <div><li>Logout</li></div>
+          <div>
+            <li>Logout</li>
+          </div>
         </aside>
 
         <main class="main-content">
@@ -279,7 +409,7 @@
         </main>
 
         <!-- 일정 등록 모달 -->
-        <div class="event-modal" style="display: none">
+        <div class="event-modal register-modal" style="display: none">
           <div class="modal-content">
             <h3>일정 등록</h3>
             <form id="eventForm">
@@ -312,9 +442,60 @@
               <label>일정 내용</label>
               <textarea id="eventDescription" rows="3"></textarea>
 
+              <label>일정 색상</label>
+              <input type="color" id="eventColor" value="#3788d8" />
+
               <div class="modal-buttons">
                 <button type="submit" class="submit-btn">일정 등록</button>
                 <button type="button" onclick="closeModal()">취소</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- 일정 상세 모달 -->
+        <div class="event-modal detail-modal" style="display: none">
+          <div class="modal-content">
+            <h3>일정 상세</h3>
+            <form id="detailForm">
+              <label>일정 이름</label>
+              <input type="text" id="detailTitle" required />
+
+              <div style="display: flex; gap: 10px">
+                <div style="flex: 1">
+                  <label>시작 시간</label>
+                  <input type="datetime-local" id="detailStart" required />
+                </div>
+                <div style="flex: 1">
+                  <label>종료 시간</label>
+                  <input type="datetime-local" id="detailEnd" required />
+                </div>
+              </div>
+
+              <div class="allday-field">
+                <label for="detailAllDay">종일 일정</label>
+                <input type="checkbox" id="detailAllDay" />
+              </div>
+
+              <label>장소</label>
+              <input
+                type="text"
+                id="detailLocation"
+                placeholder="예: 개발팀 회의실"
+              />
+
+              <label>일정 내용</label>
+              <textarea id="detailDescription" rows="3"></textarea>
+
+              <label>일정 색상</label>
+              <input type="color" id="detailColor" value="#3788d8" />
+
+              <div class="modal-buttons">
+                <button type="submit" class="submit-btn">수정</button>
+                <button type="button" class="delete-btn">삭제</button>
+                <button type="button" class="cancel-btn" onclick="closeModal()">
+                  취소
+                </button>
               </div>
             </form>
           </div>
