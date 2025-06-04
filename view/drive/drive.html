@@ -89,9 +89,39 @@
 
         <main class="main">
           <header class="header">
-            <h2 id="main-title">📂 내 드라이브</h2>
+            <h2 id="main-title">
+              📂 내 드라이브
+              <span
+                id="current-path"
+                style="font-size: 14px; color: #555; margin-left: 10px"
+                >/</span
+              >
+              <button
+                id="back-btn"
+                style="margin-left: 10px; font-size: 12px; padding: 2px 6px"
+              >
+                🔙 뒤로가기
+              </button>
+            </h2>
+
             <div>
-              <button class="create-folder-btn">+ 새로 만들기</button>
+              <button class="download-btn">⬇️ 내려받기</button>
+              <button onclick="openRenameModal()" class="rename-btn">
+                ✏️ 이름 변경
+              </button>
+              <button class="move-btn">📂 이동</button>
+
+              <div class="dropdown-wrapper">
+                <button class="create-folder-btn">+ 새로 만들기</button>
+                <ul class="dropdown-menu" style="display: none">
+                  <li onclick="openCreateFolderModal()">📁 새 폴더 만들기</li>
+                  <li onclick="uploadFolder()">📂 폴더 업로드</li>
+                  <li onclick="document.getElementById('fileElem').click()">
+                    📄 파일 업로드
+                  </li>
+                </ul>
+              </div>
+
               <button class="restore-selected-btn" style="display: none">
                 복원
               </button>
@@ -102,6 +132,13 @@
           </header>
 
           <section id="tab-my-drive" class="tab-content active">
+            <div id="drop-zone" class="drop-zone">
+              <p>여기로 파일을 끌어다 놓으세요</p>
+              <input type="file" id="fileElem" multiple hidden />
+              <label for="fileElem" class="upload-label"
+                >또는 클릭하여 파일 선택</label
+              >
+            </div>
             <table>
               <thead>
                 <tr>

@@ -1,14 +1,29 @@
-// 전체 통합 버전 JS - drive.js (이름 변경 기능 포함)
-
 document.addEventListener("DOMContentLoaded", function () {
   let folders = JSON.parse(localStorage.getItem("folders")) || [];
   let trash = JSON.parse(localStorage.getItem("trash")) || [];
   let renameIndex = null;
+  let currentPath = "/";
 
   const myList = document.getElementById("my-list");
   const sharedList = document.getElementById("shared-list");
   const recentList = document.getElementById("recent-list");
   const trashList = document.getElementById("trash-list");
+
+  document.addEventListener("click", () => {
+    document.querySelector(".dropdown-menu").style.display = "none";
+  });
+
+  window.openCreateFolderModal = function () {
+    document.getElementById("folderModal").style.display = "flex";
+    document.getElementById("folderNameInput").value = "";
+    document.getElementById("folderNameInput").focus();
+    document.querySelector(".dropdown-menu").style.display = "none";
+  };
+
+  window.uploadFolder = function () {
+    alert("폴더 업로드 기능은 아직 지원되지 않습니다.");
+    document.querySelector(".dropdown-menu").style.display = "none";
+  };
 
   document
     .getElementById("trash-select-all")
@@ -63,12 +78,64 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  const dropZone = document.getElementById("drop-zone");
+
+  dropZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZone.classList.add("dragover");
+  });
+
+  dropZone.addEventListener("dragleave", () => {
+    dropZone.classList.remove("dragover");
+  });
+
+  dropZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropZone.classList.remove("dragover");
+
+    const files = Array.from(e.dataTransfer.files);
+    const now = new Date().toLocaleString();
+
+    files.forEach((file) => {
+      folders.push({
+        name: file.name,
+        size: `${(file.size / 1024).toFixed(1)} KB`,
+        type: "file",
+        createdAt: now,
+        modifiedAt: now,
+        parentId: null,
+      });
+    });
+
+    saveData();
+    renderFolders();
+  });
+
   const tabMap = {
     "⭐ 내 드라이브": "tab-my-drive",
     "공용 드라이브": "tab-shared-drive",
     "최근 사용": "tab-recent",
     휴지통: "tab-trash",
   };
+
+  function updateHeaderButtons(tabId) {
+    const isTrash = tabId === "tab-trash";
+    document.querySelector(".create-folder-btn").style.display = isTrash
+      ? "none"
+      : "inline-block";
+    document.querySelector(".restore-selected-btn").style.display = isTrash
+      ? "inline-block"
+      : "none";
+    document.querySelector(".download-btn").style.display = isTrash
+      ? "none"
+      : "inline-block";
+    document.querySelector(".rename-btn").style.display = isTrash
+      ? "none"
+      : "inline-block";
+    document.querySelector(".move-btn").style.display = isTrash
+      ? "none"
+      : "inline-block";
+  }
 
   document.querySelectorAll(".sidebar li").forEach((li) => {
     li.addEventListener("click", () => {
@@ -81,11 +148,17 @@ document.addEventListener("DOMContentLoaded", function () {
         .querySelectorAll(".tab-content")
         .forEach((tab) => tab.classList.remove("active"));
 
-      const tabId = tabMap[li.textContent.trim()];
+      const label = li.textContent.trim();
+      const tabId = tabMap[label];
+
       if (tabId) {
         document.getElementById(tabId).classList.add("active");
-        document.getElementById("main-title").textContent =
-          li.textContent.trim();
+        document.getElementById("main-title").textContent = label;
+
+        if (label === "⭐ 내 드라이브") {
+          currentPath = "/";
+          document.getElementById("current-path").textContent = currentPath;
+        }
       }
 
       const isTrash = tabId === "tab-trash";
@@ -96,16 +169,19 @@ document.addEventListener("DOMContentLoaded", function () {
         ? "inline-block"
         : "none";
 
+      updateHeaderButtons(tabId);
       renderFolders();
       renderTrash();
     });
   });
 
-  document.querySelector(".create-folder-btn").addEventListener("click", () => {
-    document.getElementById("folderModal").style.display = "flex";
-    document.getElementById("folderNameInput").value = "";
-    document.getElementById("folderNameInput").focus();
-  });
+  document
+    .querySelector(".create-folder-btn")
+    .addEventListener("click", (e) => {
+      e.stopPropagation();
+      const menu = document.querySelector(".dropdown-menu");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    });
 
   window.closeModal = function () {
     document.getElementById("folderModal").style.display = "none";
@@ -187,7 +263,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     menu.innerHTML = `
       <button onclick="deleteFolder(${index})"><i class="fa-solid fa-trash"></i> 삭제</button>
-      <button onclick="openRenameModal(${index})">이름 변경</button>
+      <button onclick="openRenameModal(${index})">✏️ 이름 변경</button>
+      <button >내려받기</button>
     `;
     menu.style.top = y + "px";
     menu.style.left = x + "px";
