@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>내 드라이브</title>
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/drive.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script src="/js/drive/drive.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 헤더 -->
+      <div class="header">
+        <div class="header-logo">
+          <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+          <img
+            src="/images/logo_title.png"
+            class="logo-title"
+            alt="로고타이틀"
+          />
+        </div>
+
+        <div class="memu">
+          <a href="/board/main.html"
+            ><img src="/images/header/board.png" alt="게시판" class="memu-icon"
+          /></a>
+          <div class="vertical-divider"></div>
+          <a href="/chat/main.html"
+            ><img src="/images/header/chat.png" alt="메세지" class="memu-icon"
+          /></a>
+          <div class="vertical-divider"></div>
+          <a href="/calender/calender.html"
+            ><img
+              src="/images/header/calendar.png"
+              alt="캘린더"
+              class="memu-icon"
+          /></a>
+          <div class="vertical-divider"></div>
+          <a href="/project/main.html"
+            ><img
+              src="/images/header/project.png"
+              alt="프로젝트"
+              class="memu-icon"
+          /></a>
+          <div class="vertical-divider"></div>
+          <a href="#"
+            ><img src="/images/header/page.png" alt="페이지" class="memu-icon"
+          /></a>
+          <div class="vertical-divider"></div>
+          <a href="/drive/drive.html"
+            ><img
+              src="/images/header/drive.png"
+              alt="드라이브"
+              class="memu-icon"
+          /></a>
+          <div class="vertical-divider"></div>
+          <a href="#"
+            ><img
+              src="/images/header/settings.png"
+              alt="설정"
+              class="memu-icon"
+          /></a>
+          <div class="vertical-divider"></div>
+          <img src="/images/off.png" alt="로그아웃" class="logout" />
+          <div class="vertical-divider"></div>
+        </div>
+
+        <span class="status">ONLINE <span>●</span></span>
+        <img src="/images/profile1.png" alt="프로필이미지" />
+        <span class="admin">김팀장<br />Admin</span>
+      </div>
+
+      <!-- 본문 -->
+      <div class="main-layout">
+        <aside class="sidebar">
+          <h2>📂 드라이브</h2>
+          <ul>
+            <li class="active">⭐ 내 드라이브</li>
+            <li>공용 드라이브</li>
+            <li>최근 사용</li>
+            <li><i class="fa-solid fa-trash"></i> 휴지통</li>
+          </ul>
+        </aside>
+
+        <main class="main">
+          <header class="header">
+            <h2 id="main-title">📂 내 드라이브</h2>
+            <div>
+              <button class="create-folder-btn">+ 새로 만들기</button>
+              <button class="restore-selected-btn" style="display: none">
+                복원
+              </button>
+              <button class="delete-selected-btn">
+                <i class="fa-solid fa-trash"></i> 삭제
+              </button>
+            </div>
+          </header>
+
+          <section id="tab-my-drive" class="tab-content active">
+            <table>
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="select-all" /></th>
+                  <th>종류</th>
+                  <th>이름</th>
+                  <th>크기</th>
+                  <th>수정한 날짜</th>
+                  <th>수정한 사람</th>
+                  <th>생성한 날짜</th>
+                </tr>
+              </thead>
+              <tbody id="my-list"></tbody>
+            </table>
+          </section>
+
+          <section id="tab-shared-drive" class="tab-content">
+            <table>
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="select-all" /></th>
+                  <th>종류</th>
+                  <th>이름</th>
+                  <th>크기</th>
+                  <th>수정한 날짜</th>
+                  <th>수정한 사람</th>
+                  <th>생성한 날짜</th>
+                </tr>
+              </thead>
+              <tbody id="shared-list"></tbody>
+            </table>
+          </section>
+
+          <section id="tab-recent" class="tab-content">
+            <table>
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="select-all" /></th>
+                  <th>종류</th>
+                  <th>이름</th>
+                  <th>크기</th>
+                  <th>수정한 날짜</th>
+                  <th>수정한 사람</th>
+                  <th>생성한 날짜</th>
+                </tr>
+              </thead>
+              <tbody id="recent-list"></tbody>
+            </table>
+          </section>
+
+          <section id="tab-trash" class="tab-content">
+            <table>
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="trash-select-all" /></th>
+                  <th>이름</th>
+                  <th>삭제일자</th>
+                  <th>복원</th>
+                </tr>
+              </thead>
+              <tbody id="trash-list"></tbody>
+            </table>
+          </section>
+        </main>
+      </div>
+
+      <!-- 푸터 -->
+      <div class="footer">version 0.0.1</div>
+    </div>
+
+    <!-- 모달: 새폴더 -->
+    <div class="modal-overlay" id="folderModal" style="display: none">
+      <div class="modal">
+        <div class="modal-header">
+          <span>새폴더 추가</span>
+          <button class="modal-close" onclick="closeModal()">×</button>
+        </div>
+        <div class="modal-body">
+          <input
+            type="text"
+            id="folderNameInput"
+            placeholder="텍스트를 입력해 주세요."
+          />
+        </div>
+        <div class="modal-footer">
+          <button class="cancel-btn" onclick="closeModal()">취소</button>
+          <button class="confirm-btn" onclick="addFolderFromModal()">
+            확인
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 모달: 이름 변경 -->
+    <div class="modal-overlay" id="renameModal" style="display: none">
+      <div class="modal">
+        <div class="modal-header">
+          <span>이름 변경</span>
+          <button class="modal-close" onclick="closeRenameModal()">×</button>
+        </div>
+        <div class="modal-body">
+          <input
+            type="text"
+            id="renameInput"
+            placeholder="텍스트를 입력해 주세요."
+          />
+        </div>
+        <div class="modal-footer">
+          <button class="cancel-btn" onclick="closeRenameModal()">취소</button>
+          <button class="confirm-btn" onclick="confirmRename()">확인</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
