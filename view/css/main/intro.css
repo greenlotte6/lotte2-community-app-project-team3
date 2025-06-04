@@ -87,7 +87,8 @@ textarea {
   align-items: center;
 }
 
-.login-btn {
+.login-btn,
+.register-btn {
   background-color: #4299e1;
   color: white;
   padding: 8px 20px;
@@ -100,7 +101,8 @@ textarea {
   cursor: pointer;
 }
 
-.login-btn:hover {
+.login-btn:hover,
+.register-btn:hover {
   background-color: #3182ce;
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);

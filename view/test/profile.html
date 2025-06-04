@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/admin/aside.css">
+    <title>프로필 설정</title>
+    <style>
+        .main-layout {
+            display: flex;
+            background-color: #f9fbfd;
+        }
+
+        main.main-content {
+            flex: 1;
+            padding: 40px 60px;
+        }
+
+        .main-content h1 {
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+
+        .profile-setting {
+            display: flex;
+            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            border: 2px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+        .profile-setting .left {
+            width: 35%;
+            background-color: #f2f6fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .profile-setting .left img {
+            border-radius: 50%;
+            width: 100%;
+            height: 90%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .profile-setting .left a {
+            text-decoration: underline;
+            font-size: 0.9rem;
+            color: #104e4a;
+        }
+
+        .profile-setting .right {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-setting h4 {
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .profile-setting input[type="text"],
+        .profile-setting input[type="password"] {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f4f4f4;
+            width: 100%;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-row input {
+            flex: 1;
+        }
+
+        .btn {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .btn button {
+            height: 40px;
+            width: 120px;
+            border: 2px solid #104e4a;
+            border-radius: 10px;
+            background-color: transparent;
+            color: #104e4a;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo">
+                <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+                <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+            </div>
+            <span class="status">ONLINE <span>●</span></span>
+            <img src="/images/profile1.png" alt="프로필이미지" />
+            <span class="admin">김팀장<br>Admin</span>
+        </div>
+
+        <div class="main-layout">
+            <!-- 사이드메뉴 시작 -->
+            <aside class="sidebar">
+                <div>
+                    <div class="section-title">SETTINGS</div>
+                    <ul>
+                        <li><a href="/admin/profile.html">👤프로필</a></li>
+                        <li><a href="/admin/page.html">📄페이지</a></li>
+                        <li><a href="/admin/message.html">💬메시지</a></li>
+                        <li><a href="/admin/calendar.html">📅캘린더</a></li>
+                        <li><a href="/admin/project.html">📁프로젝트</a></li>
+                        <li><a href="/admin/drive.html">🗂️드라이브</a></li>
+                        <li><a href="/admin/board.html">📝게시판</a></li>
+                        <li><a href="/admin/plan.html">💳요금제</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <!-- 사이드메뉴 끝 -->
+
+            <main class="main-content">
+
+                <article class="main-content">
+                    <!-- 메인 시작 -->
+                    <div class="title">
+                        <h1>프로필 설정</h1>
+                    </div>
+                    <div class="profile-setting">
+                        <div class="left">
+                            <div>
+                                <img src="/images/profile1.png" alt="프로필이미지">
+                            </div>
+                            <a href="#">프로필사진 변경</a>
+                        </div>
+                        <div class="right">
+                            <h4>이름</h4>
+                            <input type="text" name="name" readonly placeholder="김팀장">
+
+                            <h4>이메일</h4>
+                            <input type="text" name="email" placeholder="kimleader@example.com">
+
+                            <h4>사내번호</h4>
+                            <input type="text" name="office" placeholder="051-123-1234">
+
+                            <h4>부서</h4>
+                            <input type="text" name="department" readonly placeholder="IT">
+
+                            <h4>사번 / 직급</h4>
+                            <div class="input-row">
+                                <input type="text" name="employId" readonly placeholder="M1029">
+                                <input type="text" name="position" readonly placeholder="대리">
+                            </div>
+
+
+                            <h4>아이디</h4>
+                            <input type="text" name="id" readonly placeholder="kim0531">
+
+                            <h4>비밀번호</h4>
+                            <div class="input-row">
+                                <input type="password" name="pass1" placeholder="새로운 비밀번호">
+                                <input type="password" name="pass2" placeholder="비밀번호 확인">
+                            </div>
+
+
+                            <h4>가입 날짜</h4>
+                            <input type="text" name="regDate" readonly placeholder="2025.05.31">
+                        </div>
+                    </div>
+                    <!-- 메인 끝 -->
+
+                    <div class="btn">
+                        <button>S A V E</button>
+                    </div>
+
+                </article>
+
+            </main>
+        </div>
+
+
+        <div class="footer">
+            version 0.0.1 | License | More Themes | Documentation | Support
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

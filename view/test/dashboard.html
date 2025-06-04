@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>대시보드</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo">
+                <a href="/dashboard/dashboard.html">
+                    <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+                    <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+                </a>
+
+            </div>
+
+            <div class="memu">
+                <a href="/board/main.html">
+                    <img src="/images/header/board.png" alt="게시판" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/chat/main.html">
+                    <img src="/images/header/chat.png" alt="메세지" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/calender/calender.html">
+                    <img src="/images/header/calendar.png" alt="캘린더" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/project/main.html">
+                    <img src="/images/header/project.png" alt="프로젝트" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="#">
+                    <img src="/images/header/page.png" alt="페이지" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/drive/drive.html">
+                    <img src="/images/header/drive.png" alt="드라이브" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/admin/profile.html">
+                    <img src="/images/header/settings.png" alt="설정" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <img src="/images/off.png" alt="로그아웃" class="logout" />
+                <div class="vertical-divider"></div>
+            </div>
+
+            <span class="status">ONLINE <span>●</span></span>
+            <img src="/images/profile1.png" alt="프로필이미지" />
+            <span class="admin">김팀장<br>Admin</span>
+        </div>
+
+        <div class="main-layout">
+
+            <main class="main-content">
+
+                <article class="main-content">
+                    <!-- 메인 시작 -->
+                    <div class="dashboard">
+                        <div class="top">
+                            <section class="part1">
+                                <div class="profile">
+                                    <section class="profile-image">
+                                        <img src="/images/profile1.png" alt="">
+                                    </section>
+                                    <section class="profile-info">
+                                        <div>
+                                            <p>Welcome! <span>김팀장</span> 님 </p>
+                                            <p>(관리자)</p>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="time">
+                                    <div class="js-clock">
+                                        <span class="currDate"></span>
+                                        <span class="currTime"></span>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="part2">
+                                <div class="projects">
+                                    <h2>✅진행중인 프로젝트</h2>
+                                    <div class="lists">
+                                        <div class="project-list">
+                                            <article>
+                                                <div class="title">
+                                                    <p>[<span>프로젝트명</span>]</p>
+                                                </div>
+                                                <div class="period">
+                                                    <p><span>2025.06.03</span> ~ <span>2025.06.30</span></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p>담당자</p>
+                                                    <p>프로젝트 내용입니다</p>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="project-list">
+                                            <article>
+                                                <div class="title">
+                                                    <p>[<span>프로젝트명</span>]</p>
+                                                </div>
+                                                <div class="period">
+                                                    <p><span>2025.06.03</span> ~ <span>2025.06.30</span></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p>담당자</p>
+                                                    <p>내용</p>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="project-list">
+                                            <article>
+                                                <div class="title">
+                                                    <p>[<span>프로젝트명</span>]</p>
+                                                </div>
+                                                <div class="period">
+                                                    <p><span>2025.06.03</span> ~ <span>2025.06.30</span></p>
+                                                </div>
+                                                <div class="info">
+                                                    <p>담당자</p>
+                                                    <p>내용</p>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <section class="part3">
+                            <div class="notices1">
+                                <h2>📢공지사항</h2>
+                                <article>
+                                    <div class="title">
+                                        <span>[공지사항]</span>
+                                        <span>제목</span>
+                                    </div>
+                                    <div class="content">
+                                        <p>내용</p>
+                                    </div>
+                                    <div class="info">
+                                        <span>2025.06.03</span>
+                                        <span>10</span>
+                                        <span>29</span>
+                                    </div>
+                                </article>
+                                <article>
+                                    <div class="title">
+                                        <span>[공지사항]</span>
+                                        <span>제목</span>
+                                    </div>
+                                    <div class="content">
+                                        <p>내용</p>
+                                    </div>
+                                    <div class="info">
+                                        <span>2025.06.03</span>
+                                        <span>10</span>
+                                        <span>29</span>
+                                    </div>
+                                </article>
+                                <article>
+                                    <div class="title">
+                                        <span>[공지사항]</span>
+                                        <span>제목</span>
+                                    </div>
+                                    <div class="content">
+                                        <p>내용</p>
+                                    </div>
+                                    <div class="info">
+                                        <span>2025.06.03</span>
+                                        <span>10</span>
+                                        <span>29</span>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="notices2">
+                                <h2>📅다가오는 일정</h2>
+                                <h3>오늘</h3>
+                                <article>
+                                    <div class="title">
+                                        <span>일정1</span>
+                                    </div>
+                                    <div class="dates">
+                                        <p><span>2025.06.03</span> ~ <span>2025.06.30</span></p>
+                                    </div>
+                                    <div class="info">
+                                        <p>일정 설명</p>
+                                    </div>
+                                </article>
+                                <h3>내일</h3>
+                                <article>
+                                    <div class="title">
+                                        <span>일정1</span>
+                                    </div>
+                                    <div class="dates">
+                                        <p><span>2025.06.03</span> ~ <span>2025.06.30</span></p>
+                                    </div>
+                                    <div class="info">
+                                        <p>일정 설명</p>
+                                    </div>
+                                </article>
+                                <article>
+                                    <div class="title">
+                                        <span>일정1</span>
+                                    </div>
+                                    <div class="dates">
+                                        <p><span>2025.06.03</span> ~ <span>2025.06.30</span></p>
+                                    </div>
+                                    <div class="info">
+                                        <p>일정 설명</p>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="notices3"></div>
+                        </section>
+                    </div>
+            </main>
+        </div>
+
+        <div class="footer">
+            version 0.0.1 | License | More Themes | Documentation | Support
+        </div>
+    </div>
+</body>
+<script>
+    const clockContainer = document.querySelector(".js-clock"),
+        dateTitle = clockContainer.querySelector(".currDate"),
+        clockTitle = clockContainer.querySelector(".currTime");
+
+    function getDate() {
+        const date = new Date();
+        const week = ['일', '월', '화', '수', '목', '금', '토'];
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const dayName = week[date.getDay()];
+        dateTitle.innerText = `${year}/${month < 10 ? `0${month}` : month}/${day < 10 ? `0${day}` : day} [${dayName}]`;
+    }
+
+    function getTime() {
+        const date = new Date();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const seconds = date.getSeconds();
+        clockTitle.innerText =
+            `${hours < 10 ? `0${hours}` : hours}:` +
+            `${minutes < 10 ? `0${minutes}` : minutes}:` +
+            `${seconds < 10 ? `0${seconds}` : seconds}`;
+    }
+
+    function updateTextSize() {
+        const elements = [clockTitle, dateTitle];
+        const targetWidthRatio = 0.5;
+        elements.forEach(elem => {
+            let curFontSize = 20;
+            for (let i = 0; i < 3; i++) {
+                const parentWidth = elem.parentNode.offsetWidth;
+                const textWidth = elem.offsetWidth;
+                curFontSize *= targetWidthRatio / (textWidth / parentWidth);
+                elem.style.fontSize = `${curFontSize}pt`;
+            }
+        });
+    }
+
+
+    function init() {
+        getDate();
+        getTime();
+        updateTextSize();
+        setInterval(getTime, 1000);
+        window.addEventListener("resize", updateTextSize);
+    }
+
+    init();
+</script>
+
+</html>

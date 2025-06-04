@@ -1,0 +1,405 @@
+/* General Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%; /* Important for body to fill viewport */
+}
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  display: flex; /* Use flexbox for vertical stacking */
+  flex-direction: column; /* Stack header, main-wrapper, footer */
+}
+
+/* Top Header Section */
+
+/* Main Content Wrapper (contains both sidebars and the editor/card-grid) */
+.main-content-wrapper {
+  display: flex; /* Use flexbox for horizontal arrangement */
+  flex-grow: 1; /* Makes this section fill remaining vertical space */
+  overflow: hidden; /* Prevents scrollbars from nested elements if content overflows */
+}
+
+/* Original Sidebar (사내 게시판 프로젝트) - Updated content */
+.original-sidebar {
+  /* Renamed from .sidebar in previous user input */
+  width: 240px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  padding: 1rem;
+  overflow-y: auto; /* Allows scrolling if content is tall */
+  flex-shrink: 0; /* Prevents this sidebar from shrinking */
+}
+/* Removed h2 specific to original-sidebar */
+.original-sidebar .section-title {
+  /* For BOARDS, MENU, SETTINGS */
+  font-size: 12px;
+  color: #888;
+  padding: 0.5rem 0; /* Adjust padding as needed */
+  margin-top: 1rem; /* Space between sections */
+  border-bottom: 1px solid #f0f0f0; /* Optional separator */
+  text-transform: uppercase; /* Match common styling for these headers */
+}
+.original-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+  font-size: 14px;
+}
+.original-sidebar li {
+  padding: 0.5rem 0.5rem; /* Add some internal padding */
+  cursor: pointer;
+  transition: background-color 0.2s;
+  color: #555;
+}
+.original-sidebar li:hover {
+  background-color: #f1f3f5;
+  border-radius: 4px; /* Slight rounding on hover */
+}
+.original-sidebar > div:last-child > li {
+  /* Style for the 'Logout' item */
+  margin-top: auto; /* Push Logout to bottom if it's the last child in a flex column */
+  padding-top: 1rem; /* Add space above logout */
+  border-top: 1px solid #eee; /* Separator for logout */
+}
+
+/* Notion-Style Sidebar (내 페이지) - (This one remains as in previous step) */
+.notion-style-sidebar {
+  width: 240px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.notion-style-sidebar-header {
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+
+.notion-style-sidebar-header h2 {
+  font-size: 16px;
+  margin-bottom: 0.5rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.notion-style-sidebar-header h2 span {
+  font-size: 14px;
+  color: #999;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+  color: #888;
+}
+.search-box input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  margin-left: 0.5rem;
+  font-size: 14px;
+  color: #333;
+}
+.search-box input::placeholder {
+  color: #bbb;
+}
+
+.sidebar-section {
+  margin-bottom: 0.5rem;
+}
+
+/* section-title for sidebar */
+.notion-style-sidebar .section-title {
+  font-size: 12px;
+  color: #888;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.notion-style-sidebar .section-title i {
+  font-size: 10px;
+  transition: transform 0.2s;
+}
+.notion-style-sidebar .section-title.collapsed i {
+  transform: rotate(-90deg);
+}
+
+.page-list {
+  list-style: none;
+  padding: 0;
+  font-size: 14px;
+}
+.notion-style-sidebar .page-list li {
+  /* Specific styles for Notion-style sidebar's list items */
+  padding: 0.5rem 1rem 0.5rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+.notion-style-sidebar .page-list li:hover {
+  background-color: #f1f3f5;
+}
+.notion-style-sidebar .page-list li.active {
+  background-color: #e6f0ff;
+  color: #1a73e8;
+}
+.notion-style-sidebar .page-list li.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #1a73e8;
+  border-radius: 0 3px 3px 0;
+}
+.notion-style-sidebar .page-list .icon {
+  color: #999;
+  font-size: 12px;
+}
+.notion-style-sidebar .page-list .add-page {
+  color: #666;
+  font-style: italic;
+}
+
+.create-page-btn-wrapper {
+  margin-top: auto;
+  padding: 1rem;
+  border-top: 1px solid #eee;
+}
+.create-page-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4f83f1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.create-page-btn:hover {
+  background-color: #3b6edc;
+}
+
+/* Main Content Area (Card Grid) */
+.main-editor-area {
+  flex: 1; /* Takes remaining horizontal space */
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Generic Button (used in page header) */
+.btn {
+  padding: 0.5rem 1rem;
+  background-color: #4f83f1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #3b6edc;
+}
+
+/* Page Header within Main Content */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem; /* Add space below header */
+}
+.page-header h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+/* Card Layout CSS */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem; /* 카드 사이 간격 */
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 푸터를 하단에 고정 */
+  min-height: 180px; /* 카드 최소 높이 (내용에 따라 조절) */
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: #fff;
+  margin-right: 0.5rem;
+}
+.card-icon.support {
+  background-color: #f7e6a0;
+  color: #a67c00;
+} /* Yellow */
+.card-icon.digital {
+  background-color: #d1d8df;
+  color: #495057;
+} /* Gray */
+.card-icon.event {
+  background-color: #a0c2f7;
+  color: #3b6edc;
+} /* Blue */
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  color: #adb5bd;
+  font-size: 14px;
+}
+.card-actions i {
+  cursor: pointer;
+}
+.card-actions i:hover {
+  color: #495057;
+}
+
+.card-content {
+  flex-grow: 1; /* 콘텐츠가 사용 가능한 공간을 모두 차지하도록 함 */
+  margin-bottom: 1rem;
+}
+
+.card-content h3 {
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #343a40;
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  color: #495057;
+  line-height: 1.4;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box; /* 웹킷 기반 브라우저를 위한 줄 수 제한 */
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis; /* Add ellipsis if content overflows */
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.avatars {
+  display: flex;
+  position: relative;
+  margin-right: 0.5rem;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  background-color: #e9ecef; /* 아바타 플레이스홀더 배경 */
+  margin-left: -8px; /* 아바타 겹치기 효과 */
+  object-fit: cover;
+}
+.avatars .avatar:first-child {
+  margin-left: 0; /* 첫 번째 아바타는 겹치지 않음 */
+}
+
+.card-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-btn {
+  background-color: #e9ecef;
+  color: #495057;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.card-btn:hover {
+  background-color: #dee2e6;
+}
+
+.card-btn.primary {
+  background-color: #4f83f1;
+  color: white;
+}
+
+.card-btn.primary:hover {
+  background-color: #3b6edc;
+}
+
+/* Utility classes for collapsible sections */
+.collapsible-content {
+  display: block;
+}
+.collapsible-content.collapsed {
+  display: none;
+}
+
+/* Footer */
+.app-footer {
+  height: 40px; /* Example fixed height */
+  background-color: #f0f0f0;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #666;
+  flex-shrink: 0; /* Prevent it from shrinking */
+}

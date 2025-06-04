@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/admin/aside.css">
+    <title>메시지 설정</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo">
+                <a href="/dashboard/dashboard.html">
+                    <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+                    <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+                </a>
+            </div>
+            <div class="memu">
+                <a href="/board/main.html">
+                    <img src="/images/header/board.png" alt="게시판" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/chat/main.html">
+                    <img src="/images/header/chat.png" alt="메세지" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/calender/calender.html">
+                    <img src="/images/header/calendar.png" alt="캘린더" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/project/main.html">
+                    <img src="/images/header/project.png" alt="프로젝트" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/page/pageMain.html">
+                    <img src="/images/header/page.png" alt="페이지" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/drive/drive.html">
+                    <img src="/images/header/drive.png" alt="드라이브" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/admin/profile.html">
+                    <img src="/images/header/settings.png" alt="설정" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <img src="/images/off.png" alt="로그아웃" class="logout" />
+                <div class="vertical-divider"></div>
+            </div>
+            <span class="status">ONLINE <span>●</span></span>
+            <img src="/images/profile1.png" alt="프로필이미지" />
+            <span class="admin">김팀장<br>Admin</span>
+        </div>
+
+        <div class="main-layout">
+            <!-- 사이드메뉴 시작 -->
+            <aside class="sidebar">
+                <div>
+                    <div class="section-title">SETTINGS</div>
+                    <ul>
+                        <li><a href="/admin/profile.html">👤프로필</a></li>
+                        <li><a href="/admin/page.html">📄페이지</a></li>
+                        <li><a href="/admin/message.html">💬메시지</a></li>
+                        <li><a href="/admin/calendar.html">📅캘린더</a></li>
+                        <li><a href="/admin/project.html">📁프로젝트</a></li>
+                        <li><a href="/admin/drive.html">🗂️드라이브</a></li>
+                        <li><a href="/admin/board.html">📝게시판</a></li>
+                        <li><a href="/admin/plan.html">💳요금제</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <!-- 사이드메뉴 끝 -->
+
+            <main class="main-content">
+
+                <article class="main-content">
+                    <!-- 메인 시작 -->
+                    <div class="title">
+                        <h1>메시지 설정</h1>
+                    </div>
+
+                    <div class="message-setting">
+                        <h3>기본 설정</h3>
+                        <div class="setting1">
+                            <div class="list1">
+                                <section>
+                                    글자 크기 옵션
+                                    <section class="radios">
+                                        <label>
+                                            <input name="fontsize" class="basic" type="radio" value="basic">기본
+                                        </label>
+                                        <label>
+                                            <input name="fontsize" class="big" type="radio" value="big">크게
+                                        </label>
+                                        <label>
+                                            <input name="fontsize" class="small" type="radio" value="small">작게
+                                        </label>
+                                    </section>
+                                </section>
+                            </div>
+                        </div>
+
+                        <h3>메시지 자동응답</h3>
+                        <div class="setting2">
+                            <div class="list2">
+                                <section>
+                                    개인 메시지 자동응답
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 메인 끝 -->
+
+                    <div class="btn">
+                        <button>S A V E</button>
+                    </div>
+
+                </article>
+
+            </main>
+        </div>
+
+
+        <div class="footer">
+            version 0.0.1 | License | More Themes | Documentation | Support
+        </div>
+
+    </div>
+</body>
+
+</html>

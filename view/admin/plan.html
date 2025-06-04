@@ -7,21 +7,11 @@
   <title>요금제 설정</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link rel="stylesheet" href="/css/index.css" />
+  <link rel="stylesheet" href="/css/admin/plan.css">
   <link rel="stylesheet" href="/css/admin/aside.css">
 
   <style>
-    h1 {
-      margin: 0 0 40px 10px;
-    }
 
-    .status span {
-      color: green;
-    }
-
-    .main-content {
-      flex: 1;
-      padding: 2% 4%;
-    }
   </style>
 </head>
 
@@ -29,8 +19,42 @@
   <div class="container">
     <div class="header">
       <div class="header-logo">
-        <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
-        <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+        <a href="/dashboard/dashboard.html">
+          <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+          <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+        </a>
+      </div>
+      <div class="memu">
+        <a href="/board/main.html">
+          <img src="/images/header/board.png" alt="게시판" class="memu-icon" />
+        </a>
+        <div class="vertical-divider"></div>
+        <a href="/chat/main.html">
+          <img src="/images/header/chat.png" alt="메세지" class="memu-icon" />
+        </a>
+        <div class="vertical-divider"></div>
+        <a href="/calender/calender.html">
+          <img src="/images/header/calendar.png" alt="캘린더" class="memu-icon" />
+        </a>
+        <div class="vertical-divider"></div>
+        <a href="/project/main.html">
+          <img src="/images/header/project.png" alt="프로젝트" class="memu-icon" />
+        </a>
+        <div class="vertical-divider"></div>
+        <a href="/page/pageMain.html">
+          <img src="/images/header/page.png" alt="페이지" class="memu-icon" />
+        </a>
+        <div class="vertical-divider"></div>
+        <a href="/drive/drive.html">
+          <img src="/images/header/drive.png" alt="드라이브" class="memu-icon" />
+        </a>
+        <div class="vertical-divider"></div>
+        <a href="/admin/profile.html">
+          <img src="/images/header/settings.png" alt="설정" class="memu-icon" />
+        </a>
+        <div class="vertical-divider"></div>
+        <img src="/images/off.png" alt="로그아웃" class="logout" />
+        <div class="vertical-divider"></div>
       </div>
       <span class="status">ONLINE <span>●</span></span>
       <img src="/images/profile1.png" alt="프로필이미지" />
@@ -38,41 +62,20 @@
     </div>
 
     <div class="main-layout">
+      <!-- 사이드메뉴 시작 -->
       <aside class="sidebar">
         <div>
-          <div class="section-title">BOARDS</div>
-          <ul>
-            <li>Notices</li>
-            <li>Department</li>
-            <li>Free</li>
-            <li>Q&A</li>
-            <li>Album</li>
-            <li>Menu</li>
-          </ul>
-          <div class="section-title">MENU</div>
-          <ul>
-            <li>Messages</li>
-            <li>Calender</li>
-            <li>Projects</li>
-            <li>Pages</li>
-            <li>Drive</li>
-          </ul>
           <div class="section-title">SETTINGS</div>
           <ul>
-            <li>프로필</li>
-            <li>알림</li>
-            <li>캘린더</li>
-            <li>페이지</li>
-            <li>메시지</li>
-            <li>내 드라이브</li>
-            <li>프로젝트</li>
-            <li>-------------------</li>
-            <li>게시판</li>
-            <li>플랜</li>
+            <li><a href="/admin/profile.html">👤프로필</a></li>
+            <li><a href="/admin/page.html">📄페이지</a></li>
+            <li><a href="/admin/message.html">💬메시지</a></li>
+            <li><a href="/admin/calendar.html">📅캘린더</a></li>
+            <li><a href="/admin/project.html">📁프로젝트</a></li>
+            <li><a href="/admin/drive.html">🗂️드라이브</a></li>
+            <li><a href="/admin/board.html">📝게시판</a></li>
+            <li><a href="/admin/plan.html">💳요금제</a></li>
           </ul>
-        </div>
-        <div>
-          <li>Logout</li>
         </div>
       </aside>
 
@@ -80,9 +83,68 @@
 
         <article class="main-content">
           <!-- 메인 시작 -->
-          <div class="title">
-            <h1>요금제</h1>
-          </div>
+          <!-- 💰 요금제 섹션 -->
+
+          <section class="pricing-section">
+            <div class="pricing-container">
+              <div class="pricing-header">
+                <h1>요금은 0원부터, 지금 시작하세요!</h1>
+
+                <a href="/main/pricing.html" class="compare-button">가격 비교하러 가기 →</a>
+              </div>
+
+              <div class="pricing-cards">
+                <!-- FREE 플랜 -->
+                <div class="pricing-card">
+                  <div class="plan-header">
+                    <h2>FREE</h2>
+                    <div class="price">0원</div>
+                    <p class="plan-subtitle">무료</p>
+                  </div>
+
+                  <div class="plan-icon">
+                    <img src="/images/main/aAF5devxEdbNPNiF_Gold.png" alt="FREE Plan" />
+                  </div>
+
+                  <div class="plan-description">무료 플랜: 기본 기능 체험</div>
+                </div>
+
+                <!-- PLUS 플랜 -->
+                <div class="pricing-card">
+                  <div class="plan-header">
+                    <h2>PLUS</h2>
+                    <div class="price">9,900원/달</div>
+                    <p class="plan-subtitle">연간 결제 시 20% 할인</p>
+                  </div>
+
+                  <div class="plan-icon">
+                    <img src="/images/main/aAF5sOvxEdbNPNiH_Platinum.png" alt="PLUS Plan" />
+                  </div>
+
+                  <div class="plan-description">
+                    소규모 팀을 위한 협업 도구와 확장된 기능
+                  </div>
+                </div>
+
+                <!-- PRO 플랜 -->
+                <div class="pricing-card">
+                  <div class="plan-header">
+                    <h2>PRO</h2>
+                    <div class="price">29,000원/달</div>
+                    <p class="plan-subtitle">연간 결제 시 20% 할인</p>
+                  </div>
+
+                  <div class="plan-icon">
+                    <img src="/images/main/aAF5yOvxEdbNPNiJ_Diamond.png" alt="PRO Plan" />
+                  </div>
+
+                  <div class="plan-description">
+                    대규모 조직을 위한 프리미엄 지원과 고급 기능
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
 
 
         </article>

@@ -1,156 +1,79 @@
-/* 설정 타이틀 */
-h1 {
-  margin: 0 0 30px 10px;
+.main-layout {
+  display: flex;
+  background-color: #f9fbfd;
 }
 
-.status span {
-  color: green;
-}
-
-/* 메인 */
-.main-content {
+main.main-content {
   flex: 1;
-  padding: 2% 4%;
+  padding: 40px 60px;
+}
+
+.main-content h1 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 5px;
 }
 
 .board-setting {
   display: flex;
-  border: 1px solid #dedede;
   background: #ffffff;
-  border-radius: 30px;
-  height: 100%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 30px;
 }
 
 .board {
-  flex: 1;
-  padding: 30px;
+  width: 100%;
+  min-height: 700px;
   display: flex;
   flex-direction: column;
-  min-height: 700px;
+  gap: 20px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head p {
+  margin: 0;
+  color: #333;
 }
 
 .head button {
-  float: right;
   width: 80px;
   height: 30px;
-  border: 3px solid #1ab9af;
-  background-color: transparent;
-  border-radius: 10px;
-  color: #0c5550;
-  margin-top: -30px;
+  border: none;
+  background-color: #104e4a;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
 }
 
 .body {
-  margin-top: 40px;
-  border: 1px solid #dfdfdf;
+  overflow-x: auto;
 }
 
-/* 수정하기 버튼 */
-.body button {
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid #98cfcc;
-  padding: 5px;
-  font-size: 13px;
-}
-
-/* 리스트 디자인 */
-table {
-  border-spacing: 0;
+.body table {
   width: 100%;
-  table-layout: fixed;
+  border-collapse: collapse;
+  background-color: white;
 }
 
-th {
+.body th,
+.body td {
   padding: 12px;
   text-align: center;
   border-bottom: 1px solid #dfdfdf;
+  font-size: 0.95rem;
 }
 
-th:nth-last-child(1) {
-  width: 20%;
-}
-
-th:nth-last-child(2) {
-  width: 20%;
-}
-
-td {
-  padding: 12px;
-  text-align: center;
-}
-
-/* On/Off 스위치 디자인 */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 28px;
-  margin-left: 350px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 34px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 22px;
-  width: 22px;
-  left: 3px;
-  bottom: 3px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #104e4a;
-}
-
-input:checked + .slider:before {
-  transform: translateX(22px);
-}
-
-/* 공유할 멤버 추가 */
-#memberInputContainer {
-  display: none;
-  margin-top: 10px;
-}
-
-#memberTagContainer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-bottom: 10px;
-}
-
-/* 삭제버튼 */
-button.deleteBtn {
-  width: 50px;
-  padding: 4px;
-  background: none;
-  border: 1px solid darkred;
-  color: orangered;
-  margin-left: 30px;
-}
-
-button.deleteBtn:hover {
-  background-color: #0c5550;
+.body th {
+  background-color: #3a64b1;
   color: white;
+}
+
+.body td {
+  background-color: #fafbfc;
 }

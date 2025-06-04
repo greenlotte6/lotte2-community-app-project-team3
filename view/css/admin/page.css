@@ -1,70 +1,75 @@
-/* 설정 타이틀 */
-h1 {
-  margin: 0 0 30px 10px;
-}
-
-.status span {
-  color: green;
-}
-
 /* 메인 */
-.main-content {
+.main-layout {
+  display: flex;
+  background-color: #f9fbfd;
+}
+
+main.main-content {
   flex: 1;
-  padding: 2% 4%;
+  padding: 40px 60px;
+}
+.main-content h1 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 5px;
 }
 
 .page-setting {
   display: flex;
-  border: 1px solid #dedede;
   background: #ffffff;
-  border-radius: 30px;
-  height: 100%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 30px;
 }
 
 .page {
-  flex: 1;
-  padding: 30px;
+  width: 100%;
+  min-height: 700px;
   display: flex;
   flex-direction: column;
-  min-height: 700px;
+  gap: 20px;
 }
 
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head p {
+  margin: 0;
+  color: #333;
+}
 .head button {
-  float: right;
   width: 80px;
   height: 30px;
-  border: 3px solid #1ab9af;
-  background-color: transparent;
-  border-radius: 10px;
-  color: #0c5550;
-  margin-top: -30px;
+  border: none;
+  background-color: #104e4a;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
 }
 
 .body {
-  margin-top: 40px;
-  border: 1px solid #dfdfdf;
-}
-
-/* 수정하기 버튼 */
-.body button {
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid #98cfcc;
-  padding: 5px;
-  font-size: 13px;
+  overflow-x: auto;
 }
 
 /* 리스트 디자인 */
 table {
-  border-spacing: 0;
   width: 100%;
-  table-layout: fixed;
+  border-collapse: collapse;
+  background-color: white;
 }
-
-th {
+th,
+td {
   padding: 12px;
   text-align: center;
   border-bottom: 1px solid #dfdfdf;
+  font-size: 0.95rem;
+}
+th {
+  background-color: #3a64b1;
+  color: white;
 }
 
 th:nth-last-child(1) {
@@ -76,8 +81,7 @@ th:nth-last-child(2) {
 }
 
 td {
-  padding: 12px;
-  text-align: center;
+  background-color: #fafbfc;
 }
 
 td.title::before {

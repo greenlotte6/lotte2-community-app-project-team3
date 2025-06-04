@@ -1,16 +1,12 @@
-/* 설정 타이틀 */
-h1 {
-  margin: 0 0 30px 10px;
-}
-
-.status span {
-  color: green;
-}
-
 /* 메인 */
-.main-content {
+.main-layout {
+  display: flex;
+  background-color: #f9fbfd;
+}
+
+main.main-content {
   flex: 1;
-  padding: 2% 4%;
+  padding: 40px 60px;
 }
 
 .notification h3 {
@@ -30,10 +26,8 @@ h1 {
 
 .setting1 div,
 .setting2 div {
-  border: 1px solid #dedede;
   background: #ffffff;
-  border-radius: 20px;
-  height: 100%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .setting1 div {
