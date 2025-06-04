@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let trash = JSON.parse(localStorage.getItem("trash")) || [];
   let renameIndex = null;
   let currentPath = "/";
+  let sortKey = null;
+  let sortAsc = true;
 
   const myList = document.getElementById("my-list");
   const sharedList = document.getElementById("shared-list");
@@ -113,29 +115,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const tabMap = {
     "⭐ 내 드라이브": "tab-my-drive",
-    "공용 드라이브": "tab-shared-drive",
+    "공유 드라이브": "tab-shared-drive",
     "최근 사용": "tab-recent",
-    휴지통: "tab-trash",
+    "🗑️ 휴지통": "tab-trash",
   };
-
-  function updateHeaderButtons(tabId) {
-    const isTrash = tabId === "tab-trash";
-    document.querySelector(".create-folder-btn").style.display = isTrash
-      ? "none"
-      : "inline-block";
-    document.querySelector(".restore-selected-btn").style.display = isTrash
-      ? "inline-block"
-      : "none";
-    document.querySelector(".download-btn").style.display = isTrash
-      ? "none"
-      : "inline-block";
-    document.querySelector(".rename-btn").style.display = isTrash
-      ? "none"
-      : "inline-block";
-    document.querySelector(".move-btn").style.display = isTrash
-      ? "none"
-      : "inline-block";
-  }
 
   document.querySelectorAll(".sidebar li").forEach((li) => {
     li.addEventListener("click", () => {
@@ -169,7 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
         ? "inline-block"
         : "none";
 
-      updateHeaderButtons(tabId);
       renderFolders();
       renderTrash();
     });
@@ -262,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.body.appendChild(menu);
     }
     menu.innerHTML = `
-      <button onclick="deleteFolder(${index})"><i class="fa-solid fa-trash"></i> 삭제</button>
+      <button onclick="deleteFolder(${index})">🗑️ 삭제</button>
       <button onclick="openRenameModal(${index})">✏️ 이름 변경</button>
       <button >내려받기</button>
     `;
@@ -305,6 +287,31 @@ document.addEventListener("DOMContentLoaded", function () {
     closeRenameModal();
     renderFolders();
   };
+
+  function updateSortIcons() {
+    document.querySelectorAll("th[data-key]").forEach((th) => {
+      const key = th.dataset.key;
+      if (key === sortKey) {
+        th.innerHTML = `${th.dataset.label} ${sortAsc ? "⬆️" : "⬇️"}`;
+      } else {
+        th.innerHTML = th.dataset.label;
+      }
+    });
+  }
+
+  document.querySelectorAll("th[data-key]").forEach((th) => {
+    th.addEventListener("click", () => {
+      const key = th.dataset.key;
+      if (sortKey === key) {
+        sortAsc = !sortAsc;
+      } else {
+        sortKey = key;
+        sortAsc = true;
+      }
+      updateSortIcons();
+      renderFolders();
+    });
+  });
 
   window.deleteFolder = function (index) {
     if (folders[index]) {
