@@ -1,5 +1,4 @@
-/* 기본 설정 */
-* {
+* 기본 설정 */ * {
   margin: 0;
   padding: 0;
   font-size: 12px;
@@ -211,6 +210,62 @@ main {
 .chat-actions {
   display: flex;
   gap: 8px;
+  /* 드롭다운을 위해 relative 위치 설정 */
+  position: relative;
+}
+
+/* 드롭다운 컨테이너 - 중요한 부분! */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* 드롭다운 메뉴 스타일 */
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #e4e6ea;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 180px;
+  /* 처음에는 숨김 */
+  display: none;
+}
+
+/* 드롭다운이 열렸을 때 */
+.dropdown-menu.show {
+  display: block;
+}
+
+/* 드롭다운 메뉴 항목들 */
+.dropdown-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #1c1e21;
+  border-bottom: 1px solid #f0f2f5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background-color: #f0f2f5;
+}
+
+.dropdown-item.danger {
+  color: #e74c3c;
+}
+
+.dropdown-item.danger:hover {
+  background-color: #ffeaea;
 }
 
 /* 채팅 메시지 영역 */
@@ -323,4 +378,38 @@ main {
 .chat-messages::-webkit-scrollbar-thumb {
   background: #c1c1c1;
   border-radius: 3px;
+}
+
+.header {
+  background-color: #ffffff;
+  padding: 10px 20px;
+  border-bottom: 1px solid #e4e6ea;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.status {
+  font-size: 14px;
+  color: #65676b;
+}
+
+.header img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.admin {
+  font-size: 12px;
+  color: #1c1e21;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  padding: 10px;
+  text-align: center;
+  font-size: 11px;
+  color: #65676b;
+  border-top: 1px solid #e4e6ea;
 }
