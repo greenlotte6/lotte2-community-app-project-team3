@@ -150,7 +150,6 @@ main {
   color: #2d3748;
   margin-bottom: 20px;
   line-height: 1;
-
   letter-spacing: -2px;
   text-align: left;
 }
@@ -214,16 +213,6 @@ main {
   height: 100%;
 }
 
-.image-placeholder-icon {
-  font-size: 48px;
-  margin-bottom: 15px;
-}
-
-.image-placeholder-text {
-  font-size: 16px;
-  font-weight: 500;
-}
-
 .workspace-title {
   width: 100%;
   display: flex;
@@ -244,11 +233,6 @@ main {
   margin: 0 0 30px 0;
 }
 
-.workspace-title-content {
-  text-align: center;
-  max-width: 800px;
-}
-
 main > p {
   width: 100%;
   text-align: center;
@@ -263,7 +247,7 @@ main > p {
 /* 🚀 스크롤 인터랙션 섹션 */
 .interactive-section {
   width: 100%;
-  height: 400vh; /* 긴 스크롤 영역 */
+  height: 400vh;
   position: relative;
   margin-top: 80px;
 }
@@ -271,7 +255,6 @@ main > p {
 .sticky-container {
   position: sticky;
   top: 0;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -306,13 +289,13 @@ main > p {
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.6s ease;
-  width: calc(100% - 80px); /* padding 40px * 2 = 80px 빼기 */
-  height: calc(100% - 80px); /* padding 40px * 2 = 80px 빼기 */
+  width: calc(100% - 80px);
+  height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 40px; /* padding 값 */
-  left: 40px; /* padding 값 */
+  top: 40px;
+  left: 40px;
   z-index: 1;
 }
 
@@ -320,19 +303,6 @@ main > p {
   opacity: 1;
   transform: translateY(0);
   z-index: 10;
-}
-.demo-content h3 {
-  font-size: 32px;
-  font-weight: 900;
-  color: #2d3748;
-  margin-bottom: 20px;
-}
-
-.demo-content p {
-  font-size: 18px;
-  color: #718096;
-  line-height: 1.6;
-  margin-bottom: 30px;
 }
 
 .demo-visual {
@@ -342,14 +312,14 @@ main > p {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* 이미지가 넘치지 않도록 */
+  overflow: hidden;
 }
 
 .demo-img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 비율 유지하면서 박스 채우기 */
-  object-position: center; /* 중앙 정렬 */
+  object-fit: cover;
+  object-position: center;
   border-radius: 12px;
 }
 
@@ -412,6 +382,209 @@ main > p {
   max-width: 300px;
 }
 
+/* 요금제 섹션 스타일 */
+.pricing-section {
+  width: 100%;
+  background: #4a1a5c;
+  padding: 180px 0 240px 0;
+  margin-top: 0;
+}
+
+.pricing-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.pricing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.pricing-header h1 {
+  font-family: "Arial Black", "Helvetica", sans-serif;
+  font-size: 56px;
+  font-weight: 900;
+  color: #e8d5ff;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.compare-button {
+  background: white;
+  color: #4a1a5c;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.compare-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+/* 가격 카드들 */
+.pricing-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: #f5f3f1;
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px) translateX(5px) rotate(2deg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.plan-header {
+  margin-bottom: 30px;
+}
+
+.plan-header h2 {
+  font-size: 28px;
+  font-weight: 900;
+  color: #2d3748;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.price {
+  font-size: 36px;
+  font-weight: 900;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+.plan-subtitle {
+  color: #718096;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* 플랜 아이콘/이미지 */
+.plan-icon {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 30px auto;
+
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plan-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 플랜 설명 */
+.plan-description {
+  color: #718096;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* FAQ 섹션 스타일 */
+.faq-section {
+  width: 100%;
+  background: #f0f2f5;
+  padding: 100px 0;
+}
+
+.faq-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.faq-content {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  margin-left: 80px;
+}
+
+.faq-text {
+  flex: 1;
+  max-width: 500px;
+}
+
+.faq-text h1 {
+  font-family: "Media Sans Bold", "Arial Black", "Helvetica", sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: #2d3748;
+  margin-bottom: 30px;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+.faq-text p {
+  font-size: 20px;
+  color: #718096;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.faq-button {
+  background: #4299e1;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+}
+
+.faq-button:hover {
+  background: #3182ce;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(66, 153, 225, 0.3);
+}
+
+.faq-image {
+  flex: 1;
+  max-width: 400px;
+  height: 350px;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  background: transparent;
+}
+
+.faq-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 footer {
   height: 60px;
   background-color: #333;
@@ -421,7 +594,7 @@ footer {
   justify-content: center;
 }
 
-/* 반응형 - 작은 화면에서는 세로로 배치 */
+/* 반응형 */
 @media (max-width: 1240px) {
   .main-content {
     flex-direction: column;
@@ -445,59 +618,64 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
   }
+
+  .faq-content {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+  }
 }
 
-/* 더 작은 화면에서는 섹션 크기 조정 */
-@media (max-width: 620px) {
+@media (max-width: 1024px) {
+  .pricing-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .pricing-header h1 {
+    font-size: 48px;
+  }
+
+  .faq-text h1 {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pricing-header h1 {
+    font-size: 36px;
+  }
+
+  .pricing-container {
+    padding: 0 20px;
+  }
+
   .hero-section,
   .features-section {
     width: 100%;
     max-width: 400px;
     height: 400px;
   }
-}
 
-footer {
-  height: 60px;
-  background-color: #333;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 반응형 - 작은 화면에서는 세로로 배치 */
-@media (max-width: 1240px) {
-  .main-content {
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
+  .faq-text h1 {
+    font-size: 36px;
   }
 
-  .content-wrapper {
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
+  .faq-text p {
+    font-size: 18px;
   }
 
-  .demo-box {
-    width: 90%;
-    max-width: 500px;
+  .faq-container {
+    padding: 0 20px;
   }
 
-  .steps-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
-
-/* 더 작은 화면에서는 섹션 크기 조정 */
-@media (max-width: 620px) {
-  .hero-section,
-  .features-section {
-    width: 100%;
-    max-width: 400px;
-    height: 400px;
+  .faq-image {
+    height: 250px;
   }
 }
