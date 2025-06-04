@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시판</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/board/aside.css">
+
+    <style>
+        .main-layout {
+            display: flex;
+            background-color: #f9fbfd;
+        }
+
+        main.main-content {
+            flex: 1;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .board {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .board h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+
+        .board p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .board table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .board thead {
+            background-color: #3a64b1;
+            color: white;
+        }
+
+        .board th,
+        .board td {
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .page {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .page a {
+            margin: 0 5px;
+            padding: 6px 12px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .page a:hover {
+            background-color: #3a64b1;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo">
+                <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+                <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+            </div>
+            <span class="status">ONLINE <span>●</span></span>
+            <img src="/images/profile1.png" alt="프로필이미지" />
+            <span class="admin">김팀장<br>Admin</span>
+        </div>
+
+        <div class="main-layout">
+            <aside class="sidebar">
+                <div>
+                    <div class="section-title">BOARDS</div>
+                    <ul>
+                        <li><a href="/board/main.html">🏠메인</a></li>
+                        <li><a href="/board/board.html">📢공지사항</a></li>
+                        <li><a href="/board/board.html">💬자유게시판</a></li>
+                        <li><a href="/board/board.html">🍱식단표</a></li>
+                    </ul>
+            </aside>
+
+            <main class="main-content">
+                <article class="main-content">
+                    <div class="board">
+                        <h3>공지사항</h3>
+                        <p>📢 회사 소식, 가장 먼저 확인하세요.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>글번호</th>
+                                    <th>제목</th>
+                                    <th>내용</th>
+                                    <th>조회수</th>
+                                    <th>작성일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>공지사항입니다1</td>
+                                    <td>내용입니다1 (10)</td>
+                                    <td>50</td>
+                                    <td>2025.06.03</td>
+                                </tr>
+                                <!-- 이하 반복 -->
+                            </tbody>
+                        </table>
+                        <div class="page">
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                        </div>
+                    </div>
+                </article>
+            </main>
+        </div>
+
+        <div class="footer">
+            version 0.0.1 | License | More Themes | Documentation | Support
+        </div>
+    </div>
+</body>
+
+</html>

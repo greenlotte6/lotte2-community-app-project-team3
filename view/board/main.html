@@ -8,10 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link rel="stylesheet" href="/css/index.css" />
   <link rel="stylesheet" href="/css/board/main.css" />
-
-  <style>
-
-  </style>
+  <link rel="stylesheet" href="/css/board/aside.css">
 </head>
 
 <body>
@@ -31,53 +28,22 @@
         <div>
           <div class="section-title">BOARDS</div>
           <ul>
-            <li>Notices</li>
-            <li>Department</li>
-            <li>Free</li>
-            <li>Q&A</li>
-            <li>Album</li>
-            <li>Menu</li>
+            <li><a href="/board/main.html">🏠메인</a></li>
+            <li><a href="/board/board.html">📢공지사항</a></li>
+            <li><a href="/board/board.html">💬자유게시판</a></li>
+            <li><a href="/board/board.html">🍱식단표</a></li>
           </ul>
-          <div class="section-title">MENU</div>
-          <ul>
-            <li>Messages</li>
-            <li>Calender</li>
-            <li>Projects</li>
-            <li>Pages</li>
-            <li>Drive</li>
-          </ul>
-          <div class="section-title">SETTINGS</div>
-          <ul>
-            <li>프로필</li>
-            <li>알림</li>
-            <li>캘린더</li>
-            <li>페이지</li>
-            <li>메시지</li>
-            <li>내 드라이브</li>
-            <li>프로젝트</li>
-            <li>-------------------</li>
-            <li>게시판</li>
-            <li>플랜</li>
-          </ul>
-        </div>
-        <div>
-          <li>Logout</li>
-        </div>
       </aside>
 
       <main class="main-content">
 
-        <article class="main-content">
-          <!-- 메인 시작 -->
-          <div class="title">
-            <h1>게시판</h1>
-          </div>
+        <main class="main-content">
           <div class="notices">
-            <h3>공지사항</h3>
-            <p>📢 회사 소식, 가장 먼저 확인하세요.</p>
+            <h3>📢 공지사항</h3>
             <table>
               <thead>
                 <tr>
+                  <th>글번호</th>
                   <th>제목</th>
                   <th>내용</th>
                   <th>조회수</th>
@@ -86,130 +52,121 @@
               </thead>
               <tbody>
                 <tr>
+                  <td>1</td>
                   <td>공지사항입니다1</td>
                   <td>내용입니다1 (10)</td>
                   <td>50</td>
                   <td>2025.06.03</td>
                 </tr>
                 <tr>
-                  <td>공지사항입니다1</td>
-                  <td>내용입니다1 (10)</td>
-                  <td>50</td>
+                  <td>2</td>
+                  <td>공지사항입니다2</td>
+                  <td>내용입니다2 (8)</td>
+                  <td>30</td>
+                  <td>2025.06.03</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>공지사항입니다2</td>
+                  <td>내용입니다2 (8)</td>
+                  <td>30</td>
+                  <td>2025.06.03</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>공지사항입니다2</td>
+                  <td>내용입니다2 (8)</td>
+                  <td>30</td>
+                  <td>2025.06.03</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>공지사항입니다2</td>
+                  <td>내용입니다2 (8)</td>
+                  <td>30</td>
                   <td>2025.06.03</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <section class="row1">
+          <div class="section-container">
             <div class="free">
-              <h3>자유게시판</h3>
-              <p>💬 가볍게, 자유롭게! 소통은 여기서부터.</p>
-              <article>
-                <div class="title">
-                  <span>[글번호]</span>
-                  <span>제목</span>
+              <h3>💬 자유게시판</h3>
+              <div class="post-card">
+                <div class="post-title">[글번호] 제목</div>
+                <div class="post-meta">
+                  <span>작성자</span><span>2025.06.03</span><span>💬 5</span><span>👀 89</span>
                 </div>
-                <div class="content">
-                  <p>작성자</p>
-                  <p>내용</p>
+              </div>
+              <div class="post-card">
+                <div class="post-title">[글번호] 제목</div>
+                <div class="post-meta">
+                  <span>작성자</span><span>2025.06.03</span><span>💬 5</span><span>👀 89</span>
                 </div>
-                <div class="info">
-                  <span>2025.06.03</span>
-                  <span>댓글수</span>
-                  <span>조회수</span>
+              </div>
+              <div class="post-card">
+                <div class="post-title">[글번호] 제목</div>
+                <div class="post-meta">
+                  <span>작성자</span><span>2025.06.03</span><span>💬 5</span><span>👀 89</span>
                 </div>
-              </article>
-              <article>
-                <div class="title">
-                  <span>[글번호]</span>
-                  <span>제목</span>
-                </div>
-                <div class="content">
-                  <p>작성자</p>
-                  <p>내용</p>
-                </div>
-                <div class="info">
-                  <span>2025.06.03</span>
-                  <span>댓글수</span>
-                  <span>조회수</span>
-                </div>
-              </article>
+              </div>
             </div>
-            <div class="library">
-              <h3>NEW!</h3>
-              <p>🆕 지금 막 올라온 따끈한 이야기들!</p>
-              <article>
-                <div class="title">
-                  <span>[카테고리]</span>
-                  <span>제목</span>
-                </div>
-                <div class="content">
-                  <p>작성자</p>
-                  <p>내용</p>
-                </div>
-                <div class="info">
-                  <span>2025.06.03</span>
-                  <span>댓글수</span>
-                  <span>조회수</span>
-                </div>
-              </article>
-              <article>
-                <div class="title">
-                  <span>[카테고리]</span>
-                  <span>제목</span>
-                </div>
-                <div class="content">
-                  <p>작성자</p>
-                  <p>내용</p>
-                </div>
-                <div class="info">
-                  <span>2025.06.03</span>
-                  <span>댓글수</span>
-                  <span>조회수</span>
-                </div>
-              </article>
-            </div>
-            <div class="menu">
-              <h3>식단표</h3>
-              <p>🍽️ 오늘 점심 뭐 먹지?</p>
-              <article>
-                <div class="row2">
-                  <div class="date">
-                    <p>06.03 <span>(화)</span></p>
-                  </div>
-                  <div class="details">
-                    <span>밥</span>
-                    <span>국</span>
-                    <div>
-                      <span>반찬1</span>
-                      <span>반찬2</span>
-                      <span>반찬3</span>
-                    </div>
-                  </div>
-                </div>
-              </article>
-              <article>
-                <div class="row2">
-                  <div class="date">
-                    <p>06.03 <span>(화)</span></p>
-                  </div>
-                  <div class="details">
-                    <span>밥</span>
-                    <span>국</span>
-                    <div>
-                      <span>반찬1</span>
-                      <span>반찬2</span>
-                      <span>반찬3</span>
-                    </div>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </section>
-        </article>
 
-      </main>
+            <div class="new">
+              <h3>🆕 NEW</h3>
+              <div class="post-card">
+                <div class="post-title">[카테고리] 제목</div>
+                <div class="post-meta">
+                  <span>작성자</span><span>2025.06.03</span><span>💬 3</span><span>👀 51</span>
+                </div>
+              </div>
+              <div class="post-card">
+                <div class="post-title">[카테고리] 제목</div>
+                <div class="post-meta">
+                  <span>작성자</span><span>2025.06.03</span><span>💬 3</span><span>👀 51</span>
+                </div>
+              </div>
+              <div class="post-card">
+                <div class="post-title">[카테고리] 제목</div>
+                <div class="post-meta">
+                  <span>작성자</span><span>2025.06.03</span><span>💬 3</span><span>👀 51</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu">
+              <h3>🍱 식단표</h3>
+              <div class="meal-card">
+                <div class="meal-date">06.03 (화)</div>
+                <div class="meal-content">
+                  <span>밥</span><span>국</span>
+                  <div class="sides">
+                    <span>반찬1</span><span>반찬2</span><span>반찬3</span>
+                  </div>
+                </div>
+              </div>
+              <div class="meal-card">
+                <div class="meal-date">06.03 (화)</div>
+                <div class="meal-content">
+                  <span>밥</span><span>국</span>
+                  <div class="sides">
+                    <span>반찬1</span><span>반찬2</span><span>반찬3</span>
+                  </div>
+                </div>
+              </div>
+              <div class="meal-card">
+                <div class="meal-date">06.03 (화)</div>
+                <div class="meal-content">
+                  <span>밥</span><span>국</span>
+                  <div class="sides">
+                    <span>반찬1</span><span>반찬2</span><span>반찬3</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
 
     </div>
 

@@ -1,96 +1,97 @@
-/* 헤더 + 타이틀 */
-h1 {
-  margin: 0 0 40px 10px;
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fbfd;
 }
 
-.status span {
-  color: green;
+.main-layout {
+  display: flex;
+  background-color: #f9fbfd;
 }
 
-/* 메인 */
-.row1,
-.row2 {
+main.main-content {
+  flex: 1;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.free,
+.new,
+.menu,
+.notices {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.free h3,
+.new h3,
+.menu h3,
+.notices h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.free {
+  width: 35%;
+}
+
+.new {
+  width: 35%;
+}
+
+.menu {
+  width: 29%;
+}
+
+.notices table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  line-height: 3;
+}
+
+.notices table thead {
+  background: #3a64b1;
+  color: white;
+  height: 50px;
+}
+
+.section-container {
   display: flex;
   gap: 20px;
 }
 
-.row1 > div {
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.main-content {
-  flex: 1;
-  padding: 2% 4%;
-}
-.main-content h3 {
-  font-weight: 500;
-}
-.main-content article {
+.post-card,
+.meal-card {
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
   background-color: #ffffff;
-  border-radius: 10px;
 }
 
-.free article,
-.library article,
-.menu article {
-  margin: 10px 5px 5px 5px;
-  border: 1px solid rgb(199, 229, 255);
-  padding: 10px;
-  border-radius: 0 10px 10px 10px;
+.post-title {
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
-/* 공지사항 */
-.notices {
-  height: 230px;
-  padding: 15px;
-  border: 2px solid #598be9;
-  border-radius: 0 10px 10px 10px;
-}
-.notices table {
-  margin-top: 10px;
-  border-spacing: 0;
-  width: 100%;
-  text-align: center;
-}
-.notices thead {
-  background-color: #3a64b1;
-  color: #ffffff;
-}
-.notices tbody td {
-  border-bottom: 1px solid #3a64b1;
+.post-meta span {
+  margin-right: 10px;
+  font-size: 0.9em;
+  color: #666;
 }
 
-/* 자유게시판 */
-.free {
-  height: 420px;
-  width: 40%;
-  padding: 15px;
-  margin-top: 30px;
-  border: 2px solid #9bd8d4;
-  border-radius: 0 10px 10px 10px;
+.meal-date {
+  font-weight: 600;
+  margin-bottom: 5px;
 }
 
-/* NEW */
-.library {
-  height: 420px;
-  width: 40%;
-  padding: 15px;
-  margin-top: 30px;
-  border: 2px solid #2caba3;
-  border-radius: 0 10px 10px 10px;
-}
-
-/* 식단표 */
-.menu {
-  height: 420px;
-  width: 30%;
-  padding: 15px;
-  margin-top: 30px;
-  border: 2px solid #67a6e6;
-  border-radius: 0 10px 10px 10px;
-}
-.details {
-  border-left: 2px solid #67a6e6;
-  padding: 0 5%;
+.meal-content span,
+.sides span {
+  margin-right: 8px;
 }
