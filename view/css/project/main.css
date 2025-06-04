@@ -133,6 +133,7 @@ main {
 .projects-container {
   flex: 1;
   overflow-y: auto;
+  padding-top: 5px;
 }
 
 .project-item {
@@ -614,6 +615,187 @@ main {
 }
 
 .modal-btn-create:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 편집 모달 */
+.edit-modal {
+  background-color: white;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: scale(0.7);
+  transition: transform 0.3s;
+}
+
+.modal-overlay.active .edit-modal {
+  transform: scale(1);
+}
+
+/* 모달 헤더 */
+.modal-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.modal-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+  font-size: 24px;
+  color: white;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1c1e21;
+  margin-bottom: 8px;
+}
+
+.modal-subtitle {
+  font-size: 14px;
+  color: #65676b;
+}
+
+/* 모달 바디 */
+.modal-body {
+  margin-bottom: 30px;
+}
+
+.form-section {
+  margin-bottom: 25px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1c1e21;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #495057;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  border-color: #1877f2;
+  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
+}
+
+.form-input::placeholder {
+  color: #adb5bd;
+}
+
+/* 프로젝트 타입 선택 */
+.project-types {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.type-option {
+  padding: 15px 10px;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: #ffffff;
+}
+
+.type-option:hover {
+  border-color: #1877f2;
+  background-color: #f8fbff;
+}
+
+.type-option.selected {
+  border-color: #1877f2;
+  background-color: #e7f3ff;
+}
+
+.type-icon {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.type-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #495057;
+}
+
+.type-option.selected .type-name {
+  color: #1877f2;
+  font-weight: 600;
+}
+
+/* 모달 액션 */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid #f0f2f5;
+}
+
+.modal-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 100px;
+}
+
+.modal-btn-cancel {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border: 1px solid #dee2e6;
+}
+
+.modal-btn-cancel:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.modal-btn-save {
+  background-color: #1877f2;
+  color: white;
+}
+
+.modal-btn-save:hover {
+  background-color: #166fe5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+}
+
+.modal-btn-save:disabled {
   background-color: #adb5bd;
   cursor: not-allowed;
   transform: none;

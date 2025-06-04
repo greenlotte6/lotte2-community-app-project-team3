@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/view/css/main/intro.css" />
+    <link rel="stylesheet" href="/css/main/intro.css" />
     <title>메인-소개</title>
   </head>
   <body>
@@ -12,14 +12,14 @@
         <header class="header">
           <!-- 왼쪽 메뉴 -->
           <div class="header-left">
-            <a href="#pricing">가격</a>
-            <a href="#help">도움 센터</a>
+            <a href="/main/pricing.html">가격</a>
+            <a href="/main/faq.html">도움 센터</a>
           </div>
 
           <!-- 중앙 로고 -->
           <div class="header-center">
-            <a href="#home" class="logo">
-              <img src="/view/images/logo_title.png" alt="Logo" />
+            <a href="/main/intro.html" class="logo">
+              <img src="/images/logo_title.png" alt="Logo" />
             </a>
           </div>
 
@@ -49,7 +49,7 @@
             <section class="features-section">
               <div class="image-placeholder">
                 <img
-                  src="/view/images/aAkmrfIqRLdaBiNZ_home_hero_lifestyle.jpg"
+                  src="/images/aAkmrfIqRLdaBiNZ_home_hero_lifestyle.jpg"
                   alt="Feature-Image"
                 />
               </div>
@@ -70,28 +70,28 @@
                 <!-- Step 1 Content -->
                 <div class="demo-content active" data-step="1">
                   <div class="demo-visual">
-                    <img class="demo-img" src="/view/images/main/Work_7.jpg" />
+                    <img class="demo-img" src="/images/main/Work_7.jpg" />
                   </div>
                 </div>
 
                 <!-- Step 2 Content -->
                 <div class="demo-content" data-step="2">
                   <div class="demo-visual">
-                    <img class="demo-img" src="/view/images/main/2629473.jpg" />
+                    <img class="demo-img" src="/images/main/2629473.jpg" />
                   </div>
                 </div>
 
                 <!-- Step 3 Content -->
                 <div class="demo-content" data-step="3">
                   <div class="demo-visual">
-                    <img class="demo-img" src="/view/images/main/54950.jpg" />
+                    <img class="demo-img" src="/images/main/54950.jpg" />
                   </div>
                 </div>
 
                 <!-- Step 4 Content -->
                 <div class="demo-content" data-step="4">
                   <div class="demo-visual">
-                    <img class="demo-img" src="/view/images/main/6274.jpg" />
+                    <img class="demo-img" src="/images/main/6274.jpg" />
                   </div>
                 </div>
               </div>
@@ -146,294 +146,73 @@
         </section>
 
         <!-- 💰 요금제 섹션 -->
-        <!-- 요금제 비교 섹션 -->
-        <section class="pricing-comparison">
-          <div class="comparison-container">
-            <!-- 비교 섹션 헤더 -->
-            <div class="comparison-header">
-              <h1>모든 플랜을 자세히 비교해보세요</h1>
-              <p>
-                각 플랜별 제공되는 기능을 한눈에 확인하고 최적의 선택을 하세요
-              </p>
+
+        <section class="pricing-section">
+          <div class="pricing-container">
+            <div class="pricing-header">
+              <h1>요금은 0원부터, 지금 시작하세요!</h1>
+
+              <a href="/main/pricing.html" class="compare-button"
+                >가격 비교하러 가기 →</a
+              >
             </div>
 
-            <!-- 비교 테이블 -->
-            <div class="comparison-table">
-              <!-- 테이블 헤더 (플랜명 + 가격 + 버튼) -->
-              <div class="table-header">
-                <!-- 빈 첫번째 컬럼 (기능명 자리) -->
-                <div class="empty-column"></div>
-                <div class="plan-column">
-                  <h3>FREE</h3>
-                  <div class="plan-price">0원</div>
-                  <p class="plan-desc">무료</p>
-                  <button class="comparison-btn free-btn">시작하기</button>
+            <div class="pricing-cards">
+              <!-- FREE 플랜 -->
+              <div class="pricing-card">
+                <div class="plan-header">
+                  <h2>FREE</h2>
+                  <div class="price">0원</div>
+                  <p class="plan-subtitle">무료</p>
                 </div>
-                <div class="plan-column">
-                  <h3>PLUS</h3>
-                  <div class="plan-price">9,900원/월</div>
-                  <p class="plan-desc">연간 결제 시 20% 할인</p>
-                  <button class="comparison-btn plus-btn">시작하기</button>
+
+                <div class="plan-icon">
+                  <img
+                    src="/images/main/aAF5devxEdbNPNiF_Gold.png"
+                    alt="FREE Plan"
+                  />
                 </div>
-                <div class="plan-column">
-                  <h3>PRO</h3>
-                  <div class="plan-price">29,000원/월</div>
-                  <p class="plan-desc">연간 결제 시 20% 할인</p>
-                  <button class="comparison-btn pro-btn">시작하기</button>
+
+                <div class="plan-description">무료 플랜: 기본 기능 체험</div>
+              </div>
+
+              <!-- PLUS 플랜 -->
+              <div class="pricing-card">
+                <div class="plan-header">
+                  <h2>PLUS</h2>
+                  <div class="price">9,900원/달</div>
+                  <p class="plan-subtitle">연간 결제 시 20% 할인</p>
+                </div>
+
+                <div class="plan-icon">
+                  <img
+                    src="/images/main/aAF5sOvxEdbNPNiH_Platinum.png"
+                    alt="PLUS Plan"
+                  />
+                </div>
+
+                <div class="plan-description">
+                  소규모 팀을 위한 협업 도구와 확장된 기능
                 </div>
               </div>
 
-              <!-- 기능 비교 행들 -->
-              <div class="table-body">
-                <!-- 기본 기능 섹션 -->
-                <div class="feature-section">
-                  <div class="section-title">기본 기능</div>
+              <!-- PRO 플랜 -->
+              <div class="pricing-card">
+                <div class="plan-header">
+                  <h2>PRO</h2>
+                  <div class="price">29,000원/달</div>
+                  <p class="plan-subtitle">연간 결제 시 20% 할인</p>
                 </div>
 
-                <div class="feature-row">
-                  <div class="feature-name">페이지 생성</div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
+                <div class="plan-icon">
+                  <img
+                    src="/images/main/aAF5yOvxEdbNPNiJ_Diamond.png"
+                    alt="PRO Plan"
+                  />
                 </div>
 
-                <div class="feature-row">
-                  <div class="feature-name">기본 게시판</div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">개인 캘린더</div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <!-- 협업 기능 섹션 -->
-                <div class="feature-section">
-                  <div class="section-title">협업 & 팀 기능</div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">팀 협업 도구</div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">프로젝트 관리</div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <!-- 저장공간 & 고급기능 섹션 -->
-                <div class="feature-section">
-                  <div class="section-title">저장공간 & 고급기능</div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">저장공간</div>
-                  <div class="feature-check">5GB</div>
-                  <div class="feature-check">100GB</div>
-                  <div class="feature-check">무제한</div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">고급 보안 설정</div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">관리자 대시보드</div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <!-- 지원 섹션 -->
-                <div class="feature-section">
-                  <div class="section-title">고객 지원</div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">고객지원</div>
-                  <div class="feature-check">이메일</div>
-                  <div class="feature-check">우선 지원</div>
-                  <div class="feature-check">24/7 전담</div>
+                <div class="plan-description">
+                  대규모 조직을 위한 프리미엄 지원과 고급 기능
                 </div>
               </div>
             </div>
@@ -450,10 +229,11 @@
                   워키토키를 이용하는 중 불편함을 느끼셨나요? <br />
                   지금 바로 알려주세요
                 </p>
-                <button class="faq-button">고객센터</button>
+
+                <a href="/main/faq.html" class="faq-button">고객센터</a>
               </div>
               <div class="faq-image">
-                <img src="/view/images/main/faq-icon.png" alt="고객 지원" />
+                <img src="/images/main/faq-icon.png" alt="고객 지원" />
               </div>
             </div>
           </div>
@@ -462,5 +242,5 @@
       <footer>Footer</footer>
     </div>
   </body>
-  <script src="/view/js/main/introScroll.js"></script>
+  <script src="/js/main/introScroll.js"></script>
 </html>

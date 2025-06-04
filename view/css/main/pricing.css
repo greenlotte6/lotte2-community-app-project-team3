@@ -127,6 +127,7 @@ main {
 .pricing-hero-container {
   max-width: 1200px;
   margin: 0 auto;
+  text-align: center;
 }
 
 .pricing-hero h1 {
