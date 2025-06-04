@@ -245,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     menu.innerHTML = `
       <button onclick="deleteFolder(${index})">🗑️ 삭제</button>
-      <button onclick="openRenameModal(${index})">이름 변경</button>
+      <button onclick="openRenameModal(${index})">✏️ 이름 변경</button>
       <button >내려받기</button>
     `;
     menu.style.top = y + "px";
