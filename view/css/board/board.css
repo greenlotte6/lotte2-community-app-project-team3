@@ -1,0 +1,70 @@
+/* 헤더 + 타이틀 */
+h1 {
+  margin: 0 0 40px 10px;
+}
+
+.status span {
+  color: green;
+}
+
+/* 메인 */
+.row1,
+.row2 {
+  display: flex;
+  gap: 20px;
+}
+
+.row1 > div {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2% 4%;
+}
+.main-content h3 {
+  font-weight: 500;
+}
+.main-content article {
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+/* 게시판 */
+.board {
+  min-height: 650px;
+  padding: 30px;
+  border: 2px solid #598be9;
+  border-radius: 0 10px 10px 10px;
+}
+.board table {
+  margin-top: 30px;
+  border-spacing: 0;
+  width: 100%;
+  text-align: center;
+}
+.board thead {
+  background-color: #3a64b1;
+  color: #ffffff;
+  height: 50px;
+}
+.board tbody td {
+  border-bottom: 1px solid #3a64b1;
+  line-height: 3;
+}
+
+a {
+  color: #333333;
+  border: 2px solid #6781b3;
+  padding: 3px 8px;
+}
+
+.page {
+  margin: 40px auto 0;
+  /* 상단 마진 30px, 좌우 auto */
+  width: fit-content;
+  /* 내부 콘텐츠 크기만큼 너비 지정 */
+  text-align: center;
+  /* 내부 요소 중앙 정렬 */
+}

@@ -1,0 +1,23 @@
+/* 헤더 + 타이틀 */
+.status span {
+  color: green;
+}
+
+/* 메인 */
+.main-content {
+  flex: 1;
+  padding: 2% 4%;
+}
+.main-content h3 {
+  font-weight: 500;
+}
+.main-content article {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 2%;
+}
+
+/* 게시판 */
+.dashboard {
+  min-height: 650px;
+}
