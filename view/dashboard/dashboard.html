@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>대시보드</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="/css/index.css" />
+  <link rel="stylesheet" href="/css/dashboard/dashboard.css" />
+
+  <style>
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      /* 위아래로 쌓기 */
+      gap: 20px;
+    }
+
+    .top {
+      display: flex;
+      gap: 20px;
+    }
+
+    .part1,
+    .part2 {
+      height: 100%;
+      /* .dashboard-top 기준 */
+    }
+
+    .part3 {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .part3 .notices {
+      flex: 1;
+      height: 200px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+
+    .profile {
+      display: flex;
+      flex-wrap: wrap;
+      height: 35%;
+      border: 2px solid #598be9;
+      border-radius: 0 10px 10px 10px;
+    }
+
+    .profile-image {
+      width: 40%;
+    }
+
+    .profile-image img {
+      border-radius: 50%;
+      width: 70%;
+      display: block;
+      margin: 10px auto;
+      /* 이미지 자체를 중앙 정렬 */
+    }
+
+    .profile-info {
+      padding: 2%;
+      width: 60%;
+    }
+
+    .profile-info div p:nth-child(1) {
+      font-size: 20px;
+    }
+
+    .profile-info div p:nth-child(1) span {
+      font-size: 20px;
+      border-bottom: 1px solid #598be9;
+    }
+
+    .time {
+      width: 100%;
+      margin-top: 1%;
+      border-radius: 0 10px 10px 10px;
+      border: 2px solid #104E4A;
+      text-align: center;
+      padding: 3%;
+    }
+
+    .currDate {
+      font-weight: bold;
+    }
+
+    .currTime {
+      font-weight: bold;
+      color: #598be9;
+    }
+
+    .projects {
+      display: flex;
+      flex-wrap: wrap;
+      width: 40%;
+      height: 67%;
+      border: 2px solid #9bd8d4;
+      border-radius: 0 10px 10px 10px;
+    }
+
+
+    /* 화면이 768px 이하일 경우 세로 정렬 */
+    @media (max-width: 1800px) {
+      .profile {
+        flex-direction: column;
+        width: 60%;
+        min-height: 300px;
+      }
+
+      .time {
+        width: 60%;
+      }
+
+      .profile-image,
+      .profile-info {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-logo">
+        <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+        <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+      </div>
+      <span class="status">ONLINE <span>●</span></span>
+      <img src="/images/profile1.png" alt="프로필이미지" />
+      <span class="admin">김팀장<br>Admin</span>
+    </div>
+
+    <div class="main-layout">
+      <aside class="sidebar">
+        <div>
+          <div class="section-title">BOARDS</div>
+          <ul>
+            <li>Notices</li>
+            <li>Department</li>
+            <li>Free</li>
+            <li>Q&A</li>
+            <li>Album</li>
+            <li>Menu</li>
+          </ul>
+          <div class="section-title">MENU</div>
+          <ul>
+            <li>Messages</li>
+            <li>Calender</li>
+            <li>Projects</li>
+            <li>Pages</li>
+            <li>Drive</li>
+          </ul>
+          <div class="section-title">SETTINGS</div>
+          <ul>
+            <li>프로필</li>
+            <li>알림</li>
+            <li>캘린더</li>
+            <li>페이지</li>
+            <li>메시지</li>
+            <li>내 드라이브</li>
+            <li>프로젝트</li>
+            <li>-------------------</li>
+            <li>게시판</li>
+            <li>플랜</li>
+          </ul>
+        </div>
+        <div>
+          <li>Logout</li>
+        </div>
+      </aside>
+
+      <main class="main-content">
+
+        <article class="main-content">
+          <!-- 메인 시작 -->
+          <div class="dashboard">
+            <div class="top">
+              <section class="part1">
+                <div class="profile">
+                  <section class="profile-image">
+                    <img src="/images/profile1.png" alt="">
+                  </section>
+                  <section class="profile-info">
+                    <div>
+                      <p>Welcome! <span>김팀장</span> 님 </p>
+                      <p>(관리자)</p>
+                    </div>
+                  </section>
+                </div>
+
+                <div class="time">
+                  <div class="js-clock">
+                    <span class="currDate"></span>
+                    <span class="currTime"></span>
+                  </div>
+                </div>
+              </section>
+              <section class="part2">
+                <div class="projects"></div>
+              </section>
+            </div>
+
+            <section class="part3">
+              <div class="notices"></div>
+              <div class="notices"></div>
+              <div class="notices"></div>
+            </section>
+          </div>
+      </main>
+    </div>
+
+    <div class="footer">
+      version 0.0.1 | License | More Themes | Documentation | Support
+    </div>
+  </div>
+</body>
+<script>
+  const clockContainer = document.querySelector(".js-clock"),
+    dateTitle = clockContainer.querySelector(".currDate"),
+    clockTitle = clockContainer.querySelector(".currTime");
+
+  function getDate() {
+    const date = new Date();
+    const week = ['일', '월', '화', '수', '목', '금', '토'];
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const dayName = week[date.getDay()];
+    dateTitle.innerText = `${year}년 ${month < 10 ? `0${month}` : month}월 ${day < 10 ? `0${day}` : day}일 ${dayName}요일`;
+  }
+
+  function getTime() {
+    const date = new Date();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    clockTitle.innerText =
+      `${hours < 10 ? `0${hours}` : hours}:` +
+      `${minutes < 10 ? `0${minutes}` : minutes}:` +
+      `${seconds < 10 ? `0${seconds}` : seconds}`;
+  }
+
+  function updateTextSize() {
+    const elements = [clockTitle, dateTitle];
+    const targetWidthRatio = 0.5;
+    elements.forEach(elem => {
+      let curFontSize = 20;
+      for (let i = 0; i < 3; i++) {
+        const parentWidth = elem.parentNode.offsetWidth;
+        const textWidth = elem.offsetWidth;
+        curFontSize *= targetWidthRatio / (textWidth / parentWidth);
+        elem.style.fontSize = `${curFontSize}pt`;
+      }
+    });
+  }
+
+
+  function init() {
+    getDate();
+    getTime();
+    updateTextSize();
+    setInterval(getTime, 1000);
+    window.addEventListener("resize", updateTextSize);
+  }
+
+  init();
+</script>
+
+</html>
