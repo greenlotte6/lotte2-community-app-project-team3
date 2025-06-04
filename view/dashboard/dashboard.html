@@ -7,202 +7,11 @@
   <title>대시보드</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link rel="stylesheet" href="/css/index.css" />
-  <link rel="stylesheet" href="/css/dashboard/dashboard.css" />
+  <link rel="stylesheet" href="/css/dashboard/dashboard.css">
+
 
   <style>
-    .dashboard {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      height: 100vh;
-      /* 전체 브라우저 높이 기준 */
-    }
 
-    .top {
-      display: flex;
-      gap: 20px;
-      flex: 0 1 40%;
-      /* 대시보드의 40%만 차지 */
-      min-height: 250px;
-    }
-
-    .part1 {
-      width: 39%;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      height: 100%;
-    }
-
-    .profile {
-      flex: 2;
-      display: flex;
-      flex-wrap: wrap;
-      border: 2px solid #598be9;
-      border-radius: 0 10px 10px 10px;
-      min-height: 120px;
-    }
-
-    .profile-image {
-      width: 30%;
-    }
-
-    .profile-image img {
-      border-radius: 50%;
-      width: 70%;
-      display: block;
-      margin: 10px auto;
-      /* 이미지 자체를 중앙 정렬 */
-    }
-
-    .profile-info {
-      padding: 2%;
-      width: 60%;
-    }
-
-    .profile-info div p:nth-child(1) {
-      font-size: 20px;
-    }
-
-    .profile-info div p:nth-child(1) span {
-      font-size: 20px;
-      border-bottom: 1px solid #598be9;
-    }
-
-    .time {
-      flex: 1;
-      border-radius: 0 10px 10px 10px;
-      border: 2px solid #104E4A;
-      text-align: center;
-    }
-
-    .part2 {
-      width: 60%;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      height: 100%;
-    }
-
-    .projects {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      border: 2px solid #2caba3;
-      border-radius: 0 10px 10px 10px;
-      padding: 10px;
-      box-sizing: border-box;
-      min-height: 180px;
-    }
-
-    .lists {
-      display: flex;
-      gap: 10px;
-      flex: 1;
-    }
-
-    .project-list {
-      flex: 1;
-      border: 2px solid #bbdafa;
-      border-radius: 0 10px 10px 10px;
-    }
-
-    /* 하단 part3 */
-    .part3 {
-      display: flex;
-      gap: 10px;
-      flex: 1;
-      margin-top: 20px;
-    }
-
-    .part3 .notices1 {
-      flex: 1;
-      border: 2px solid #3d577c;
-      border-radius: 0 10px 10px 10px;
-      min-height: 200px;
-      padding: 10px;
-    }
-
-    .part3 .notices2 {
-      flex: 1;
-      border: 2px solid #3d577c;
-      border-radius: 0 10px 10px 10px;
-      min-height: 200px;
-      padding: 10px;
-    }
-
-    .part3 .notices3 {
-      flex: 1;
-      border: none;
-      border-radius: 0 10px 10px 10px;
-      min-height: 200px;
-    }
-
-    /* 미디어쿼리는 그대로 유지 (필요 시 추가 조정 가능) */
-    @media (max-width: 1500px) {
-      .profile {
-        flex-direction: column;
-        width: 60%;
-        min-height: 300px;
-      }
-
-      .time {
-        width: 60%;
-      }
-
-      .profile-image,
-      .profile-info {
-        width: 100%;
-      }
-
-      .top>.part1,
-      .top>.part2 {
-        flex: 1;
-      }
-    }
-
-    .info span:nth-child(2)::before {
-      content: "";
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      margin-right: 8px;
-      vertical-align: middle;
-      position: relative;
-      top: -1px;
-      background-image: url("/images/comment.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-
-    .info span:nth-child(3)::before {
-      content: "";
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      margin-right: 8px;
-      vertical-align: middle;
-      position: relative;
-      top: -1px;
-      background-image: url("/images/users.png");
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-
-    .info span {
-      margin-right: 15px;
-    }
-
-    .notices1 article,
-    .notices2 article {
-      border: 1px solid #afcff3;
-      margin: 10px;
-    }
-
-    .notices2 h3 {
-      margin: 10px;
-    }
   </style>
 </head>
 
@@ -234,7 +43,7 @@
           <img src="/images/header/project.png" alt="프로젝트" class="memu-icon" />
         </a>
         <div class="vertical-divider"></div>
-        <a href="#">
+        <a href="/page/pageMain.html">
           <img src="/images/header/page.png" alt="페이지" class="memu-icon" />
         </a>
         <div class="vertical-divider"></div>
@@ -297,7 +106,7 @@
                         </div>
                         <div class="info">
                           <p>담당자</p>
-                          <p>내용</p>
+                          <p>프로젝트 내용입니다</p>
                         </div>
                       </article>
                     </div>

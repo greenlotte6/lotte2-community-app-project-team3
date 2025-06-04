@@ -22,6 +22,10 @@ body {
   min-height: 100vh;
   flex-direction: column;
 }
+/* 헤더 + 타이틀 */
+.status span {
+  color: green;
+}
 
 /* 메인 콘텐츠 영역 (헤더/푸터 제외하고 좌우로 배치) */
 .main-layout {

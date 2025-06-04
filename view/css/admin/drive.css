@@ -1,64 +1,78 @@
-/* 설정 타이틀 */
-h1 {
-  margin: 0 0 30px 10px;
+.main-layout {
+  display: flex;
+  background-color: #f9fbfd;
 }
 
-.status span {
-  color: green;
-}
-
-/* 메인 */
-.main-content {
+main.main-content {
   flex: 1;
-  padding: 2% 4%;
+  padding: 40px 60px;
+}
+
+.main-content h1 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 5px;
+}
+
+.drive {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .drive h3 {
-  padding: 10px;
-  margin: 30px 0 10px 0;
-  font-weight: 500;
-}
-
-.drive section {
-  padding: 20px;
-  border-bottom: 1px solid #dfdfdf;
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .setting1 div,
 .setting2 div {
-  border: 1px solid #dedede;
   background: #ffffff;
-  border-radius: 20px;
-  height: 100%;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
-.setting1 div {
-}
-
-.setting2 div {
-}
-
+.list1 section,
 .list2 section {
-  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+  border-bottom: 1px solid #e4e4e4;
 }
 
 .list2 section:nth-child(2) {
   background-color: #d4e4e2;
+  padding: 15px;
 }
-
-.list1 section:nth-last-child(1),
-.list2 section:nth-last-child(1) {
-  border: none;
-}
-
 .list2 section {
+  padding: 20px 10px;
+}
+.list1 section:last-child,
+.list2 section:last-child {
+  border-bottom: none;
 }
 
-/* On/Off 스위치 디자인 */
+select#order,
+select#view {
+  width: 120px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+}
+
+.list2 p:nth-child(2) {
+  margin-right: auto;
+}
+
+.list2 p:nth-child(2) span,
+.list2 p span {
+  color: #104e4a;
+  font-weight: bold;
+}
+
 .switch {
   position: relative;
   display: inline-block;
@@ -105,17 +119,31 @@ input:checked + .slider:before {
   transform: translateX(22px);
 }
 
-/* SAVE 버튼 디자인 */
 .btn {
   text-align: right;
+  margin-top: 20px;
 }
 
 .btn button {
   height: 40px;
   width: 120px;
-  margin: 40px 5px 0 0;
-  border: 3px solid #104e4a;
+  border: 2px solid #104e4a;
   border-radius: 10px;
   background-color: transparent;
   color: #104e4a;
+  cursor: pointer;
+}
+
+select#order,
+select#view {
+  width: 120px;
+}
+
+.list2 p:nth-child(2) {
+  margin-right: 70%;
+}
+
+.list2 p:nth-child(2) span {
+  color: #104e4a;
+  font-weight: bold;
 }

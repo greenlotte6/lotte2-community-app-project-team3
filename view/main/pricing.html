@@ -1,551 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/main/pricing.css" />
-    <title>메인-가격</title>
-  </head>
-  <body>
-    <div id="wrapper">
-      <div class="header-wrapper">
-        <header class="header">
-          <!-- 왼쪽 메뉴 -->
-          <div class="header-left">
-            <a href="/main/pricing.html">가격</a>
-            <a href="/main/faq.html">도움 센터</a>
-          </div>
 
-          <!-- 중앙 로고 -->
-          <div class="header-center">
-            <a href="/main/intro.html" class="logo">
-              <img src="/images/logo_title.png" alt="Logo" />
-            </a>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/main/pricing.css" />
+  <title>메인-가격</title>
+</head>
 
-          <!-- 오른쪽 로그인 -->
-          <div class="header-right">
-            <a href="#login" class="login-btn">로그인</a>
-          </div>
-        </header>
-      </div>
-      <div class="empty-box"></div>
+<body>
+  <div id="wrapper">
+    <div class="header-wrapper">
+      <header class="header">
+        <!-- 왼쪽 메뉴 -->
+        <div class="header-left">
+          <a href="/main/pricing.html">가격</a>
+          <a href="/main/faq.html">도움 센터</a>
+        </div>
 
-      <main>
-        <!-- 프라이싱 헤더 -->
-        <section class="pricing-hero">
-          <div class="pricing-hero-container">
-            <h1>여러분들을 위한<br />플랜을 선택하세요</h1>
+        <!-- 중앙 로고 -->
+        <div class="header-center">
+          <a href="/index.html" class="logo">
+            <img src="/images/logo_title.png" alt="Logo" />
+          </a>
+        </div>
 
-            <!-- Monthly/Annually 토글 -->
-            <div class="billing-toggle">
-              <span class="toggle-label active" data-billing="monthly">월</span>
-              <span class="toggle-label" data-billing="annually">년</span>
-            </div>
-          </div>
-        </section>
-
-        <!-- 요금제 카드 섹션 -->
-        <section class="pricing-plans">
-          <div class="pricing-container">
-            <div class="plans-grid">
-              <!-- Gold Plan -->
-              <div class="plan-card">
-                <div class="plan-content">
-                  <h2 class="plan-name">FREE</h2>
-                  <div class="plan-price">
-                    <span class="price-amount monthly">0원</span>
-                    <span class="price-amount annually" style="display: none"
-                      >0원</span
-                    >
-                  </div>
-                  <p class="plan-subtitle">무료입니다</p>
-
-                  <div class="plan-icon">
-                    <img src="/images/main/aAF5devxEdbNPNiF_Gold.png" />
-                  </div>
-
-                  <button class="select-plan-btn">플랜을 선택해주세요</button>
-
-                  <div class="plan-description">
-                    기본 플랜을 이용하실 수 있습니다
-                  </div>
-                </div>
-
-                <div class="plan-features">
-                  <div class="feature-item">
-                    <svg
-                      class="check-icon"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                    >
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="#10B981"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    <span>5 product listings</span>
-                  </div>
-                  <div class="feature-item">
-                    <svg
-                      class="check-icon"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                    >
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="#10B981"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    <span>One image per product</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Platinum Plan -->
-              <div class="plan-card">
-                <div class="plan-content">
-                  <h2 class="plan-name">PLUS</h2>
-                  <div class="plan-price">
-                    <span class="price-amount monthly">9,900/월</span>
-                    <span class="price-amount annually" style="display: none"
-                      >7,900/년</span
-                    >
-                  </div>
-                  <p class="plan-subtitle monthly">
-                    또는 년 20% 할인받을 수 있습니다
-                  </p>
-                  <p class="plan-subtitle annually" style="display: none">
-                    billed annually
-                  </p>
-
-                  <div class="plan-icon">
-                    <img src="/images/main/aAF5sOvxEdbNPNiH_Platinum.png" />
-                  </div>
-
-                  <button class="select-plan-btn">플랜을 선택해주세요</button>
-
-                  <div class="plan-description">
-                    For growing stores with more inventory and orders.
-                  </div>
-                </div>
-
-                <div class="plan-features">
-                  <div class="feature-item">
-                    <svg
-                      class="check-icon"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                    >
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="#10B981"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    <span>50 product listings</span>
-                  </div>
-                  <div class="feature-item">
-                    <svg
-                      class="check-icon"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                    >
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="#10B981"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    <span>Five images per product</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Diamond Plan -->
-              <div class="plan-card">
-                <div class="plan-content">
-                  <h2 class="plan-name">PRO</h2>
-                  <div class="plan-price">
-                    <span class="price-amount monthly">29,000/월</span>
-                    <span class="price-amount annually" style="display: none"
-                      >23,000/년</span
-                    >
-                  </div>
-                  <p class="plan-subtitle monthly">or save 20% annually</p>
-                  <p class="plan-subtitle annually" style="display: none">
-                    billed annually
-                  </p>
-
-                  <div class="plan-icon">
-                    <img src="/images/main/aAF5yOvxEdbNPNiJ_Diamond.png" />
-                  </div>
-
-                  <button class="select-plan-btn">플랜을 선택해주세요</button>
-
-                  <div class="plan-description">
-                    Top-tier support for stores at scale.
-                  </div>
-                </div>
-
-                <div class="plan-features">
-                  <div class="feature-item">
-                    <svg
-                      class="check-icon"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                    >
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="#10B981"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    <span>500 product listings</span>
-                  </div>
-                  <div class="feature-item">
-                    <svg
-                      class="check-icon"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                    >
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="#10B981"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                    <span>25 images per product</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- 요금제 비교 섹션 -->
-        <!-- 요금제 비교 섹션 -->
-        <section class="pricing-comparison">
-          <div class="comparison-container">
-            <!-- 비교 섹션 헤더 -->
-            <div class="comparison-header">
-              <h1>모든 플랜을 자세히 비교해보세요</h1>
-              <p>
-                각 플랜별 제공되는 기능을 한눈에 확인하고 최적의 선택을 하세요
-              </p>
-            </div>
-
-            <!-- 비교 테이블 -->
-            <div class="comparison-table">
-              <!-- 테이블 헤더 (플랜명 + 가격 + 버튼) -->
-              <div class="table-header">
-                <!-- 빈 첫번째 컬럼 (기능명 자리) -->
-                <div class="empty-column"></div>
-                <div class="plan-column">
-                  <h3>FREE</h3>
-                  <div class="plan-price">0원</div>
-                  <p class="plan-desc">무료</p>
-                  <button class="comparison-btn free-btn">시작하기</button>
-                </div>
-                <div class="plan-column">
-                  <h3>PLUS</h3>
-                  <div class="plan-price">9,900원/월</div>
-                  <p class="plan-desc">연간 결제 시 20% 할인</p>
-                  <button class="comparison-btn plus-btn">시작하기</button>
-                </div>
-                <div class="plan-column">
-                  <h3>PRO</h3>
-                  <div class="plan-price">29,000원/월</div>
-                  <p class="plan-desc">연간 결제 시 20% 할인</p>
-                  <button class="comparison-btn pro-btn">시작하기</button>
-                </div>
-              </div>
-
-              <!-- 기능 비교 행들 -->
-              <div class="table-body">
-                <!-- 기본 기능 섹션 -->
-                <div class="feature-section">
-                  <div class="section-title">기본 기능</div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">페이지 생성</div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">기본 게시판</div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">개인 캘린더</div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <!-- 협업 기능 섹션 -->
-                <div class="feature-section">
-                  <div class="section-title">협업 & 팀 기능</div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">팀 협업 도구</div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">프로젝트 관리</div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <!-- 저장공간 & 고급기능 섹션 -->
-                <div class="feature-section">
-                  <div class="section-title">저장공간 & 고급기능</div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">저장공간</div>
-                  <div class="feature-check">5GB</div>
-                  <div class="feature-check">100GB</div>
-                  <div class="feature-check">무제한</div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">고급 보안 설정</div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">관리자 대시보드</div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon inactive" viewBox="0 0 24 24">
-                      <path
-                        d="M18 6L6 18M6 6L18 18"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                  <div class="feature-check">
-                    <svg class="check-icon active" viewBox="0 0 24 24">
-                      <path
-                        d="M20 6L9 17L4 12"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <!-- 지원 섹션 -->
-                <div class="feature-section">
-                  <div class="section-title">고객 지원</div>
-                </div>
-
-                <div class="feature-row">
-                  <div class="feature-name">고객지원</div>
-                  <div class="feature-check">이메일</div>
-                  <div class="feature-check">우선 지원</div>
-                  <div class="feature-check">24/7 전담</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer>Footer</footer>
+        <!-- 오른쪽 로그인 -->
+        <div class="header-right">
+          <a href="#login" class="login-btn">로그인</a>
+        </div>
+      </header>
     </div>
-  </body>
-  <script src="/js/main/pricing.js"></script>
+    <div class="empty-box"></div>
+
+    <main>
+      <!-- 프라이싱 헤더 -->
+      <section class="pricing-hero">
+        <div class="pricing-hero-container">
+          <h1>여러분들을 위한<br />플랜을 선택하세요</h1>
+
+          <!-- Monthly/Annually 토글 -->
+          <div class="billing-toggle">
+            <span class="toggle-label active" data-billing="monthly">월</span>
+            <span class="toggle-label" data-billing="annually">년</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 요금제 카드 섹션 -->
+      <section class="pricing-plans">
+        <div class="pricing-container">
+          <div class="plans-grid">
+            <!-- Gold Plan -->
+            <div class="plan-card">
+              <div class="plan-content">
+                <h2 class="plan-name">FREE</h2>
+                <div class="plan-price">
+                  <span class="price-amount monthly">0원</span>
+                  <span class="price-amount annually" style="display: none">0원</span>
+                </div>
+                <p class="plan-subtitle">무료입니다</p>
+
+                <div class="plan-icon">
+                  <img src="/images/main/aAF5devxEdbNPNiF_Gold.png" />
+                </div>
+
+                <button class="select-plan-btn">플랜을 선택해주세요</button>
+
+                <div class="plan-description">
+                  기본 플랜을 이용하실 수 있습니다
+                </div>
+              </div>
+
+              <div class="plan-features">
+                <div class="feature-item">
+                  <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 6L9 17L4 12" stroke="#10B981" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>5 product listings</span>
+                </div>
+                <div class="feature-item">
+                  <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 6L9 17L4 12" stroke="#10B981" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>One image per product</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Platinum Plan -->
+            <div class="plan-card">
+              <div class="plan-content">
+                <h2 class="plan-name">PLUS</h2>
+                <div class="plan-price">
+                  <span class="price-amount monthly">9,900/월</span>
+                  <span class="price-amount annually" style="display: none">7,900/년</span>
+                </div>
+                <p class="plan-subtitle monthly">
+                  또는 년 20% 할인받을 수 있습니다
+                </p>
+                <p class="plan-subtitle annually" style="display: none">
+                  billed annually
+                </p>
+
+                <div class="plan-icon">
+                  <img src="/images/main/aAF5sOvxEdbNPNiH_Platinum.png" />
+                </div>
+
+                <button class="select-plan-btn">플랜을 선택해주세요</button>
+
+                <div class="plan-description">
+                  For growing stores with more inventory and orders.
+                </div>
+              </div>
+
+              <div class="plan-features">
+                <div class="feature-item">
+                  <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 6L9 17L4 12" stroke="#10B981" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>50 product listings</span>
+                </div>
+                <div class="feature-item">
+                  <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 6L9 17L4 12" stroke="#10B981" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>Five images per product</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Diamond Plan -->
+            <div class="plan-card">
+              <div class="plan-content">
+                <h2 class="plan-name">PRO</h2>
+                <div class="plan-price">
+                  <span class="price-amount monthly">29,000/월</span>
+                  <span class="price-amount annually" style="display: none">23,000/년</span>
+                </div>
+                <p class="plan-subtitle monthly">or save 20% annually</p>
+                <p class="plan-subtitle annually" style="display: none">
+                  billed annually
+                </p>
+
+                <div class="plan-icon">
+                  <img src="/images/main/aAF5yOvxEdbNPNiJ_Diamond.png" />
+                </div>
+
+                <button class="select-plan-btn">플랜을 선택해주세요</button>
+
+                <div class="plan-description">
+                  Top-tier support for stores at scale.
+                </div>
+              </div>
+
+              <div class="plan-features">
+                <div class="feature-item">
+                  <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 6L9 17L4 12" stroke="#10B981" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>500 product listings</span>
+                </div>
+                <div class="feature-item">
+                  <svg class="check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 6L9 17L4 12" stroke="#10B981" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <span>25 images per product</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 요금제 비교 섹션 -->
+      <!-- 요금제 비교 섹션 -->
+      <section class="pricing-comparison">
+        <div class="comparison-container">
+          <!-- 비교 섹션 헤더 -->
+          <div class="comparison-header">
+            <h1>모든 플랜을 자세히 비교해보세요</h1>
+            <p>
+              각 플랜별 제공되는 기능을 한눈에 확인하고 최적의 선택을 하세요
+            </p>
+          </div>
+
+          <!-- 비교 테이블 -->
+          <div class="comparison-table">
+            <!-- 테이블 헤더 (플랜명 + 가격 + 버튼) -->
+            <div class="table-header">
+              <!-- 빈 첫번째 컬럼 (기능명 자리) -->
+              <div class="empty-column"></div>
+              <div class="plan-column">
+                <h3>FREE</h3>
+                <div class="plan-price">0원</div>
+                <p class="plan-desc">무료</p>
+                <button class="comparison-btn free-btn">시작하기</button>
+              </div>
+              <div class="plan-column">
+                <h3>PLUS</h3>
+                <div class="plan-price">9,900원/월</div>
+                <p class="plan-desc">연간 결제 시 20% 할인</p>
+                <button class="comparison-btn plus-btn">시작하기</button>
+              </div>
+              <div class="plan-column">
+                <h3>PRO</h3>
+                <div class="plan-price">29,000원/월</div>
+                <p class="plan-desc">연간 결제 시 20% 할인</p>
+                <button class="comparison-btn pro-btn">시작하기</button>
+              </div>
+            </div>
+
+            <!-- 기능 비교 행들 -->
+            <div class="table-body">
+              <!-- 기본 기능 섹션 -->
+              <div class="feature-section">
+                <div class="section-title">기본 기능</div>
+              </div>
+
+              <div class="feature-row">
+                <div class="feature-name">페이지 생성</div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="feature-row">
+                <div class="feature-name">기본 게시판</div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="feature-row">
+                <div class="feature-name">개인 캘린더</div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- 협업 기능 섹션 -->
+              <div class="feature-section">
+                <div class="section-title">협업 & 팀 기능</div>
+              </div>
+
+              <div class="feature-row">
+                <div class="feature-name">팀 협업 도구</div>
+                <div class="feature-check">
+                  <svg class="check-icon inactive" viewBox="0 0 24 24">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="feature-row">
+                <div class="feature-name">프로젝트 관리</div>
+                <div class="feature-check">
+                  <svg class="check-icon inactive" viewBox="0 0 24 24">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- 저장공간 & 고급기능 섹션 -->
+              <div class="feature-section">
+                <div class="section-title">저장공간 & 고급기능</div>
+              </div>
+
+              <div class="feature-row">
+                <div class="feature-name">저장공간</div>
+                <div class="feature-check">5GB</div>
+                <div class="feature-check">100GB</div>
+                <div class="feature-check">무제한</div>
+              </div>
+
+              <div class="feature-row">
+                <div class="feature-name">고급 보안 설정</div>
+                <div class="feature-check">
+                  <svg class="check-icon inactive" viewBox="0 0 24 24">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon inactive" viewBox="0 0 24 24">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+              </div>
+
+              <div class="feature-row">
+                <div class="feature-name">관리자 대시보드</div>
+                <div class="feature-check">
+                  <svg class="check-icon inactive" viewBox="0 0 24 24">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon inactive" viewBox="0 0 24 24">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+                <div class="feature-check">
+                  <svg class="check-icon active" viewBox="0 0 24 24">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- 지원 섹션 -->
+              <div class="feature-section">
+                <div class="section-title">고객 지원</div>
+              </div>
+
+              <div class="feature-row">
+                <div class="feature-name">고객지원</div>
+                <div class="feature-check">이메일</div>
+                <div class="feature-check">우선 지원</div>
+                <div class="feature-check">24/7 전담</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      version 0.0.1 | License | More Themes | Documentation | Support
+    </footer>
+  </div>
+</body>
+<script src="/js/main/pricing.js"></script>
+
 </html>

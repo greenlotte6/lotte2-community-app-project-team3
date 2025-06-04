@@ -5,132 +5,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>로그인</title>
-<style>
-    body {
-      font-family: 'Noto Sans KR', sans-serif;
-      background-color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .login-container {
-      width: 360px;
-      padding: 40px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    h1 {
-      margin-bottom: 4px;
-      font-size: 24px;
-    }
-
-    p {
-      margin-bottom: 24px;
-      color: #666;
-      font-size: 14px;
-    }
-
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 14px;
-    }
-
-    .password-hint {
-      text-align: left;
-      font-size: 12px;
-      color: #888;
-      margin-bottom: 10px;
-    }
-
-    .remember-forgot {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      margin-bottom: 16px;
-    }
-
-    .remember-forgot label {
-      display: flex;
-      align-items: center;
-    }
-
-    .login-btn {
-      width: 100%;
-      padding: 12px;
-      background-color: #3478f6;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .social-login {
-      margin-top: 24px;
-    }
-
-    .social-login p {
-      margin-bottom: 8px;
-      font-size: 13px;
-      color: #555;
-    }
-
-    .social-buttons {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .social-buttons button {
-      width: 32%;
-      padding: 10px;
-      font-size: 13px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      background-color: white;
-      cursor: pointer;
-    }
-
-    .signup-link {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #666;
-    }
-
-    .signup-link a {
-      color: #3478f6;
-      text-decoration: none;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/register/login.css">
 </head>
 
 <body>
-  
-   <div class="login-container">
+
+  <div class="login-container">
     <h1>로그인</h1>
     <p>Please log in to continue</p>
-    
+
     <input type="email" placeholder="Email Address" />
     <input type="password" placeholder="Password" />
     <div class="password-hint">It must be a combination of minimum 8 letters, numbers, and symbols.</div>
 
     <div class="remember-forgot">
       <label><input type="checkbox" /> Remember me</label>
-      <a href="#" style="color: #3478f6; text-decoration: none;">Forgot Password?</a>
+      <a href="/register/findId.html" style="color: #3478f6; text-decoration: none;">Forgot ID?</a>
+      <a href="/register/findPassword.html" style="color: #3478f6; text-decoration: none;">Forgot Password?</a>
     </div>
 
-    <button class="login-btn">Log In</button>
+    <a href="/dashboard/dashboard.html">
+      <button class="login-btn">Log In</button>
+    </a>
 
     <div class="social-login">
       <p>Or log in with:</p>
@@ -142,7 +38,7 @@
     </div>
 
     <div class="signup-link">
-      No account yet? <a href="#">Sign Up</a>
+      No account yet? <a href="/register/signUp.html">Sign Up</a>
     </div>
   </div>
 </body>

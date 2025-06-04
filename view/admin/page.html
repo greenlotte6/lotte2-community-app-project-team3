@@ -18,8 +18,42 @@
     <div class="container">
         <div class="header">
             <div class="header-logo">
-                <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
-                <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+                <a href="/dashboard/dashboard.html">
+                    <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+                    <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+                </a>
+            </div>
+            <div class="memu">
+                <a href="/board/main.html">
+                    <img src="/images/header/board.png" alt="게시판" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/chat/main.html">
+                    <img src="/images/header/chat.png" alt="메세지" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/calender/calender.html">
+                    <img src="/images/header/calendar.png" alt="캘린더" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/project/main.html">
+                    <img src="/images/header/project.png" alt="프로젝트" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/page/pageMain.html">
+                    <img src="/images/header/page.png" alt="페이지" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/drive/drive.html">
+                    <img src="/images/header/drive.png" alt="드라이브" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/admin/profile.html">
+                    <img src="/images/header/settings.png" alt="설정" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <img src="/images/off.png" alt="로그아웃" class="logout" />
+                <div class="vertical-divider"></div>
             </div>
             <span class="status">ONLINE <span>●</span></span>
             <img src="/images/profile1.png" alt="프로필이미지" />
@@ -30,39 +64,17 @@
             <!-- 사이드메뉴 시작 -->
             <aside class="sidebar">
                 <div>
-                    <div class="section-title">BOARDS</div>
-                    <ul>
-                        <li>Notices</li>
-                        <li>Department</li>
-                        <li>Free</li>
-                        <li>Q&A</li>
-                        <li>Album</li>
-                        <li>Menu</li>
-                    </ul>
-                    <div class="section-title">MENU</div>
-                    <ul>
-                        <li>Messages</li>
-                        <li>Calender</li>
-                        <li>Projects</li>
-                        <li>Pages</li>
-                        <li>Drive</li>
-                    </ul>
                     <div class="section-title">SETTINGS</div>
                     <ul>
-                        <li>프로필</li>
-                        <li>알림</li>
-                        <li>캘린더</li>
-                        <li>페이지</li>
-                        <li>메시지</li>
-                        <li>내 드라이브</li>
-                        <li>프로젝트</li>
-                        <li>-------------------</li>
-                        <li>게시판</li>
-                        <li>플랜</li>
+                        <li><a href="/admin/profile.html">👤프로필</a></li>
+                        <li><a href="/admin/page.html">📄페이지</a></li>
+                        <li><a href="/admin/message.html">💬메시지</a></li>
+                        <li><a href="/admin/calendar.html">📅캘린더</a></li>
+                        <li><a href="/admin/project.html">📁프로젝트</a></li>
+                        <li><a href="/admin/drive.html">🗂️드라이브</a></li>
+                        <li><a href="/admin/board.html">📝게시판</a></li>
+                        <li><a href="/admin/plan.html">💳요금제</a></li>
                     </ul>
-                </div>
-                <div>
-                    <li>Logout</li>
                 </div>
             </aside>
             <!-- 사이드메뉴 끝 -->
@@ -78,8 +90,11 @@
                         <div class="page">
                             <div class="head">
                                 <p>페이지를 추가하거나 멤버 권한, 공개여부를 설정할 수 있습니다.</p>
-                                <button onclick="openModal('addModal')">ADD</button>
+                                <a href="/admin/addPage.html">
+                                    <button onclick="openModal('addModal')">ADD</button>
+                                </a>
                             </div>
+
                             <div class="body">
                                 <table>
                                     <thead>
