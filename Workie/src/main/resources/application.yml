@@ -1,0 +1,76 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  servlet:
+    multipart:
+      location: uploads
+      max-file-size: 10MB
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dns05156@gmail.com
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls:
+            enable: true
+
+  application:
+    name: Workie
+    version: 0.0.1-SNAPSHOT
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    cache: false
+
+  devtools:
+    restart:
+      enabled: true       # ?? ???? ??
+    livereload:
+      enabled: false      # ??? ? ??? ?
+
+  datasource:
+    url: jdbc:mysql://3.36.66.1:3306/
+    username: main
+    password: Qwerty@123!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update     # ?? ??? ??
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true         # ?? ??? ??
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+mybatis:
+  mapper-locations: classpath:mappers/**/*.xml
+
+file:
+  upload:
+    path: uploads
+
+jwt:
+  issuer: chhak0503@gmail.com
+  secret: 1XudNUpSmog5lwI9thJFejF6YfBBQnCI
+
+logging:
+  level:
+    root: info
+    kr.co.lotteOn: debug
+    org.hibernate.SQL: info
+    org.hibernate.type.descriptor.sql.BasicBinder: off
