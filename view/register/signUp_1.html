@@ -1,64 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/css/register/signUp_1.css" />
+    <link
+      rel="icon"
+      href="/images/logo_noback(withoutLettter).png"
+      type="image/x-icon"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원가입</title>
-  <link rel="stylesheet" href="/css/register/signUp_1.css">
-</head>
+  <body>
+    <div class="container">
+      <div class="step">1/4</div>
+      <h2>회원 가입 유형을 선택하세요.</h2>
+      <p class="description">
+        거주 국가에 따라 결제 통화가 결정되며 가입 후에는 변경이 불가합니다.
+      </p>
 
-<body>
-  <div class="container">
-    <div class="step">1/4</div>
-    <h2>회원 가입 유형을 선택하세요.</h2>
-    <p class="description">거주 국가에 따라 결제 통화가 결정되며 가입 후에는 변경이 불가합니다.</p>
+      <label for="country">거주 국가</label>
+      <select id="country">
+        <option value="korea">한국</option>
+        <option value="japan">일본</option>
+        <option value="usa">미국</option>
+        <!-- 추가 국가 옵션 -->
+      </select>
 
-    <label for="country">거주 국가</label>
-    <select id="country">
-      <option value="korea">한국</option>
-      <option value="japan">일본</option>
-      <option value="usa">미국</option>
-      <!-- 추가 국가 옵션 -->
-    </select>
+      <label>회원 유형</label>
+      <div class="type-buttons">
+        <button type="button" id="bizBtn">사업자 회원</button>
+        <button type="button" class="active" id="personalBtn">개인 회원</button>
+      </div>
 
-    <label>회원 유형</label>
-    <div class="type-buttons">
-      <button type="button" id="bizBtn">사업자 회원</button>
-      <button type="button" class="active" id="personalBtn">개인 회원</button>
+      <label for="language">사용 언어</label>
+      <select id="language">
+        <option value="korean">한국어</option>
+        <option value="english">English</option>
+        <option value="japanese">日本語</option>
+      </select>
+
+      <div class="button-group">
+        <a href="/index.html">
+          <button class="prev">&lt; 이전</button>
+        </a>
+        <a href="/register/signUp_2.html">
+          <button class="next">다음 &gt;</button>
+        </a>
+      </div>
     </div>
 
-    <label for="language">사용 언어</label>
-    <select id="language">
-      <option value="korean">한국어</option>
-      <option value="english">English</option>
-      <option value="japanese">日本語</option>
-    </select>
+    <script>
+      const bizBtn = document.getElementById("bizBtn");
+      const personalBtn = document.getElementById("personalBtn");
 
-    <div class="button-group">
-      <a href="/index.html">
-        <button class="prev">&lt; 이전</button>
-      </a>
-      <a href="/register/signUp_2.html">
-        <button class="next">다음 &gt;</button>
-      </a>
-    </div>
-  </div>
+      bizBtn.addEventListener("click", () => {
+        bizBtn.classList.add("active");
+        personalBtn.classList.remove("active");
+      });
 
-  <script>
-    const bizBtn = document.getElementById("bizBtn");
-    const personalBtn = document.getElementById("personalBtn");
-
-    bizBtn.addEventListener("click", () => {
-      bizBtn.classList.add("active");
-      personalBtn.classList.remove("active");
-    });
-
-    personalBtn.addEventListener("click", () => {
-      personalBtn.classList.add("active");
-      bizBtn.classList.remove("active");
-    });
-  </script>
-</body>
-
+      personalBtn.addEventListener("click", () => {
+        personalBtn.classList.add("active");
+        bizBtn.classList.remove("active");
+      });
+    </script>
+  </body>
 </html>

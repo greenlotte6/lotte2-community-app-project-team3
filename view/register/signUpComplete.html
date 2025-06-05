@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입 완료</title>
+    <link rel="stylesheet" href="/css/register/complete.css" />
+    <link
+      rel="icon"
+      href="/images/logo_noback(withoutLettter).png"
+      type="image/x-icon"
+    />
+    <style></style>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원가입 완료</title>
-  <link rel="stylesheet" href="/css/register/complete.css">
-  <style>
-
-  </style>
-</head>
-
-<body>
-  <div class="modal-overlay">
-    <div class="modal-content">
-      <div class="close-btn" onclick="closeModal()">×</div>
-      <div class="logo">
-        <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+  <body>
+    <div class="modal-overlay">
+      <div class="modal-content">
+        <div class="close-btn" onclick="closeModal()">×</div>
+        <div class="logo">
+          <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+        </div>
+        <h2>회원 가입 완료</h2>
+        <p>서비스 신청을 위해 다음 단계를 진행해주세요.</p>
+        <a href="/dashboard/dashboard.html">
+          <button class="btn-confirm" onclick="confirmNext()">확인</button>
+        </a>
       </div>
-      <h2>회원 가입 완료</h2>
-      <p>서비스 신청을 위해 다음 단계를 진행해주세요.</p>
-      <a href="/dashboard/dashboard.html">
-        <button class="btn-confirm" onclick="confirmNext()">확인</button>
-      </a>
     </div>
-  </div>
 
-  <script>
-    function closeModal() {
-      // 창 닫기 혹은 리디렉션
-      alert("닫기 버튼 클릭됨");
-      // window.location.href = "/"; // 예: 메인 페이지로 이동
-    }
+    <script>
+      function closeModal() {
+        // 창 닫기 혹은 리디렉션
+        alert("닫기 버튼 클릭됨");
+        // window.location.href = "/"; // 예: 메인 페이지로 이동
+      }
 
-    function confirmNext() {
-      // 다음 단계로 이동
-      alert("확인 버튼 클릭됨");
-      // window.location.href = "/next-step";
-    }
-  </script>
-</body>
-
+      function confirmNext() {
+        // 다음 단계로 이동
+        alert("확인 버튼 클릭됨");
+        // window.location.href = "/next-step";
+      }
+    </script>
+  </body>
 </html>
