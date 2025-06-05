@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { SettingLayout } from "../../layouts/SettingLayout";
 import { Link } from "react-router-dom";
+import { AddPageModal } from "../../components/setting/AddPageModal";
 
 export const Page = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <SettingLayout>
       <main className="main-content" id="page-container">
@@ -16,9 +19,7 @@ export const Page = () => {
                 <p>
                   페이지를 추가하거나 멤버 권한, 공개여부를 설정할 수 있습니다.
                 </p>
-                <a href="/admin/addPage.html">
-                  <button onclick="openModal('addModal')">ADD</button>
-                </a>
+                <button onClick={() => setIsModalOpen(true)}>ADD</button>
               </div>
 
               <div className="body">
@@ -33,7 +34,9 @@ export const Page = () => {
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="title">page1</td>
+                      <td className="title">
+                        <Link to="/setting/modifyPage">page1</Link>
+                      </td>
                       <td>허용멤버만</td>
                       <td>kim0531</td>
                       <td>2025.06.03</td>
@@ -50,6 +53,7 @@ export const Page = () => {
             </div>
           </div>
         </article>
+        {isModalOpen && <AddPageModal onClose={() => setIsModalOpen(false)} />}
       </main>
     </SettingLayout>
   );

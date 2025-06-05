@@ -12,9 +12,9 @@ export function initClock() {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const dayName = week[date.getDay()];
-    dateTitle.innerText = `${year}/${month < 10 ? `0${month}` : month}/${
-      day < 10 ? `0${day}` : day
-    } [${dayName}]`;
+    dateTitle.innerText = `${year}년 ${month < 10 ? `0${month}` : month}월 ${
+      day < 10 ? `0${day}일` : day
+    } ${dayName}요일`;
   }
 
   function getTime() {
