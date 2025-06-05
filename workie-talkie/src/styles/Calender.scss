@@ -1,0 +1,105 @@
+/* 공통 모달 배경 */
+.event-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 모달 컨텐츠 */
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 550px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  font-family: sans-serif;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  font-size: 25px;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+/* 종일일정 라벨 */
+.allday-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* 버튼 공통 스타일 */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.modal-buttons button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* 등록/수정 버튼 */
+.modal-buttons .submit-btn {
+  background-color: #4a75f2;
+  color: white;
+}
+.modal-buttons .submit-btn:hover {
+  background-color: #3b63c7;
+}
+
+/* 삭제 버튼 */
+.modal-buttons .delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+.modal-buttons .delete-btn:hover {
+  background-color: #c82333;
+}
+
+/* 취소 버튼 */
+.modal-buttons .cancel-btn,
+.modal-buttons button[type="button"]:not(.submit-btn):not(.delete-btn) {
+  background-color: #f0f0f0;
+  color: #333;
+}
+.modal-buttons .cancel-btn:hover,
+.modal-buttons button[type="button"]:not(.submit-btn):not(.delete-btn):hover {
+  background-color: #e0e0e0;
+}
+
+input[type="color"] {
+  height: 50px;
+}

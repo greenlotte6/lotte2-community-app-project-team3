@@ -1,0 +1,160 @@
+.main-layout {
+  display: flex;
+  background-color: #f9fbfd;
+}
+
+main.main-content {
+  flex: 1;
+  padding: 40px 60px;
+}
+
+.main-content h1 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 5px;
+}
+
+.page-setting {
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.body div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.body div:last-child {
+  border-bottom: none;
+}
+
+.body h4 {
+  width: 160px;
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.body input[type="text"],
+.body input[type="date"] {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+  margin-left: 20px;
+}
+
+.body .dates {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.body .dates img {
+  width: 16px;
+  height: 16px;
+}
+
+input#memberInput {
+  width: 500px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  margin-left: auto;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #104e4a;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* 공유할 멤버 추가 */
+#memberTagContainer {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  padding: 0 20px 0 330px;
+  height: 50px;
+  width: 300px;
+}
+
+div#memberInputContainer {
+  display: inline;
+}
+
+.deleteBtn {
+  padding: 6px 12px;
+  background: none;
+  border: 1px solid darkred;
+  color: orangered;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.deleteBtn:hover {
+  background-color: #0c5550;
+  color: white;
+}
+
+.btn {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.btn button {
+  padding: 10px 20px;
+  border: 2px solid #104e4a;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #104e4a;
+  cursor: pointer;
+}

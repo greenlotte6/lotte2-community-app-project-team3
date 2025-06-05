@@ -1,0 +1,109 @@
+#board-container {
+  /* 메인 */
+  .main-layout {
+    display: flex;
+    background-color: #f9fbfd;
+  }
+
+  main.main-content {
+    flex: 1;
+    padding: 40px 60px;
+  }
+  .main-content h1 {
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+  }
+
+  .board-setting {
+    display: flex;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+  }
+
+  .board {
+    width: 100%;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .head p {
+    margin: 0;
+    color: #333;
+  }
+  .head button {
+    width: 80px;
+    height: 30px;
+    border: none;
+    background-color: #104e4a;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+  }
+
+  .body {
+    overflow-x: auto;
+  }
+
+  /* 수정하기 버튼 */
+  .body button {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #98cfcc;
+    padding: 5px;
+    font-size: 13px;
+  }
+
+  /* 리스트 디자인 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+  }
+
+  th,
+  td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #dfdfdf;
+    font-size: 0.95rem;
+  }
+
+  th {
+    background-color: #3a64b1;
+    color: white;
+  }
+
+  td {
+    background-color: #fafbfc;
+  }
+
+  th:nth-last-child(1) {
+    width: 20%;
+  }
+
+  th:nth-last-child(2) {
+    width: 20%;
+  }
+
+  td.title::before {
+    content: "";
+    display: inline-block;
+    background-image: url("/images/documents.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+}

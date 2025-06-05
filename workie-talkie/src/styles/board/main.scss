@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fbfd;
+}
+
+.main-layout {
+  display: flex;
+  background-color: #f9fbfd;
+}
+
+main.main-content {
+  flex: 1;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.free,
+.new,
+.menu,
+.notices {
+  background: white;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.free h3,
+.new h3,
+.menu h3,
+.notices h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.free {
+  width: 35%;
+}
+
+.new {
+  width: 35%;
+}
+
+.menu {
+  width: 29%;
+}
+
+.notices table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  line-height: 3;
+}
+
+.notices table thead {
+  background: #3a64b1;
+  color: white;
+  height: 50px;
+}
+
+.section-container {
+  display: flex;
+  gap: 20px;
+}
+
+.post-card,
+.meal-card {
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background-color: #ffffff;
+}
+
+.post-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.post-meta span {
+  margin-right: 10px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.meal-date {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.meal-content span,
+.sides span {
+  margin-right: 8px;
+}

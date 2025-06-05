@@ -1,0 +1,174 @@
+/* 메인 */
+#page-container {
+  .main-layout {
+    display: flex;
+    background-color: #f9fbfd;
+  }
+
+  main.main-content {
+    flex: 1;
+    padding: 40px 60px;
+  }
+  .main-content h1 {
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+  }
+
+  .page-setting {
+    display: flex;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+  }
+
+  .page {
+    width: 100%;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .head p {
+    margin: 0;
+    color: #333;
+  }
+  .head button {
+    width: 80px;
+    height: 30px;
+    border: none;
+    background-color: #104e4a;
+    cursor: pointer;
+    color: white;
+    font-weight: 500;
+  }
+
+  .body {
+    overflow-x: auto;
+  }
+
+  /* 리스트 디자인 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+  }
+  th,
+  td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #dfdfdf;
+    font-size: 0.95rem;
+  }
+  th {
+    background-color: #3a64b1;
+    color: white;
+  }
+
+  th:nth-last-child(1) {
+    width: 20%;
+  }
+
+  th:nth-last-child(2) {
+    width: 20%;
+  }
+
+  td {
+    background-color: #fafbfc;
+  }
+
+  td.title::before {
+    content: "";
+    display: inline-block;
+    background-image: url("/images/pages2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  /* On/Off 스위치 디자인 */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+    margin-left: 350px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+
+  input:checked + .slider {
+    background-color: #104e4a;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(22px);
+  }
+
+  /* 공유할 멤버 추가 */
+  #memberInputContainer {
+    display: none;
+    margin-top: 10px;
+  }
+
+  #memberTagContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  /* 삭제버튼 */
+  button.deleteBtn {
+    width: 50px;
+    padding: 4px;
+    background: none;
+    border: 1px solid darkred;
+    color: orangered;
+    margin-left: 30px;
+  }
+
+  button.deleteBtn:hover {
+    background-color: #0c5550;
+    color: white;
+  }
+}

@@ -1,0 +1,380 @@
+/* 기본 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo",
+    sans-serif;
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #111;
+}
+
+input,
+textarea {
+  outline: none;
+  resize: none;
+}
+
+#wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+}
+
+/* 헤더 스타일 */
+.header-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 70px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header-left a {
+  color: #4a5568;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.header-left a:hover {
+  color: #2d3748;
+}
+
+.header-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.login-btn {
+  background-color: #4299e1;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #3182ce;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+}
+
+.empty-box {
+  width: 100%;
+  height: 0;
+}
+
+main {
+  flex: 1;
+}
+
+/* FAQ 섹션 */
+.faq-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 100px 20px;
+  color: white;
+}
+
+.faq-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.faq-content {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.faq-text {
+  flex: 1;
+  max-width: 500px;
+}
+
+.faq-text h1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 40px;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+/* 검색창 스타일 */
+.search-container {
+  margin-top: 40px;
+}
+
+.search-box {
+  position: relative;
+  max-width: 500px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 16px 16px 48px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  background: white;
+  color: #374151;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.search-input::placeholder {
+  color: #9ca3af;
+}
+
+/* FAQ 이미지 */
+.faq-image {
+  flex: 1;
+  max-width: 400px;
+  height: 350px;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  background: transparent;
+}
+
+.faq-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 12px;
+}
+
+/* 질문 섹션 */
+.questions-section {
+  background: white;
+  padding: 100px 20px;
+}
+
+.questions-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.questions-container h2 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 60px;
+  line-height: 1.2;
+}
+
+.questions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  margin-bottom: 80px;
+}
+
+.question-category {
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 30px;
+  border: 1px solid #e5e7eb;
+}
+
+.question-category h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #667eea;
+}
+
+.question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.question-item {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.question-item:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
+}
+
+.question-item h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.question-item p {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* 추가 도움말 섹션 */
+.help-footer {
+  text-align: center;
+  background: #f9fafb;
+  border-radius: 20px;
+  padding: 60px 40px;
+  border: 2px solid #e5e7eb;
+}
+
+.help-footer h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+
+.help-footer p {
+  font-size: 18px;
+  color: #6b7280;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.contact-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+/* 푸터 */
+footer {
+  height: 60px;
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .faq-content {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .faq-text h1 {
+    font-size: 42px;
+  }
+
+  .questions-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .faq-text h1 {
+    font-size: 36px;
+  }
+
+  .questions-container h2 {
+    font-size: 32px;
+  }
+
+  .faq-container,
+  .questions-container {
+    padding: 0 20px;
+  }
+
+  .faq-image {
+    height: 250px;
+  }
+
+  .help-footer {
+    padding: 40px 20px;
+  }
+}

@@ -1,0 +1,67 @@
+.main-layout {
+  display: flex;
+  background-color: #f9fbfd;
+}
+
+main.main-content {
+  flex: 1;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.board {
+  background: white;
+  padding: 20px;
+}
+
+.board h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 5px;
+}
+
+.board p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.board table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.board thead {
+  background-color: #3a64b1;
+  color: white;
+}
+
+.board th,
+.board td {
+  padding: 10px;
+  border-bottom: 1px solid #d3d3d3;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.page {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.page a {
+  margin: 0 5px;
+  padding: 6px 12px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+.page a:hover {
+  background-color: #3a64b1;
+  color: #fff;
+}
