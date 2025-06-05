@@ -25,6 +25,9 @@ const router = createBrowserRouter([
   { path: "/setting/drive", element: <Drive /> },
   { path: "/setting/board", element: <Board /> },
   { path: "/setting/plan", element: <Plan /> },
+
+  { path: "/drive", element: null },
+  { path: "/calender", element: null },
 ]);
 
 // 라우터 내보내기
