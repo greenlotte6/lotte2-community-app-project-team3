@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 export const Aside = () => {
   return (
     <>
-      <aside class="sidebar">
+      <aside className="sidebar">
         <div>
-          <div class="section-title">SETTINGS</div>
+          <div className="section-title">SETTINGS</div>
           <ul>
             <li>
               <Link to="/setting/profile">👤프로필</Link>
