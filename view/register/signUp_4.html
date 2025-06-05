@@ -1,63 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/css/register/signUp_4.css" />
+    <link
+      rel="icon"
+      href="/images/logo_noback(withoutLettter).png"
+      type="image/x-icon"
+    />
+    <style></style>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>회원가입</title>
-  <link rel="stylesheet" href="/css/register/signUp_4.css">
-  <style>
+  <body>
+    <div class="container">
+      <div class="step">4/4</div>
+      <h2>계정 소유자 정보를 입력해주세요.</h2>
 
-  </style>
-</head>
+      <input type="text" placeholder="이름을 입력해 주십시오" />
 
-<body>
-  <div class="container">
-    <div class="step">4/4</div>
-    <h2>계정 소유자 정보를 입력해주세요.</h2>
+      <div class="input-group">
+        <input type="tel" placeholder="설정 인증이 필요합니다" />
+        <button class="verify-btn">설정 인증</button>
+      </div>
 
-    <input type="text" placeholder="이름을 입력해 주십시오" />
+      <div class="input-group">
+        <input type="text" placeholder="기본 주소를 입력해 주십시오" />
+        <button class="addr-btn" onclick="openModal()">주소 검색</button>
+      </div>
 
-    <div class="input-group">
-      <input type="tel" placeholder="설정 인증이 필요합니다" />
-      <button class="verify-btn">설정 인증</button>
+      <input type="text" placeholder="상세 주소를 입력해 주십시오" />
+
+      <div class="btns">
+        <a href="/index.html">
+          <button class="prev-btn">← 이전</button>
+        </a>
+        <a href="/register/signUpComplete.html">
+          <button class="next-btn" disabled>다음 →</button>
+        </a>
+      </div>
     </div>
 
-    <div class="input-group">
-      <input type="text" placeholder="기본 주소를 입력해 주십시오" />
-      <button class="addr-btn" onclick="openModal()">주소 검색</button>
+    <!-- 주소 모달창 -->
+    <div id="addressModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>주소 검색</h3>
+        <input
+          type="text"
+          placeholder="도로명, 지번, 건물명 검색"
+          style="width: 100%; padding: 10px; margin-top: 10px"
+        />
+        <p style="margin-top: 12px; color: #777; font-size: 14px">
+          주소 검색 결과가 여기에 표시됩니다...
+        </p>
+      </div>
     </div>
 
-    <input type="text" placeholder="상세 주소를 입력해 주십시오" />
-
-    <div class="btns">
-      <a href="/index.html">
-        <button class="prev-btn">← 이전</button>
-      </a>
-      <a href="/register/signUpComplete.html">
-        <button class="next-btn" disabled>다음 →</button>
-      </a>
-    </div>
-  </div>
-
-  <!-- 주소 모달창 -->
-  <div id="addressModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h3>주소 검색</h3>
-      <input type="text" placeholder="도로명, 지번, 건물명 검색" style="width: 100%; padding: 10px; margin-top: 10px;" />
-      <p style="margin-top: 12px; color: #777; font-size: 14px;">주소 검색 결과가 여기에 표시됩니다...</p>
-    </div>
-  </div>
-
-  <script>
-    function openModal() {
-      document.getElementById("addressModal").style.display = "block";
-    }
-    function closeModal() {
-      document.getElementById("addressModal").style.display = "none";
-    }
-  </script>
-</body>
-
+    <script>
+      function openModal() {
+        document.getElementById("addressModal").style.display = "block";
+      }
+      function closeModal() {
+        document.getElementById("addressModal").style.display = "none";
+      }
+    </script>
+  </body>
 </html>

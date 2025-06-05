@@ -1,46 +1,58 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <link rel="stylesheet" href="/css/register/login.css" />
+    <link
+      rel="icon"
+      href="/images/logo_noback(withoutLettter).png"
+      type="image/x-icon"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>로그인</title>
-  <link rel="stylesheet" href="/css/register/login.css">
-</head>
+  <body>
+    <div class="login-container">
+      <h1>로그인</h1>
+      <p>Please log in to continue</p>
 
-<body>
+      <input type="email" placeholder="Email Address" />
+      <input type="password" placeholder="Password" />
+      <div class="password-hint">
+        It must be a combination of minimum 8 letters, numbers, and symbols.
+      </div>
 
-  <div class="login-container">
-    <h1>로그인</h1>
-    <p>Please log in to continue</p>
+      <div class="remember-forgot">
+        <label><input type="checkbox" /> Remember me</label>
+        <a
+          href="/register/findId.html"
+          style="color: #3478f6; text-decoration: none"
+          >Forgot ID?</a
+        >
+        <a
+          href="/register/findPassword.html"
+          style="color: #3478f6; text-decoration: none"
+          >Forgot Password?</a
+        >
+      </div>
 
-    <input type="email" placeholder="Email Address" />
-    <input type="password" placeholder="Password" />
-    <div class="password-hint">It must be a combination of minimum 8 letters, numbers, and symbols.</div>
+      <a href="/dashboard/dashboard.html">
+        <button class="login-btn">Log In</button>
+      </a>
 
-    <div class="remember-forgot">
-      <label><input type="checkbox" /> Remember me</label>
-      <a href="/register/findId.html" style="color: #3478f6; text-decoration: none;">Forgot ID?</a>
-      <a href="/register/findPassword.html" style="color: #3478f6; text-decoration: none;">Forgot Password?</a>
-    </div>
+      <div class="social-login">
+        <p>Or log in with:</p>
+        <div class="social-buttons">
+          <button>G&nbsp; Google</button>
+          <button> Apple</button>
+          <button> Twitter</button>
+        </div>
+      </div>
 
-    <a href="/dashboard/dashboard.html">
-      <button class="login-btn">Log In</button>
-    </a>
-
-    <div class="social-login">
-      <p>Or log in with:</p>
-      <div class="social-buttons">
-        <button>G&nbsp; Google</button>
-        <button> Apple</button>
-        <button> Twitter</button>
+      <div class="signup-link">
+        No account yet? <a href="/register/signUp.html">Sign Up</a>
       </div>
     </div>
-
-    <div class="signup-link">
-      No account yet? <a href="/register/signUp.html">Sign Up</a>
-    </div>
-  </div>
-</body>
-
+  </body>
 </html>
