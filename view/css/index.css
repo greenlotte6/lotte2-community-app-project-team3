@@ -62,6 +62,7 @@ body {
   width: 30px;
   height: 30px;
   margin-left: 10px;
+  vertical-align: middle;
 }
 
 .header-logo {
@@ -75,6 +76,7 @@ body {
 .header-logo img {
   width: 55px;
   height: 55px;
+  vertical-align: middle;
 }
 
 img.logo-title {
