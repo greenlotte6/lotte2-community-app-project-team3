@@ -1,18 +1,42 @@
 // ========================================
-// 칸반보드 작업 추가 시스템
+// 칸반보드 편집 및 추가 시스템 (완전 통합)
 // ========================================
 
 // 전역 변수들
-let currentTargetColumn = null; // 현재 작업을 추가할 컬럼
+let currentEditingTask = null;
+let currentTargetColumn = null;
+let taskIdCounter = 100; // 새 작업 ID용
 
-// DOM 요소들
-const taskModal = document.getElementById("taskModal");
-const cancelTaskBtn = document.getElementById("cancelTaskBtn");
-const saveTaskBtn = document.getElementById("saveTaskBtn");
-const taskTitleInput = document.getElementById("taskTitle");
-const taskContentInput = document.getElementById("taskContent");
+// DOM 요소들 - 편집 모달
+const editTaskModal = document.getElementById("editTaskModal");
+const editTaskTitle = document.getElementById("editTaskTitle");
+const editTaskDescription = document.getElementById("editTaskDescription");
+const editTaskPriority = document.getElementById("editTaskPriority");
+const editTaskAssignee = document.getElementById("editTaskAssignee");
+const editTaskTag = document.getElementById("editTaskTag");
+const editTaskDate = document.getElementById("editTaskDate");
+const cancelEditBtn = document.getElementById("cancelEditBtn");
+const saveEditBtn = document.getElementById("saveEditBtn");
+const deleteTaskBtn = document.getElementById("deleteTaskBtn");
 
-// 작업 우선순위 배열 (랜덤 할당용)
+// DOM 요소들 - 추가 모달 (기존 taskModal을 addTaskModal로 변경)
+const addTaskModal =
+  document.getElementById("addTaskModal") ||
+  document.getElementById("taskModal");
+const newTaskTitle =
+  document.getElementById("newTaskTitle") ||
+  document.getElementById("taskTitle");
+const newTaskDescription =
+  document.getElementById("newTaskDescription") ||
+  document.getElementById("taskContent");
+const cancelAddBtn =
+  document.getElementById("cancelAddBtn") ||
+  document.getElementById("cancelTaskBtn");
+const saveAddBtn =
+  document.getElementById("saveAddBtn") ||
+  document.getElementById("saveTaskBtn");
+
+// 작업 우선순위 배열
 const priorities = ["high", "medium", "low"];
 const priorityNames = {
   high: "높음",
@@ -20,7 +44,7 @@ const priorityNames = {
   low: "낮음",
 };
 
-// 담당자 목록 (랜덤 할당용)
+// 담당자 목록
 const assignees = [
   { name: "김", avatar: "김" },
   { name: "이", avatar: "이" },
@@ -30,7 +54,7 @@ const assignees = [
   { name: "한", avatar: "한" },
 ];
 
-// 태그 목록 (랜덤 할당용)
+// 태그 목록 및 매핑
 const tags = [
   { name: "Frontend", class: "frontend" },
   { name: "Backend", class: "backend" },
@@ -39,6 +63,24 @@ const tags = [
   { name: "Documentation", class: "" },
   { name: "Bug Fix", class: "" },
 ];
+
+const tagClasses = {
+  frontend: "frontend",
+  backend: "backend",
+  design: "design",
+  testing: "",
+  documentation: "",
+  bugfix: "",
+};
+
+const tagNames = {
+  frontend: "Frontend",
+  backend: "Backend",
+  design: "Design",
+  testing: "Testing",
+  documentation: "Documentation",
+  bugfix: "Bug Fix",
+};
 
 // ========================================
 // 유틸리티 함수들
@@ -53,8 +95,7 @@ function getRandomElement(array) {
 function getRandomDate() {
   const today = new Date();
   const futureDate = new Date(today);
-  futureDate.setDate(today.getDate() + Math.floor(Math.random() * 14) + 1); // 1-14일 후
-
+  futureDate.setDate(today.getDate() + Math.floor(Math.random() * 14) + 1);
   const month = futureDate.getMonth() + 1;
   const day = futureDate.getDate();
   return `${month}/${day}`;
@@ -68,45 +109,160 @@ function updateTaskCount(column) {
 }
 
 // ========================================
-// 모달 관리 함수들
+// 편집 모달 관리
 // ========================================
 
-// 모달 열기
-function openTaskModal(targetColumn = null) {
-  currentTargetColumn = targetColumn;
-  taskModal.classList.add("active");
+function openEditModal(taskCard) {
+  if (!editTaskModal) {
+    alert("편집 모달을 찾을 수 없습니다. HTML에 editTaskModal을 추가해주세요.");
+    return;
+  }
+
+  currentEditingTask = taskCard;
+
+  // 현재 작업 정보 가져오기
+  const title = taskCard.querySelector(".task-title").textContent;
+  const description = taskCard.querySelector(".task-description").textContent;
+  const assignee = taskCard.querySelector(".assignee-avatar").textContent;
+  const date = taskCard.querySelector(".task-date").textContent;
+
+  // 우선순위 추출
+  let priority = "medium";
+  if (taskCard.classList.contains("priority-high")) priority = "high";
+  else if (taskCard.classList.contains("priority-low")) priority = "low";
+
+  // 태그 추출
+  const tagElement = taskCard.querySelector(".task-tag");
+  let tag = "frontend";
+  if (tagElement) {
+    if (tagElement.classList.contains("frontend")) tag = "frontend";
+    else if (tagElement.classList.contains("backend")) tag = "backend";
+    else if (tagElement.classList.contains("design")) tag = "design";
+    else tag = "testing";
+  }
+
+  // 모달에 정보 설정
+  editTaskTitle.value = title;
+  editTaskDescription.value =
+    description === "설명이 없습니다." ? "" : description;
+  if (editTaskPriority) editTaskPriority.value = priority;
+  if (editTaskAssignee) editTaskAssignee.value = assignee;
+  if (editTaskTag) editTaskTag.value = tag;
+  if (editTaskDate) editTaskDate.value = date;
+
+  // 모달 열기
+  editTaskModal.classList.add("active");
   document.body.style.overflow = "hidden";
+}
+
+function closeEditModal() {
+  if (editTaskModal) {
+    editTaskModal.classList.remove("active");
+    document.body.style.overflow = "auto";
+    currentEditingTask = null;
+  }
+}
+
+function saveTaskEdit() {
+  if (!currentEditingTask) return;
+
+  const title = editTaskTitle.value.trim();
+  const description = editTaskDescription.value.trim();
+  const priority = editTaskPriority ? editTaskPriority.value : "medium";
+  const assignee = editTaskAssignee ? editTaskAssignee.value : "김";
+  const tag = editTaskTag ? editTaskTag.value : "frontend";
+  const date = editTaskDate ? editTaskDate.value.trim() : getRandomDate();
+
+  if (!title) {
+    alert("작업 제목을 입력해주세요.");
+    editTaskTitle.focus();
+    return;
+  }
+
+  // 작업 카드 업데이트
+  currentEditingTask.querySelector(".task-title").textContent = title;
+  currentEditingTask.querySelector(".task-description").textContent =
+    description || "설명이 없습니다.";
+  currentEditingTask.querySelector(".assignee-avatar").textContent = assignee;
+  currentEditingTask.querySelector(".task-date").textContent = date;
+
+  // 우선순위 클래스 업데이트
+  currentEditingTask.className = `task-card priority-${priority}`;
+  if (currentEditingTask.getAttribute("data-task-id")) {
+    currentEditingTask.setAttribute(
+      "data-task-id",
+      currentEditingTask.getAttribute("data-task-id")
+    );
+  }
+
+  // 태그 업데이트
+  const tagElement = currentEditingTask.querySelector(".task-tag");
+  if (tagElement) {
+    tagElement.textContent = tagNames[tag] || tag;
+    tagElement.className = "task-tag " + (tagClasses[tag] || "");
+  }
+
+  alert("작업이 성공적으로 수정되었습니다!");
+  closeEditModal();
+}
+
+function deleteTask() {
+  if (!currentEditingTask) return;
+
+  const taskTitle = currentEditingTask.querySelector(".task-title").textContent;
+  if (confirm(`"${taskTitle}" 작업을 정말 삭제하시겠습니까?`)) {
+    const column = currentEditingTask.closest(".kanban-column");
+    currentEditingTask.remove();
+    updateTaskCount(column);
+    alert("작업이 삭제되었습니다.");
+    closeEditModal();
+  }
+}
+
+// ========================================
+// 새 작업 추가 모달 관리
+// ========================================
+
+function openAddModal(targetColumn = null) {
+  if (!addTaskModal) {
+    alert("추가 모달을 찾을 수 없습니다.");
+    return;
+  }
+
+  currentTargetColumn =
+    targetColumn || document.querySelector(".kanban-column.todo");
 
   // 입력 필드 초기화
-  taskTitleInput.value = "";
-  taskContentInput.value = "";
-  saveTaskBtn.disabled = true;
+  if (newTaskTitle) newTaskTitle.value = "";
+  if (newTaskDescription) newTaskDescription.value = "";
+  if (saveAddBtn) saveAddBtn.disabled = true;
 
-  // 제목 입력 필드에 포커스
+  // 모달 열기
+  addTaskModal.classList.add("active");
+  document.body.style.overflow = "hidden";
+
   setTimeout(() => {
-    taskTitleInput.focus();
+    if (newTaskTitle) newTaskTitle.focus();
   }, 100);
 }
 
-// 모달 닫기
-function closeTaskModal() {
-  taskModal.classList.remove("active");
-  document.body.style.overflow = "auto";
-  currentTargetColumn = null;
-
-  // 입력 필드 초기화
-  taskTitleInput.value = "";
-  taskContentInput.value = "";
+function closeAddModal() {
+  if (addTaskModal) {
+    addTaskModal.classList.remove("active");
+    document.body.style.overflow = "auto";
+    currentTargetColumn = null;
+  }
 }
 
-// 저장 버튼 상태 업데이트
-function updateSaveButtonState() {
-  const hasTitle = taskTitleInput.value.trim().length > 0;
-  saveTaskBtn.disabled = !hasTitle;
+function updateAddButtonState() {
+  if (newTaskTitle && saveAddBtn) {
+    const hasTitle = newTaskTitle.value.trim().length > 0;
+    saveAddBtn.disabled = !hasTitle;
+  }
 }
 
 // ========================================
-// 작업 카드 생성 함수
+// 작업 카드 생성 및 추가
 // ========================================
 
 function createTaskCard(title, description) {
@@ -119,6 +275,7 @@ function createTaskCard(title, description) {
   // 작업 카드 요소 생성
   const taskCard = document.createElement("div");
   taskCard.className = `task-card priority-${priority}`;
+  taskCard.setAttribute("data-task-id", taskIdCounter++);
 
   taskCard.innerHTML = `
     <div class="task-title">${title}</div>
@@ -136,40 +293,27 @@ function createTaskCard(title, description) {
     </div>
   `;
 
-  // 클릭 이벤트 추가 (작업 상세보기용)
+  // 클릭 이벤트 추가 (편집용)
   taskCard.addEventListener("click", function () {
-    showTaskDetails(this);
-  });
-
-  // 드래그 앤 드롭 이벤트 추가 (향후 구현용)
-  taskCard.draggable = true;
-  taskCard.addEventListener("dragstart", function (e) {
-    e.dataTransfer.setData("text/plain", "");
-    this.style.opacity = "0.5";
-  });
-
-  taskCard.addEventListener("dragend", function () {
-    this.style.opacity = "1";
+    openEditModal(this);
   });
 
   return taskCard;
 }
 
-// ========================================
-// 작업 추가 함수
-// ========================================
-
 function addNewTask() {
-  const title = taskTitleInput.value.trim();
-  const description = taskContentInput.value.trim();
+  if (!newTaskTitle) return;
+
+  const title = newTaskTitle.value.trim();
+  const description = newTaskDescription ? newTaskDescription.value.trim() : "";
 
   if (!title) {
     alert("작업 제목을 입력해주세요.");
-    taskTitleInput.focus();
+    newTaskTitle.focus();
     return;
   }
 
-  // 대상 컬럼 결정 (지정되지 않았으면 첫 번째 컬럼)
+  // 대상 컬럼 결정
   let targetColumn = currentTargetColumn;
   if (!targetColumn) {
     targetColumn = document.querySelector(".kanban-column.todo");
@@ -199,15 +343,20 @@ function addNewTask() {
   const columnName = targetColumn.querySelector(".column-name").textContent;
   alert(`"${title}" 작업이 ${columnName} 컬럼에 추가되었습니다!`);
 
-  // 모달 닫기
-  closeTaskModal();
+  closeAddModal();
 }
 
 // ========================================
-// 작업 상세보기 함수 (보너스 기능)
+// 기존 작업 상세보기 (편집 모달이 없을 때 대체)
 // ========================================
 
 function showTaskDetails(taskCard) {
+  // 편집 모달이 있으면 편집 모달을 열고, 없으면 상세보기
+  if (editTaskModal) {
+    openEditModal(taskCard);
+    return;
+  }
+
   const title = taskCard.querySelector(".task-title").textContent;
   const description = taskCard.querySelector(".task-description").textContent;
   const tag = taskCard.querySelector(".task-tag").textContent;
@@ -227,91 +376,15 @@ function showTaskDetails(taskCard) {
 📅 마감일: ${date}
 ⚡ 우선순위: ${priority}
 
-이 작업을 편집하거나 다른 컬럼으로 이동하시겠습니까?
+편집 모달이 추가되면 더 자세한 편집이 가능합니다.
   `;
 
-  if (confirm(details + "\n\n확인: 편집 / 취소: 닫기")) {
-    // 편집 기능 (향후 구현)
-    alert("작업 편집 기능은 향후 구현 예정입니다.");
-  }
+  alert(details);
 }
 
 // ========================================
-// 이벤트 리스너 초기화
+// 검색 기능
 // ========================================
-
-function initializeEventListeners() {
-  // 컬럼별 "새 작업 추가" 버튼들
-  document.querySelectorAll(".add-task-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const column = this.closest(".kanban-column");
-      openTaskModal(column);
-    });
-  });
-
-  // 헤더의 추가 버튼 (기본적으로 To Do 컬럼에 추가)
-  document.querySelector(".add-btn").addEventListener("click", function () {
-    openTaskModal();
-  });
-
-  // 모달 닫기 이벤트들
-  cancelTaskBtn.addEventListener("click", closeTaskModal);
-
-  // 배경 클릭으로 모달 닫기
-  taskModal.addEventListener("click", function (e) {
-    if (e.target === taskModal) {
-      closeTaskModal();
-    }
-  });
-
-  // ESC 키로 모달 닫기
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && taskModal.classList.contains("active")) {
-      closeTaskModal();
-    }
-  });
-
-  // 저장 버튼 클릭
-  saveTaskBtn.addEventListener("click", addNewTask);
-
-  // 입력 필드 변경 시 저장 버튼 상태 업데이트
-  taskTitleInput.addEventListener("input", updateSaveButtonState);
-
-  // Enter 키로 빠른 저장 (제목 입력 필드에서)
-  taskTitleInput.addEventListener("keypress", function (e) {
-    if (e.key === "Enter" && !saveTaskBtn.disabled) {
-      addNewTask();
-    }
-  });
-
-  // 기존 작업 카드들에 클릭 이벤트 추가
-  document.querySelectorAll(".task-card").forEach((card) => {
-    card.addEventListener("click", function () {
-      showTaskDetails(this);
-    });
-  });
-}
-
-// ========================================
-// 초기화
-// ========================================
-
-document.addEventListener("DOMContentLoaded", function () {
-  initializeEventListeners();
-  console.log("칸반보드 작업 추가 시스템이 초기화되었습니다.");
-});
-
-// ========================================
-// 추가 기능들 (보너스)
-// ========================================
-
-// 검색 기능 (헤더의 검색 버튼용)
-document.querySelector(".search-btn").addEventListener("click", function () {
-  const searchTerm = prompt("검색할 작업명을 입력하세요:");
-  if (searchTerm) {
-    searchTasks(searchTerm);
-  }
-});
 
 function searchTasks(searchTerm) {
   const taskCards = document.querySelectorAll(".task-card");
@@ -350,3 +423,119 @@ function searchTasks(searchTerm) {
     });
   }, 3000);
 }
+
+// ========================================
+// 이벤트 리스너 초기화
+// ========================================
+
+function initializeEventListeners() {
+  // 기존 작업 카드 클릭 이벤트
+  document.querySelectorAll(".task-card").forEach((card) => {
+    card.addEventListener("click", function () {
+      if (editTaskModal) {
+        openEditModal(this);
+      } else {
+        showTaskDetails(this);
+      }
+    });
+  });
+
+  // 새 작업 추가 버튼들
+  document.querySelectorAll(".add-task-btn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const column = this.closest(".kanban-column");
+      openAddModal(column);
+    });
+  });
+
+  // 헤더의 추가 버튼
+  const headerAddBtn = document.querySelector(".add-btn");
+  if (headerAddBtn) {
+    headerAddBtn.addEventListener("click", function () {
+      openAddModal();
+    });
+  }
+
+  // 편집 모달 이벤트들
+  if (cancelEditBtn) cancelEditBtn.addEventListener("click", closeEditModal);
+  if (saveEditBtn) saveEditBtn.addEventListener("click", saveTaskEdit);
+  if (deleteTaskBtn) deleteTaskBtn.addEventListener("click", deleteTask);
+
+  // 추가 모달 이벤트들
+  if (cancelAddBtn) cancelAddBtn.addEventListener("click", closeAddModal);
+  if (saveAddBtn) saveAddBtn.addEventListener("click", addNewTask);
+  if (newTaskTitle)
+    newTaskTitle.addEventListener("input", updateAddButtonState);
+
+  // 모달 배경 클릭으로 닫기
+  if (editTaskModal) {
+    editTaskModal.addEventListener("click", function (e) {
+      if (e.target === editTaskModal) {
+        closeEditModal();
+      }
+    });
+  }
+
+  if (addTaskModal) {
+    addTaskModal.addEventListener("click", function (e) {
+      if (e.target === addTaskModal) {
+        closeAddModal();
+      }
+    });
+  }
+
+  // ESC 키로 모달 닫기
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      if (editTaskModal && editTaskModal.classList.contains("active")) {
+        closeEditModal();
+      } else if (addTaskModal && addTaskModal.classList.contains("active")) {
+        closeAddModal();
+      }
+    }
+  });
+
+  // Enter 키로 빠른 저장
+  if (newTaskTitle) {
+    newTaskTitle.addEventListener("keypress", function (e) {
+      if (e.key === "Enter" && saveAddBtn && !saveAddBtn.disabled) {
+        addNewTask();
+      }
+    });
+  }
+
+  if (editTaskTitle) {
+    editTaskTitle.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        saveTaskEdit();
+      }
+    });
+  }
+
+  // 검색 기능
+  const searchBtn = document.querySelector(".search-btn");
+  if (searchBtn) {
+    searchBtn.addEventListener("click", function () {
+      const searchTerm = prompt("검색할 작업명을 입력하세요:");
+      if (searchTerm) {
+        searchTasks(searchTerm);
+      }
+    });
+  }
+}
+
+// ========================================
+// 초기화
+// ========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+  initializeEventListeners();
+  console.log("칸반보드 편집 및 추가 시스템이 초기화되었습니다.");
+
+  // 기존 작업 카드들에 data-task-id 추가 (없는 경우)
+  document.querySelectorAll(".task-card").forEach((card, index) => {
+    if (!card.getAttribute("data-task-id")) {
+      card.setAttribute("data-task-id", index + 1);
+    }
+  });
+});
