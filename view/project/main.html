@@ -10,8 +10,14 @@
   <body>
     <div class="header">
       <div class="header-logo">
-        <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
-        <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+        <a href="/dashboard/dashboard.html">
+          <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+          <img
+            src="/images/logo_title.png"
+            class="logo-title"
+            alt="로고타이틀"
+          />
+        </a>
       </div>
 
       <div class="memu">
@@ -39,7 +45,7 @@
           />
         </a>
         <div class="vertical-divider"></div>
-        <a href="#">
+        <a href="/page/pageMain.html">
           <img src="/images/header/page.png" alt="페이지" class="memu-icon" />
         </a>
         <div class="vertical-divider"></div>
@@ -51,7 +57,7 @@
           />
         </a>
         <div class="vertical-divider"></div>
-        <a href="#">
+        <a href="/admin/profile.html">
           <img src="/images/header/settings.png" alt="설정" class="memu-icon" />
         </a>
         <div class="vertical-divider"></div>
@@ -93,25 +99,26 @@
         <!-- 프로젝트 목록 -->
         <div class="projects-container" id="projectsContainer">
           <!-- 프로젝트 아이템들 -->
-          <div class="project-item">
-            <div class="project-icon type-web">W</div>
-            <div class="project-info">
-              <div class="project-name">웹사이트 리뉴얼</div>
-              <div class="project-details">
-                <span class="project-type">웹 개발</span>
-                <span class="project-date">2024.11.15</span>
+          <a href="/project/kanban.html">
+            <div class="project-item">
+              <div class="project-icon type-web">W</div>
+              <div class="project-info">
+                <div class="project-name">웹사이트 리뉴얼</div>
+                <div class="project-details">
+                  <span class="project-type">웹 개발</span>
+                  <span class="project-date">2024.11.15</span>
+                </div>
+                <div class="project-description">
+                  반응형 웹사이트 리뉴얼 프로젝트입니다. 모던한 디자인과 사용자
+                  경험을 개선합니다.
+                </div>
               </div>
-              <div class="project-description">
-                반응형 웹사이트 리뉴얼 프로젝트입니다. 모던한 디자인과 사용자
-                경험을 개선합니다.
+              <div class="project-actions">
+                <button class="action-btn edit-btn" title="편집">✏️</button>
+                <button class="action-btn delete-btn" title="삭제">🗑️</button>
               </div>
             </div>
-            <div class="project-actions">
-              <button class="action-btn edit-btn" title="편집">✏️</button>
-              <button class="action-btn delete-btn" title="삭제">🗑️</button>
-            </div>
-          </div>
-
+          </a>
           <div class="project-item">
             <div class="project-icon type-mobile">M</div>
             <div class="project-info">
