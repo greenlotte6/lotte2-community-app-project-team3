@@ -1,260 +1,335 @@
 <!DOCTYPE html>
 <html lang="ko">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>페이지</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/page/main.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/page/main.css" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="app-header">
-        <div class="header">
-            <div class="header-logo">
-                <a href="/dashboard/dashboard.html">
-                    <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
-                    <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
-                </a>
-            </div>
-            <div class="memu">
-                <a href="/board/main.html">
-                    <img src="/images/header/board.png" alt="게시판" class="memu-icon" />
-                </a>
-                <div class="vertical-divider"></div>
-                <a href="/chat/main.html">
-                    <img src="/images/header/chat.png" alt="메세지" class="memu-icon" />
-                </a>
-                <div class="vertical-divider"></div>
-                <a href="/calender/calender.html">
-                    <img src="/images/header/calendar.png" alt="캘린더" class="memu-icon" />
-                </a>
-                <div class="vertical-divider"></div>
-                <a href="/project/main.html">
-                    <img src="/images/header/project.png" alt="프로젝트" class="memu-icon" />
-                </a>
-                <div class="vertical-divider"></div>
-                <a href="/page/pageMain.html">
-                    <img src="/images/header/page.png" alt="페이지" class="memu-icon" />
-                </a>
-                <div class="vertical-divider"></div>
-                <a href="/drive/drive.html">
-                    <img src="/images/header/drive.png" alt="드라이브" class="memu-icon" />
-                </a>
-                <div class="vertical-divider"></div>
-                <a href="/admin/profile.html">
-                    <img src="/images/header/settings.png" alt="설정" class="memu-icon" />
-                </a>
-                <div class="vertical-divider"></div>
-                <img src="/images/off.png" alt="로그아웃" class="logout" />
-                <div class="vertical-divider"></div>
-            </div>
-            <span class="status">ONLINE <span>●</span></span>
-            <img src="/images/profile1.png" alt="프로필이미지" />
-            <span class="admin">김팀장<br>Admin</span>
+      <div class="header">
+        <div class="header-logo">
+          <a href="/dashboard/dashboard.html">
+            <img
+              src="/images/logo_noback(withoutLettter).png"
+              alt="로고이미지"
+            />
+            <img
+              src="/images/logo_title.png"
+              class="logo-title"
+              alt="로고타이틀"
+            />
+          </a>
         </div>
+        <div class="memu">
+          <a href="/board/main.html">
+            <img
+              src="/images/header/board.png"
+              alt="게시판"
+              class="memu-icon"
+            />
+          </a>
+          <div class="vertical-divider"></div>
+          <a href="/chat/main.html">
+            <img src="/images/header/chat.png" alt="메세지" class="memu-icon" />
+          </a>
+          <div class="vertical-divider"></div>
+          <a href="/calender/calender.html">
+            <img
+              src="/images/header/calendar.png"
+              alt="캘린더"
+              class="memu-icon"
+            />
+          </a>
+          <div class="vertical-divider"></div>
+          <a href="/project/main.html">
+            <img
+              src="/images/header/project.png"
+              alt="프로젝트"
+              class="memu-icon"
+            />
+          </a>
+          <div class="vertical-divider"></div>
+          <a href="/page/pageMain.html">
+            <img src="/images/header/page.png" alt="페이지" class="memu-icon" />
+          </a>
+          <div class="vertical-divider"></div>
+          <a href="/drive/drive.html">
+            <img
+              src="/images/header/drive.png"
+              alt="드라이브"
+              class="memu-icon"
+            />
+          </a>
+          <div class="vertical-divider"></div>
+          <a href="/admin/profile.html">
+            <img
+              src="/images/header/settings.png"
+              alt="설정"
+              class="memu-icon"
+            />
+          </a>
+          <div class="vertical-divider"></div>
+          <img src="/images/off.png" alt="로그아웃" class="logout" />
+          <div class="vertical-divider"></div>
+        </div>
+        <span class="status">ONLINE <span>●</span></span>
+        <img src="/images/profile1.png" alt="프로필이미지" />
+        <span class="admin">김팀장<br />Admin</span>
+      </div>
     </div>
 
     <div class="main-content-wrapper">
-
-        <div class="notion-style-sidebar">
-            <div class="notion-style-sidebar-header">
-                <h2>내 페이지 <span>(5)</span></h2>
-                <div class="search-box">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="검색하기">
-                </div>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="section-title" data-target="recentPages">
-                    <span>최근 페이지 (1)</span>
-                    <i class="fa-solid fa-angle-down"></i>
-                </div>
-                <ul class="page-list collapsible-content" id="recentPages">
-                    <li><i class="fa-solid fa-file icon"></i> 새 페이지 1</li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="section-title" data-target="pageList">
-                    <span>페이지 목록 (5)</span>
-                    <i class="fa-solid fa-angle-down"></i>
-                </div>
-                <ul class="page-list collapsible-content" id="pageList">
-                    <li><i class="fa-solid fa-file icon"></i> 새 페이지 1</li>
-                    <li><i class="fa-solid fa-file icon"></i> 새 페이지 5</li>
-                    <li><i class="fa-solid fa-file icon"></i> 새 페이지 2</li>
-                    <li class="active"><i class="fa-solid fa-file icon"></i> 새 페이지 4</li>
-                    <li><i class="fa-solid fa-file icon"></i> 새 페이지 3</li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <div class="section-title" data-target="sharedPages">
-                    <span>공유 페이지 (1)</span>
-                    <i class="fa-solid fa-angle-down"></i>
-                </div>
-                <ul class="page-list collapsible-content" id="sharedPages">
-                    <li><i class="fa-solid fa-file icon"></i> 공유 페이지 1</li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <ul class="page-list">
-                    <li><i class="fa-solid fa-trash-can icon"></i> 휴지통</li>
-                </ul>
-            </div>
-
-            <div class="create-page-btn-wrapper">
-                <button class="create-page-btn">
-                    <a href="/page/page.html">
-                        <i class="fa-solid fa-plus"></i> 새 페이지 생성
-                    </a>
-                </button>
-            </div>
+      <div class="notion-style-sidebar">
+        <div class="notion-style-sidebar-header">
+          <h2>내 페이지 <span>(5)</span></h2>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="검색하기" />
+          </div>
         </div>
 
-        <div class="main-editor-area">
-            <div class="page-header">
-                <h1>게시물 목록</h1>
-                <button class="btn">새 게시물 추가</button>
-            </div>
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-icon support"><i class="fas fa-users"></i></span>
-                        <div class="card-actions">
-                            <i class="far fa-star"></i>
-                            <i class="fas fa-ellipsis-h"></i>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3>Support Team</h3>
-                        <p>Support your team customer support team is lending the goes, the bad, and the ugly day in and
-                            day out.</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="avatars">
-                            <img src="https://via.placeholder.com/28/ADD8E6/FFFFFF?text=A" alt="user avatar"
-                                class="avatar">
-                            <img src="https://via.placeholder.com/28/90EE90/FFFFFF?text=B" alt="user avatar"
-                                class="avatar">
-                            <img src="https://via.placeholder.com/28/FFB6C1/FFFFFF?text=C" alt="user avatar"
-                                class="avatar">
-                        </div>
-                        <div class="card-buttons">
-                            <button class="card-btn">Duplicate</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-icon digital"><i class="fas fa-chart-line"></i></span>
-                        <div class="card-actions">
-                            <i class="far fa-star"></i>
-                            <i class="fas fa-ellipsis-h"></i>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3>Digital Marketing</h3>
-                        <p>Digital marketing refers to advertising delivered through digital channels such as search
-                            engines, websites, social media, email, and mobile apps.</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="avatars">
-                            <img src="https://via.placeholder.com/28/FFD700/FFFFFF?text=D" alt="user avatar"
-                                class="avatar">
-                            <img src="https://via.placeholder.com/28/C0C0C0/FFFFFF?text=E" alt="user avatar"
-                                class="avatar">
-                        </div>
-                        <div class="card-buttons">
-                            <button class="card-btn">Follow</button>
-                            <button class="card-btn primary">Email</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-icon event"><i class="fas fa-calendar-alt"></i></span>
-                        <div class="card-actions">
-                            <i class="far fa-star"></i>
-                            <i class="fas fa-ellipsis-h"></i>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3>Event</h3>
-                        <p>Event is defined as a particular context which is part of a program of contexts. An example
-                            of an event is the long-term ...</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="avatars">
-                            <img src="https://via.placeholder.com/28/ADD8E6/FFFFFF?text=F" alt="user avatar"
-                                class="avatar">
-                            <img src="https://via.placeholder.com/28/90EE90/FFFFFF?text=G" alt="user avatar"
-                                class="avatar">
-                        </div>
-                        <div class="card-buttons">
-                            <button class="card-btn primary">Invite</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-icon support"><i class="fas fa-users"></i></span>
-                        <div class="card-actions">
-                            <i class="far fa-star"></i>
-                            <i class="fas fa-ellipsis-h"></i>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <h3>Support Team</h3>
-                        <p>Support your team customer support team is lending the goes, the bad, and the ugly day in and
-                            day out.</p>
-                    </div>
-                    <div class="card-footer">
-                        <div class="avatars">
-                            <img src="https://via.placeholder.com/28/ADD8E6/FFFFFF?text=H" alt="user avatar"
-                                class="avatar">
-                            <img src="https://via.placeholder.com/28/90EE90/FFFFFF?text=I" alt="user avatar"
-                                class="avatar">
-                            <img src="https://via.placeholder.com/28/FFB6C1/FFFFFF?text=J" alt="user avatar"
-                                class="avatar">
-                        </div>
-                        <div class="card-buttons">
-                            <button class="card-btn">Duplicate</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="sidebar-section">
+          <div class="section-title" data-target="recentPages">
+            <span>최근 페이지 (1)</span>
+            <i class="fa-solid fa-angle-down"></i>
+          </div>
+          <ul class="page-list collapsible-content" id="recentPages">
+            <li><i class="fa-solid fa-file icon"></i> 새 페이지 1</li>
+          </ul>
         </div>
+
+        <div class="sidebar-section">
+          <div class="section-title" data-target="pageList">
+            <span>페이지 목록 (5)</span>
+            <i class="fa-solid fa-angle-down"></i>
+          </div>
+          <ul class="page-list collapsible-content" id="pageList">
+            <li><i class="fa-solid fa-file icon"></i> 새 페이지 1</li>
+            <li><i class="fa-solid fa-file icon"></i> 새 페이지 5</li>
+            <li><i class="fa-solid fa-file icon"></i> 새 페이지 2</li>
+            <li class="active">
+              <i class="fa-solid fa-file icon"></i> 새 페이지 4
+            </li>
+            <li><i class="fa-solid fa-file icon"></i> 새 페이지 3</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="section-title" data-target="sharedPages">
+            <span>공유 페이지 (1)</span>
+            <i class="fa-solid fa-angle-down"></i>
+          </div>
+          <ul class="page-list collapsible-content" id="sharedPages">
+            <li><i class="fa-solid fa-file icon"></i> 공유 페이지 1</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <ul class="page-list">
+            <li><i class="fa-solid fa-trash-can icon"></i> 휴지통</li>
+          </ul>
+        </div>
+
+        <div class="create-page-btn-wrapper">
+          <button class="create-page-btn">
+            <a href="/page/page.html">
+              <i class="fa-solid fa-plus"></i> 새 페이지 생성
+            </a>
+          </button>
+        </div>
+      </div>
+
+      <div class="main-editor-area">
+        <div class="page-header">
+          <h1>게시물 목록</h1>
+          <button class="btn">새 게시물 추가</button>
+        </div>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon support"
+                ><i class="fas fa-users"></i
+              ></span>
+              <div class="card-actions">
+                <i class="far fa-star"></i>
+                <i class="fas fa-ellipsis-h"></i>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>Support Team</h3>
+              <p>
+                Support your team customer support team is lending the goes, the
+                bad, and the ugly day in and day out.
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="avatars">
+                <img
+                  src="https://via.placeholder.com/28/ADD8E6/FFFFFF?text=A"
+                  alt="user avatar"
+                  class="avatar"
+                />
+                <img
+                  src="https://via.placeholder.com/28/90EE90/FFFFFF?text=B"
+                  alt="user avatar"
+                  class="avatar"
+                />
+                <img
+                  src="https://via.placeholder.com/28/FFB6C1/FFFFFF?text=C"
+                  alt="user avatar"
+                  class="avatar"
+                />
+              </div>
+              <div class="card-buttons">
+                <button class="card-btn">Duplicate</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon digital"
+                ><i class="fas fa-chart-line"></i
+              ></span>
+              <div class="card-actions">
+                <i class="far fa-star"></i>
+                <i class="fas fa-ellipsis-h"></i>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>Digital Marketing</h3>
+              <p>
+                Digital marketing refers to advertising delivered through
+                digital channels such as search engines, websites, social media,
+                email, and mobile apps.
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="avatars">
+                <img
+                  src="https://via.placeholder.com/28/FFD700/FFFFFF?text=D"
+                  alt="user avatar"
+                  class="avatar"
+                />
+                <img
+                  src="https://via.placeholder.com/28/C0C0C0/FFFFFF?text=E"
+                  alt="user avatar"
+                  class="avatar"
+                />
+              </div>
+              <div class="card-buttons">
+                <button class="card-btn">Follow</button>
+                <button class="card-btn primary">Email</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon event"
+                ><i class="fas fa-calendar-alt"></i
+              ></span>
+              <div class="card-actions">
+                <i class="far fa-star"></i>
+                <i class="fas fa-ellipsis-h"></i>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>Event</h3>
+              <p>
+                Event is defined as a particular context which is part of a
+                program of contexts. An example of an event is the long-term ...
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="avatars">
+                <img
+                  src="https://via.placeholder.com/28/ADD8E6/FFFFFF?text=F"
+                  alt="user avatar"
+                  class="avatar"
+                />
+                <img
+                  src="https://via.placeholder.com/28/90EE90/FFFFFF?text=G"
+                  alt="user avatar"
+                  class="avatar"
+                />
+              </div>
+              <div class="card-buttons">
+                <button class="card-btn primary">Invite</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon support"
+                ><i class="fas fa-users"></i
+              ></span>
+              <div class="card-actions">
+                <i class="far fa-star"></i>
+                <i class="fas fa-ellipsis-h"></i>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3>Support Team</h3>
+              <p>
+                Support your team customer support team is lending the goes, the
+                bad, and the ugly day in and day out.
+              </p>
+            </div>
+            <div class="card-footer">
+              <div class="avatars">
+                <img
+                  src="https://via.placeholder.com/28/ADD8E6/FFFFFF?text=H"
+                  alt="user avatar"
+                  class="avatar"
+                />
+                <img
+                  src="https://via.placeholder.com/28/90EE90/FFFFFF?text=I"
+                  alt="user avatar"
+                  class="avatar"
+                />
+                <img
+                  src="https://via.placeholder.com/28/FFB6C1/FFFFFF?text=J"
+                  alt="user avatar"
+                  class="avatar"
+                />
+              </div>
+              <div class="card-buttons">
+                <button class="card-btn">Duplicate</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="app-footer">
-        version 0.0.1 | License | More Themes | Documentation | Support
-    </div>
+    <div class="app-footer">version 0.0.1-SNAPSHOT</div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Collapsible Sidebar Sections (for Notion-style sidebar)
-            document.querySelectorAll('.notion-style-sidebar .section-title').forEach(title => {
-                title.addEventListener('click', () => {
-                    const targetId = title.dataset.target;
-                    const content = document.getElementById(targetId);
-                    if (content) {
-                        content.classList.toggle('collapsed');
-                        title.classList.toggle('collapsed');
-                    }
-                });
+      document.addEventListener("DOMContentLoaded", () => {
+        // Collapsible Sidebar Sections (for Notion-style sidebar)
+        document
+          .querySelectorAll(".notion-style-sidebar .section-title")
+          .forEach((title) => {
+            title.addEventListener("click", () => {
+              const targetId = title.dataset.target;
+              const content = document.getElementById(targetId);
+              if (content) {
+                content.classList.toggle("collapsed");
+                title.classList.toggle("collapsed");
+              }
             });
-        });
+          });
+      });
     </script>
-</body>
-
+  </body>
 </html>
