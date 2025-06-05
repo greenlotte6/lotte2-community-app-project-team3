@@ -28,6 +28,7 @@ const router = createBrowserRouter([
   { path: "/setting/plan", element: <Plan /> },
   { path: "/setting/addPage", element: <AddPage /> },
   { path: "/setting/modifyPage", element: <AddPage /> },
+
 ]);
 
 // 라우터 내보내기

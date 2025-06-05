@@ -10,16 +10,20 @@
       href="/images/logo_noback(withoutLettter).png"
       type="image/x-icon"
     />
-    <style></style>
   </head>
 
   <body>
     <div class="container">
-      <div class="step">3/4</div>
+      <div class="step">2/2</div>
       <h2>로그인 정보를 입력해주세요.</h2>
       <p class="subtext">입력하신 정보로 회원님의 계정이 생성됩니다.</p>
 
-      <label for="email">아이디</label>
+      <label for="id">아이디</label>
+      <div class="input-group">
+        <input type="text" id="text" placeholder="아이디 입력" />
+      </div>
+
+      <label for="email">이메일</label>
       <div class="input-group">
         <input type="text" id="email" placeholder="이메일 입력" />
         <button class="verify-btn">이메일 인증</button>
@@ -49,6 +53,21 @@
           class="toggle-btn"
           onclick="togglePassword('passwordConfirm')"
         ></button>
+      </div>
+
+      <label for="email">회사명</label>
+      <div class="input-group">
+        <input type="text" id="company" placeholder="회사 입력" />
+      </div>
+
+      <label for="email">사업자등록번호</label>
+      <div class="input-group">
+        <input type="number" id="tex" placeholder="사업자 등록 번호 입력" />
+      </div>
+
+      <label for="email">핸드폰 번호</label>
+      <div class="input-group">
+        <input type="tel" id="tel" placeholder="핸드폰번호 입력" />
       </div>
 
       <div class="btns">

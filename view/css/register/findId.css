@@ -1,0 +1,141 @@
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Center vertically */
+  min-height: 100vh; /* Ensure it takes full viewport height */
+  /* No padding-top */
+  box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+.container {
+  width: 380px; /* Adjust width as needed to match the image */
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+h2 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: normal; /* To match the lighter font in the image */
+}
+
+.tab-buttons {
+  display: flex;
+  margin-bottom: 30px;
+  border: 1px solid #e0e0e0; /* Border for the tab group */
+  border-radius: 6px;
+  overflow: hidden; /* Ensures rounded corners apply to children */
+}
+
+.tab-button {
+  flex: 1;
+  padding: 12px 0;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  background-color: #f8f8f8; /* Default background for inactive tab */
+  color: #666;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tab-button:first-child {
+  border-right: 1px solid #e0e0e0; /* Separator for tabs */
+}
+
+.tab-button.active {
+  background-color: #fff; /* Active tab background */
+  color: #333;
+  font-weight: bold;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.input-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-field input[type="email"],
+.input-field input[type="text"] {
+  flex-grow: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none; /* Remove blue outline on focus */
+}
+
+.input-field input[type="email"]::placeholder,
+.input-field input[type="text"]::placeholder {
+  color: #bbb;
+}
+
+.input-field button {
+  padding: 12px 15px;
+  background-color: #e0e0e0; /* Gray for 인증 button */
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.actions button {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.actions .btn-cancel {
+  background-color: #ccc;
+  color: #333;
+}
+
+.actions .btn-cancel:hover {
+  background-color: #bbb;
+}
+
+.actions .btn-confirm {
+  background-color: #4a90e2; /* Blue for 확인 button */
+  color: white;
+}
+
+.actions .btn-confirm:hover {
+  background-color: #3a7bd8;
+}
+
+/* Hide content not related to selected tab */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
