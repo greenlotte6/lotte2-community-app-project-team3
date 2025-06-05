@@ -1,0 +1,153 @@
+#drive-container {
+  .main-layout {
+    display: flex;
+    background-color: #f9fbfd;
+  }
+
+  main.main-content {
+    flex: 1;
+    padding: 40px 60px;
+  }
+
+  .main-content h1 {
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+  }
+
+  .drive {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .drive h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  h3:nth-child(2) {
+    margin: 30px 0 10px 0;
+  }
+  .setting1 div,
+  .setting2 div {
+    background: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  .list1 section,
+  .list2 section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid #e4e4e4;
+  }
+
+  .list2 section:nth-child(2) {
+    background-color: #d4e4e2;
+    padding: 15px;
+  }
+  .list2 section {
+    padding: 20px 10px;
+  }
+  .list1 section:last-child,
+  .list2 section:last-child {
+    border-bottom: none;
+  }
+
+  select#order,
+  select#view {
+    width: 120px;
+    padding: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f4f4f4;
+  }
+
+  .list2 p:nth-child(2) {
+    margin-right: auto;
+  }
+
+  .list2 p:nth-child(2) span,
+  .list2 p span {
+    color: #104e4a;
+    font-weight: bold;
+  }
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+    margin-left: 10px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+
+  input:checked + .slider {
+    background-color: #104e4a;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(22px);
+  }
+
+  .btn {
+    text-align: right;
+    margin-top: 20px;
+  }
+
+  .btn button {
+    height: 40px;
+    width: 120px;
+    border: 2px solid #104e4a;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #104e4a;
+    cursor: pointer;
+  }
+
+  select#order,
+  select#view {
+    width: 120px;
+  }
+
+  .list2 p:nth-child(2) {
+    margin-right: 70%;
+  }
+
+  .list2 p:nth-child(2) span {
+    color: #104e4a;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/admin/pages.css">
+    <link rel="stylesheet" href="/css/admin/aside.css">
+    <title>페이지 수정</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo">
+                <a href="/dashboard/dashboard.html">
+                    <img src="/images/logo_noback(withoutLettter).png" alt="로고이미지" />
+                    <img src="/images/logo_title.png" class="logo-title" alt="로고타이틀" />
+                </a>
+            </div>
+            <div class="memu">
+                <a href="/board/main.html">
+                    <img src="/images/header/board.png" alt="게시판" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/chat/main.html">
+                    <img src="/images/header/chat.png" alt="메세지" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/calender/calender.html">
+                    <img src="/images/header/calendar.png" alt="캘린더" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/project/main.html">
+                    <img src="/images/header/project.png" alt="프로젝트" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/page/pageMain.html">
+                    <img src="/images/header/page.png" alt="페이지" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/drive/drive.html">
+                    <img src="/images/header/drive.png" alt="드라이브" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <a href="/admin/profile.html">
+                    <img src="/images/header/settings.png" alt="설정" class="memu-icon" />
+                </a>
+                <div class="vertical-divider"></div>
+                <img src="/images/off.png" alt="로그아웃" class="logout" />
+                <div class="vertical-divider"></div>
+            </div>
+            <span class="status">ONLINE <span>●</span></span>
+            <img src="/images/profile1.png" alt="프로필이미지" />
+            <span class="admin">김팀장<br>Admin</span>
+        </div>
+
+        <div class="main-layout">
+            <!-- 사이드메뉴 시작 -->
+            <aside class="sidebar">
+                <div>
+                    <div class="section-title">SETTINGS</div>
+                    <ul>
+                        <li><a href="/admin/profile.html">👤프로필</a></li>
+                        <li><a href="/admin/page.html">📄페이지</a></li>
+                        <li><a href="/admin/message.html">💬메시지</a></li>
+                        <li><a href="/admin/calendar.html">📅캘린더</a></li>
+                        <li><a href="/admin/project.html">📁프로젝트</a></li>
+                        <li><a href="/admin/drive.html">🗂️드라이브</a></li>
+                        <li><a href="/admin/board.html">📝게시판</a></li>
+                        <li><a href="/admin/plan.html">💳요금제</a></li>
+                    </ul>
+                </div>
+            </aside>
+            <!-- 사이드메뉴 끝 -->
+
+            <main class="main-content">
+                <article class="main-content">
+                    <!-- 메인 시작 -->
+                    <div class="title">
+                        <h1>페이지 수정</h1>
+                    </div>
+                    <div class="page-setting">
+                        <div class="page">
+                            <div class="body">
+                                <div>
+                                    <h4>페이지명</h4>
+                                    <input type="text" placeholder="페이지명을 입력해 주세요." />
+                                </div>
+                                <div>
+                                    <h4>페이지 설명</h4>
+                                    <input type="text" placeholder="설명을 입력해 주세요." />
+                                </div>
+                                <div>
+                                    <h4>공유 범위</h4>
+                                    <select id="shareScope" onchange="handleShareScopeChange()">
+                                        <option value="all">전체공개</option>
+                                        <option value="none">비공개</option>
+                                        <option value="member">멤버공개</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h4>작성 권한</h4>
+                                    <select>
+                                        <option>관리자 및 페이지마스터만</option> <!-- 페이지마스터 = 페이지 생성자 -->
+                                        <option>전체</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h4>글자 크기</h4>
+                                    <section class="radios">
+                                        <label>
+                                            <input name="fontsize" class="basic" type="radio" value="basic">기본
+                                        </label>
+                                        <label>
+                                            <input name="fontsize" class="big" type="radio" value="big">크게
+                                        </label>
+                                        <label>
+                                            <input name="fontsize" class="small" type="radio" value="small">작게
+                                        </label>
+                                    </section>
+                                </div>
+                                <div>
+                                    <h4>삭제</h4>
+                                    <label>
+                                        <button class="deleteBtn" onclick="confirmDelete()">삭제</button>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 메인 끝 -->
+
+                    <div class="btn">
+                        <button>S A V E</button>
+                    </div>
+                </article>
+            </main>
+        </div>
+
+        <div class="footer">
+            version 0.0.1 | License | More Themes | Documentation | Support
+        </div>
+
+    </div>
+
+</body>
+<script src="/js/setting/hidden.js"></script>
+<script src="/js/setting/members.js"></script>
+<script src="/js/setting/delete.js"></script>
+
+</html>

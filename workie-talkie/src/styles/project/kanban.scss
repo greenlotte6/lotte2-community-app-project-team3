@@ -1,0 +1,689 @@
+/* 기본 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo",
+    sans-serif;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #111;
+}
+
+input,
+textarea,
+select {
+  outline: none;
+  resize: none;
+}
+
+body {
+  background-color: #f0f2f5;
+}
+
+/* 헤더 */
+.header {
+  background-color: #ffffff;
+  padding: 15px 30px;
+  border-bottom: 1px solid #e4e6ea;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.status {
+  font-size: 14px;
+  color: #42b883;
+  font-weight: 600;
+}
+
+.header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.admin {
+  font-size: 12px;
+  color: #65676b;
+  text-align: right;
+}
+
+/* 푸터 */
+.footer {
+  background-color: #ffffff;
+  padding: 15px 30px;
+  border-top: 1px solid #e4e6ea;
+  text-align: center;
+  font-size: 11px;
+  color: #65676b;
+}
+
+#wrapper {
+  min-height: calc(100vh - 120px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #f0f2f5;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* 사이드바 */
+aside {
+  width: 300px;
+  height: fit-content;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1c1e21;
+  margin-bottom: 20px;
+}
+
+.new-project-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.new-project-btn:hover {
+  background-color: #166fe5;
+}
+
+.new-project-btn:active {
+  transform: translateY(1px);
+}
+
+/* 메인 영역 */
+main {
+  width: 1250px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 칸반 헤더 */
+.kanban-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.kanban-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1c1e21;
+}
+
+.kanban-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.search-btn,
+.add-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.search-btn {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.search-btn:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.add-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.add-btn:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* 칸반 보드 */
+.kanban-board {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  flex: 1;
+}
+
+/* 칸반 컬럼 */
+.kanban-column {
+  min-width: 300px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.column-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.column-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1c1e21;
+}
+
+.task-count {
+  background-color: #6c757d;
+  color: white;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.column-menu {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.column-menu:hover {
+  background-color: #e9ecef;
+}
+
+/* 컬럼별 색상 */
+.kanban-column.todo {
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+}
+
+.kanban-column.todo .task-count {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.kanban-column.progress {
+  background-color: #d1ecf1;
+  border-left: 4px solid #17a2b8;
+}
+
+.kanban-column.progress .task-count {
+  background-color: #17a2b8;
+}
+
+.kanban-column.review {
+  background-color: #f8d7da;
+  border-left: 4px solid #dc3545;
+}
+
+.kanban-column.review .task-count {
+  background-color: #dc3545;
+}
+
+.kanban-column.done {
+  background-color: #d4edda;
+  border-left: 4px solid #28a745;
+}
+
+.kanban-column.done .task-count {
+  background-color: #28a745;
+}
+
+/* 작업 목록 */
+.task-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 작업 카드 */
+.task-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 4px solid transparent;
+  position: relative;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.task-card.priority-high {
+  border-left-color: #dc3545;
+}
+
+.task-card.priority-medium {
+  border-left-color: #ffc107;
+}
+
+.task-card.priority-low {
+  border-left-color: #28a745;
+}
+
+/* 작업 카드 호버 힌트 */
+.task-card::after {
+  content: "클릭하여 편집";
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background-color: rgba(24, 119, 242, 0.1);
+  color: #1877f2;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.task-card:hover::after {
+  opacity: 1;
+}
+
+.task-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1c1e21;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.task-description {
+  font-size: 12px;
+  color: #6c757d;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.task-tags {
+  display: flex;
+  gap: 4px;
+}
+
+.task-tag {
+  background-color: #e9ecef;
+  color: #495057;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.task-tag.frontend {
+  background-color: #cce5ff;
+  color: #0056b3;
+}
+
+.task-tag.backend {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.task-tag.design {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.task-assignee {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.assignee-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #6c757d;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.task-date {
+  color: #6c757d;
+}
+
+/* 새 작업 추가 버튼 */
+.add-task-btn {
+  width: 100%;
+  padding: 12px;
+  border: 2px dashed #dee2e6;
+  background: none;
+  border-radius: 8px;
+  color: #6c757d;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.add-task-btn:hover {
+  border-color: #1877f2;
+  color: #1877f2;
+  background-color: #f8fbff;
+}
+
+/* 스크롤바 스타일 */
+.kanban-board::-webkit-scrollbar,
+.task-list::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.kanban-board::-webkit-scrollbar-track,
+.task-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.kanban-board::-webkit-scrollbar-thumb,
+.task-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.kanban-board::-webkit-scrollbar-thumb:hover,
+.task-list::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* ========================================
+   모달 스타일들
+   ======================================== */
+
+/* 모달 오버레이 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 작업 모달 */
+.task-modal {
+  background-color: white;
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: scale(0.7);
+  transition: transform 0.3s;
+}
+
+.modal-overlay.active .task-modal {
+  transform: scale(1);
+}
+
+/* 모달 헤더 */
+.modal-header {
+  text-align: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1c1e21;
+  margin-bottom: 5px;
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: #65676b;
+}
+
+/* 모달 폼 */
+.modal-form {
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1c1e21;
+  margin-bottom: 6px;
+}
+
+/* 폼 행 레이아웃 */
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* 폼 입력 요소들 */
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #495057;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  font-family: inherit;
+  background-color: white;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: #1877f2;
+  box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.1);
+}
+
+.form-input::placeholder {
+  color: #adb5bd;
+}
+
+.form-select {
+  cursor: pointer;
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* 모달 액션 버튼들 */
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid #f0f2f5;
+}
+
+.modal-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 80px;
+}
+
+/* 삭제 버튼 (왼쪽 정렬) */
+.modal-btn-delete {
+  background-color: #dc3545;
+  color: white;
+  margin-right: auto;
+}
+
+.modal-btn-delete:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* 취소 버튼 */
+.modal-btn-cancel {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border: 1px solid #dee2e6;
+}
+
+.modal-btn-cancel:hover {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+/* 저장 버튼 */
+.modal-btn-save {
+  background-color: #28a745;
+  color: white;
+}
+
+.modal-btn-save:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.modal-btn-save:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  #wrapper {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  .kanban-board {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .kanban-column {
+    min-width: auto;
+    max-height: 50vh;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .task-modal {
+    width: 95%;
+    padding: 20px;
+  }
+}

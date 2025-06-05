@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Orbit", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  color: #333;
+  font-size: 14px;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+/* 헤더 + 타이틀 */
+.status span {
+  color: green;
+}
+
+/* 메인 콘텐츠 영역 (헤더/푸터 제외하고 좌우로 배치) */
+.main-layout {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+/* 상단 헤더 영역 */
+.header {
+  height: 50px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 30px 0 30px 0;
+}
+
+.header .status,
+.header .admin {
+  font-size: 12px;
+  margin: 0 10px 0 20px;
+}
+
+.header .logout {
+  margin-right: 10px;
+  width: 28px;
+  height: 28px;
+}
+
+.header img {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.header-logo img {
+  width: 55px;
+  height: 55px;
+}
+
+img.logo-title {
+  width: 160px;
+  height: 40px;
+  border-radius: 0;
+  margin-left: -10px;
+}
+
+img.memu-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 0;
+}
+
+/* 하단 푸터 영역 */
+.footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  color: #666;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+
+.memu {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 요소 간 여백 */
+}
+
+.vertical-divider {
+  width: 2px;
+  height: 30px;
+  background-color: #ccc;
+}

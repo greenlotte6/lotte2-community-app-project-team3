@@ -1,0 +1,92 @@
+.main-layout {
+  display: flex;
+  background-color: #f9fbfd;
+}
+
+main.main-content {
+  flex: 1;
+  padding: 40px 60px;
+}
+
+.main-content h1 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 5px;
+}
+
+.profile-setting {
+  display: flex;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.profile-setting .left {
+  width: 35%;
+  background-color: #f2f6fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.profile-setting .left img {
+  border-radius: 50%;
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.profile-setting .left a {
+  text-decoration: underline;
+  font-size: 0.9rem;
+  color: #104e4a;
+}
+
+.profile-setting .right {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-setting h4 {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.profile-setting input[type="text"],
+.profile-setting input[type="password"] {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f4f4f4;
+  width: 100%;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+}
+
+.input-row input {
+  flex: 1;
+}
+
+.btn {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.btn button {
+  height: 40px;
+  width: 120px;
+  border: 2px solid #104e4a;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #104e4a;
+  cursor: pointer;
+}

@@ -1,0 +1,610 @@
+/* 기본 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo",
+    sans-serif;
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #111;
+}
+
+input,
+textarea {
+  outline: none;
+  resize: none;
+}
+
+#wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa;
+}
+
+/* 헤더 스타일 */
+.header-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 70px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header-left a {
+  color: #4a5568;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.header-left a:hover {
+  color: #2d3748;
+}
+
+.header-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.login-btn {
+  background-color: #4299e1;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #3182ce;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+}
+
+.empty-box {
+  width: 100%;
+  height: 0;
+}
+
+main {
+  flex: 1;
+  padding-bottom: 80px;
+}
+
+/* 프라이싱 히어로 섹션 */
+.pricing-hero {
+  padding: 80px 20px 60px;
+}
+
+.pricing-hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pricing-hero h1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: #1a1a1a;
+  margin-bottom: 40px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+/* 토글 스위치 */
+.billing-toggle {
+  display: inline-flex;
+  background: #4a1a5c;
+  border-radius: 25px;
+  padding: 4px;
+  position: relative;
+}
+
+.toggle-label {
+  padding: 12px 24px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  color: white;
+  position: relative;
+  z-index: 2;
+}
+
+.toggle-label.active {
+  background: white;
+  color: #4a1a5c;
+}
+
+/* 프라이싱 플랜 섹션 */
+.pricing-plans {
+  padding: 40px 20px;
+}
+
+.pricing-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 플랜 그리드 - 카드 크기 조절 가능 */
+.plans-grid {
+  display: grid;
+  /* 3개 카드를 고정으로 나란히 배치: 1fr 1fr 1fr */
+  grid-template-columns: 1fr 1fr 1fr;
+  /* 카드 간격 조절: 40px를 변경하면 카드 사이 간격 조절 */
+  gap: 40px;
+  /* 전체 컨테이너 최대 너비 조절: 1400px를 변경하면 전체 폭 조절 */
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 플랜 카드 - 전체 카드 크기 조절 가능 */
+.plan-card {
+  background: white;
+  /* 카드 모서리 둥글기 조절: 20px를 변경하면 모서리 둥글기 조절 */
+  border-radius: 20px;
+  border: 2px solid #e5e7eb;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  /* 카드 최소 높이 추가 가능: min-height: 600px; */
+}
+
+.plan-card:hover {
+  border-color: #4a1a5c;
+  /* intro 페이지와 동일한 효과: 위로 떠오르면서 오른쪽으로 기울어지기 */
+  transform: translateY(-8px) translateX(5px) rotate(2deg);
+  box-shadow: 0 20px 40px rgba(74, 26, 92, 0.15);
+}
+
+/* 카드 내용 영역 - 상단 내부 여백 조절 가능 */
+.plan-content {
+  /* 세로 여백 줄이고 가로 여백 늘리기: 30px 60px (상하를 줄이고 좌우를 늘림) */
+  padding: 30px 60px;
+  text-align: center;
+  flex: 1;
+}
+
+.plan-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.plan-price {
+  margin-bottom: 10px;
+}
+
+.price-amount {
+  font-size: 48px;
+  font-weight: 900;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.plan-subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+/* 플랜 아이콘 이미지 스타일 */
+.plan-icon img {
+  /* 이미지 최대 크기 제한 */
+  max-width: 60px;
+  max-height: 60px;
+  /* 비율 유지하면서 크기 조절 */
+  width: auto;
+  height: auto;
+  /* 이미지가 깨끗하게 표시되도록 */
+  object-fit: contain;
+}
+
+.select-plan-btn {
+  width: 100%;
+  padding: 16px;
+  background: #5dade2;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 30px;
+}
+
+.select-plan-btn:hover {
+  background: #3498db;
+  transform: translateY(-1px);
+}
+
+.plan-description {
+  color: #6b7280;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* 기능 리스트 */
+/* 기능 리스트 영역 - 하단 여백 조절 가능 */
+.plan-features {
+  background: #f9fafb;
+  /* 세로 여백 줄이고 가로 여백 늘리기: 25px 60px */
+  padding: 25px 60px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  color: #374151;
+}
+
+.feature-item:last-child {
+  margin-bottom: 0;
+}
+
+.check-icon {
+  flex-shrink: 0;
+}
+
+/* 요금제 비교 섹션 */
+.pricing-comparison {
+  padding: 80px 20px;
+  background: white;
+}
+
+.comparison-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 비교 섹션 헤더 */
+.comparison-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.comparison-header h1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.comparison-header p {
+  font-size: 18px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* 비교 테이블 */
+.comparison-table {
+  background: white;
+  border-radius: 20px;
+  border: 2px solid #e5e7eb;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* 요금제 비교 섹션 */
+.pricing-comparison {
+  padding: 80px 20px;
+  background: white;
+}
+
+.comparison-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.comparison-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.comparison-header h1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.comparison-header p {
+  font-size: 18px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.comparison-table {
+  background: white;
+  border-radius: 20px;
+  border: 2px solid #e5e7eb;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* 테이블 헤더 */
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.empty-column {
+  padding: 30px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.plan-column {
+  padding: 30px 20px;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  color: white;
+}
+
+.plan-column:last-child {
+  border-right: none;
+}
+
+.plan-column h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: inherit;
+}
+
+.plan-column .plan-price {
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 8px;
+  color: inherit;
+}
+
+.plan-column .plan-desc {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 20px;
+  color: inherit;
+}
+
+.comparison-btn {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.free-btn {
+  background: white;
+  color: #374151;
+}
+
+.free-btn:hover {
+  background: #f8f9ff;
+}
+
+.plus-btn {
+  background: white;
+  color: #667eea;
+}
+
+.plus-btn:hover {
+  background: #f8f9ff;
+}
+
+.pro-btn {
+  background: white;
+  color: #1a1a1a;
+}
+
+.pro-btn:hover {
+  background: #f8f9ff;
+}
+
+/* 테이블 바디 */
+.table-body {
+  background: white;
+}
+
+.feature-section {
+  background: #f9fafb;
+  padding: 20px 30px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.feature-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  padding: 20px 0;
+  border-bottom: 1px solid #f3f4f6;
+  align-items: center;
+}
+
+.feature-row:last-child {
+  border-bottom: none;
+}
+
+.feature-name {
+  padding: 0 30px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.feature-check {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.check-icon {
+  width: 20px;
+  height: 20px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.check-icon.active {
+  color: #10b981;
+}
+
+.check-icon.inactive {
+  color: #d1d5db;
+}
+/* 반응형 */
+@media (max-width: 1024px) {
+  .table-header {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .feature-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .plan-column,
+  .empty-column {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .comparison-header h1 {
+    font-size: 32px;
+  }
+}
+
+/* 푸터 */
+footer {
+  height: 60px;
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  /* 작은 화면에서는 세로로 배치 */
+  .plans-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-hero h1 {
+    font-size: 36px;
+  }
+
+  .plan-content {
+    padding: 30px 20px;
+  }
+
+  .price-amount {
+    font-size: 36px;
+  }
+
+  .header-left {
+    gap: 20px;
+  }
+
+  .header-left a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricing-hero {
+    padding: 60px 15px 40px;
+  }
+
+  .pricing-hero h1 {
+    font-size: 28px;
+  }
+
+  .toggle-label {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .pricing-plans {
+    padding: 20px 15px;
+  }
+}

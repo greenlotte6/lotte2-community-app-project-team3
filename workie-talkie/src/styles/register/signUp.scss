@@ -1,0 +1,64 @@
+body {
+  font-family: "Arial", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #fff;
+}
+
+.container {
+  width: 400px;
+  padding: 40px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+}
+
+.logo {
+  /* Remove fixed width and height */
+  margin: 0 auto 20px; /* Centers the logo horizontally and adds space below */
+}
+
+.logo img {
+  width: 80px; /* Adjust as needed for your desired size */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Removes extra space below the image */
+  margin: 0 auto; /* Centers the image within its container */
+}
+
+h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+input[type="email"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #4e88ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #3a6fd6;
+}
