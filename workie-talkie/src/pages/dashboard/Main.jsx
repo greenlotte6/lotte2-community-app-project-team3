@@ -2,6 +2,13 @@ import React, { useEffect } from "react";
 import { initClock } from "../../assets/js/clock";
 import { MainLayout } from "../../layouts/MainLayout";
 
+/* 
+로그인 정보를 사용하려면 다음처럼 꺼냅니다:
+import { useLoginStore } from "../../stores/useLoginStore";
+
+const username = useLoginStore((state) => state.user?.username); 
+*/
+
 export const Main = () => {
   useEffect(() => {
     initClock();

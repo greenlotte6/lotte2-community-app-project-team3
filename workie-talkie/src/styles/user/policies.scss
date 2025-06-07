@@ -1,0 +1,140 @@
+#policies {
+  height: 87vh; // 뷰포트 높이 전체를 차지하게 합니다.
+  width: 100vw; // 뷰포트 너비 전체를 차지하게 합니다.
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: #f7f9fc; // 원하는 배경색
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    width: 450px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    min-height: auto;
+  }
+
+  .step {
+    font-size: 12px;
+    color: #888;
+    text-align: right;
+  }
+
+  h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  p.description {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .agreement {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: #f5f7fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  .agreement input[type="checkbox"] {
+    margin-right: 8px;
+  }
+
+  .button-group {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .button-group button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .prev {
+    background-color: transparent;
+    color: #4e88ff;
+  }
+
+  .next {
+    background-color: #4e88ff;
+    color: white;
+  }
+
+  /* 모달 스타일 */
+  .modal-overlay {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    z-index: 1001;
+  }
+
+  .modal h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .modal p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .modal .agree-btn {
+    background-color: #4e88ff;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    float: right;
+  }
+
+  .modal .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #999;
+  }
+
+  .agree-btn {
+    background-color: #4e88ff;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    float: right;
+  }
+}

@@ -6,7 +6,7 @@ import "./styles/index.scss";
 import "./styles/imports/settings.scss";
 import "./styles/imports/dashboards.scss";
 import "./styles/imports/boards.scss";
-import "./styles/user/login.scss";
+import "./styles/imports/users.scss";
 
 function App() {
   return <RouterProvider router={router} />;
