@@ -13,12 +13,22 @@ import { Main } from "../pages/dashboard/Main";
 import { BoardMain } from "../pages/board/BoardMain";
 import { BoardList } from "../pages/board/BoardList";
 import { Login } from "../pages/user/Login";
+import { Policies } from "../pages/user/Policies";
+import { Register } from "../pages/user/Register";
+import { FindId } from "../pages/user/FindId";
+import { FindPw } from "../pages/user/FindPw";
+import { FindResult } from "../pages/user/FindResult";
 
 //라우터 생성
 
 const router = createBrowserRouter([
   { path: "/", element: null },
   { path: "/user/login", element: <Login /> },
+  { path: "/user/policies", element: <Policies /> },
+  { path: "/user/register", element: <Register /> },
+  { path: "/user/findId", element: <FindId /> },
+  { path: "/user/findPw", element: <FindPw /> },
+  { path: "/user/findResult", element: <FindResult /> },
   { path: "/dashboard/main", element: <Main /> },
   { path: "/setting/profile", element: <Profile /> },
   { path: "/setting/page", element: <Page /> },

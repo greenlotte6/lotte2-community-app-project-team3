@@ -1,0 +1,158 @@
+/* findId.scss (또는 해당 SCSS 파일) */
+
+#findId {
+  height: 87vh;
+  width: 100vw;
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: #f7f9fc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    width: 380px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    min-height: auto;
+  }
+
+  h2 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: normal;
+  }
+
+  .tab-buttons {
+    display: flex;
+    margin-bottom: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .tab-button {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background-color: #f8f8f8;
+    color: #666;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:first-child {
+      border-right: 1px solid #e0e0e0;
+    }
+
+    &.active {
+      background-color: #fff;
+      color: #333;
+      font-weight: bold;
+    }
+  }
+
+  // 기존 .tab-content 대신 .tab-area와 그 안의 개별 탭 콘텐츠에 직접 스타일 적용
+  .tab-area {
+    // 탭 콘텐츠를 감싸는 영역에 대한 스타일 (필요시 추가)
+    // margin-bottom: 20px; // 버튼과의 간격 등
+  }
+
+  // 이메일 탭 콘텐츠 (기본적으로 activeTab === "email"일 때만 렌더링되므로 display: none 필요 없음)
+  .email-content {
+    // 필요하다면 이메일 탭 전용 스타일 추가
+  }
+
+  // 휴대폰 탭 콘텐츠 (기본적으로 activeTab === "hp"일 때만 렌더링되므로 display: none 필요 없음)
+  .hp-content {
+    // 필요하다면 휴대폰 탭 전용 스타일 추가
+    // padding: 20px 0; // 예시로 여백 추가
+    p {
+      font-size: 14px;
+      color: #555;
+      margin: 20px 0; // 내용이 가운데 올 수 있도록 여백 추가
+    }
+  }
+
+  .input-group {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  .input-group label {
+    display: block;
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  .input-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .input-field input[type="email"],
+  .input-field input[type="text"] {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .input-field input[type="email"]::placeholder,
+  .input-field input[type="text"]::placeholder {
+    color: #bbb;
+  }
+
+  .input-field button {
+    padding: 12px 15px;
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px; // 컨테이너 하단으로 분리되었으므로, 위쪽 마진 재조정
+  }
+
+  .actions button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .actions .btn-cancel {
+    background-color: #ccc;
+    color: #333;
+  }
+
+  .actions .btn-cancel:hover {
+    background-color: #bbb;
+  }
+
+  .actions .btn-confirm {
+    background-color: #4a90e2;
+    color: white;
+  }
+
+  .actions .btn-confirm:hover {
+    background-color: #3a7bd8;
+  }
+}

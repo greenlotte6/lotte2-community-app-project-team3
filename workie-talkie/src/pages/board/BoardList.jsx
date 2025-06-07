@@ -4,9 +4,9 @@ import { BoardLayout } from "../../layouts/BoardLayout";
 export const BoardList = () => {
   return (
     <BoardLayout>
-      <main class="main-content">
-        <article class="main-content">
-          <div class="board">
+      <main className="main-content">
+        <article className="main-content">
+          <div className="board">
             <h3>공지사항</h3>
             <p>📢 회사 소식, 가장 먼저 확인하세요.</p>
             <table>
@@ -29,7 +29,7 @@ export const BoardList = () => {
                 </tr>
               </tbody>
             </table>
-            <div class="page">
+            <div className="page">
               <a href="#">1</a>
               <a href="#">2</a>
               <a href="#">3</a>
