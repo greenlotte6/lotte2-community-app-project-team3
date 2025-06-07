@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { SettingLayout } from "../../layouts/SettingLayout";
 import { Link } from "react-router-dom";
 import { AddPageModal } from "../../components/setting/AddPageModal";
+import { ModifyPageModal } from "../../components/setting/ModifyPageModal";
 
 export const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModifyOpen, setIsModifyOpen] = useState(false);
 
   return (
     <SettingLayout>
@@ -35,7 +37,7 @@ export const Page = () => {
                   <tbody>
                     <tr>
                       <td className="title">
-                        <Link to="/setting/modifyPage">page1</Link>
+                        <p onClick={() => setIsModifyOpen(true)}>page1</p>
                       </td>
                       <td>허용멤버만</td>
                       <td>kim0531</td>
@@ -54,6 +56,9 @@ export const Page = () => {
           </div>
         </article>
         {isModalOpen && <AddPageModal onClose={() => setIsModalOpen(false)} />}
+        {isModifyOpen && (
+          <ModifyPageModal onClose={() => setIsModifyOpen(false)} />
+        )}
       </main>
     </SettingLayout>
   );

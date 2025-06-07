@@ -1,0 +1,110 @@
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+
+  .logout {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+
+    .dropdown-item {
+      padding: 10px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+}
+
+#landing {
+  .header-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 70px;
+  }
+
+  .header {
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  /* 헤더 왼쪽 메뉴 */
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .header-left a {
+    color: #4a5568;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .header-left a:hover {
+    color: #2d3748;
+  }
+
+  /* 헤더 중앙 로고 */
+  .header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 0%;
+  }
+
+  /* 헤더 오른쪽 로그인 */
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .login-btn,
+  .register-btn {
+    background-color: #4299e1;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .login-btn:hover,
+  .register-btn:hover {
+    background-color: #3182ce;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+  }
+}

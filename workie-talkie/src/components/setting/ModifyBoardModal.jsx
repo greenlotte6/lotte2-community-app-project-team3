@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import "../../styles/setting/modals.scss";
 import { SharedMembersInput } from "./SharedMembersInput";
 
-export const AddPageModal = ({ onClose }) => {
+export const ModifyBoardModal = ({ onClose }) => {
   // 모달 내부에서 사용할 상태들
   const [shareScope, setShareScope] = useState("all");
   const [sharedMembers, setSharedMembers] = useState([]);
-  const [pageTitle, setPageTitle] = useState(""); // 페이지명 상태 추가
-  const [pageInfo, setPageInfo] = useState(""); // 페이지 설명 상태 추가
+  const [boardTitle, setBoardTitle] = useState("");
+  const [boardInfo, setBoardInfo] = useState("");
   const [writePermission, setWritePermission] =
     useState("관리자 및 페이지마스터만"); // 작성 권한 상태 추가
 
@@ -22,14 +22,24 @@ export const AddPageModal = ({ onClose }) => {
     const confirmed = window.confirm("저장하시겠습니까?");
     if (confirmed) {
       console.log("저장 데이터:", {
-        pageTitle: pageTitle, // 상태에서 값 가져오기
-        pageInfo: pageInfo, // 상태에서 값 가져오기
+        boardTitle: boardTitle, // 상태에서 값 가져오기
+        boardInfo: boardInfo, // 상태에서 값 가져오기
         shareScope: shareScope,
         writePermission: writePermission, // 상태에서 값 가져오기
         sharedMembers: sharedMembers,
       });
       alert("저장되었습니다.");
       onClose(); // 저장 후 모달 닫기
+    }
+  };
+
+  const handleDelete = () => {
+    const confirmed = window.confirm("정말 삭제하시겠습니까?");
+    if (confirmed) {
+      // 여기에 삭제 로직 구현
+      console.log("삭제 처리됨"); // 예시
+      alert("삭제되었습니다.");
+      onClose(); // 삭제 후 모달 닫기
     }
   };
 
@@ -45,29 +55,29 @@ export const AddPageModal = ({ onClose }) => {
           ×
         </button>
         <div className="title">
-          <h1>페이지 추가</h1>
+          <h1>게시판 수정</h1>
         </div>
         <div className="page-setting">
           <div className="page">
             <div className="body">
               <div>
-                <h4>페이지명</h4>
+                <h4>게시판명</h4>
                 <input
                   type="text"
-                  name="pageTitle"
-                  placeholder="페이지명을 입력해 주세요."
-                  value={pageTitle} // 상태와 연결
-                  onChange={(e) => setPageTitle(e.target.value)} // 상태 업데이트
+                  name="boardTitle"
+                  placeholder="게시판명을 입력해 주세요."
+                  value={boardTitle}
+                  onChange={(e) => setBoardTitle(e.target.value)}
                 />
               </div>
               <div>
-                <h4>페이지 설명</h4>
+                <h4>게시판 설명</h4>
                 <input
                   type="text"
-                  name="pageInfo"
+                  name="boardInfo"
                   placeholder="설명을 입력해 주세요."
-                  value={pageInfo} // 상태와 연결
-                  onChange={(e) => setPageInfo(e.target.value)} // 상태 업데이트
+                  value={boardInfo}
+                  onChange={(e) => setBoardInfo(e.target.value)}
                 />
               </div>
               <div>
@@ -78,7 +88,6 @@ export const AddPageModal = ({ onClose }) => {
                   onChange={handleShareScopeChange}
                 >
                   <option value="all">전체공개</option>
-                  <option value="none">비공개</option>
                   <option value="member">멤버공개</option>
                 </select>
               </div>
@@ -94,46 +103,33 @@ export const AddPageModal = ({ onClose }) => {
               )}
               <div>
                 <h4>작성 권한</h4>
-                <select
-                  value={writePermission} // 상태와 연결
-                  onChange={(e) => setWritePermission(e.target.value)} // 상태 업데이트
-                >
-                  <option>관리자 및 페이지마스터만</option>
+                <select>
+                  <option>관리자 및 게시판마스터만</option>
                   <option>전체</option>
                 </select>
               </div>
-
               <div>
-                <h4>글자 크기</h4>
-                <section className="radios">
-                  <label>
-                    <input
-                      name="fontsize"
-                      className="basic"
-                      type="radio"
-                      value="basic"
-                    />
-                    기본
-                  </label>
-                  <label>
-                    <input
-                      name="fontsize"
-                      className="big"
-                      type="radio"
-                      value="big"
-                    />
-                    크게
-                  </label>
-                  <label>
-                    <input
-                      name="fontsize"
-                      className="small"
-                      type="radio"
-                      value="small"
-                    />
-                    작게
-                  </label>
-                </section>
+                <h4>타입</h4>
+                <select>
+                  <option>게시판</option>
+                  <option>미리보기</option>
+                  <option>앨범</option>
+                </select>
+              </div>
+              <div>
+                <h4>댓글허용</h4>
+                <label className="switch">
+                  <input type="checkbox" />
+                  <span className="slider round"></span>
+                </label>
+              </div>
+              <div>
+                <h4>삭제</h4>
+                <label>
+                  <button className="deleteBtn" onClick={handleDelete}>
+                    삭제
+                  </button>
+                </label>
               </div>
             </div>
           </div>

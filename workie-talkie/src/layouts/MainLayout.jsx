@@ -7,10 +7,7 @@ export const MainLayout = ({ children }) => {
   return (
     <div className="container">
       <Header />
-      <div className="main-layout">
-        <Aside />
-        {children}
-      </div>
+      <div className="main-layout">{children}</div>
       <Footer />
     </div>
   );

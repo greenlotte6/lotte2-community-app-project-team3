@@ -10,12 +10,15 @@ import { AutoMessage } from "../pages/setting/AutoMessage";
 import { Drive } from "../pages/setting/Drive";
 import { Plan } from "../pages/setting/Plan";
 import { Main } from "../pages/dashboard/Main";
-import { AddPage } from "../pages/setting/AddPage";
+import { BoardMain } from "../pages/board/BoardMain";
+import { BoardList } from "../pages/board/BoardList";
+import { Login } from "../pages/user/Login";
 
 //라우터 생성
 
 const router = createBrowserRouter([
   { path: "/", element: null },
+  { path: "/user/login", element: <Login /> },
   { path: "/dashboard/main", element: <Main /> },
   { path: "/setting/profile", element: <Profile /> },
   { path: "/setting/page", element: <Page /> },
@@ -26,9 +29,8 @@ const router = createBrowserRouter([
   { path: "/setting/drive", element: <Drive /> },
   { path: "/setting/board", element: <Board /> },
   { path: "/setting/plan", element: <Plan /> },
-  { path: "/setting/addPage", element: <AddPage /> },
-  { path: "/setting/modifyPage", element: <AddPage /> },
-
+  { path: "/board/main", element: <BoardMain /> },
+  { path: "/board/list", element: <BoardList /> },
 ]);
 
 // 라우터 내보내기

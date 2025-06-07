@@ -31,16 +31,12 @@ export const SharedMembersInput = ({
 
   return (
     <div id="memberInputContainer">
-      {" "}
-      {/* 이 ID는 CSS에 사용될 수 있으니 유지 */}
       <div className="hidden">
-        {" "}
         {/* 이 클래스도 CSS에 사용될 수 있으니 유지 */}
         <h4>공유할 멤버</h4>
         <input
           type="text"
           id="memberInput"
-          style={{ width: "100%" }}
           placeholder="이메일 또는 아이디 입력 후 Enter"
           value={newMemberInput}
           onChange={(e) => setNewMemberInput(e.target.value)}
@@ -48,7 +44,6 @@ export const SharedMembersInput = ({
         />
       </div>
       <div id="memberTagContainer">
-        {" "}
         {/* 이 ID도 CSS에 사용될 수 있으니 유지 */}
         {sharedMembers.map((member, index) => (
           <div

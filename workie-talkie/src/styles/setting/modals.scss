@@ -38,10 +38,7 @@
       color: #333;
     }
   }
-
-  /* 기존 .main-content와 .title 등 내부 요소 스타일은 그대로 유지 */
   .main-content {
-    /* 모달 내부의 메인 콘텐츠 영역 (기존 코드에서 가져온 부분) */
     padding: 0; /* 모달 padding과 겹치지 않도록 초기화 */
     margin: 0; /* 모달 margin과 겹치지 않도록 초기화 */
   }
@@ -54,23 +51,14 @@
     }
   }
 
-  .page-setting {
-    /* 기존 스타일 */
-  }
-
-  .body {
-    /* 기존 스타일 */
-  }
   .btn {
     margin-top: 30px;
     text-align: center;
     button {
-      padding: 12px 30px;
       background-color: #007bff;
       color: white;
       border: none;
       border-radius: 5px;
-      font-size: 16px;
       cursor: pointer;
 
       &:hover {
@@ -78,4 +66,8 @@
       }
     }
   }
+}
+
+#page-container .page {
+  min-height: auto !important;
 }
