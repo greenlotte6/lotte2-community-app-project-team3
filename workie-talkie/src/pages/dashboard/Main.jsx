@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { DashboardLayout } from "../../layouts/DashboardLayout";
 import { initClock } from "../../assets/js/clock";
+import { MainLayout } from "../../layouts/MainLayout";
 
 export const Main = () => {
   useEffect(() => {
@@ -12,7 +12,7 @@ export const Main = () => {
   }, []);
 
   return (
-    <DashboardLayout>
+    <MainLayout>
       <main className="main-content" id="dashboard-container">
         <article className="main-content">
           <div className="dashboard">
@@ -230,6 +230,6 @@ export const Main = () => {
           </div>
         </article>
       </main>
-    </DashboardLayout>
+    </MainLayout>
   );
 };

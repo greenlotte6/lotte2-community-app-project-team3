@@ -1,26 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { SettingLayout } from "../../layouts/SettingLayout";
 import { Link } from "react-router-dom";
+import { AddProjectModal } from "../../components/setting/AddProjectModal";
+import { ModifyProjectModal } from "../../components/setting/ModifyProjectModal";
 
 export const Project = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModifyOpen, setIsModifyOpen] = useState(false);
   return (
     <SettingLayout>
-      <main class="main-content" id="project-container">
-        <article class="main-content">
-          <div class="title">
+      <main className="main-content" id="project-container">
+        <article className="main-content">
+          <div className="title">
             <h1>프로젝트 설정</h1>
           </div>
-          <div class="board-setting">
-            <div class="board">
-              <div class="head">
+          <div className="board-setting">
+            <div className="board">
+              <div className="head">
                 <p>
                   프로젝트를 추가하거나 멤버 권한, 타입을 설정할 수 있습니다.
                 </p>
-                <a href="/admin/addProject.html">
-                  <button onclick="">ADD</button>
-                </a>
+                <button onClick={() => setIsModalOpen(true)}>ADD</button>
               </div>
-              <div class="body">
+              <div className="body">
                 <table>
                   <thead>
                     <tr>
@@ -34,7 +36,7 @@ export const Project = () => {
                   <tbody>
                     <tr>
                       <td>
-                        <a href="/admin/modifyProject.html">프로젝트1</a>
+                        <p onClick={() => setIsModifyOpen(true)}>프로젝트1</p>
                       </td>
                       <td>김팀장</td>
                       <td>5</td>
@@ -54,6 +56,12 @@ export const Project = () => {
             </div>
           </div>
         </article>
+        {isModalOpen && (
+          <AddProjectModal onClose={() => setIsModalOpen(false)} />
+        )}
+        {isModifyOpen && (
+          <ModifyProjectModal onClose={() => setIsModifyOpen(false)} />
+        )}
       </main>
     </SettingLayout>
   );

@@ -1,0 +1,111 @@
+#login-container {
+  height: 100vh; // 뷰포트 높이 전체를 차지하게 합니다.
+  width: 100vw; // 뷰포트 너비 전체를 차지하게 합니다.
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  background-color: #f7f9fc; // 원하는 배경색
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    margin-bottom: 4px;
+    font-size: 24px;
+  }
+
+  p {
+    margin-bottom: 24px;
+    color: #666;
+    font-size: 14px;
+  }
+
+  .logo img {
+    border-radius: none !important;
+  }
+  .header img {
+    border-radius: 0% !important;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  .password-hint {
+    text-align: left;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  .remember-forgot label {
+    display: flex;
+    align-items: center;
+  }
+
+  .login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #3478f6;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .social-login {
+    margin-top: 24px;
+  }
+
+  .social-login p {
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #555;
+  }
+
+  .social-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .social-buttons button {
+    width: 32%;
+    padding: 10px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .signup-link {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .signup-link a {
+    color: #3478f6;
+    text-decoration: none;
+  }
+
+  .remember-forgot {
+    color: #3478f6;
+    text-decoration: none;
+  }
+}

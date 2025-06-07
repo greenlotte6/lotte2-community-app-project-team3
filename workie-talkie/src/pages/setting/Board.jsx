@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { SettingLayout } from "../../layouts/SettingLayout";
 import { Link } from "react-router-dom";
+import { AddBoardModal } from "../../components/setting/AddBoardModal";
+import { ModifyBoardModal } from "../../components/setting/ModifyBoardModal";
 
 export const Board = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModifyOpen, setIsModifyOpen] = useState(false);
+
   return (
     <SettingLayout>
-      <main class="main-content" id="board-container">
-        <article class="main-content">
-          <div class="title">
+      <main className="main-content" id="board-container">
+        <article className="main-content">
+          <div className="title">
             <h1>게시판 설정</h1>
           </div>
-          <div class="board-setting">
-            <div class="board">
-              <div class="head">
+          <div className="board-setting">
+            <div className="board">
+              <div className="head">
                 <div>
                   <p>
                     게시판을 추가하거나 멤버 권한, 타입을 설정할 수 있습니다.
@@ -22,11 +27,10 @@ export const Board = () => {
                     접속 해주세요.
                   </p>
                 </div>
-                <a href="/admin/addBoard.html">
-                  <button onclick="">ADD</button>
-                </a>
+                <button onClick={() => setIsModalOpen(true)}>ADD</button>
               </div>
-              <div class="body">
+
+              <div className="body">
                 <table>
                   <thead>
                     <tr>
@@ -39,7 +43,7 @@ export const Board = () => {
                   <tbody>
                     <tr>
                       <td>
-                        <a href="/admin/modifyBoard.html">공지사항</a>
+                        <p onClick={() => setIsModifyOpen(true)}>공지사항</p>
                       </td>
                       <td>관리자</td>
                       <td>kim0531</td>
@@ -57,6 +61,10 @@ export const Board = () => {
             </div>
           </div>
         </article>
+        {isModalOpen && <AddBoardModal onClose={() => setIsModalOpen(false)} />}
+        {isModifyOpen && (
+          <ModifyBoardModal onClose={() => setIsModifyOpen(false)} />
+        )}
       </main>
     </SettingLayout>
   );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../../styles/setting/modals.scss";
 import { SharedMembersInput } from "./SharedMembersInput";
 
-export const AddPageModal = ({ onClose }) => {
+export const ModifyPageModal = ({ onClose }) => {
   // 모달 내부에서 사용할 상태들
   const [shareScope, setShareScope] = useState("all");
   const [sharedMembers, setSharedMembers] = useState([]);
@@ -33,6 +33,16 @@ export const AddPageModal = ({ onClose }) => {
     }
   };
 
+  const handleDelete = () => {
+    const confirmed = window.confirm("정말 삭제하시겠습니까?");
+    if (confirmed) {
+      // 여기에 삭제 로직 구현
+      console.log("삭제 처리됨"); // 예시
+      alert("삭제되었습니다.");
+      onClose(); // 삭제 후 모달 닫기
+    }
+  };
+
   return (
     // 모달 오버레이 div
     <div className="modal-overlay" onClick={onClose}>
@@ -45,7 +55,7 @@ export const AddPageModal = ({ onClose }) => {
           ×
         </button>
         <div className="title">
-          <h1>페이지 추가</h1>
+          <h1>페이지 수정</h1>
         </div>
         <div className="page-setting">
           <div className="page">
@@ -134,6 +144,14 @@ export const AddPageModal = ({ onClose }) => {
                     작게
                   </label>
                 </section>
+              </div>
+              <div>
+                <h4>삭제</h4>
+                <label>
+                  <button className="deleteBtn" onClick={handleDelete}>
+                    삭제
+                  </button>
+                </label>
               </div>
             </div>
           </div>
