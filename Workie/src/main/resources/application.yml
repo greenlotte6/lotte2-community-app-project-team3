@@ -39,9 +39,9 @@ spring:
       enabled: false      # ??? ? ??? ?
 
   datasource:
-    url: jdbc:mysql://3.36.66.1:3306/
+    url: jdbc:mysql://3.36.66.1:3306/workie
     username: main
-    password: Qwerty@123!
+    password: Qwerty@123
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:

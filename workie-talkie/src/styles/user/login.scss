@@ -1,5 +1,5 @@
 #login-container {
-  height: 100vh; // 뷰포트 높이 전체를 차지하게 합니다.
+  height: 87vh; // 뷰포트 높이 전체를 차지하게 합니다.
   width: 100vw; // 뷰포트 너비 전체를 차지하게 합니다.
   margin: 0;
   font-family: "Noto Sans KR", sans-serif;
@@ -26,7 +26,7 @@
     border-radius: 0% !important;
   }
 
-  input[type="email"],
+  input[type="id"],
   input[type="password"] {
     width: 100%;
     padding: 12px;
@@ -34,6 +34,10 @@
     border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 14px;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 5px;
   }
 
   .password-hint {
@@ -54,6 +58,10 @@
   .remember-forgot label {
     display: flex;
     align-items: center;
+  }
+
+  .remember-forgot a:nth-last-child(2) {
+    margin-right: -120px;
   }
 
   .login-btn {
