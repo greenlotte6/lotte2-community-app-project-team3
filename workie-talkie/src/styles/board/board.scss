@@ -1,3 +1,7 @@
+#board-list-container {
+  max-height: 80vh;
+}
+
 .main-layout {
   display: flex;
   background-color: #f9fbfd;
@@ -5,7 +9,7 @@
 
 main.main-content {
   flex: 1;
-  padding: 20px 30px;
+  padding: 10px 30px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -25,12 +29,12 @@ main.main-content {
 
 .board p {
   color: #666;
-  margin-bottom: 20px;
 }
 
 .board table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
 }
 
 .board thead {

@@ -12,19 +12,23 @@ export const Aside = () => {
               <Link to="/setting/profile">👤프로필</Link>
             </li>
             <li>
-              <Link to="/setting/page">📄페이지</Link>
-            </li>
-            <li>
               <Link to="/setting/message">💬메시지</Link>
             </li>
             <li>
               <Link to="/setting/calendar">📅캘린더</Link>
             </li>
             <li>
-              <Link to="/setting/project">📁프로젝트</Link>
+              <Link to="/setting/page">📄페이지</Link>
             </li>
+
             <li>
               <Link to="/setting/drive">🗂️드라이브</Link>
+            </li>
+            <li>
+              <Link to="/setting/member">📋회원관리</Link>
+            </li>
+            <li>
+              <Link to="/setting/project">📁프로젝트</Link>
             </li>
             <li>
               <Link to="/setting/board">📝게시판</Link>
