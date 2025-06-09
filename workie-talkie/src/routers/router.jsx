@@ -20,10 +20,8 @@ import { FindPw } from "../pages/user/FindPw";
 import { FindResult } from "../pages/user/FindResult";
 import Drivepage from "../pages/drive/Drivepage";
 import ChatPage from "../pages/chat/chatpage";
+
 // 랜딩페이지
-import IntroPage from "../pages/landing/IntroPage";
-import PricingPage from "../pages/landing/PricingPage";
-import FAQPage from "../pages/landing/FAQPage";
 import { CalendarPage } from "../pages/calendar/CalendarPage";
 import { Member } from "../pages/setting/Member";
 import { ProjectMain } from "../pages/project/ProjectMain";
@@ -31,7 +29,6 @@ import { ProjectDetails } from "../pages/project/ProjectDetails";
 import { IntroPage } from "../pages/landing/IntroPage";
 import { PricingPage } from "../pages/landing/PricingPage";
 import { FAQPage } from "../pages/landing/FAQPage";
-
 
 //라우터 생성
 
