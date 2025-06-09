@@ -1,9 +1,9 @@
 import React from "react";
 
-export const ModifyModal = () => {
+export const ModifyModal = ({ onClose }) => {
   return (
-    <div className="modal-overlay" id="editModal">
-      <div className="edit-modal">
+    <div className="modal-overlay" id="editModal" onClick={onClose}>
+      <div className="edit-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <div className="modal-icon">✏️</div>
           <div className="modal-title">프로젝트 편집</div>
@@ -18,7 +18,7 @@ export const ModifyModal = () => {
               id="editProjectName"
               className="form-input"
               placeholder="프로젝트 이름을 입력하세요"
-              maxlength="50"
+              maxLength="50"
             />
           </div>
 
@@ -29,7 +29,7 @@ export const ModifyModal = () => {
               className="form-input"
               placeholder="프로젝트에 대한 간단한 설명을 입력하세요"
               rows="3"
-              maxlength="200"
+              maxLength="200"
             ></textarea>
           </div>
 
@@ -65,7 +65,11 @@ export const ModifyModal = () => {
         </div>
 
         <div className="modal-actions">
-          <button className="modal-btn modal-btn-cancel" id="cancelEditBtn">
+          <button
+            className="modal-btn modal-btn-cancel"
+            id="cancelEditBtn"
+            onClick={onClose}
+          >
             취소
           </button>
           <button className="modal-btn modal-btn-save" id="saveEditBtn">
