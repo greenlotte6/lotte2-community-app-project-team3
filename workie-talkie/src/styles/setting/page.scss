@@ -1,10 +1,6 @@
 /* 메인 */
 #page-container {
-  .main-layout {
-    display: flex;
-    background-color: #f9fbfd;
-  }
-
+  max-height: 80vh;
   main.main-content {
     flex: 1;
     padding: 40px 60px;
@@ -183,11 +179,6 @@
   .main-layout {
     display: flex;
     background-color: #f9fbfd;
-  }
-
-  main.main-content {
-    flex: 1;
-    padding: 40px 60px;
   }
 
   .main-content h1 {

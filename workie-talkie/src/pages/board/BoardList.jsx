@@ -4,7 +4,7 @@ import { BoardLayout } from "../../layouts/BoardLayout";
 export const BoardList = () => {
   return (
     <BoardLayout>
-      <main className="main-content">
+      <main className="main-content" id="board-list-container">
         <article className="main-content">
           <div className="board">
             <h3>공지사항</h3>

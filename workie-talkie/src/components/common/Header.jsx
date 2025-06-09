@@ -33,37 +33,45 @@ export const Header = () => {
         <div className="vertical-divider"></div>
         <Link to="/chat/main"><img src="/images/header/chat.png" alt="메세지" className="memu-icon" /></Link>
         <div className="vertical-divider"></div>
-        <Link to="/calender/calender"><img src="/images/header/calendar.png" alt="캘린더" className="memu-icon" /></Link>
+        <Link to="/calendar"><img src="/images/header/calendar.png" alt="캘린더" className="memu-icon" /></Link>
         <div className="vertical-divider"></div>
-        <Link to="/project/main"><img src="/images/header/project.png" alt="프로젝트" className="memu-icon" /></Link>
+        <Link to="/project"><img src="/images/header/project.png" alt="프로젝트" className="memu-icon" /></Link>
         <div className="vertical-divider"></div>
         <Link to="/page/pageMain"><img src="/images/header/page.png" alt="페이지" className="memu-icon" /></Link>
         <div className="vertical-divider"></div>
-        <Link to="/drive/drive"><img src="/images/header/drive.png" alt="드라이브" className="memu-icon" /></Link>
+        <Link to="/drive"><img src="/images/header/drive.png" alt="드라이브" className="memu-icon" /></Link>
         <div className="vertical-divider"></div>
         <Link to="/setting/profile"><img src="/images/header/settings.png" alt="설정" className="memu-icon" /></Link>
         <div className="vertical-divider"></div>
-        <div className="dropdown-container"> {/* 새로 추가된 div */}
-        <img src="/images/off.png" alt="로그아웃" className="logout-icon" onClick={toggleDropdown}/>
-          {isDropdownOpen && (
-            <div className="dropdown-menu">
-              <div className="dropdown-item" onClick={handleStatusChange}>
-                상태 변경
-              </div>
-              <div className="dropdown-item" onClick={handleLogout}>
-                로그아웃
-              </div>
-            </div>
-          )}
-        </div>
-        <div className="vertical-divider"></div>
       </div>
 
-        {/* prettier-ignore */}
         <>
-        <span className="status">ONLINE <span>●</span></span>
-        <img src="/images/profile1.png" alt="프로필이미지" />
-        <span className="admin">김팀장<br />Admin</span>
+          <span className="status">
+            ONLINE <span>●</span>
+          </span>
+          <div className="dropdown-container">
+            <img
+              src="/images/profile1.png"
+              alt="프로필이미지"
+              className="logout-icon"
+              onClick={toggleDropdown}
+            />
+            {isDropdownOpen && (
+              <div className="dropdown-menu">
+                <div className="dropdown-item" onClick={handleStatusChange}>
+                  상태 변경
+                </div>
+                <div className="dropdown-item" onClick={handleLogout}>
+                  로그아웃
+                </div>
+              </div>
+            )}
+          </div>
+          <span className="admin">
+            김팀장
+            <br />
+            Admin
+          </span>
         </>
       </div>
     </>

@@ -8,10 +8,10 @@ import { Menus } from "../../components/board/Menus";
 export const BoardMain = () => {
   return (
     <BoardLayout>
-      <main class="main-content">
+      <main className="main-content" id="board-main-container">
         <Notices />
 
-        <div class="section-container">
+        <div className="section-container">
           <Frees />
 
           <News />

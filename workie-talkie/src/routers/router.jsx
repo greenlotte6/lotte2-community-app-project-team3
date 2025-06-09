@@ -19,11 +19,15 @@ import { FindId } from "../pages/user/FindId";
 import { FindPw } from "../pages/user/FindPw";
 import { FindResult } from "../pages/user/FindResult";
 import Drivepage from "../pages/drive/Drivepage";
+import { CalendarPage } from "../pages/calendar/CalendarPage";
+import { Member } from "../pages/setting/Member";
+import { ProjectMain } from "../pages/project/ProjectMain";
+import { ProjectDetails } from "../pages/project/ProjectDetails";
 
 // 랜딩페이지
-import IntroPage from "../pages/landing/IntroPage";
-import PricingPage from "../pages/landing/PricingPage";
-import FAQPage from "../pages/landing/FAQPage";
+//import IntroPage from "../pages/landing/IntroPage";
+//import PricingPage from "../pages/landing/PricingPage";
+//import FAQPage from "../pages/landing/FAQPage";
 
 //라우터 생성
 
@@ -45,17 +49,20 @@ const router = createBrowserRouter([
   { path: "/setting/drive", element: <Drive /> },
   { path: "/setting/board", element: <Board /> },
   { path: "/setting/plan", element: <Plan /> },
+  { path: "/setting/member", element: <Member /> },
   { path: "/board/main", element: <BoardMain /> },
   { path: "/board/list", element: <BoardList /> },
 
   { path: "/drive", element: <Drivepage /> },
+  { path: "/calendar", element: <CalendarPage /> },
 
+  { path: "/project", element: <ProjectMain /> },
+  { path: "/project/details", element: <ProjectDetails /> },
 
   // 랜딩 페이지들
-  { path: "/", element: <IntroPage /> },
-  { path: "/pricing", element: <PricingPage /> },
-  { path: "/faq", element: <FAQPage /> },
-
+  //{ path: "/", element: <IntroPage /> },
+  //{ path: "/pricing", element: <PricingPage /> },
+  //{ path: "/faq", element: <FAQPage /> },
 ]);
 
 // 라우터 내보내기

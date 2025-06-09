@@ -2,7 +2,7 @@ import React from "react";
 
 export const Notices = () => {
   return (
-    <div class="notices">
+    <div className="notices">
       <h3>📢 공지사항</h3>
       <table>
         <thead>
