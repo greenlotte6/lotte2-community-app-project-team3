@@ -19,11 +19,12 @@ import { FindId } from "../pages/user/FindId";
 import { FindPw } from "../pages/user/FindPw";
 import { FindResult } from "../pages/user/FindResult";
 import Drivepage from "../pages/drive/Drivepage";
+import ChatPage from "../pages/chat/chatpage";
 
 // 랜딩페이지
-import IntroPage from "../pages/landing/IntroPage";
-import PricingPage from "../pages/landing/PricingPage";
-import FAQPage from "../pages/landing/FAQPage";
+// import IntroPage from "../pages/landing/IntroPage";
+// import PricingPage from "../pages/landing/PricingPage";
+// import FAQPage from "../pages/landing/FAQPage";
 
 //라우터 생성
 
@@ -49,13 +50,12 @@ const router = createBrowserRouter([
   { path: "/board/list", element: <BoardList /> },
 
   { path: "/drive", element: <Drivepage /> },
-
+  { path: "/chat", element: <ChatPage /> },
 
   // 랜딩 페이지들
-  { path: "/", element: <IntroPage /> },
-  { path: "/pricing", element: <PricingPage /> },
-  { path: "/faq", element: <FAQPage /> },
-
+  // { path: "/", element: <IntroPage /> },
+  // { path: "/pricing", element: <PricingPage /> },
+  // { path: "/faq", element: <FAQPage /> },
 ]);
 
 // 라우터 내보내기

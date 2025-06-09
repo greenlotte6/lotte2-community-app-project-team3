@@ -5,13 +5,15 @@ import { Aside } from "../components/drive/Aside";
 
 export const DriveLayout = ({ children }) => {
   return (
-    <div className="container">
-      <Header />
-      <div className="main-layout" id="drive-container">
-        <Aside />
-        {children}
+    <div id="drive-container">
+      <div className="container">
+        <Header />
+        <div className="main-layout">
+          <Aside />
+          <main className="main">{children}</main>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };
