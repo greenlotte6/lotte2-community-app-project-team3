@@ -20,6 +20,11 @@ import { FindPw } from "../pages/user/FindPw";
 import { FindResult } from "../pages/user/FindResult";
 import Drivepage from "../pages/drive/Drivepage";
 
+// 랜딩페이지
+import IntroPage from "../pages/landing/IntroPage";
+import PricingPage from "../pages/landing/PricingPage";
+import FAQPage from "../pages/landing/FAQPage";
+
 //라우터 생성
 
 const router = createBrowserRouter([
@@ -42,7 +47,15 @@ const router = createBrowserRouter([
   { path: "/setting/plan", element: <Plan /> },
   { path: "/board/main", element: <BoardMain /> },
   { path: "/board/list", element: <BoardList /> },
+
   { path: "/drive", element: <Drivepage /> },
+
+
+  // 랜딩 페이지들
+  { path: "/", element: <IntroPage /> },
+  { path: "/pricing", element: <PricingPage /> },
+  { path: "/faq", element: <FAQPage /> },
+
 ]);
 
 // 라우터 내보내기
