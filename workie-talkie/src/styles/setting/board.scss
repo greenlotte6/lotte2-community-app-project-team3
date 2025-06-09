@@ -1,14 +1,6 @@
 #board-container {
+  max-height: 80vh;
   /* 메인 */
-  .main-layout {
-    display: flex;
-    background-color: #f9fbfd;
-  }
-
-  main.main-content {
-    flex: 1;
-    padding: 40px 60px;
-  }
   .main-content h1 {
     margin-bottom: 20px;
     font-size: 1.4rem;
@@ -25,7 +17,6 @@
 
   .board {
     width: 100%;
-    min-height: 700px;
     display: flex;
     flex-direction: column;
     gap: 20px;

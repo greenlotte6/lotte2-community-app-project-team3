@@ -1,682 +1,684 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-size: 12px;
-  font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo",
-    sans-serif;
-}
+#intro-page {
+  * {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo",
+      sans-serif;
+  }
 
-ul,
-ol {
-  list-style: none;
-}
+  ul,
+  ol {
+    list-style: none;
+  }
 
-a {
-  text-decoration: none;
-  color: #111;
-}
+  a {
+    text-decoration: none;
+    color: #111;
+  }
 
-input,
-textarea {
-  outline: none;
-  resize: none;
-}
+  input,
+  textarea {
+    outline: none;
+    resize: none;
+  }
 
-#wrapper {
-  width: 100%;
-  min-height: 100vh;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  background-color: #f0f2f5; // 🎨 인트로 페이지 배경색
-}
+  #wrapper {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f2f5; // 🎨 인트로 페이지 배경색
+  }
 
-.header-wrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 70px;
-}
+  .header-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 70px;
+  }
 
-.header {
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 70px;
-
-  // 왼쪽 메뉴 (가격, 도움 센터)
-  &-left {
+  .header {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 20px;
     display: flex;
     align-items: center;
-    gap: 30px;
+    justify-content: space-between;
+    height: 70px;
+
+    // 왼쪽 메뉴 (가격, 도움 센터)
+    &-left {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+
+      a {
+        color: #4a5568;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #2d3748;
+        }
+      }
+    }
+
+    // 중앙 로고
+    &-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+
+      .logo img {
+        height: 40px;
+        width: auto;
+        object-fit: contain;
+      }
+    }
+
+    // 오른쪽 로그인
+    &-right {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .login-btn,
+  .register-btn {
+    background-color: #4299e1;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #3182ce;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
+    }
+  }
+
+  .empty-box {
+    width: 100%;
+    height: 70px; // 🎯 인트로 페이지는 헤더 높이만큼 여백
+  }
+
+  main {
+    flex: 1;
+  }
+
+  // 🎭 메인 콘텐츠 (히어로 + 피쳐)
+  .main-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  .main-content {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // 🦸 히어로 섹션 (왼쪽)
+  .hero-section {
+    width: 580px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+
+    h1 {
+      font-family: "Media Sans Bold", "Arial Black", "Helvetica", sans-serif;
+      font-size: 72px !important;
+      font-weight: 900;
+      color: #2d3748;
+      margin-bottom: 20px !important;
+      line-height: 1;
+      letter-spacing: -2px;
+      text-align: left;
+    }
+
+    p {
+      font-size: 16px;
+      color: #718096;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      max-width: 100%;
+    }
 
     a {
-      color: #4a5568;
+      display: inline-block;
+      background-color: #4299e1;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 6px;
       text-decoration: none;
-      font-size: 16px;
-      font-weight: 500;
-      transition: color 0.3s;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
 
       &:hover {
-        color: #2d3748;
+        background-color: #3182ce;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
       }
     }
   }
 
-  // 중앙 로고
-  &-center {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-
-    .logo img {
-      height: 40px;
-      width: auto;
-      object-fit: contain;
-    }
-  }
-
-  // 오른쪽 로그인
-  &-right {
+  // 🖼️ 피쳐 섹션 (오른쪽)
+  .features-section {
+    width: 700px;
+    height: 700px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
-  }
-}
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    background-color: #f8f9fa;
 
-.login-btn,
-.register-btn {
-  background-color: #4299e1;
-  color: white;
-  padding: 8px 20px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #3182ce;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
-  }
-}
-
-.empty-box {
-  width: 100%;
-  height: 70px; // 🎯 인트로 페이지는 헤더 높이만큼 여백
-}
-
-main {
-  flex: 1;
-}
-
-// 🎭 메인 콘텐츠 (히어로 + 피쳐)
-.main-wrapper {
-  display: flex;
-  justify-content: center;
-  padding: 40px 0;
-}
-
-.main-content {
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 40px;
-  display: flex;
-  gap: 40px;
-  align-items: center;
-  justify-content: center;
-}
-
-// 🦸 히어로 섹션 (왼쪽)
-.hero-section {
-  width: 580px;
-  height: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 40px 20px;
-  box-sizing: border-box;
-  flex-shrink: 0;
-
-  h1 {
-    font-family: "Media Sans Bold", "Arial Black", "Helvetica", sans-serif;
-    font-size: 72px;
-    font-weight: 900;
-    color: #2d3748;
-    margin-bottom: 20px;
-    line-height: 1;
-    letter-spacing: -2px;
-    text-align: left;
-  }
-
-  p {
-    font-size: 16px;
-    color: #718096;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    max-width: 100%;
-  }
-
-  a {
-    display: inline-block;
-    background-color: #4299e1;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-
-    &:hover {
-      background-color: #3182ce;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
     }
   }
-}
 
-// 🖼️ 피쳐 섹션 (오른쪽)
-.features-section {
-  width: 700px;
-  height: 700px;
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  overflow: hidden;
-  background-color: #f8f9fa;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-  }
-}
-
-.image-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #a0aec0;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-}
-
-// 📝 워크스페이스 타이틀
-.workspace-title {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 80px;
-  padding: 0 20px;
-
-  h1 {
-    font-family: "Media Sans Bold", "Arial Black", "Helvetica", sans-serif;
-    font-size: 72px;
-    font-weight: 900;
-    color: #2d3748;
-    text-transform: uppercase;
-    letter-spacing: -3px;
-    text-align: center;
-    line-height: 1;
-    margin: 0 0 30px 0;
-  }
-}
-
-main > p {
-  width: 100%;
-  text-align: center;
-  font-size: 18px;
-  color: #718096;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-// 🎭 스크롤 인터랙션 섹션
-.interactive-section {
-  width: 100%;
-  height: 400vh;
-  position: relative;
-  margin-top: 80px;
-}
-
-.sticky-container {
-  position: sticky;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 100px 0;
-  box-sizing: border-box;
-}
-
-.content-wrapper {
-  width: 100%;
-  max-width: 1200px;
-  padding: 0 40px;
-  display: flex;
-  gap: 80px;
-  align-items: center;
-  justify-content: center;
-}
-
-// 왼쪽 데모 박스
-.demo-box {
-  width: 600px;
-  height: 600px;
-  background: white;
-  border-radius: 20px;
-  padding: 40px;
-  box-sizing: border-box;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-  position: relative;
-  overflow: hidden;
-}
-
-.demo-content {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease;
-  width: calc(100% - 80px);
-  height: calc(100% - 80px);
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  z-index: 1;
-
-  &.active {
-    opacity: 1;
-    transform: translateY(0);
-    z-index: 10;
-  }
-}
-
-.demo-visual {
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.demo-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 12px;
-}
-
-// 오른쪽 단계 표시
-.steps-container {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-
-.step-item {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  transition: all 0.4s ease;
-
-  &.active {
-    .step-number {
-      background: #4299e1;
-      color: white;
-      border-color: #2d3748;
-      transform: scale(1.1);
-    }
-
-    .step-content {
-      opacity: 1;
-    }
-  }
-}
-
-.step-number {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #e2e8f0;
-  color: #718096;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
-  transition: all 0.4s ease;
-  border: 2px solid transparent;
-}
-
-.step-content {
-  opacity: 0.6;
-  transition: all 0.4s ease;
-}
-
-.step-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #2d3748;
-  margin-bottom: 8px;
-}
-
-.step-description {
-  font-size: 16px;
-  color: #718096;
-  line-height: 1.4;
-  max-width: 300px;
-}
-
-// 💰 요금제 섹션 (보라색 배경)
-.pricing-section {
-  width: 100%;
-  background: #4a1a5c;
-  padding: 180px 0 240px 0;
-  margin-top: 0;
-}
-
-.pricing-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-.pricing-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 60px;
-
-  h1 {
-    font-family: "Arial Black", "Helvetica", sans-serif;
-    font-size: 56px;
-    font-weight: 900;
-    color: #e8d5ff;
-    margin: 0;
-    letter-spacing: -1px;
-  }
-}
-
-.compare-button {
-  background: white;
-  color: #4a1a5c;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-  }
-}
-
-.pricing-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.pricing-card {
-  background: #f5f3f1;
-  border-radius: 20px;
-  padding: 40px 30px;
-  text-align: center;
-  transition: all 0.3s ease;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  &:hover {
-    transform: translateY(-8px) translateX(5px) rotate(2deg); // 🎪 인트로 특유의 호버 효과
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  }
-}
-
-.plan-header {
-  margin-bottom: 30px;
-
-  h2 {
-    font-size: 28px;
-    font-weight: 900;
-    color: #2d3748;
-    margin-bottom: 15px;
-    letter-spacing: 1px;
-  }
-}
-
-.price {
-  font-size: 36px;
-  font-weight: 900;
-  color: #2d3748;
-  margin-bottom: 8px;
-}
-
-.plan-subtitle {
-  color: #718096;
-  font-size: 14px;
-  margin: 0;
-}
-
-.plan-icon {
-  width: 180px;
-  height: 180px;
-  margin: 0 auto 30px auto;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-.plan-description {
-  color: #718096;
-  font-size: 16px;
-  line-height: 1.5;
-  text-align: center;
-}
-
-// ❓ FAQ 섹션
-.faq-section {
-  width: 100%;
-  background: #f0f2f5;
-  padding: 100px 0;
-}
-
-.faq-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-.faq-content {
-  display: flex;
-  align-items: center;
-  gap: 80px;
-  margin-left: 80px;
-}
-
-.faq-text {
-  flex: 1;
-  max-width: 500px;
-
-  h1 {
-    font-family: "Media Sans Bold", "Arial Black", "Helvetica", sans-serif;
-    font-size: 48px;
-    font-weight: 900;
-    color: #2d3748;
-    margin-bottom: 30px;
-    letter-spacing: -1px;
-    line-height: 1.2;
-  }
-
-  p {
-    font-size: 20px;
-    color: #718096;
-    line-height: 1.6;
-    margin-bottom: 40px;
-  }
-}
-
-.faq-button {
-  background: #4299e1;
-  color: white;
-  border: none;
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: none;
-
-  &:hover {
-    background: #3182ce;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(66, 153, 225, 0.3);
-  }
-}
-
-.faq-image {
-  flex: 1;
-  max-width: 400px;
-  height: 350px;
-  border-radius: 0;
-  overflow: hidden;
-  box-shadow: none;
-  background: transparent;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-}
-
-footer {
-  height: 60px;
-  background-color: #333;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-// 📱 반응형
-@media (max-width: 1240px) {
-  .main-content {
+  .image-placeholder {
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    justify-content: center;
+    color: #a0aec0;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  // 📝 워크스페이스 타이틀
+  .workspace-title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    padding: 0 20px;
+
+    h1 {
+      font-family: "Media Sans Bold", "Arial Black", "Helvetica", sans-serif;
+      font-size: 72px;
+      font-weight: 900;
+      color: #2d3748;
+      text-transform: uppercase;
+      letter-spacing: -3px;
+      text-align: center;
+      line-height: 1;
+      margin: 0 0 30px 0;
+    }
+  }
+
+  main > p {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color: #718096;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  // 🎭 스크롤 인터랙션 섹션
+  .interactive-section {
+    width: 100%;
+    height: 400vh;
+    position: relative;
+    margin-top: 80px;
+  }
+
+  .sticky-container {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 0;
+    box-sizing: border-box;
   }
 
   .content-wrapper {
-    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+    display: flex;
+    gap: 80px;
     align-items: center;
-    gap: 40px;
-  }
-
-  .demo-box {
-    width: 90%;
-    max-width: 500px;
-  }
-
-  .steps-container {
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
   }
 
-  .faq-content {
-    flex-direction: column;
-    gap: 40px;
-    text-align: center;
+  // 왼쪽 데모 박스
+  .demo-box {
+    width: 600px;
+    height: 600px;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
   }
-}
 
-@media (max-width: 1024px) {
-  .pricing-header {
+  .demo-content {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+    width: calc(100% - 80px);
+    height: calc(100% - 80px);
+    display: flex;
     flex-direction: column;
-    gap: 20px;
-    text-align: center;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    z-index: 1;
 
-    h1 {
-      font-size: 48px;
+    &.active {
+      opacity: 1;
+      transform: translateY(0);
+      z-index: 10;
     }
   }
 
-  .faq-text h1 {
-    font-size: 42px;
+  .demo-visual {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
-}
 
-@media (max-width: 768px) {
-  .pricing-cards {
-    grid-template-columns: 1fr;
+  .demo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+  }
+
+  // 오른쪽 단계 표시
+  .steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .step-item {
+    display: flex;
+    align-items: center;
     gap: 20px;
+    transition: all 0.4s ease;
+
+    &.active {
+      .step-number {
+        background: #4299e1;
+        color: white;
+        border-color: #2d3748;
+        transform: scale(1.1);
+      }
+
+      .step-content {
+        opacity: 1;
+      }
+    }
   }
 
-  .pricing-header h1 {
-    font-size: 36px;
+  .step-number {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #718096;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+  }
+
+  .step-content {
+    opacity: 0.6;
+    transition: all 0.4s ease;
+  }
+
+  .step-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2d3748;
+    margin-bottom: 8px;
+  }
+
+  .step-description {
+    font-size: 16px;
+    color: #718096;
+    line-height: 1.4;
+    max-width: 300px;
+  }
+
+  // 💰 요금제 섹션 (보라색 배경)
+  .pricing-section {
+    width: 100%;
+    background: #4a1a5c;
+    padding: 180px 0 240px 0;
+    margin-top: 0;
   }
 
   .pricing-container {
-    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
   }
 
-  .hero-section,
-  .features-section {
-    width: 100%;
-    max-width: 400px;
-    height: 400px;
+  .pricing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+
+    h1 {
+      font-family: "Arial Black", "Helvetica", sans-serif;
+      font-size: 56px;
+      font-weight: 900;
+      color: #e8d5ff;
+      margin: 0;
+      letter-spacing: -1px;
+    }
   }
 
-  .faq-text h1 {
+  .compare-button {
+    background: white;
+    color: #4a1a5c;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .pricing-card {
+    background: #f5f3f1;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &:hover {
+      transform: translateY(-8px) translateX(5px) rotate(2deg); // 🎪 인트로 특유의 호버 효과
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .plan-header {
+    margin-bottom: 30px;
+
+    h2 {
+      font-size: 28px;
+      font-weight: 900;
+      color: #2d3748;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+  }
+
+  .price {
     font-size: 36px;
+    font-weight: 900;
+    color: #2d3748;
+    margin-bottom: 8px;
   }
 
-  .faq-text p {
-    font-size: 18px;
+  .plan-subtitle {
+    color: #718096;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .plan-icon {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 30px auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .plan-description {
+    color: #718096;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  // ❓ FAQ 섹션
+  .faq-section {
+    width: 100%;
+    background: #f0f2f5;
+    padding: 100px 0;
   }
 
   .faq-container {
-    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .faq-content {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    margin-left: 80px;
+  }
+
+  .faq-text {
+    flex: 1;
+    max-width: 500px;
+
+    h1 {
+      font-family: "Media Sans Bold", "Arial Black", "Helvetica", sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: #2d3748;
+      margin-bottom: 30px;
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+
+    p {
+      font-size: 20px;
+      color: #718096;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+  }
+
+  .faq-button {
+    background: #4299e1;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: none;
+
+    &:hover {
+      background: #3182ce;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(66, 153, 225, 0.3);
+    }
   }
 
   .faq-image {
-    height: 250px;
+    flex: 1;
+    max-width: 400px;
+    height: 350px;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: none;
+    background: transparent;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  footer {
+    height: 60px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // 📱 반응형
+  @media (max-width: 1240px) {
+    .main-content {
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .content-wrapper {
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .demo-box {
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .steps-container {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .faq-content {
+      flex-direction: column;
+      gap: 40px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .pricing-header {
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+
+      h1 {
+        font-size: 48px;
+      }
+    }
+
+    .faq-text h1 {
+      font-size: 42px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .pricing-cards {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .pricing-header h1 {
+      font-size: 36px;
+    }
+
+    .pricing-container {
+      padding: 0 20px;
+    }
+
+    .hero-section,
+    .features-section {
+      width: 100%;
+      max-width: 400px;
+      height: 400px;
+    }
+
+    .faq-text h1 {
+      font-size: 36px;
+    }
+
+    .faq-text p {
+      font-size: 18px;
+    }
+
+    .faq-container {
+      padding: 0 20px;
+    }
+
+    .faq-image {
+      height: 250px;
+    }
   }
 }

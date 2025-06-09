@@ -4,18 +4,14 @@ import React from "react";
 const DemoContent = ({ stepNumber, imageSrc, isActive }) => {
   return (
     <div
-      className={`demo-content ${isActive ? "demo-content--active" : ""}`}
+      className={`demo-content ${isActive ? "active" : ""}`}
       data-step={stepNumber}
     >
-      <div className="demo-content__visual">
-        <img
-          className="demo-content__img"
-          src={imageSrc}
-          alt={`Demo ${stepNumber}`}
-        />
+      <div className="demo-visual">
+        <img className="demo-img" src={imageSrc} alt={`Demo ${stepNumber}`} />
       </div>
     </div>
   );
 };
 
-export default DemoContent;
+export { DemoContent };

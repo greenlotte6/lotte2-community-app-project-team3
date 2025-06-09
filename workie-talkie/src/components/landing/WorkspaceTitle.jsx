@@ -14,4 +14,4 @@ const WorkspaceTitle = () => {
   );
 };
 
-export default WorkspaceTitle;
+export { WorkspaceTitle };

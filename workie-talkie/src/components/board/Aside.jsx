@@ -6,19 +6,19 @@ export const Aside = () => {
     <>
       <aside className="sidebar">
         <div>
-          <div class="section-title">BOARDS</div>
+          <div className="section-title">BOARDS</div>
           <ul>
             <li>
               <Link to="/board/main">🏠메인</Link>
             </li>
             <li>
-              <Link to="/board/board">📢공지사항</Link>
+              <Link to="/board/list">📢공지사항</Link>
             </li>
             <li>
-              <Link to="/board/board">💬자유게시판</Link>
+              <Link to="/board/list">💬자유게시판</Link>
             </li>
             <li>
-              <Link to="/board/board">🍱식단표</Link>
+              <Link to="/board/list">🍱식단표</Link>
             </li>
           </ul>
         </div>

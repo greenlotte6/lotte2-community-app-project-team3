@@ -20,16 +20,23 @@ import { FindPw } from "../pages/user/FindPw";
 import { FindResult } from "../pages/user/FindResult";
 import Drivepage from "../pages/drive/Drivepage";
 import ChatPage from "../pages/chat/chatpage";
-
 // 랜딩페이지
-// import IntroPage from "../pages/landing/IntroPage";
-// import PricingPage from "../pages/landing/PricingPage";
-// import FAQPage from "../pages/landing/FAQPage";
+import IntroPage from "../pages/landing/IntroPage";
+import PricingPage from "../pages/landing/PricingPage";
+import FAQPage from "../pages/landing/FAQPage";
+import { CalendarPage } from "../pages/calendar/CalendarPage";
+import { Member } from "../pages/setting/Member";
+import { ProjectMain } from "../pages/project/ProjectMain";
+import { ProjectDetails } from "../pages/project/ProjectDetails";
+import { IntroPage } from "../pages/landing/IntroPage";
+import { PricingPage } from "../pages/landing/PricingPage";
+import { FAQPage } from "../pages/landing/FAQPage";
+
 
 //라우터 생성
 
 const router = createBrowserRouter([
-  { path: "/", element: null },
+  // { path: "/", element: null },
   { path: "/user/login", element: <Login /> },
   { path: "/user/policies", element: <Policies /> },
   { path: "/user/register", element: <Register /> },
@@ -46,16 +53,18 @@ const router = createBrowserRouter([
   { path: "/setting/drive", element: <Drive /> },
   { path: "/setting/board", element: <Board /> },
   { path: "/setting/plan", element: <Plan /> },
+  { path: "/setting/member", element: <Member /> },
   { path: "/board/main", element: <BoardMain /> },
   { path: "/board/list", element: <BoardList /> },
-
   { path: "/drive", element: <Drivepage /> },
   { path: "/chat", element: <ChatPage /> },
-
+  { path: "/calendar", element: <CalendarPage /> },
+  { path: "/project", element: <ProjectMain /> },
+  { path: "/project/details", element: <ProjectDetails /> },
   // 랜딩 페이지들
-  // { path: "/", element: <IntroPage /> },
-  // { path: "/pricing", element: <PricingPage /> },
-  // { path: "/faq", element: <FAQPage /> },
+  { path: "/", element: <IntroPage /> },
+  { path: "/pricing", element: <PricingPage /> },
+  { path: "/faq", element: <FAQPage /> },
 ]);
 
 // 라우터 내보내기

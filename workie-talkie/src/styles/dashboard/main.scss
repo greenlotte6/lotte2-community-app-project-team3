@@ -1,190 +1,192 @@
-.main-layout {
-  display: flex;
-  background-color: #f9fbfd;
-}
+#dashboard-container {
+  .main-layout {
+    display: flex;
+    background-color: #f9fbfd;
+  }
 
-main.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
+  main.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
 
-.dashboard {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 
-.top {
-  display: flex;
-  gap: 20px;
-  height: 100%;
-  align-items: stretch;
-}
+  .top {
+    display: flex;
+    gap: 20px;
+    height: 100%;
+    align-items: stretch;
+  }
 
-.part1,
-.part2 {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  height: 100%;
-}
+  .part1,
+  .part2 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+  }
 
-.part1 {
-  flex: 1;
-}
+  .part1 {
+    flex: 1;
+  }
 
-.part2 {
-  flex: 2;
-  height: 345px;
-}
+  .part2 {
+    flex: 2;
+    height: 345px;
+  }
 
-.profile,
-.time,
-.projects,
-.project-list,
-.notices1,
-.notices2,
-.notices3 {
-  background-color: #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  padding: 15px;
-}
+  .profile,
+  .time,
+  .projects,
+  .project-list,
+  .notices1,
+  .notices2,
+  .notices3 {
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+  }
 
-.profile,
-.time,
-.projects {
-  flex: 1;
-}
+  .profile,
+  .time,
+  .projects {
+    flex: 1;
+  }
 
-.profile {
-  display: flex;
-  gap: 10px;
-}
+  .profile {
+    display: flex;
+    gap: 10px;
+  }
 
-.profile-image img {
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-}
+  .profile-image img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+  }
 
-.profile-info p {
-  margin: 4px 0;
-}
+  .profile-info p {
+    margin: 4px 0;
+  }
 
-.time {
-  text-align: center;
-}
+  .time {
+    text-align: center;
+  }
 
-.js-clock {
-  display: flex; /* 자식 요소들을 Flex 아이템으로 만듭니다. */
-  flex-direction: column; /* Flex 아이템들을 세로(열) 방향으로 정렬합니다. */
-  align-items: center; /* Flex 아이템들을 가로축(cross axis)에서 중앙 정렬합니다. (텍스트 중앙 정렬 효과) */
-  justify-content: center; /* 세로축(main axis)에서 중앙 정렬합니다. (부모 높이에 따라) */
-  height: 190px;
-}
+  .js-clock {
+    display: flex; /* 자식 요소들을 Flex 아이템으로 만듭니다. */
+    flex-direction: column; /* Flex 아이템들을 세로(열) 방향으로 정렬합니다. */
+    align-items: center; /* Flex 아이템들을 가로축(cross axis)에서 중앙 정렬합니다. (텍스트 중앙 정렬 효과) */
+    justify-content: center; /* 세로축(main axis)에서 중앙 정렬합니다. (부모 높이에 따라) */
+    height: 190px;
+  }
 
-.js-clock .currDate,
-.js-clock .currTime {
-  white-space: nowrap;
-}
+  .js-clock .currDate,
+  .js-clock .currTime {
+    white-space: nowrap;
+  }
 
-.projects {
-  display: flex;
-  flex-direction: column;
-}
+  .projects {
+    display: flex;
+    flex-direction: column;
+  }
 
-.lists {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
+  .lists {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
 
-.project-list {
-  flex: 1;
-}
+  .project-list {
+    flex: 1;
+  }
 
-.part3 {
-  display: flex;
-  gap: 20px;
-}
+  .part3 {
+    display: flex;
+    gap: 20px;
+  }
 
-.notices1,
-.notices2 {
-  flex: 1;
-}
+  .notices1,
+  .notices2 {
+    flex: 1;
+  }
 
-.notices3 {
-  flex: 1;
-}
+  .notices3 {
+    flex: 1;
+  }
 
-.notices1 article,
-.notices2 article {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 10px;
-  margin-bottom: 10px;
-}
+  .notices1 article,
+  .notices2 article {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
 
-.title span,
-.content p,
-.info span,
-.info p {
-  font-size: 0.95rem;
-}
+  .title span,
+  .content p,
+  .info span,
+  .info p {
+    font-size: 0.95rem;
+  }
 
-.title span {
-  font-weight: bold;
-  margin-right: 6px;
-}
+  .title span {
+    font-weight: bold;
+    margin-right: 6px;
+  }
 
-.info span::before,
-.info p::before {
-  margin-right: 4px;
-}
+  .info span::before,
+  .info p::before {
+    margin-right: 4px;
+  }
 
-.notices2 h2,
-.notices1 h2,
-.projects h2 {
-  font-size: 1.1rem;
-  border-bottom: 2px solid #e0e0e0;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-}
+  .notices2 h2,
+  .notices1 h2,
+  .projects h2 {
+    font-size: 1.1rem;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
 
-.notices2 h3 {
-  font-size: 1rem;
-  margin: 10px 0 5px;
-  color: #333;
-}
+  .notices2 h3 {
+    font-size: 1rem;
+    margin: 10px 0 5px;
+    color: #333;
+  }
 
-/* 진행률 막대 컨테이너 */
-.percentage {
-  display: flex; /* 막대와 텍스트를 한 줄에 배치 */
-  align-items: center; /* 세로 중앙 정렬 */
-  gap: 10px; /* 막대와 텍스트 사이 간격 */
-  margin-top: 10px; /* 필요에 따라 상단 여백 추가 */
-}
+  /* 진행률 막대 컨테이너 */
+  .percentage {
+    display: flex; /* 막대와 텍스트를 한 줄에 배치 */
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 10px; /* 막대와 텍스트 사이 간격 */
+    margin-top: 10px; /* 필요에 따라 상단 여백 추가 */
+  }
 
-.progress-bar-container {
-  width: 150px; /* 막대 전체 너비 설정 (조절 가능) */
-  height: 10px; /* 막대 높이 */
-  background-color: #e0e0e0; /* 막대 배경색 */
-  border-radius: 5px; /* 막대 모서리 둥글게 */
-  overflow: hidden; /* 내부 채움 바가 컨테이너를 넘지 않도록 */
-}
+  .progress-bar-container {
+    width: 150px; /* 막대 전체 너비 설정 (조절 가능) */
+    height: 10px; /* 막대 높이 */
+    background-color: #e0e0e0; /* 막대 배경색 */
+    border-radius: 5px; /* 막대 모서리 둥글게 */
+    overflow: hidden; /* 내부 채움 바가 컨테이너를 넘지 않도록 */
+  }
 
-/* 실제 진행률을 채우는 바 */
-.progress-bar-filler {
-  height: 100%; /* 부모 높이 전체 사용 */
-  background-color: #4caf50; /* 진행률 색상 (초록색 예시) */
-  border-radius: 5px; /* 모서리 둥글게 */
-  transition: width 0.5s ease-in-out; /* 너비 변경 시 부드러운 애니메이션 효과 */
-}
+  /* 실제 진행률을 채우는 바 */
+  .progress-bar-filler {
+    height: 100%; /* 부모 높이 전체 사용 */
+    background-color: #4caf50; /* 진행률 색상 (초록색 예시) */
+    border-radius: 5px; /* 모서리 둥글게 */
+    transition: width 0.5s ease-in-out; /* 너비 변경 시 부드러운 애니메이션 효과 */
+  }
 
-/* 진행률 텍스트 스타일 (선택 사항) */
-.percentage span {
-  font-weight: bold;
-  color: #333;
+  /* 진행률 텍스트 스타일 (선택 사항) */
+  .percentage span {
+    font-weight: bold;
+    color: #333;
+  }
 }

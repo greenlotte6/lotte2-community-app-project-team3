@@ -9,9 +9,10 @@ import "./styles/imports/boards.scss";
 import "./styles/imports/users.scss";
 import "./styles/imports/drive.scss";
 import "./styles/imports/chats.scss";
-// import "./styles/landing/intro.scss";
-// import "./styles/landing/pricing.scss";
-// import "./styles/landing/faq.scss";
+import "./styles/imports/landings.scss";
+import "./styles/imports/calender.scss";
+import "./styles/imports/projects.scss";
+
 
 function App() {
   return <RouterProvider router={router} />;

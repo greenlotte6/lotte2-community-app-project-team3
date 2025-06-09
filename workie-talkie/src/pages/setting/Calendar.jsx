@@ -4,7 +4,7 @@ import { SettingLayout } from "../../layouts/SettingLayout";
 export const Calendar = () => {
   return (
     <SettingLayout>
-      <main className="main-content">
+      <main className="main-content" id="calendar-container">
         <article className="main-content">
           <div className="title">
             <h1>달력 설정</h1>
