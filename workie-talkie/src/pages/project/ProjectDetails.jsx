@@ -1,22 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { MainLayout } from "../../layouts/MainLayout";
-
+import { DetailsAddModal } from "../../components/project/DetailsAddModal";
+import { DetailsModifyModal } from "../../components/project/DetailsModifyModal";
+{
+  /* 
+  스크립트까지 완전 이식은 못했습니다 ㅜ 
+  모달 띄우는거까지만 해놨는데 기능구현하면서 마무리 부탁드려요! 
+  */
+}
 export const ProjectDetails = () => {
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
+
   return (
     <MainLayout>
       <div id="wrapper" className="project-details-container">
+        {/* 디자인 바꾸셔도 됩니다! scss 파일에도 써놨는데, 프로젝트 이동용으로 추가한거에용 */}
         <aside>
           <h2 className="sidebar-title">My Project</h2>
           <div className="project-list">
-            <p>프로젝트명1</p>
+            <p>프로젝트명</p>
             <p>프로젝트내용</p>
           </div>
           <div className="project-list">
-            <p>프로젝트명1</p>
+            <p>프로젝트명</p>
             <p>프로젝트내용</p>
           </div>
           <div className="project-list">
-            <p>프로젝트명1</p>
+            <p>프로젝트명</p>
             <p>프로젝트내용</p>
           </div>
         </aside>
@@ -28,7 +39,11 @@ export const ProjectDetails = () => {
               <button className="search-btn" title="검색">
                 🔍
               </button>
-              <button className="add-btn" title="새 작업 추가">
+              <button
+                className="add-btn"
+                title="새 작업 추가"
+                onClick={() => setIsAddModalOpen(true)}
+              >
                 ➕
               </button>
             </div>
@@ -44,7 +59,10 @@ export const ProjectDetails = () => {
                 <button className="column-menu">⋯</button>
               </div>
 
-              <div className="task-list">
+              <div
+                className="task-list"
+                onClick={() => setIsModifyModalOpen(true)}
+              >
                 <div className="task-card priority-high">
                   <div className="task-title">로그인 페이지 디자인 수정</div>
                   <div className="task-description">
@@ -95,7 +113,12 @@ export const ProjectDetails = () => {
                 </div>
               </div>
 
-              <button className="add-task-btn">+ 새 작업 추가</button>
+              <button
+                className="add-task-btn"
+                onClick={() => setIsAddModalOpen(true)}
+              >
+                + 새 작업 추가
+              </button>
             </div>
             <div className="kanban-column progress">
               <div className="column-header">
@@ -251,6 +274,12 @@ export const ProjectDetails = () => {
               <button className="add-task-btn">+ 새 작업 추가</button>
             </div>
           </div>
+          {isAddModalOpen && (
+            <DetailsAddModal onClose={() => setIsAddModalOpen(false)} />
+          )}
+          {isModifyModalOpen && (
+            <DetailsModifyModal onClose={() => setIsModifyModalOpen(false)} />
+          )}
         </main>
       </div>
     </MainLayout>
