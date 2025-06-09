@@ -1,3 +1,4 @@
+/* 기본 설정 */
 * {
   margin: 0;
   padding: 0;
@@ -28,16 +29,16 @@ textarea {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f8f9fa; // 🎨 프라이싱 페이지 배경색
+  background-color: #f8f9fa;
 }
 
-// 📱 헤더 (스티키 헤더 + 흰색 배경)
+/* 헤더 스타일 */
 .header-wrapper {
   display: flex;
   justify-content: center;
   width: 100%;
   height: 70px;
-  background: white; // 🎯 프라이싱 페이지는 흰색 헤더
+  background: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
@@ -110,7 +111,7 @@ textarea {
 
 .empty-box {
   width: 100%;
-  height: 0; // 🎯 프라이싱 페이지는 스티키 헤더라 여백 없음
+  height: 0;
 }
 
 main {
@@ -118,7 +119,7 @@ main {
   padding-bottom: 80px;
 }
 
-// 🎯 프라이싱 히어로 섹션
+/* 프라이싱 히어로 섹션 */
 .pricing-hero {
   padding: 80px 20px 60px;
 
@@ -140,7 +141,7 @@ main {
   }
 }
 
-// 🔄 토글 스위치 (월간/연간 결제)
+/* 토글 스위치 */
 .billing-toggle {
   display: inline-flex;
   background: #4a1a5c;
@@ -166,26 +167,26 @@ main {
   }
 }
 
-// 📋 프라이싱 플랜 섹션
+/* 프라이싱 플랜 섹션 */
 .pricing-plans {
   padding: 40px 20px;
 }
 
 .pricing-container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-// 플랜 그리드 (3개 카드를 나란히)
+/* 플랜 그리드 */
 .plans-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; // 🎯 3개 카드 고정
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 40px;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-// 플랜 카드
+/* 플랜 카드 */
 .plan-card {
   background: white;
   border-radius: 20px;
@@ -197,15 +198,14 @@ main {
 
   &:hover {
     border-color: #4a1a5c;
-    // 🎪 인트로와 동일한 호버 효과
     transform: translateY(-8px) translateX(5px) rotate(2deg);
     box-shadow: 0 20px 40px rgba(74, 26, 92, 0.15);
   }
 }
 
-// 카드 내용 영역
+/* 카드 내용 영역 */
 .plan-content {
-  padding: 30px 60px; // 🎯 세로 여백 줄이고 가로 여백 늘림
+  padding: 30px 60px;
   text-align: center;
   flex: 1;
 }
@@ -234,10 +234,10 @@ main {
   margin-bottom: 30px;
 }
 
-// 플랜 아이콘
+/* 플랜 아이콘 */
 .plan-icon {
   img {
-    max-width: 60px; // 🎯 아이콘 크기 제한
+    max-width: 60px;
     max-height: 60px;
     width: auto;
     height: auto;
@@ -270,10 +270,10 @@ main {
   line-height: 1.5;
 }
 
-// ✅ 기능 리스트 영역
+/* 기능 리스트 */
 .plan-features {
   background: #f9fafb;
-  padding: 25px 60px; // 🎯 세로 여백 줄이고 가로 여백 늘림
+  padding: 25px 60px;
   border-top: 1px solid #e5e7eb;
 }
 
@@ -299,15 +299,15 @@ main {
   fill: none;
 
   &.active {
-    color: #10b981; // 녹색 체크
+    color: #10b981;
   }
 
   &.inactive {
-    color: #d1d5db; // 회색 X
+    color: #d1d5db;
   }
 }
 
-// 📊 요금제 비교 섹션
+/* 요금제 비교 섹션 */
 .pricing-comparison {
   padding: 80px 20px;
   background: white;
@@ -318,7 +318,6 @@ main {
   margin: 0 auto;
 }
 
-// 비교 섹션 헤더
 .comparison-header {
   text-align: center;
   margin-bottom: 60px;
@@ -340,7 +339,6 @@ main {
   }
 }
 
-// 비교 테이블
 .comparison-table {
   background: white;
   border-radius: 20px;
@@ -349,7 +347,7 @@ main {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-// 테이블 헤더
+/* 테이블 헤더 */
 .table-header {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -433,7 +431,7 @@ main {
   }
 }
 
-// 테이블 바디
+/* 테이블 바디 */
 .table-body {
   background: white;
 }
@@ -476,7 +474,7 @@ main {
   color: #374151;
 }
 
-// 푸터
+/* 푸터 */
 footer {
   height: 60px;
   background-color: #333;
@@ -487,10 +485,10 @@ footer {
   margin-top: auto;
 }
 
-// 📱 반응형
+/* 반응형 */
 @media (max-width: 1200px) {
   .plans-grid {
-    grid-template-columns: 1fr; // 작은 화면에서는 세로로
+    grid-template-columns: 1fr;
     gap: 20px;
   }
 }
