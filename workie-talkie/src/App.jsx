@@ -8,9 +8,11 @@ import "./styles/imports/dashboards.scss";
 import "./styles/imports/boards.scss";
 import "./styles/imports/users.scss";
 import "./styles/imports/drive.scss";
-//import "./styles/imports/landings.scss";
+import "./styles/imports/chats.scss";
+import "./styles/imports/landings.scss";
 import "./styles/imports/calender.scss";
 import "./styles/imports/projects.scss";
+
 
 function App() {
   return <RouterProvider router={router} />;
