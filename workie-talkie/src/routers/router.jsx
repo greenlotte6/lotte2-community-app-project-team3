@@ -25,14 +25,20 @@ import { ProjectMain } from "../pages/project/ProjectMain";
 import { ProjectDetails } from "../pages/project/ProjectDetails";
 
 // 랜딩페이지
-//import IntroPage from "../pages/landing/IntroPage";
-//import PricingPage from "../pages/landing/PricingPage";
-//import FAQPage from "../pages/landing/FAQPage";
+
+import IntroPage from "../pages/landing/IntroPage";
+import PricingPage from "../pages/landing/PricingPage";
+import FAQPage from "../pages/landing/FAQPage";
+
+import { IntroPage } from "../pages/landing/IntroPage";
+import { PricingPage } from "../pages/landing/PricingPage";
+import { FAQPage } from "../pages/landing/FAQPage";
+
 
 //라우터 생성
 
 const router = createBrowserRouter([
-  { path: "/", element: null },
+  // { path: "/", element: null },
   { path: "/user/login", element: <Login /> },
   { path: "/user/policies", element: <Policies /> },
   { path: "/user/register", element: <Register /> },
@@ -60,9 +66,10 @@ const router = createBrowserRouter([
   { path: "/project/details", element: <ProjectDetails /> },
 
   // 랜딩 페이지들
-  //{ path: "/", element: <IntroPage /> },
-  //{ path: "/pricing", element: <PricingPage /> },
-  //{ path: "/faq", element: <FAQPage /> },
+  { path: "/", element: <IntroPage /> },
+  { path: "/pricing", element: <PricingPage /> },
+  { path: "/faq", element: <FAQPage /> },
+
 ]);
 
 // 라우터 내보내기

@@ -17,11 +17,13 @@ const HeroSection = () => {
         드립니다.
       </p>
 
-      <a href="#project" className="hero-section__cta">
+      <a href="#project">
+        {" "}
+        {/* className 제거! */}
         프로젝트 시작하기
       </a>
     </section>
   );
 };
 
-export default HeroSection;
+export { HeroSection };
