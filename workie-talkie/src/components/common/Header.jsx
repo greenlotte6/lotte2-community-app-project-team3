@@ -31,7 +31,7 @@ export const Header = () => {
         <div className="memu">
         <Link to="/board/main"><img src="/images/header/board.png" alt="게시판" className="memu-icon" /></Link>
         <div className="vertical-divider"></div>
-        <Link to="/chat/main"><img src="/images/header/chat.png" alt="메세지" className="memu-icon" /></Link>
+        <Link to="/chat"><img src="/images/header/chat.png" alt="메세지" className="memu-icon" /></Link>
         <div className="vertical-divider"></div>
         <Link to="/calendar"><img src="/images/header/calendar.png" alt="캘린더" className="memu-icon" /></Link>
         <div className="vertical-divider"></div>
