@@ -18,6 +18,7 @@ import { Register } from "../pages/user/Register";
 import { FindId } from "../pages/user/FindId";
 import { FindPw } from "../pages/user/FindPw";
 import { FindResult } from "../pages/user/FindResult";
+import Drivepage from "../pages/drive/Drivepage";
 
 //라우터 생성
 
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
   { path: "/setting/plan", element: <Plan /> },
   { path: "/board/main", element: <BoardMain /> },
   { path: "/board/list", element: <BoardList /> },
+  { path: "/drive", element: <Drivepage /> },
 ]);
 
 // 라우터 내보내기
