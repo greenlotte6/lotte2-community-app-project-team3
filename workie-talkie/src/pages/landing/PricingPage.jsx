@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Header } from "../../components/landing/Header";
 import { Footer } from "../../components/common/Footer";
-import "../../styles/landing/pricing.scss";
+//import "../../styles/landing/pricing.scss";
 
 const PricingPage = () => {
   // 월간/연간 토글 상태 관리

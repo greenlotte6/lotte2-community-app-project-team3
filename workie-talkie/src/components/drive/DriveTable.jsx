@@ -22,7 +22,7 @@ export const DriveTable = ({ activeTab, folders, trash, onRequestRename }) => {
   };
 
   return (
-    <section className="tab-content active" id="drive-container">
+    <section className="tab-content active">
       {/* 드래그 앤 드롭 영역 (선택 사항) */}
       {!isTrash && (
         <div id="drop-zone" className="drop-zone" ref={dropRef}>

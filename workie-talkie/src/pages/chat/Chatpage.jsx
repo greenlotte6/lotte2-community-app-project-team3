@@ -1,4 +1,3 @@
-// src/pages/ChatPage.jsx
 import React from "react";
 
 import { ChatLayout } from "../../layouts/ChatLayout";
@@ -10,9 +9,6 @@ import { ChatInput } from "../../components/chat/ChatInput";
 const ChatPage = () => {
   return (
     <ChatLayout>
-      <aside>
-        <Aside />
-      </aside>
       <main>
         <ChatHeader />
         <ChatMessages />

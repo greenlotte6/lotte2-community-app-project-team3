@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Header } from "../../components/landing/Header";
 import { Footer } from "../../components/common/Footer";
-import "../../styles/landing/faq.scss";
+//import "../../styles/landing/faq.scss";
 
 const FAQPage = () => {
   // 검색어 상태 관리
