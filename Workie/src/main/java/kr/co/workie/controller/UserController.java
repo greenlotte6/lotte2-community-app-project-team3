@@ -86,6 +86,7 @@ public class UserController {
             map.put("username", user.getId());
             map.put("name", user.getName());
             map.put("position", user.getPosition());
+            map.put("employeeId", user.getEmployeeId());
             map.put("email", user.getEmail());
             map.put("ssn", user.getSsn());
             map.put("tax", user.getTax());

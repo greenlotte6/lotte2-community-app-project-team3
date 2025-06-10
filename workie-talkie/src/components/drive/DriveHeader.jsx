@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 export const DriveHeader = ({
   activeTab,
@@ -10,6 +10,19 @@ export const DriveHeader = ({
 }) => {
   const isTrash = activeTab === "🗑️ 휴지통";
   const isDisabled = selectedIndexes.length === 0;
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  // 드롭다운 외부 클릭 시 닫기
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <header className="header">
@@ -51,10 +64,51 @@ export const DriveHeader = ({
               📂 이동
             </button>
 
-            <div className="dropdown-wrapper">
-              <button className="create-folder-btn" onClick={onOpenFolderModal}>
+            {/* 드롭다운 영역 */}
+            <div className="dropdown-wrapper" ref={dropdownRef}>
+              <button
+                className="create-folder-btn"
+                onClick={() => setIsDropdownOpen((prev) => !prev)}
+              >
                 + 새로 만들기
               </button>
+              {isDropdownOpen && (
+                <ul className="dropdown-menu">
+                  <li
+                    onClick={() => {
+                      setIsDropdownOpen(false);
+                      onOpenFolderModal();
+                    }}
+                  >
+                    📁 새 폴더 만들기
+                  </li>
+                  <li
+                    onClick={() => {
+                      setIsDropdownOpen(false);
+                      alert("📂 폴더 업로드 기능은 추후 구현됩니다.");
+                    }}
+                  >
+                    📂 폴더 업로드
+                  </li>
+                  <li
+                    onClick={() => {
+                      setIsDropdownOpen(false);
+                      document.getElementById("fileElem").click();
+                    }}
+                  >
+                    📄 파일 업로드
+                  </li>
+                </ul>
+              )}
+              <input
+                type="file"
+                id="fileElem"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) alert(`📄 업로드할 파일: ${file.name}`);
+                }}
+              />
             </div>
           </>
         )}

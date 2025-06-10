@@ -36,11 +36,11 @@ body {
   .container {
     display: flex;
     height: 100vh;
+    flex-direction: column;
   }
 
   .main-layout {
     display: flex;
-    height: calc(100vh - 140px);
   }
 
   .container {
@@ -281,6 +281,11 @@ body {
 
   .dropdown-wrapper .dropdown-menu li:last-child {
     border-bottom: none;
+  }
+
+  .dropdown-wrapper {
+    margin-left: 5px;
+    margin-right: 5px;
   }
 
   button.download-btn,

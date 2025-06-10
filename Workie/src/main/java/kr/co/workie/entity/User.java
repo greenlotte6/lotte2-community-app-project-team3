@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -23,6 +24,8 @@ public class User {
     private String ssn;
     private String tax;
     private String name;
+    private String rating;
+    private String employeeId;
     private String email;
     private String hp;
     private String role;
