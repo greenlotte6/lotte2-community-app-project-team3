@@ -1,11 +1,39 @@
 import React, { useState, useRef } from "react";
+import { ContextMenu } from "./ContextMenu"; // 우클릭 메뉴 컴포넌트
 
-export const DriveTable = ({ activeTab, folders, trash, onRequestRename }) => {
-  const [selectedIndexes, setSelectedIndexes] = useState([]);
+export const DriveTable = ({
+  activeTab,
+  folders,
+  trash,
+  selectedIndexes,
+  setSelectedIndexes,
+  onRequestRename,
+  onRequestRestore,
+}) => {
   const dropRef = useRef(null);
-
   const isTrash = activeTab === "🗑️ 휴지통";
   const data = isTrash ? trash : folders;
+
+  const [contextMenu, setContextMenu] = useState({
+    visible: false,
+    x: 0,
+    y: 0,
+    index: null,
+  });
+
+  const handleContextMenu = (e, index) => {
+    e.preventDefault();
+    setContextMenu({
+      visible: true,
+      x: e.clientX,
+      y: e.clientY,
+      index,
+    });
+  };
+
+  const handleCloseContextMenu = () => {
+    setContextMenu((prev) => ({ ...prev, visible: false }));
+  };
 
   const handleCheckboxChange = (index, checked) => {
     setSelectedIndexes((prev) =>
@@ -23,7 +51,6 @@ export const DriveTable = ({ activeTab, folders, trash, onRequestRename }) => {
 
   return (
     <section className="tab-content active">
-      {/* 드래그 앤 드롭 영역 (선택 사항) */}
       {!isTrash && (
         <div id="drop-zone" className="drop-zone" ref={dropRef}>
           <p>여기로 파일을 끌어다 놓으세요</p>
@@ -57,7 +84,7 @@ export const DriveTable = ({ activeTab, folders, trash, onRequestRename }) => {
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index}>
+            <tr key={index} onContextMenu={(e) => handleContextMenu(e, index)}>
               <td>
                 <input
                   type="checkbox"
@@ -79,13 +106,31 @@ export const DriveTable = ({ activeTab, folders, trash, onRequestRename }) => {
               <td>{item.createdAt}</td>
               {isTrash && (
                 <td>
-                  <button onClick={() => onRequestRename(index)}>복원</button>
+                  <button onClick={() => onRequestRestore(index)}>복원</button>
                 </td>
               )}
             </tr>
           ))}
         </tbody>
       </table>
+
+      <ContextMenu
+        visible={contextMenu.visible}
+        position={{ x: contextMenu.x, y: contextMenu.y }}
+        onClose={handleCloseContextMenu}
+        onDelete={() => {
+          handleCloseContextMenu();
+          // 추후 삭제 기능 연결
+        }}
+        onRename={() => {
+          handleCloseContextMenu();
+          onRequestRename(contextMenu.index);
+        }}
+        onDownload={() => {
+          handleCloseContextMenu();
+          alert("📥 내려받기 기능은 추후 구현됩니다.");
+        }}
+      />
     </section>
   );
 };
