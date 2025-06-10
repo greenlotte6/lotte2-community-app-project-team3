@@ -99,7 +99,7 @@ const FAQPage = () => {
   const filteredCategories = getFilteredCategories();
 
   return (
-    <div id="wrapper">
+    <div id="faq-page">
       <Header />
       <div className="empty-box" />
 

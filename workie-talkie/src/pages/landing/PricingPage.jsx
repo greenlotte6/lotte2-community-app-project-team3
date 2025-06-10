@@ -92,7 +92,7 @@ const PricingPage = () => {
   ];
 
   return (
-    <div id="wrapper">
+    <div id="pricing-page">
       <Header />
       <div className="empty-box" />
 

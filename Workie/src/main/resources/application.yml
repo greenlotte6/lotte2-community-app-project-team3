@@ -72,5 +72,8 @@ logging:
   level:
     root: info
     kr.co.lotteOn: debug
+    kr.co.workie: debug                    # 채팅 패키지 로깅
+    org.springframework.web.socket: debug  # WebSocket 로깅
+    org.springframework.messaging: debug   # 메시징 로깅
     org.hibernate.SQL: info
     org.hibernate.type.descriptor.sql.BasicBinder: off
