@@ -21,7 +21,9 @@ import { FindResult } from "../pages/user/FindResult";
 import Drivepage from "../pages/drive/Drivepage";
 import ChatPage from "../pages/chat/chatpage";
 
-// 랜딩페이지
+// 채팅 테스트 페이지 추가
+import { ChatTestPage } from "../pages/chat/ChatTestPage";
+
 import { CalendarPage } from "../pages/calendar/CalendarPage";
 import { Member } from "../pages/setting/Member";
 import { ProjectMain } from "../pages/project/ProjectMain";
@@ -62,6 +64,9 @@ const router = createBrowserRouter([
   { path: "/", element: <IntroPage /> },
   { path: "/pricing", element: <PricingPage /> },
   { path: "/faq", element: <FAQPage /> },
+
+  // 📢 채팅 테스트 페이지 추가!
+  { path: "/chat/chatTest", element: <ChatTestPage /> },
 ]);
 
 // 라우터 내보내기
