@@ -33,6 +33,7 @@ export const Login = () => {
           navigate("/dashboard/main");
         }
       } catch (err) {
+        alert("아이디/비밀번호를 확인해주세요");
         console.error(err);
       }
     };

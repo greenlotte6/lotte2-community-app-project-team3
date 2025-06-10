@@ -20,6 +20,7 @@ public class UserDTO {
     private String role;
     private String position;
     private String office;
+    private String department;
     private String zip;
     private String addr1;
     private String addr2;
@@ -28,6 +29,10 @@ public class UserDTO {
 
     private String regip;
     private String sms;
+    
+    //추가필드
+    private String companyName;
+    private String CEOId;
 
 
 

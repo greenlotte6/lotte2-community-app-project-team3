@@ -1,6 +1,6 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import { Profile } from "../pages/setting/profile";
+import { Profile } from "../pages/setting/Profile";
 import { Page } from "../pages/setting/Page";
 import { Project } from "../pages/setting/Project";
 import { Board } from "../pages/setting/Board";
@@ -31,35 +31,42 @@ import { ProjectDetails } from "../pages/project/ProjectDetails";
 import { IntroPage } from "../pages/landing/IntroPage";
 import { PricingPage } from "../pages/landing/PricingPage";
 import { FAQPage } from "../pages/landing/FAQPage";
+import { AuthWrapper } from "../components/auth/AuthWrapper";
 
 //라우터 생성
 
 const router = createBrowserRouter([
-  // { path: "/", element: null },
   { path: "/user/login", element: <Login /> },
   { path: "/user/policies", element: <Policies /> },
   { path: "/user/register", element: <Register /> },
   { path: "/user/findId", element: <FindId /> },
   { path: "/user/findPw", element: <FindPw /> },
   { path: "/user/findResult", element: <FindResult /> },
-  { path: "/dashboard/main", element: <Main /> },
-  { path: "/setting/profile", element: <Profile /> },
-  { path: "/setting/page", element: <Page /> },
-  { path: "/setting/message", element: <Message /> },
-  { path: "/setting/autoMessage", element: <AutoMessage /> },
-  { path: "/setting/calendar", element: <Calendar /> },
-  { path: "/setting/project", element: <Project /> },
-  { path: "/setting/drive", element: <Drive /> },
-  { path: "/setting/board", element: <Board /> },
-  { path: "/setting/plan", element: <Plan /> },
-  { path: "/setting/member", element: <Member /> },
-  { path: "/board/main", element: <BoardMain /> },
-  { path: "/board/list", element: <BoardList /> },
-  { path: "/drive", element: <Drivepage /> },
-  { path: "/chat", element: <ChatPage /> },
-  { path: "/calendar", element: <CalendarPage /> },
-  { path: "/project", element: <ProjectMain /> },
-  { path: "/project/details", element: <ProjectDetails /> },
+  {
+    element: <AuthWrapper />,
+    children: [
+      { path: "/dashboard/main", element: <Main /> },
+      { path: "/setting/profile", element: <Profile /> },
+      { path: "/setting/page", element: <Page /> },
+      { path: "/setting/message", element: <Message /> },
+      { path: "/setting/autoMessage", element: <AutoMessage /> },
+      { path: "/setting/calendar", element: <Calendar /> },
+      { path: "/setting/project", element: <Project /> },
+      { path: "/setting/drive", element: <Drive /> },
+      { path: "/setting/board", element: <Board /> },
+      { path: "/setting/plan", element: <Plan /> },
+      { path: "/setting/member", element: <Member /> },
+      { path: "/board/main", element: <BoardMain /> },
+      { path: "/board/list", element: <BoardList /> },
+      { path: "/drive", element: <Drivepage /> },
+      { path: "/chat", element: <ChatPage /> },
+      { path: "/calendar", element: <CalendarPage /> },
+      { path: "/project", element: <ProjectMain /> },
+      { path: "/project/details", element: <ProjectDetails /> },
+    ],
+  },
+  { path: "*", element: <Navigate to="/" replace /> },
+
   // 랜딩 페이지들
   { path: "/", element: <IntroPage /> },
   { path: "/pricing", element: <PricingPage /> },

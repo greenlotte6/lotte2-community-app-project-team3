@@ -35,14 +35,12 @@ public class UserController {
 
     @PostMapping("/user/login")
     public ResponseEntity login(@RequestBody UserDTO userDTO){
-
         log.info("login...1 : " + userDTO);
 
         try {
             // Security 인증 처리
             UsernamePasswordAuthenticationToken authToken
                     = new UsernamePasswordAuthenticationToken(userDTO.getId(), userDTO.getPass());
-
 
             // 사용자 DB 조회
             Authentication authentication = authenticationManager.authenticate(authToken);
@@ -53,7 +51,6 @@ public class UserController {
             User user = userDetails.getUser();
 
             log.info("login...3 : " + user);
-
 
             // 토큰 발급(액세스, 리프레쉬)
             String access  = jwtProvider.createToken(user, 1); // 1일
@@ -70,7 +67,7 @@ public class UserController {
                     .maxAge(Duration.ofDays(1)) //쿠키 수명
                     .build();
 
-            ResponseCookie refreshTokenCookie = ResponseCookie.from("refresh_token", access)
+            ResponseCookie refreshTokenCookie = ResponseCookie.from("refresh_token", refresh)
                     .httpOnly(true) //** httpOnly Cookie 생성 위함 (XSS 방지)
                     .secure(false)  //https 보안 프로토콜 적용
                     .path("/")  //쿠키 경로
@@ -83,13 +80,19 @@ public class UserController {
             headers.add(HttpHeaders.SET_COOKIE, accessTokenCookie.toString());
             headers.add(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString());
 
-
             // 액세스 토큰 클라이언트 전송
             Map<String, Object> map = new HashMap<>();
             map.put("grantType", "Bearer");
             map.put("username", user.getId());
-            //map.put("accessToken", access);
-            //map.put("refreshToken", refresh);
+            map.put("name", user.getName());
+            map.put("position", user.getPosition());
+            map.put("email", user.getEmail());
+            map.put("ssn", user.getSsn());
+            map.put("tax", user.getTax());
+            map.put("office", user.getOffice());
+            map.put("department", user.getDepartment());
+            map.put("hp", user.getHp());
+            map.put("regDate", user.getRegDate());
 
             return ResponseEntity.ok().headers(headers).body(map);
 

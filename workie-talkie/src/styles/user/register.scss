@@ -1,5 +1,4 @@
 #register {
-  height: 87vh; // 뷰포트 높이 전체를 차지하게 합니다.
   width: 100vw; // 뷰포트 너비 전체를 차지하게 합니다.
   margin: 0;
   font-family: "Noto Sans KR", sans-serif;
@@ -15,6 +14,7 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     min-height: auto;
+    margin: 20px;
   }
 
   .step {
