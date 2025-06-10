@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
+import { Test } from "../../pages/board/Test";
 
-export const TestComponent = () => {
+export const QuillEditor2 = () => {
   const [formData, setFormData] = useState({
     title: "",
     body: "", //Quill 에디터의 내용을 저장할 필드
@@ -12,11 +13,10 @@ export const TestComponent = () => {
       [filedName]: value,
     }));
   }, []);
-
   console.log("Current body content : ", formData.body);
 
   return (
-    <div>
+    <div className="title-section">
       <h1>게시글 작성</h1>
       <input
         type="text"
