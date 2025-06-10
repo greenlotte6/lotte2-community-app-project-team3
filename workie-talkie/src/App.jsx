@@ -12,7 +12,12 @@ import "./styles/imports/chats.scss";
 //import "./styles/imports/landings.scss";
 import "./styles/imports/calender.scss";
 import "./styles/imports/projects.scss";
-
+/*
+  npm install  
+  npm install quill
+  npm install sockjs-client @stomp/stompjs
+  npm install @fullcalendar/react @fullcalendar/daygrid @fullcalendar/timegrid @fullcalendar/interaction
+*/
 function App() {
   return <RouterProvider router={router} />;
 }
