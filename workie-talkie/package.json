@@ -16,6 +16,7 @@
     "@fullcalendar/react": "^6.1.17",
     "@fullcalendar/timegrid": "^6.1.17",
     "@reduxjs/toolkit": "^2.8.2",
+    "@stomp/stompjs": "^7.1.1",
     "add": "^2.0.6",
     "axios": "^1.9.0",
     "js-cookie": "^3.0.5",
@@ -25,6 +26,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.2",
     "sass": "^1.89.1",
+    "sockjs-client": "^1.6.1",
     "zustand": "^5.0.5"
   },
   "devDependencies": {
