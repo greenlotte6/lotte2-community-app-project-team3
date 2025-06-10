@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/header.scss";
+import { useLoginStore } from "../../stores/useLoginStore";
 
 export const Header = () => {
+  const user = useLoginStore((state) => state.user);
+  const navigate = useNavigate();
+  const logout = useLoginStore((state) => state.logout);
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -10,7 +15,8 @@ export const Header = () => {
   };
 
   const handleLogout = () => {
-    alert("로그아웃 처리 로직 실행"); // 실제 로그아웃 로직 연결 가능
+    logout(); // 상태에서 user 제거
+    navigate("/user/login");
   };
 
   const handleStatusChange = () => {
@@ -68,9 +74,9 @@ export const Header = () => {
             )}
           </div>
           <span className="admin">
-            김팀장
+            {user?.name}
             <br />
-            Admin
+            {user?.position}
           </span>
         </>
       </div>

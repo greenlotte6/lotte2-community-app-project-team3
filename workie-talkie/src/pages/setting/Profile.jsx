@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SettingLayout } from "../../layouts/SettingLayout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useLoginStore } from "../../stores/useLoginStore";
+import axios from "axios";
 
 export const Profile = () => {
-  return (
+  const user = useLoginStore((state) => state.user);
+  console.log("user in Profile:", user);
+
+  const navigate = useNavigate();
+
+  const [modifyUser, setModifyUser] = useState({
+    id: "",
+    pass: "",
+    name: "",
+    email: "",
+    hp: "",
+    ssn: "",
+    office: "",
+    department: "",
+  });
+
+  const [searchParams] = useSearchParams();
+
+  const id = searchParams.get("id");
+  console.log("id: " + id);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/user/login");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/setting/profile/${id}`)
+      .then((response) => {
+        console.log(response);
+
+        //state 초기화
+        setModifyUser(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  return user ? (
     <SettingLayout>
       <main className="main-content" id="profile-container">
         <article className="main-content">
@@ -19,20 +62,31 @@ export const Profile = () => {
             </div>
             <div className="right">
               <h4>이름</h4>
-              <input type="text" name="name" readOnly placeholder="김팀장" />
+              <input type="text" name="name" readOnly value={user?.name} />
 
               <h4>이메일</h4>
               <input
                 type="text"
                 name="email"
-                placeholder="kimleader@example.com"
+                value={user?.email}
+                onChange={null}
               />
 
               <h4>사내번호</h4>
-              <input type="text" name="office" placeholder="051-123-1234" />
+              <input
+                type="text"
+                name="office"
+                value={user?.office}
+                onChange={null}
+              />
 
               <h4>부서</h4>
-              <input type="text" name="department" readOnly placeholder="IT" />
+              <input
+                type="text"
+                name="department"
+                readOnly
+                value={user?.department}
+              />
 
               <h4>사번 / 직급</h4>
               <div className="input-row">
@@ -40,18 +94,18 @@ export const Profile = () => {
                   type="text"
                   name="employId"
                   readOnly
-                  placeholder="M1029"
+                  value={user?.position}
                 />
                 <input
                   type="text"
                   name="position"
                   readOnly
-                  placeholder="대리"
+                  value={user?.position}
                 />
               </div>
 
               <h4>아이디</h4>
-              <input type="text" name="id" readOnly placeholder="kim0531" />
+              <input type="text" name="id" readOnly value={user?.id} />
 
               <h4>비밀번호</h4>
               <div className="input-row">
@@ -63,6 +117,7 @@ export const Profile = () => {
                 <input
                   type="password"
                   name="pass2"
+                  onChange={null}
                   placeholder="비밀번호 확인"
                 />
               </div>
@@ -72,7 +127,7 @@ export const Profile = () => {
                 type="text"
                 name="regDate"
                 readOnly
-                placeholder="2025.05.31"
+                value={user?.regDate}
               />
             </div>
           </div>
@@ -83,5 +138,5 @@ export const Profile = () => {
         </article>
       </main>
     </SettingLayout>
-  );
+  ) : null;
 };

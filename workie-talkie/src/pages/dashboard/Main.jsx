@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { initClock } from "../../assets/js/clock";
 import { MainLayout } from "../../layouts/MainLayout";
+import { useLoginStore } from "../../stores/useLoginStore";
+import { useNavigate } from "react-router-dom";
 
 /* 
 로그인 정보를 사용하려면 다음처럼 꺼냅니다:
@@ -10,6 +12,8 @@ const username = useLoginStore((state) => state.user?.username);
 */
 
 export const Main = () => {
+  const user = useLoginStore((state) => state.user);
+  const navigate = useNavigate();
   useEffect(() => {
     initClock();
 
@@ -18,7 +22,13 @@ export const Main = () => {
     };
   }, []);
 
-  return (
+  useEffect(() => {
+    if (!user) {
+      navigate("/user/login");
+    }
+  }, [user]);
+
+  return user ? (
     <MainLayout>
       <main className="main-content" id="dashboard-container">
         <article className="main-content">
@@ -32,9 +42,9 @@ export const Main = () => {
                   <section className="profile-info">
                     <div>
                       <p>
-                        Welcome! <span>김팀장</span> 님{" "}
+                        Welcome! <span>{user?.name}</span> 님
                       </p>
-                      <p>(관리자)</p>
+                      <p>({user?.position})</p>
                     </div>
                   </section>
                 </div>
@@ -238,5 +248,5 @@ export const Main = () => {
         </article>
       </main>
     </MainLayout>
-  );
+  ) : null;
 };

@@ -6,10 +6,7 @@
 body {
   font-family: sans-serif;
 }
-.container {
-  display: flex;
-  height: 100vh;
-}
+
 .sidebar {
   width: 220px;
   background: #f5f5f5;
@@ -32,6 +29,10 @@ body {
   font-weight: bold;
 }
 #drive-container {
+  .container {
+    display: flex;
+    height: 100vh;
+  }
   .main {
     flex: 1;
     display: flex;

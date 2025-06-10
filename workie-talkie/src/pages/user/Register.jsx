@@ -11,9 +11,15 @@ const initState = {
   hp: "",
   companyName: "",
   tax: "",
+  ssn: "",
   zip: "",
   addr1: "",
   addr2: "",
+
+  //사업자 회원가입
+  role: "ADMIN",
+  position: "CEO",
+  office: "",
 };
 
 export const Register = () => {
@@ -62,7 +68,8 @@ export const Register = () => {
       !user.name ||
       !user.hp ||
       !user.companyName ||
-      !user.tax
+      !user.tax ||
+      !user.ssn
     ) {
       alert("모든 필수 정보를 입력해주세요.");
       return;
@@ -191,6 +198,18 @@ export const Register = () => {
                 id="tax"
                 name="tax"
                 value={user.tax}
+                onChange={changeHandler}
+                placeholder="사업자 등록 번호 입력"
+              />
+            </div>
+
+            <label>주민번호</label>
+            <div className="input-group">
+              <input
+                type="text"
+                id="ssn"
+                name="ssn"
+                value={user.ssn}
                 onChange={changeHandler}
                 placeholder="사업자 등록 번호 입력"
               />

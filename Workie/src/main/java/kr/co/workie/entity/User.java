@@ -28,6 +28,7 @@ public class User {
     private String role;
     private String position;
     private String office;
+    private String department;
     private String zip;
     private String addr1;
     private String addr2;
