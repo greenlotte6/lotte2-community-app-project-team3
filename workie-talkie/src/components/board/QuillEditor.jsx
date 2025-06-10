@@ -12,7 +12,7 @@ export const QuillEditor = ({ change_field }) => {
   const quillInstance = useRef(null); // Quill 인스턴스 참조
 
   useEffect(() => {
-    if (quillInstance.current) return;
+    if (quillInstance.current || quillElement.current?.firstChild) return;
 
     // Quill 에디터 초기화
     quillInstance.current = new Quill(quillElement.current, {
@@ -52,10 +52,5 @@ export const QuillEditor = ({ change_field }) => {
     };
   }, [change_field]); // change_field 함수가 변경될 때마다 useEffect 재실행 (useCallback으로 최적화됨)
 
-  return (
-    <div
-      ref={quillElement}
-      style={{ minHeight: "300px", border: "1px solid #ccc" }}
-    ></div>
-  );
+  return <div ref={quillElement} id="qull-element"></div>;
 };

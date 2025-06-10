@@ -1,2 +1,18 @@
 #test-container {
+  .title-field {
+    border: 1px solid red;
+    background-color: #ffffff;
+    border-radius: 20px;
+  }
+
+  .content-field {
+    border: 1px solid red;
+    background-color: #ffffff;
+    border-radius: 20px;
+  }
+
+  #title-input {
+    width: 60%;
+    height: 50px;
+  }
 }

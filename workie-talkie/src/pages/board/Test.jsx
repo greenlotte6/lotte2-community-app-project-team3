@@ -26,31 +26,32 @@ export const Test = () => {
 
   return (
     <BoardLayout>
-      <main className="main-content" id="board-write-page-container">
-        <h1>새 게시글 작성</h1>
+      <main className="main-content" id="test-container">
+        <div className="quill-field">
+          <h1>새 게시글 작성</h1>
 
-        {/* 제목 입력 필드 */}
-        <div style={{ marginBottom: "20px" }}>
-          <label htmlFor="title-input">제목:</label>
-          <input
-            id="title-input"
-            type="text"
-            placeholder="제목을 입력하세요"
-            value={formData.title}
-            onChange={(e) => change_field("title", e.target.value)}
-            style={{ width: "100%", padding: "8px", border: "1px solid #ddd" }}
-          />
+          {/* 제목 입력 필드 */}
+          <div className="title-field">
+            <label>제목:</label>
+            <input
+              id="title-input"
+              type="text"
+              placeholder="제목을 입력하세요"
+              value={formData.title}
+              onChange={(e) => change_field("title", e.target.value)}
+            />
+          </div>
+
+          {/* Quill 에디터 컴포넌트 사용 */}
+          <div className="content-field">
+            <label>내용:</label>
+            <QuillEditor change_field={change_field} />{" "}
+            {/* QuillEditor에 change_field 함수 전달 */}
+          </div>
+
+          {/* 작성 완료 버튼 */}
+          <button onClick={handleSubmit}>작성 완료</button>
         </div>
-
-        {/* Quill 에디터 컴포넌트 사용 */}
-        <div style={{ marginBottom: "20px" }}>
-          <label>내용:</label>
-          <QuillEditor change_field={change_field} />{" "}
-          {/* QuillEditor에 change_field 함수 전달 */}
-        </div>
-
-        {/* 작성 완료 버튼 */}
-        <button onClick={handleSubmit}>작성 완료</button>
       </main>
     </BoardLayout>
   );
