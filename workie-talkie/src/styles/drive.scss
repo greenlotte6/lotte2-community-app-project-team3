@@ -6,10 +6,6 @@
 body {
   font-family: sans-serif;
 }
-.container {
-  display: flex;
-  height: 100vh;
-}
 .sidebar {
   width: 220px;
   background: #f5f5f5;
@@ -31,7 +27,26 @@ body {
   background-color: #e0e0e0;
   font-weight: bold;
 }
+
+.main-title h2 {
+  font-size: 20px;
+}
 #drive-container {
+  .main-layout {
+    display: flex;
+    height: calc(100vh - 140px);
+  }
+  .container {
+    display: flex;
+    height: calc(100vh - 140px);
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+  }
   .main {
     flex: 1;
     display: flex;
@@ -42,7 +57,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
   }
+
   .create-folder-btn {
     background-color: #4285f4;
     color: white;
