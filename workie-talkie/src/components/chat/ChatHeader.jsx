@@ -1,19 +1,34 @@
+// src/components/chat/ChatHeader.jsx
 import React from "react";
-import { DropdownMenu } from "./DropdownMenu ";
 
-export const ChatHeader = () => {
+export const ChatHeader = ({ onAddContact, onNewChat }) => {
   return (
-    <div className="chat-header">
-      <div className="chat-user-info">
-        <div className="chat-user-pic">김</div>
-        <div className="chat-user-details">
-          <h3>김민수</h3>
-          <div className="chat-user-status">온라인</div>
-        </div>
+    <header className="chat-header">
+      {/* 기존 헤더 내용 */}
+      <div className="header-left">
+        <h1>채팅</h1>
       </div>
-      <div className="chat-actions">
-        <DropdownMenu />
+
+      {/* 새로 추가된 액션 버튼들 */}
+      <div className="header-actions">
+        <button
+          className="header-action-btn"
+          onClick={onNewChat}
+          title="새 채팅"
+        >
+          💬
+        </button>
+        <button
+          className="header-action-btn"
+          onClick={onAddContact}
+          title="친구 추가"
+        >
+          👥
+        </button>
+
+        {/* 기존 버튼들 (설정, 검색 등) */}
+        <button className="header-action-btn">⚙️</button>
       </div>
-    </div>
+    </header>
   );
 };
