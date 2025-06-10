@@ -8,10 +8,7 @@ export const ChatLayout = ({ children }) => {
     <div className="container">
       <Header />
       <div id="chat-container">
-        <div id="wrapper">
-          <Aside />
-          {children}
-        </div>
+        <div id="wrapper">{children}</div>
       </div>
       <Footer />
     </div>
