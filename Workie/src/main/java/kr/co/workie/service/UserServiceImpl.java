@@ -43,6 +43,41 @@ public class UserServiceImpl implements UserService {
 
         return savedUser.getId();
     }
+
+    @Override
+    public UserDTO findById(String id) {
+        Optional<User> user = userRepository.findById(id);
+
+        if (user.isPresent()) {
+
+            return modelMapper.map(user.get(), UserDTO.class);
+        }
+        return null;
+    }
+
+    @Override
+    public UserDTO modify(UserDTO userDTO) {
+        if(userRepository.existsById(userDTO.getId())) {
+            User user = modelMapper.map(userDTO, User.class);
+
+            // 비밀번호 변경 요청이 있는 경우에만 암호화해서 저장
+            if (userDTO.getPass() != null && !userDTO.getPass().isBlank()) {
+                String encodedPassword = passwordEncoder.encode(userDTO.getPass());
+                user.setPass(encodedPassword);
+            } else {
+                // 기존 비밀번호 유지 (DB에서 가져와서 설정)
+                String currentPass = userRepository.findById(userDTO.getId())
+                        .map(User::getPass)
+                        .orElse(null);
+                user.setPass(currentPass);
+            }
+
+            User savedUser = userRepository.save(user);
+
+            return modelMapper.map(savedUser, UserDTO.class);
+        }
+        return null;
+    }
 /*
     @Override
     public TermsDTO terms() {

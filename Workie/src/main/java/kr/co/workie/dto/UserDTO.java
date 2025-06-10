@@ -15,6 +15,8 @@ public class UserDTO {
     private String ssn;
     private String tax;
     private String name;
+    private String rating;
+    private String employeeId;
     private String email;
     private String hp;
     private String role;
@@ -24,6 +26,7 @@ public class UserDTO {
     private String zip;
     private String addr1;
     private String addr2;
+
     private String regDate;
     private String leaveDate;
 

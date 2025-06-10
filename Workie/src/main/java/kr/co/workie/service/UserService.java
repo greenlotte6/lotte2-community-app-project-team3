@@ -7,5 +7,9 @@ public interface UserService {
 
     public String register(UserDTO userDTO);
 
+    public UserDTO findById(String id);
+
+    public UserDTO modify(UserDTO userDTO);
+
     //public TermsDTO terms();
 }

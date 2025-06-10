@@ -47,7 +47,7 @@ export const Header = () => {
         <div className="vertical-divider"></div>
         <Link to="/drive"><img src="/images/header/drive.png" alt="드라이브" className="memu-icon" /></Link>
         <div className="vertical-divider"></div>
-        <Link to="/setting/profile"><img src="/images/header/settings.png" alt="설정" className="memu-icon" /></Link>
+        <Link to={`/setting/profile/${user.username}`}><img src="/images/header/settings.png" alt="설정" className="memu-icon" /></Link>
         <div className="vertical-divider"></div>
       </div>
 

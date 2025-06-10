@@ -33,16 +33,16 @@ body {
   font-size: 20px;
 }
 #drive-container {
-
   .container {
     display: flex;
     height: 100vh;
-    
+  }
+
   .main-layout {
     display: flex;
     height: calc(100vh - 140px);
   }
-    
+
   .container {
     display: flex;
     height: calc(100vh - 140px);
@@ -54,14 +54,14 @@ body {
     justify-content: flex-start;
     height: 100%;
   }
-    
+
   .main {
     flex: 1;
     display: flex;
     flex-direction: column;
     padding: 20px;
   }
-    
+
   .header {
     display: flex;
     justify-content: space-between;
