@@ -45,6 +45,13 @@
     width: 100%;
   }
 
+  .checkedStatus {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    position: relative;
+  }
+
   input[type="text"],
   input[type="password"],
   input[type="number"] {
@@ -56,6 +63,22 @@
     border-radius: 6px;
     box-sizing: border-box;
     /* padding 포함한 width 계산 */
+  }
+
+  button.checkBtn {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    background: #4299e1;
+    color: #ffffff;
+    white-space: nowrap;
+    margin-left: auto; /* 버튼을 오른쪽으로 고정 */
+  }
+
+  .comment {
+    font-size: 14px;
+    white-space: nowrap;
+    margin-right: auto; /* 남은 공간 밀어냄 */
   }
 
   .verify-btn,

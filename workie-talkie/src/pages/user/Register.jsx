@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { LandingLayout } from "../../layouts/LandingLayout";
 import { Link, useNavigate } from "react-router-dom";
-import { postUser } from "../../api/userAPI";
+import { checkUserId, postUser } from "../../api/userAPI";
 
 const initState = {
   id: "",
@@ -20,9 +20,12 @@ const initState = {
   role: "ADMIN",
   position: "CEO",
   office: "",
+  department: "대표",
+  rating: "GENERAL",
 };
 
 export const Register = () => {
+  const [idChecked, setIdChecked] = useState(null);
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -32,8 +35,15 @@ export const Register = () => {
 
   const changeHandler = (e) => {
     e.preventDefault();
-
     setUser({ ...user, [e.target.name]: e.target.value });
+
+    if (e.target.name === "id") setIdChecked(null);
+  };
+
+  const handleCheckId = async () => {
+    if (!user.id) return alert("아이디를 입력하세요.");
+    const exists = await checkUserId(user.id);
+    setIdChecked(exists);
   };
 
   // 비밀번호 입력 필드 변경 핸들러
@@ -76,12 +86,18 @@ export const Register = () => {
     }
 
     const fetchData = async () => {
+      if (idChecked !== false) {
+        alert("아이디 중복 확인을 완료해 주세요.");
+        return;
+      }
+
       try {
         const data = await postUser(user);
 
         alert("회원가입 완료!");
         navigate("/user/login");
       } catch (err) {
+        alert("입력하신 정보를 다시 한 번 확인 해주세요");
         console.error(err);
       }
     };
@@ -119,6 +135,25 @@ export const Register = () => {
                 onChange={changeHandler}
                 placeholder="아이디 입력"
               />
+              <div className="checkedStatus">
+                {idChecked !== null && (
+                  <p
+                    className="comment"
+                    style={{ color: idChecked ? "red" : "green" }}
+                  >
+                    {idChecked
+                      ? "이미 사용 중인 아이디입니다."
+                      : "사용 가능한 아이디입니다."}
+                  </p>
+                )}
+                <button
+                  type="button"
+                  className="checkBtn"
+                  onClick={handleCheckId}
+                >
+                  중복확인
+                </button>
+              </div>
             </div>
 
             <label>이메일</label>

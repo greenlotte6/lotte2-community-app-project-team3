@@ -35,6 +35,7 @@ public class User {
     private String zip;
     private String addr1;
     private String addr2;
+    private String image;
 
     //추가필드?
     private String sms;

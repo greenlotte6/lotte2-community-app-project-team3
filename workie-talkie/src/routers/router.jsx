@@ -64,7 +64,7 @@ const router = createBrowserRouter([
       { path: "/project/details", element: <ProjectDetails /> },
     ],
   },
-  { path: "*", element: <Navigate to="/" replace /> },
+  //{ path: "*", element: <Navigate to="/" replace /> },
 
   // 랜딩 페이지들
   { path: "/", element: <IntroPage /> },
