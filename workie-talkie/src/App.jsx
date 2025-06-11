@@ -10,7 +10,7 @@ import "./styles/imports/users.scss";
 import "./styles/imports/drive.scss";
 import "./styles/imports/chats.scss";
 import "./styles/imports/landings.scss";
-import "./styles/imports/calender.scss";
+import "./styles/imports/calendar.scss";
 import "./styles/imports/projects.scss";
 /*
   npm install  
