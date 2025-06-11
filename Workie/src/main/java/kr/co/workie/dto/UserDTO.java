@@ -32,7 +32,8 @@ public class UserDTO {
 
     private String regip;
     private String sms;
-    
+    private String image;
+
     //추가필드
     private String companyName;
     private String CEOId;

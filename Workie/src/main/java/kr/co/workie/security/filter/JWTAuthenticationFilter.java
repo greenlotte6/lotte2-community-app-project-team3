@@ -2,6 +2,7 @@ package kr.co.workie.security.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.workie.util.JWTProvider;
@@ -27,23 +28,32 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        // 요청 주소에서 마지막 문자열 추출
-        String uri = request.getRequestURI();
-        int i = uri.lastIndexOf("/");
-        String path = uri.substring(i);
-
-        log.info("doFilterInternal...1 : " + path);
+        String token = null;
 
         // 토큰 추출
         String header = request.getHeader(AUTH_HEADER);
         log.info("doFilterInternal...2 : " + header);
-
-        String token = null;
-
         if(header != null && header.startsWith(TOKEN_PREFIX)){
-            token = header.substring(TOKEN_PREFIX.length());
+            token = header.substring(TOKEN_PREFIX.length()).trim();
         }
 
+        // 요청 주소에서 마지막 문자열 추출
+        String uri = request.getRequestURI();
+        int i = uri.lastIndexOf("/");
+        String path = uri.substring(i);
+        log.info("doFilterInternal...1 : " + path);
+
+        // 2. 헤더에 없으면 쿠키에서 시도
+        if (token == null) {
+            if (request.getCookies() != null) {
+                for (Cookie cookie : request.getCookies()) {
+                    if ("access_token".equals(cookie.getName())) {
+                        token = cookie.getValue();
+                        break;
+                    }
+                }
+            }
+        }
         log.info("doFilterInternal...3 : " + token);
 
         // 토큰 검사

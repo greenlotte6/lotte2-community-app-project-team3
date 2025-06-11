@@ -2,6 +2,7 @@ package kr.co.workie.controller;
 
 import kr.co.workie.dto.UserDTO;
 import kr.co.workie.entity.User;
+import kr.co.workie.repository.UserRepository;
 import kr.co.workie.security.MyUserDetails;
 import kr.co.workie.service.UserService;
 import kr.co.workie.util.JWTProvider;
@@ -14,10 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -31,6 +29,7 @@ public class UserController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
     private final JWTProvider jwtProvider;
+    private final UserRepository userRepository;
 
 
     @PostMapping("/user/login")
@@ -110,6 +109,12 @@ public class UserController {
 
         String Id = userService.register(userDTO);
         return Map.of("userid", Id);
+    }
+
+    @GetMapping("/user/check")
+    public ResponseEntity<Boolean> checkUserId(@RequestParam("id") String id) {
+        boolean exists = userRepository.existsById(id);
+        return ResponseEntity.ok(exists);
     }
 
     //로그아웃 위한 쿠키 삭제

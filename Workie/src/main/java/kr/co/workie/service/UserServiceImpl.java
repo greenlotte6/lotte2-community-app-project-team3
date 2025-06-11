@@ -6,8 +6,10 @@ import kr.co.workie.entity.Company;
 import kr.co.workie.entity.User;
 import kr.co.workie.repository.CompanyRepository;
 import kr.co.workie.repository.UserRepository;
+import kr.co.workie.util.GenerateCode;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +23,26 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
     private final ModelMapper modelMapper;
+    private final GenerateCode generateCode;
+
 
     @Override
     public String register(UserDTO userDTO) {
+        //비밀번호 암호화
         String encoded = passwordEncoder.encode(userDTO.getPass());
         userDTO.setPass(encoded);
 
+        //DTO -> Entity 변환
         User user = modelMapper.map(userDTO, User.class);
         Company company = modelMapper.map(userDTO, Company.class);
 
+        //사원번호 생성
+        String department = user.getDepartment();
+        String generatedEmployeeId = generateCode.generateUniqueEmployeeId(department);
+        user.setEmployeeId(generatedEmployeeId);
+
+
+        //User 저장
         User savedUser = userRepository.save(user);
 
         // CEO일 경우에만 Company 정보 설정
@@ -38,7 +51,12 @@ public class UserServiceImpl implements UserService {
             company.setTax(savedUser.getTax());                   // CEO가 입력한 사업자 번호 복사
             company.setCompanyName(userDTO.getCompanyName());     // 회사 이름 설정
 
-            companyRepository.save(company); // company 저장
+            // joinCode 생성
+            String joinCode = generateCode.generateUniqueJoinCode();
+            company.setJoinCode(joinCode);
+
+            // company 저장
+            companyRepository.save(company);
         }
 
         return savedUser.getId();
