@@ -17,6 +17,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 public class SecurityConfig {
@@ -29,6 +34,7 @@ public class SecurityConfig {
 
         // 토큰기반 인증 시큐리티 설정
         httpSecurity
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))      //******확인*********
                 .csrf(CsrfConfigurer::disable)              // 사이트 위변조 방지
                 .httpBasic(HttpBasicConfigurer::disable)    // 기본 HTTP 인증 방식 비활성
                 .formLogin(FormLoginConfigurer::disable)    // form 이 아닌 토큰 기반이므로 폼인증 비활성
@@ -58,6 +64,27 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
+    }
+
+    // CORS 설정 Bean 추가
+    //******확인*********
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:5173", // 프론트엔드 개발 서버
+                "https://lotte2-community-app-project-team3-lac.vercel.app", // Vercel 배포 주소
+                "https://workie-talkie-personal-kappa.vercel.app" // Vercel 배포 주소
+        ));
+
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 허용할 HTTP 메서드
+        configuration.setAllowedHeaders(Arrays.asList("*")); // 모든 헤더 허용
+        configuration.setAllowCredentials(true); // 자격 증명(쿠키, 인증 헤더 등)을 허용 (JWT 사용 시 필요)
+        configuration.setMaxAge(3600L); // Pre-flight 요청 결과 캐시 시간 (초)
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration); // 모든 경로에 CORS 설정 적용
+        return source;
     }
     
 }
