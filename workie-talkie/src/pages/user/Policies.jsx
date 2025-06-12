@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { LandingLayout } from "../../layouts/LandingLayout";
+import { Link } from "react-router-dom";
 
 const termsData = {
   all: {
@@ -101,12 +102,12 @@ export const Policies = () => {
           ))}
 
           <div className="button-group">
-            <a href="/index">
+            <Link to="/index">
               <button className="prev">&lt; 이전</button>
-            </a>
-            <a href="/user/register">
+            </Link>
+            <Link to="/user/register">
               <button className="next">다음 &gt;</button>
-            </a>
+            </Link>
           </div>
         </div>
 
