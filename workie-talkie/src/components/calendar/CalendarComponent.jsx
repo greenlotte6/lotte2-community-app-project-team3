@@ -1,16 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { EventModal } from "./EventModal";
+import { getCalendar } from "../../api/userAPI";
 
-export const CalendarComponent = () => {
+export const CalendarComponent = ({ events, setEvents }) => {
   const calendarRef = useRef(null);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
-  const [formData, setFormData] = useState({});
+
   const [currentEventData, setCurrentEventData] = useState({
     // 모달에 전달하고 모달에서 수정할 데이터
     title: "",
@@ -21,14 +22,32 @@ export const CalendarComponent = () => {
     backgroundColor: "#3788d8", // 기본 색상
   });
 
-  // EventModal 내부 입력 필드 변경을 처리하는 공통 핸들러
-  const handleEventDataChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setCurrentEventData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
+  // 🔄 서버로부터 일정 목록 불러오기
+  useEffect(() => {
+    const loadEvents = async () => {
+      try {
+        const data = await getCalendar(); // ✅ getCalendar() 사용
+        console.log(data);
+
+        const converted = data.map((item) => ({
+          id: item.cno,
+          title: item.title,
+          start: item.startDate,
+          end: item.endDate,
+          allDay: item.allDay,
+          backgroundColor: item.backgroundColor,
+          borderColor: item.backgroundColor,
+          extendedProps: {
+            description: item.description,
+          },
+        }));
+        setEvents(converted); // ➡️ FullCalendar의 events state에 저장
+      } catch (err) {
+        console.error("일정 불러오기 실패", err);
+      }
+    };
+    loadEvents();
+  }, []);
 
   const handleDateSelect = (arg) => {
     setCurrentEventData({
@@ -37,100 +56,37 @@ export const CalendarComponent = () => {
       endDate: arg.endStr,
       allDay: arg.allDay,
       description: "",
-      backgroundColor: "#3788d8",
+      backgroundColor: "",
     });
     setIsRegisterModalOpen(true);
   };
 
   const handleEventClick = (info) => {
     const event = info.event;
-    setSelectedEvent(event);
-    setFormData({
-      title: event.title.split(" / ")[0],
+
+    setSelectedEvent(event); // 삭제 등에 사용 예정
+    setCurrentEventData({
+      id: event.id, // DB의 cno
+      title: event.title,
       startDate: event.startStr,
       endDate: event.endStr || event.startStr,
       allDay: event.allDay,
-      location: event.extendedProps.location || "",
       description: event.extendedProps.description || "",
-      backgroundColor: event.backgroundColor || "#3788d8",
+      backgroundColor: event.backgroundColor || "#4b6986",
     });
     setIsDetailModalOpen(true);
   };
 
-  const addEvent = () => {
-    const calendarApi = calendarRef.current.getApi();
-    calendarApi.addEvent({
-      ...currentEventData,
-      title:
-        currentEventData.title +
-        (currentEventData.location ? ` / ${currentEventData.location}` : ""),
-      extendedProps: {
-        description: currentEventData.description,
-        location: currentEventData.location,
-      },
-
-      borderColor: currentEventData.backgroundColor,
-    });
-    setIsRegisterModalOpen(false);
-
-    setCurrentEventData({
-      title: "",
-      startDate: "",
-      endDate: "",
-      allDay: false,
-      description: "",
-      backgroundColor: "#3788d8",
-    });
-  };
-
-  const updateEvent = () => {
-    if (!selectedEvent) return; // 선택된 이벤트가 없으면 함수 종료
-
-    // FullCalendar Event 객체의 속성 업데이트
-    selectedEvent.setProp(
-      "title",
-      currentEventData.title +
-        (currentEventData.location ? ` / ${currentEventData.location}` : "")
-    );
-    selectedEvent.setStart(currentEventData.start);
-    selectedEvent.setEnd(currentEventData.end);
-    selectedEvent.setAllDay(currentEventData.allDay);
-    selectedEvent.setExtendedProp("description", currentEventData.description);
-    selectedEvent.setExtendedProp("location", currentEventData.location); // location 업데이트
-    selectedEvent.setProp("backgroundColor", currentEventData.backgroundColor);
-    selectedEvent.setProp("borderColor", currentEventData.backgroundColor);
-
-    setIsDetailModalOpen(false); // 모달 닫기
-    setSelectedEvent(null); // 선택된 이벤트 초기화
-    // 모달 닫은 후 상태 초기화
-    setCurrentEventData({
-      title: "",
-      startDate: "",
-      endDate: "",
-      allDay: false,
-      description: "",
-      backgroundColor: "#3788d8",
-    });
-  };
-
   const deleteEvent = () => {
     if (selectedEvent && window.confirm("정말 이 일정을 삭제하시겠습니까?")) {
-      selectedEvent.remove(); // FullCalendar에서 이벤트 제거
-      setIsDetailModalOpen(false); // 모달 닫기
-      setSelectedEvent(null); // 선택된 이벤트 초기화
-      // 모달 닫은 후 상태 초기화
-      setCurrentEventData({
-        title: "",
-        startDate: "",
-        endDate: "",
-        allDay: false,
-        description: "",
-        backgroundColor: "#3788d8",
-      });
+      selectedEvent.remove();
+      setIsDetailModalOpen(false);
+      setSelectedEvent(null);
     }
   };
+
   return (
-    <div id="calendar-container">
+    <>
       <FullCalendar
         contentHeight="75vh"
         ref={calendarRef}
@@ -145,7 +101,6 @@ export const CalendarComponent = () => {
           addEventButton: {
             text: "일정 등록",
             click: () => {
-              setFormData({});
               setIsRegisterModalOpen(true);
             },
           },
@@ -155,7 +110,7 @@ export const CalendarComponent = () => {
         editable={true}
         select={handleDateSelect}
         eventClick={handleEventClick}
-        events={null}
+        events={events}
         // 이벤트 드래그&리사이즈 시 호출
         eventDrop={(info) => {
           // 드롭된 이벤트의 새 시작/종료 시간을 currentEventData에 반영
@@ -197,20 +152,20 @@ export const CalendarComponent = () => {
       <EventModal
         isOpen={isRegisterModalOpen} // CalendarComponent의 상태와 연결
         onClose={() => setIsRegisterModalOpen(false)} // 닫기 함수 전달
-        onSubmit={addEvent} // 등록 버튼 클릭 시 호출될 함수
         eventData={currentEventData} // 모달에 보여줄 데이터
-        onChange={handleEventDataChange} // 모달 내부 입력 변경 시 호출될 함수
+        calendarRef={calendarRef}
+        mode="create"
       />
 
       {/* 일정 상세/수정 모달 */}
       <EventModal
         isOpen={isDetailModalOpen} // CalendarComponent의 상태와 연결
         onClose={() => setIsDetailModalOpen(false)} // 닫기 함수 전달
-        onSubmit={updateEvent} // 수정 버튼 클릭 시 호출될 함수
         onDelete={deleteEvent} // 삭제 버튼 클릭 시 호출될 함수
         eventData={currentEventData} // 모달에 보여줄 데이터
-        onChange={handleEventDataChange} // 모달 내부 입력 변경 시 호출될 함수
+        calendarRef={calendarRef}
+        mode="edit"
       />
-    </div>
+    </>
   );
 };

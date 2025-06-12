@@ -19,6 +19,7 @@
     "@stomp/stompjs": "^7.1.1",
     "add": "^2.0.6",
     "axios": "^1.9.0",
+    "date-fns": "^4.1.0",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.514.0",
     "quill": "^2.0.3",

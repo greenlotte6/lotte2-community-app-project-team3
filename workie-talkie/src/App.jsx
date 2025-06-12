@@ -17,6 +17,7 @@ import "./styles/imports/projects.scss";
   npm install quill
   npm install sockjs-client @stomp/stompjs
   npm install @fullcalendar/react @fullcalendar/daygrid @fullcalendar/timegrid @fullcalendar/interaction
+  npm install date-fns
 */
 function App() {
   return <RouterProvider router={router} />;

@@ -7,12 +7,6 @@ body {
   font-family: sans-serif;
 }
 
-.sidebar {
-  width: 220px;
-  background: #f5f5f5;
-  padding: 20px;
-  border-right: 1px solid #ddd;
-}
 .sidebar h2 {
   font-size: 20px;
   margin-bottom: 10px;
@@ -49,6 +43,10 @@ body {
   }
 
   .sidebar {
+    width: 220px;
+    background: #f5f5f5;
+    padding: 20px;
+    border-right: 1px solid #ddd;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

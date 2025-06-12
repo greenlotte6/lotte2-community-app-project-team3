@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { CalendarLayout } from "../../layouts/CalendarLayout";
 import { CalendarComponent } from "../../components/calendar/CalendarComponent";
 import { useLoginStore } from "../../stores/useLoginStore";
-import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
-import { CALENDAR } from "../../api/http";
+import { useNavigate } from "react-router-dom";
 import { getCalendar } from "../../api/userAPI";
+import { SidePanel } from "../../components/calendar/SidePanel";
 
 export const CalendarPage = () => {
   const user = useLoginStore((state) => state.user);
   const navigate = useNavigate();
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     if (!user) {
@@ -29,7 +29,12 @@ export const CalendarPage = () => {
   return user ? (
     <CalendarLayout>
       <main className="main-content" id="calendar">
-        <CalendarComponent />
+        <div id="calender-side">
+          <SidePanel events={events} />
+        </div>
+        <div id="calendar-container">
+          <CalendarComponent events={events} setEvents={setEvents} />
+        </div>
       </main>
     </CalendarLayout>
   ) : null;

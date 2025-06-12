@@ -1,7 +1,7 @@
 /* 좌측 사이드바 스타일 */
 .sidebar {
-  width: 200px;
-  background-color: #f1f5fa;
+  width: 256px;
+  background-color: #374151;
   padding: 20px;
   border-right: 1px solid #ddd;
   display: flex;
@@ -20,7 +20,7 @@
   margin-top: 20px;
   margin-bottom: 10px;
   font-size: 14px;
-  color: #999;
+  color: #9ca3af;
 }
 
 .sidebar li {
@@ -40,6 +40,5 @@
 
 .sidebar a {
   text-decoration: none;
-  color: #333;
-  font-weight: bold;
+  color: #ffffff;
 }
