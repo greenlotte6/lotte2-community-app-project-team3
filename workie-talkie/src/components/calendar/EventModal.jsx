@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { postCalendar } from "../../api/userAPI";
+import { postCalendar, putCalendar } from "../../api/userAPI";
 import { useNavigate } from "react-router-dom";
+import { CALENDAR } from "../../api/http";
 
 const initState = {
   writer: "",
@@ -12,9 +13,30 @@ const initState = {
   backgroundColor: "#4b6986",
 };
 
-export const EventModal = ({ isOpen, onClose, onDelete }) => {
+export const EventModal = ({
+  isOpen,
+  onClose,
+  onDelete,
+  calendarRef,
+  mode,
+  eventData,
+}) => {
   const [calendar, setCalendar] = useState({ ...initState });
-  const navigate = useNavigate();
+  const isEdit = mode === "edit";
+
+  const formatDateForInput = (datetimeStr) => {
+    if (!datetimeStr) return "";
+    return datetimeStr.slice(0, 16); // "2025-06-12T14:30" 형식
+  };
+
+  useEffect(() => {
+    if (eventData) {
+      setCalendar({
+        ...eventData,
+        cno: eventData.id, // FullCalendar의 id를 cno로 사용
+      });
+    }
+  }, [eventData]);
 
   if (!isOpen) return null; // isOpen이 false면 아무것도 렌더링 X
 
@@ -42,10 +64,56 @@ export const EventModal = ({ isOpen, onClose, onDelete }) => {
     //전송
     const fetchData = async () => {
       try {
-        const data = await postCalendar(calendar);
-        console.log(data);
+        const calendarApi = calendarRef?.current?.getApi();
 
-        alert("일정 등록 완료!");
+        if (isEdit) {
+          // 일정 수정
+          const updatedData = {
+            ...calendar,
+            cno: calendar.cno || calendar.id,
+            startDate: formatDateForInput(calendar.startDate),
+            endDate: formatDateForInput(calendar.endDate),
+          };
+
+          console.log("📤 PUT 요청 데이터 확인", calendar);
+
+          await putCalendar(updatedData);
+
+          const existingEvent = calendarApi?.getEventById(calendar.id);
+
+          if (existingEvent) {
+            existingEvent.setProp("title", calendar.title);
+            existingEvent.setStart(calendar.startDate);
+            existingEvent.setEnd(calendar.endDate);
+            existingEvent.setExtendedProp("description", calendar.description);
+            existingEvent.setProp("backgroundColor", calendar.backgroundColor);
+            existingEvent.setProp("borderColor", calendar.backgroundColor);
+          }
+
+          alert("일정이 수정되었습니다.");
+        } else {
+          // 일정 등록
+          const data = await postCalendar(calendar);
+          console.log("✅ 일정 등록 완료", data);
+
+          const calendarApi = calendarRef?.current?.getApi();
+          calendarApi?.addEvent({
+            id: data.cno, // ← 등록 시 반환된 cno(PK)로 ID 지정
+            title: calendar.title,
+            start: calendar.startDate,
+            end: calendar.endDate,
+            allDay: calendar.allDay,
+            backgroundColor: calendar.backgroundColor,
+            borderColor: calendar.backgroundColor,
+            extendedProps: {
+              description: calendar.description,
+            },
+          });
+
+          alert("일정 등록 완료!");
+        }
+
+        onClose(); // 모달 닫기
       } catch (err) {
         alert("입력하신 정보를 다시 한 번 확인 해주세요");
         console.error(err);
@@ -54,6 +122,7 @@ export const EventModal = ({ isOpen, onClose, onDelete }) => {
     fetchData();
   };
 
+  //고쳐야됨**
   const allDayHandler = (e) => {
     const checked = e.target.checked;
     const startDate = calendar.startDate?.substring(0, 10);
@@ -77,7 +146,8 @@ export const EventModal = ({ isOpen, onClose, onDelete }) => {
         <button className="modal-close-button" onClick={onClose}>
           ×
         </button>
-        <h3>{calendar.id ? "일정 수정" : "일정 등록"}</h3>
+        <h3>{isEdit ? "일정 수정" : "일정 등록"}</h3>
+
         <form onSubmit={submitHandler}>
           <label>제목</label>
           <input
@@ -94,7 +164,7 @@ export const EventModal = ({ isOpen, onClose, onDelete }) => {
                 id="start"
                 type="datetime-local"
                 name="startDate"
-                value={calendar.startDate}
+                value={formatDateForInput(calendar.startDate)}
                 onChange={changeHandler}
               />
             </div>
@@ -104,7 +174,7 @@ export const EventModal = ({ isOpen, onClose, onDelete }) => {
                 id="end"
                 type="datetime-local"
                 name="endDate"
-                value={calendar.endDate}
+                value={formatDateForInput(calendar.endDate)}
                 onChange={changeHandler}
               />
             </div>

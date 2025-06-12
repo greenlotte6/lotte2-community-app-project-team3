@@ -90,3 +90,15 @@ export const postCalendar = async (data) => {
     throw err;
   }
 };
+
+export const putCalendar = async (data) => {
+  try {
+    const response = await axios.put(`${CALENDAR}/${data.cno}`, data, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};

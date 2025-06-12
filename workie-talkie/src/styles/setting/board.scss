@@ -4,7 +4,7 @@
   .main-content h1 {
     margin-bottom: 20px;
     font-size: 1.4rem;
-    border-bottom: 2px solid #e0e0e0;
+    border-bottom: 2px solid #374151;
     padding-bottom: 5px;
   }
 
@@ -61,7 +61,7 @@
   }
 
   th {
-    background-color: #3a64b1;
+    background-color: #374151;
     color: white;
   }
 
@@ -97,13 +97,6 @@
   main.main-content {
     flex: 1;
     padding: 40px 60px;
-  }
-
-  .main-content h1 {
-    margin-bottom: 20px;
-    font-size: 1.4rem;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 5px;
   }
 
   .board-setting {

@@ -47,12 +47,6 @@ export const Message = () => {
                     </label>
                   </section>
                 </section>
-              </div>
-            </div>
-
-            <h3>메시지 자동응답</h3>
-            <div className="setting2">
-              <div className="list2">
                 <section>
                   개인 메시지 자동응답
                   <label className="switch">

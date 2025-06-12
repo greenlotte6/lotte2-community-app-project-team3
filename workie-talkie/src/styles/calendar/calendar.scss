@@ -126,7 +126,77 @@
   }
 }
 
-#calendar-container {
-  width: 100vh;
-  margin: 0 auto;
+#calendar {
+  padding: 0 30px 0 0;
+  display: flex; /* 좌우 배치 */
+  flex-direction: row; /* 명시적 좌우 */
+
+  #calendar-container {
+    flex: 3; /* ← 달력 영역 넓게 */
+    padding: 20px;
+    overflow-y: auto; /* 혹시 캘린더 내부가 넘치면 자체 스크롤 */
+  }
+
+  #calender-side {
+    width: 256px;
+    padding: 20px;
+    background: #374151;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto; /* 내용이 많을 경우만 사이드 패널만 스크롤 */
+  }
+
+  .date-header {
+    background-color: #697887;
+    padding: 6px 10px;
+    border-left: 4px solid #bbbec7;
+    margin: 14px 0 6px;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #bebebe;
+  }
+
+  .event-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .event-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 15px;
+    font-size: 14px;
+  }
+
+  .event-time {
+    color: #87a3f7;
+    width: 48px;
+    font-weight: 500;
+  }
+
+  .event-title {
+    flex: 1;
+  }
+
+  .event-empty {
+    font-size: 13px;
+    color: #999;
+    padding: 4px 0;
+  }
+
+  .stats-section {
+    margin-top: auto; /* ← 하단으로 밀기 */
+  }
+
+  .stats-section p {
+    padding: 10px;
+  }
+
+  .side-panel-section h4 {
+    font-size: 15px;
+  }
 }
