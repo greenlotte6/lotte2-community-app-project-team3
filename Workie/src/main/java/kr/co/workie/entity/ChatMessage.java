@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * 채널과 DM의 모든 메시지를 통합 관리하는 테이블
  */
 @Entity
-@Table(name = "chat_messages")
+@Table(name = "Chat_messages")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

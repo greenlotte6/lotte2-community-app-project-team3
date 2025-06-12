@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * 실제 메시지 내용은 ChatMessage 테이블에 저장됨
  */
 @Entity
-@Table(name = "direct_messages")
+@Table(name = "Direct_messages")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

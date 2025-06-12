@@ -439,7 +439,8 @@
       .message-item {
         display: flex;
         flex-direction: column;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
+        max-width: 100%;
 
         &.user-message {
           .message-content {
@@ -448,27 +449,41 @@
             border-radius: 18px;
             word-wrap: break-word;
             position: relative;
+            font-size: 14px;
+            line-height: 1.4;
           }
 
+          .message-time {
+            font-size: 11px;
+            color: #6b7280;
+            margin-top: 4px;
+          }
+
+          /* 🔥 내가 보낸 메시지 (오른쪽 정렬) */
           &.own {
-            align-items: flex-end;
+            align-items: flex-end; /* 전체를 오른쪽으로 */
 
             .message-content {
               background-color: #007bff;
               color: white;
               border-bottom-right-radius: 4px;
+              align-self: flex-end; /* 말풍선을 오른쪽으로 */
             }
 
             .message-time {
               text-align: right;
-              margin-top: 4px;
-              font-size: 11px;
-              color: #6b7280;
+              align-self: flex-end;
+            }
+
+            /* 내 메시지에는 발신자 이름 표시 안함 */
+            .message-sender {
+              display: none;
             }
           }
 
+          /* 🔥 상대방 메시지 (왼쪽 정렬) */
           &.other {
-            align-items: flex-start;
+            align-items: flex-start; /* 전체를 왼쪽으로 */
 
             .message-sender {
               font-size: 13px;
@@ -482,14 +497,13 @@
               background-color: #f1f3f4;
               color: #374151;
               border-bottom-left-radius: 4px;
+              align-self: flex-start; /* 말풍선을 왼쪽으로 */
             }
 
             .message-time {
               text-align: left;
-              margin-top: 4px;
               margin-left: 4px;
-              font-size: 11px;
-              color: #6b7280;
+              align-self: flex-start;
             }
           }
         }

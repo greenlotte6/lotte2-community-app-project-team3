@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * 채널에 속한 사용자들의 정보와 권한을 관리하는 테이블
  */
 @Entity
-@Table(name = "channel_members")
+@Table(name = "Channel_members")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
