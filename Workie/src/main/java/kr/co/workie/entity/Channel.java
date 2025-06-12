@@ -25,7 +25,7 @@ public class Channel {
     private String name; // 채널명
 
     @Column(name = "owner_id", nullable = false)
-    private Long ownerId; // 채널 개설자 ID
+    private String ownerId; // 채널 개설자 ID (String으로 변경)
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

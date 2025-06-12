@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Log4j2
@@ -30,7 +31,6 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final JWTProvider jwtProvider;
     private final UserRepository userRepository;
-
 
     @PostMapping("/user/login")
     public ResponseEntity login(@RequestBody UserDTO userDTO){
@@ -142,6 +142,48 @@ public class UserController {
         headers.add(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString());
 
         return ResponseEntity.ok().headers(headers).body(null);
+    }
+
+    // ======== 채팅용 API 추가 ========
+
+    // 현재 사용자 정보 조회 (채팅용)
+    @GetMapping("/api/users/me")
+    public ResponseEntity<UserDTO> getCurrentUser() {
+        try {
+            log.info("현재 사용자 정보 조회 요청");
+            UserDTO currentUser = userService.getCurrentUser();
+            return ResponseEntity.ok(currentUser);
+        } catch (Exception e) {
+            log.error("현재 사용자 정보 조회 실패: {}", e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // 멤버 선택을 위한 사용자 목록 조회 (채팅용)
+    @GetMapping("/api/users/members")
+    public ResponseEntity<List<UserDTO>> getAvailableMembers() {
+        try {
+            log.info("멤버 목록 조회 요청");
+            List<UserDTO> members = userService.getAvailableMembers();
+            log.info("멤버 목록 조회 성공, 개수: {}", members.size());
+            return ResponseEntity.ok(members);
+        } catch (Exception e) {
+            log.error("멤버 목록 조회 실패: {}", e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    // 특정 사용자 정보 조회 (채팅용)
+    @GetMapping("/api/users/{userId}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable String userId) {
+        try {
+            log.info("사용자 정보 조회 요청: userId={}", userId);
+            UserDTO user = userService.getUserById(userId);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            log.error("사용자 정보 조회 실패: {}", e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 /*

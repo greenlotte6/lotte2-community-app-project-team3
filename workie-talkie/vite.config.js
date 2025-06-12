@@ -10,6 +10,24 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"), // <- 이거 추가
     },
   },
+  // 서버 설정 추가 (WebSocket 및 API 프록시)
+  server: {
+    proxy: {
+      "/ws": {
+        target: "http://localhost:8080",
+        ws: true, // WebSocket 프록시 활성화
+        changeOrigin: true,
+      },
+      "/api": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+      },
+      "/user": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+      },
+    },
+  },
   // 채팅 설정 추가
   optimizeDeps: {
     esbuildOptions: {
