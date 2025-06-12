@@ -26,6 +26,4 @@ public class Calendar {
     private LocalDateTime endDate;
     private String backgroundColor;
     private Boolean isDeleted;
-
-    private String allDay; //나중에 지울듯?
 }

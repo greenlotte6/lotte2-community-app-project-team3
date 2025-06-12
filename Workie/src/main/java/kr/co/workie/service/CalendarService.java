@@ -8,6 +8,7 @@ import kr.co.workie.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ public class CalendarService {
     private final CalendarRepository calendarRepository;
     private final ModelMapper modelMapper;
 
+    @Transactional
     public int addEvent(String loginId, CalendarDTO calendarDTO){
         Calendar calendar = modelMapper.map(calendarDTO, Calendar.class);
         calendar.setWriter(loginId);
