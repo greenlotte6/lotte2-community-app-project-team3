@@ -4,6 +4,8 @@ import kr.co.workie.entity.ChatMessage;
 import kr.co.workie.repository.ChatMessageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -37,14 +39,16 @@ public class ChatService {
      */
     @Transactional(readOnly = true)
     public List<ChatMessage> getRecentMessages(String roomId, int limit) {
-        return chatMessageRepository.findRecentMessagesByRoomId(roomId, limit);
+        // int limit를 Pageable로 변환
+        Pageable pageable = PageRequest.of(0, limit);
+        return chatMessageRepository.findRecentMessagesByRoomId(roomId, pageable);
     }
 
     /**
      * 사용자별 메시지 조회
      */
     @Transactional(readOnly = true)
-    public List<ChatMessage> getMessagesBySender(String sender) {
-        return chatMessageRepository.findBySenderOrderByCreatedAtDesc(sender);
+    public List<ChatMessage> getMessagesBySender(String senderId) {
+        return chatMessageRepository.findBySenderIdOrderByCreatedAtDesc(senderId);
     }
 }
