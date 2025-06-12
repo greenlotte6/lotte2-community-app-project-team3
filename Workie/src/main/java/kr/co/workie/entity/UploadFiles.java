@@ -23,5 +23,9 @@ public class UploadFiles {
     private String uuid;
     private String name;
     private String path;
+
+    @ManyToOne
+    private DriveItem driveItem;
+
     private LocalDateTime createdDate;
 }
