@@ -1,4 +1,4 @@
-// components/chat/ChatArea.jsx - 수정된 버전
+// components/chat/ChatArea.jsx - 사용자 정보 직접 조회 버전
 import React, { useState, useEffect, useRef } from "react";
 import { Hash, MessageCircle, Users, Send } from "lucide-react";
 import { useChat } from "../../context/ChatContext";
@@ -40,7 +40,7 @@ const ChatHeader = ({ currentChat, activeChat }) => {
 };
 
 // 메시지 컴포넌트
-const MessageItem = ({ message, isOwnMessage, currentUser }) => {
+const MessageItem = ({ message, currentUser }) => {
   const formatTime = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleTimeString("ko-KR", {
@@ -49,6 +49,59 @@ const MessageItem = ({ message, isOwnMessage, currentUser }) => {
     });
   };
 
+  // 자신이 보낸 메시지인지 확인 (모든 가능한 필드 비교)
+  const isOwn =
+    currentUser &&
+    (message.senderId === currentUser.id ||
+      message.senderId === currentUser.employeeId ||
+      message.senderName === currentUser.name ||
+      // 추가 비교 옵션들
+      String(message.senderId) === String(currentUser.id) ||
+      String(message.senderId) === String(currentUser.employeeId));
+
+  // 🔍 상세 디버깅용 로그
+  console.log("=== 📨 MessageItem 상세 디버깅 ===");
+  console.log("1. 메시지 전체:", JSON.stringify(message, null, 2));
+  console.log("2. 현재 사용자 전체:", JSON.stringify(currentUser, null, 2));
+  console.log("3. 비교 결과:");
+  console.log(
+    "   - message.senderId:",
+    `"${message.senderId}"`,
+    typeof message.senderId
+  );
+  console.log(
+    "   - message.senderName:",
+    `"${message.senderName}"`,
+    typeof message.senderName
+  );
+  console.log(
+    "   - currentUser.id:",
+    `"${currentUser?.id}"`,
+    typeof currentUser?.id
+  );
+  console.log(
+    "   - currentUser.name:",
+    `"${currentUser?.name}"`,
+    typeof currentUser?.name
+  );
+  console.log(
+    "   - currentUser.employeeId:",
+    `"${currentUser?.employeeId}"`,
+    typeof currentUser?.employeeId
+  );
+  console.log("4. 매칭 테스트:");
+  console.log("   - senderId === id?", message.senderId === currentUser?.id);
+  console.log(
+    "   - senderId === employeeId?",
+    message.senderId === currentUser?.employeeId
+  );
+  console.log(
+    "   - senderName === name?",
+    message.senderName === currentUser?.name
+  );
+  console.log("5. 최종 isOwn:", isOwn);
+  console.log("======================================");
+
   const getMessageTypeClass = (type) => {
     switch (type) {
       case "JOIN":
@@ -56,16 +109,9 @@ const MessageItem = ({ message, isOwnMessage, currentUser }) => {
       case "LEAVE":
         return "system-message leave";
       default:
-        return isOwnMessage ? "user-message own" : "user-message other";
+        return isOwn ? "user-message own" : "user-message other";
     }
   };
-
-  // 자신이 보낸 메시지인지 확인
-  const isOwn =
-    currentUser &&
-    (message.senderId === currentUser.id ||
-      message.senderName === currentUser.name ||
-      message.senderId === currentUser.employeeId);
 
   return (
     <div className={`message-item ${getMessageTypeClass(message.type)}`}>
@@ -110,12 +156,6 @@ const MessageInput = ({
     }
   };
 
-  const roomId = currentChat
-    ? activeChat.type === "channel"
-      ? `channel_${currentChat.id}`
-      : currentChat.roomId
-    : null;
-
   return (
     <div className="message-input">
       <form onSubmit={handleSubmit} className="message-form">
@@ -146,7 +186,12 @@ const MessageInput = ({
 
 // 메인 채팅 영역 컴포넌트
 const ChatArea = () => {
-  const { getCurrentChat, activeChat, currentUser } = useChat();
+  // 🔥 ChatContext 대신 직접 상태 관리
+  const [currentUser, setCurrentUser] = useState(null);
+  const [userLoading, setUserLoading] = useState(true);
+
+  // 기존 useChat 훅 사용 (getCurrentChat, activeChat만 사용)
+  const { getCurrentChat, activeChat } = useChat();
   const currentChat = getCurrentChat();
 
   const [messages, setMessages] = useState([]);
@@ -156,6 +201,46 @@ const ChatArea = () => {
   const messagesEndRef = useRef(null);
   const currentRoomRef = useRef(null);
   const subscriptionRef = useRef(null);
+
+  // 🔥 컴포넌트 마운트 시 현재 사용자 정보 조회
+  useEffect(() => {
+    fetchCurrentUser();
+  }, []);
+
+  /**
+   * 🔥 현재 로그인한 사용자 정보 직접 조회
+   */
+  const fetchCurrentUser = async () => {
+    try {
+      setUserLoading(true);
+      console.log("현재 사용자 정보 조회 시도...");
+
+      const response = await fetch("/api/users/me", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        setCurrentUser(userData);
+        console.log("✅ 현재 사용자 정보 조회 성공:", userData);
+      } else if (response.status === 401) {
+        console.warn("❌ 인증되지 않은 사용자");
+        setCurrentUser(null);
+      } else {
+        console.error("❌ 사용자 정보 조회 실패:", response.status);
+        setCurrentUser(null);
+      }
+    } catch (error) {
+      console.error("❌ 사용자 정보 조회 중 오류:", error);
+      setCurrentUser(null);
+    } finally {
+      setUserLoading(false);
+    }
+  };
 
   // 메시지 목록 끝으로 스크롤
   const scrollToBottom = () => {
@@ -178,12 +263,13 @@ const ChatArea = () => {
 
   // 메시지 추가 함수 (중복 방지)
   const addMessage = (newMessage) => {
+    console.log("📨 새 메시지 수신:", newMessage);
     setMessages((prevMessages) => {
       if (isDuplicateMessage(newMessage, prevMessages)) {
-        console.log("중복 메시지 무시:", newMessage);
+        console.log("❌ 중복 메시지 무시:", newMessage);
         return prevMessages;
       }
-      console.log("새 메시지 추가:", newMessage);
+      console.log("✅ 새 메시지 추가:", newMessage);
       return [...prevMessages, newMessage];
     });
   };
@@ -192,18 +278,30 @@ const ChatArea = () => {
   useEffect(() => {
     const initWebSocket = async () => {
       try {
+        console.log("🔄 WebSocket 연결 시도...");
+
         if (!webSocketService.isConnected()) {
           await webSocketService.connect();
         }
+
         setWsConnected(true);
-        console.log("WebSocket 연결 성공");
+        console.log("✅ WebSocket 연결 성공");
       } catch (error) {
-        console.error("WebSocket 연결 실패:", error);
+        console.error("❌ WebSocket 연결 실패:", error);
         setWsConnected(false);
+
+        // 연결 실패 시 재시도 로직 (선택사항)
+        console.log("🔄 3초 후 재연결 시도...");
+        setTimeout(() => {
+          initWebSocket();
+        }, 3000);
       }
     };
 
-    initWebSocket();
+    // 🔥 사용자 정보가 로드된 후에만 WebSocket 연결 시도
+    if (!userLoading && currentUser) {
+      initWebSocket();
+    }
 
     // 컴포넌트 언마운트 시 정리
     return () => {
@@ -211,9 +309,13 @@ const ChatArea = () => {
         subscriptionRef.current.unsubscribe();
         subscriptionRef.current = null;
       }
+      if (webSocketService.isConnected()) {
+        webSocketService.disconnect();
+      }
       currentRoomRef.current = null;
+      setWsConnected(false);
     };
-  }, []);
+  }, [userLoading, currentUser]); // 🔥 의존성 배열에 userLoading, currentUser 추가
 
   // 채팅방 변경 시 처리
   useEffect(() => {
@@ -229,7 +331,7 @@ const ChatArea = () => {
       return;
     }
 
-    console.log("채팅방 변경:", currentRoomRef.current, "->", roomId);
+    console.log("🔄 채팅방 변경:", currentRoomRef.current, "->", roomId);
 
     // 이전 구독 해제
     if (subscriptionRef.current) {
@@ -252,7 +354,7 @@ const ChatArea = () => {
 
     // 새 방 참여 및 메시지 구독
     const messageHandler = (message) => {
-      console.log("새 메시지 수신:", message);
+      console.log("📨 WebSocket 메시지 수신:", message);
       addMessage(message);
     };
 
@@ -261,14 +363,13 @@ const ChatArea = () => {
         roomId,
         messageHandler
       );
-      console.log("방 참여 완료:", roomId);
+      console.log("✅ 방 참여 완료:", roomId);
     } catch (error) {
-      console.error("방 참여 실패:", error);
+      console.error("❌ 방 참여 실패:", error);
     }
 
     // cleanup 함수
     return () => {
-      // 컴포넌트가 언마운트되거나 방이 바뀔 때만 정리
       if (subscriptionRef.current) {
         subscriptionRef.current.unsubscribe();
         subscriptionRef.current = null;
@@ -291,10 +392,10 @@ const ChatArea = () => {
       if (response.ok) {
         const history = await response.json();
         setMessages(history);
-        console.log("채팅 히스토리 로드 완료:", history.length);
+        console.log("✅ 채팅 히스토리 로드 완료:", history.length);
       }
     } catch (error) {
-      console.error("채팅 히스토리 로드 실패:", error);
+      console.error("❌ 채팅 히스토리 로드 실패:", error);
     } finally {
       setLoading(false);
     }
@@ -303,7 +404,7 @@ const ChatArea = () => {
   // 메시지 전송
   const handleSendMessage = async (content) => {
     if (!currentChat || !wsConnected || isSending) {
-      console.log("메시지 전송 불가:", {
+      console.log("❌ 메시지 전송 불가:", {
         currentChat: !!currentChat,
         wsConnected,
         isSending,
@@ -319,20 +420,50 @@ const ChatArea = () => {
     setIsSending(true);
 
     try {
+      console.log("📤 메시지 전송 시도:", content);
       const success = webSocketService.sendMessage(roomId, content);
       if (!success) {
-        console.error("메시지 전송 실패");
-        // TODO: 사용자에게 오류 알림
+        console.error("❌ 메시지 전송 실패");
+      } else {
+        console.log("✅ 메시지 전송 성공");
       }
     } catch (error) {
-      console.error("메시지 전송 중 오류:", error);
+      console.error("❌ 메시지 전송 중 오류:", error);
     } finally {
       setIsSending(false);
     }
   };
 
+  // 🔥 로딩 중일 때 로딩 화면 표시
+  if (userLoading) {
+    return (
+      <div className="chat-area">
+        <div className="empty-state">사용자 정보를 불러오는 중...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="chat-area">
+      {/* 🔍 임시 디버깅 정보 표시 */}
+      {process.env.NODE_ENV === "development" && currentUser && (
+        <div
+          style={{
+            position: "fixed",
+            top: "10px",
+            right: "10px",
+            background: "#333",
+            color: "white",
+            padding: "10px",
+            borderRadius: "5px",
+            fontSize: "12px",
+            zIndex: 9999,
+          }}
+        >
+          현재 사용자: {currentUser.name} ({currentUser.id})
+        </div>
+      )}
+
       {/* 채팅 헤더 */}
       {currentChat && (
         <ChatHeader currentChat={currentChat} activeChat={activeChat} />
@@ -368,7 +499,7 @@ const ChatArea = () => {
                 <MessageItem
                   key={messageKey}
                   message={message}
-                  currentUser={currentUser}
+                  currentUser={currentUser} // 🔥 직접 조회한 사용자 정보 전달
                 />
               );
             })}

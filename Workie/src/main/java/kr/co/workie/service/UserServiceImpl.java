@@ -99,23 +99,84 @@ public class UserServiceImpl implements UserService {
 
     // ======== 채팅용 메서드들 추가 ========
 
-    // 현재 로그인된 사용자 정보 가져오기 (private 메서드)
+    // 현재 로그인된 사용자 정보 가져오기 (private 메서드) - 최종 수정됨
     private String getCurrentUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails userDetails = (MyUserDetails) auth.getPrincipal();
-        return userDetails.getUser().getId();
+
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new RuntimeException("인증되지 않은 사용자입니다.");
+        }
+
+        Object principal = auth.getPrincipal();
+
+        if (principal instanceof MyUserDetails) {
+            return ((MyUserDetails) principal).getUser().getId();
+        } else if (principal instanceof User) {
+            return ((User) principal).getId();
+        } else if (principal instanceof String) {
+            String identifier = (String) principal;
+
+            // 우선순위: employeeId -> email -> name -> id
+            User user = userRepository.findByEmployeeId(identifier)
+                    .orElse(userRepository.findByEmail(identifier)
+                            .orElse(userRepository.findByName(identifier)
+                                    .orElse(userRepository.findById(identifier)
+                                            .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다: " + identifier)))));
+
+            return user.getId();
+        }
+
+        throw new RuntimeException("알 수 없는 Principal 타입: " + principal.getClass());
     }
+
+
 
     private User getCurrentUserEntity() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails userDetails = (MyUserDetails) auth.getPrincipal();
-        return userDetails.getUser();
-    }
 
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new RuntimeException("인증되지 않은 사용자입니다.");
+        }
+
+        Object principal = auth.getPrincipal();
+
+        if (principal instanceof MyUserDetails) {
+            return ((MyUserDetails) principal).getUser();
+        } else if (principal instanceof User) {
+            return (User) principal;
+        } else if (principal instanceof String) {
+            String identifier = (String) principal;
+
+            // 우선순위: employeeId -> email -> name -> id
+            return userRepository.findByEmployeeId(identifier)
+                    .orElse(userRepository.findByEmail(identifier)
+                            .orElse(userRepository.findByName(identifier)
+                                    .orElse(userRepository.findById(identifier)
+                                            .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다: " + identifier)))));
+        }
+
+        throw new RuntimeException("알 수 없는 Principal 타입: " + principal.getClass());
+    }
     // 현재 사용자 정보 조회 (채팅용)
     @Override
     public UserDTO getCurrentUser() {
         User currentUser = getCurrentUserEntity();
+
+        // 🔍 디버깅 로그 추가
+        System.out.println("=== UserService 디버깅 ===");
+        System.out.println("🔍 User 엔티티: " + currentUser);
+        System.out.println("🔍 User.getName(): " + currentUser.getName());
+        System.out.println("🔍 User.getId(): " + currentUser.getId());
+
+        // ModelMapper 사용
+        UserDTO dto = modelMapper.map(currentUser, UserDTO.class);
+
+        // 🔍 매핑 결과 확인
+        System.out.println("🔍 매핑된 DTO: " + dto);
+        System.out.println("🔍 DTO.getName(): " + dto.getName());
+        System.out.println("🔍 DTO.getId(): " + dto.getId());
+        System.out.println("===============================");
+
         return modelMapper.map(currentUser, UserDTO.class);
     }
 
