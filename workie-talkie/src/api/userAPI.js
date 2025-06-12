@@ -79,11 +79,14 @@ export const getCalendar = async () => {
 
 export const postCalendar = async (data) => {
   try {
-    const response = await axios.post(`${CALENDAR_ADD}`, data);
+    const response = await axios.post(`${CALENDAR_ADD}`, data, {
+      withCredentials: true,
+    });
     console.log(response);
 
     return response.data;
   } catch (err) {
     console.log(err);
+    throw err;
   }
 };

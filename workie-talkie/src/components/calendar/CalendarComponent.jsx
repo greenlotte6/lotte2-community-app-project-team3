@@ -155,35 +155,7 @@ export const CalendarComponent = () => {
         editable={true}
         select={handleDateSelect}
         eventClick={handleEventClick}
-        events={[
-          {
-            id: "1",
-            title: "팀 회의",
-            startDate: "2025-06-10T10:00:00",
-            endDate: "2025-06-10T11:00:00",
-            extendedProps: {
-              description: "주간 업무 논의",
-              location: "회의실 A",
-            },
-            backgroundColor: "#28a745",
-          },
-          {
-            id: "2",
-            title: "점심 식사",
-            startDate: "2025-06-11T12:30:00",
-            endDate: "2025-06-11T13:30:00",
-            allDay: false,
-            backgroundColor: "#ffc107",
-          },
-          {
-            id: "3",
-            title: "프로젝트 마감",
-            startDate: "2025-06-15",
-            allDay: true,
-            extendedProps: { description: "최종 보고서 제출" },
-            backgroundColor: "#6f42c1",
-          },
-        ]}
+        events={null}
         // 이벤트 드래그&리사이즈 시 호출
         eventDrop={(info) => {
           // 드롭된 이벤트의 새 시작/종료 시간을 currentEventData에 반영

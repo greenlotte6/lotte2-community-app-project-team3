@@ -9,10 +9,10 @@ const initState = {
   description: "",
   startDate: "",
   endDate: "",
-  backgroundColor: "",
+  backgroundColor: "#4b6986",
 };
 
-export const EventModal = ({ isOpen, onClose, onSubmit, onDelete }) => {
+export const EventModal = ({ isOpen, onClose, onDelete }) => {
   const [calendar, setCalendar] = useState({ ...initState });
   const navigate = useNavigate();
 
@@ -43,6 +43,7 @@ export const EventModal = ({ isOpen, onClose, onSubmit, onDelete }) => {
     const fetchData = async () => {
       try {
         const data = await postCalendar(calendar);
+        console.log(data);
 
         alert("일정 등록 완료!");
       } catch (err) {
@@ -55,8 +56,8 @@ export const EventModal = ({ isOpen, onClose, onSubmit, onDelete }) => {
 
   const allDayHandler = (e) => {
     const checked = e.target.checked;
-    const startDate = calendar.start?.substring(0, 10);
-    const endDate = calendar.end?.substring(0, 10);
+    const startDate = calendar.startDate?.substring(0, 10);
+    const endDate = calendar.endDate?.substring(0, 10);
 
     setCalendar({
       ...calendar,
@@ -93,7 +94,7 @@ export const EventModal = ({ isOpen, onClose, onSubmit, onDelete }) => {
                 id="start"
                 type="datetime-local"
                 name="startDate"
-                value={calendar.start}
+                value={calendar.startDate}
                 onChange={changeHandler}
               />
             </div>
@@ -103,7 +104,7 @@ export const EventModal = ({ isOpen, onClose, onSubmit, onDelete }) => {
                 id="end"
                 type="datetime-local"
                 name="endDate"
-                value={calendar.end}
+                value={calendar.endDate}
                 onChange={changeHandler}
               />
             </div>
@@ -145,7 +146,7 @@ export const EventModal = ({ isOpen, onClose, onSubmit, onDelete }) => {
             <button className="cancel-btn" type="button" onClick={onClose}>
               취소
             </button>
-            <button className="submit-btn" type="button" onClick={onSubmit}>
+            <button className="submit-btn" type="submit">
               저장
             </button>
           </div>

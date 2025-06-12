@@ -27,8 +27,11 @@ public class AppController {
     }
 
     @PostMapping("/calendar/add")
-    public Map<String, Integer> addCalendar(Authentication authentication, CalendarDTO calendarDTO) {
+    public Map<String, Integer> addCalendar(Authentication authentication, @RequestBody CalendarDTO calendarDTO) {
+        log.info("calendarDTO={}", calendarDTO); // 🔍 여기서 endDate가 null인지 확인
+
         String loginId = authentication.getName();
+        log.info("⛳ writer = {}", loginId);
 
         int no = calendarService.addEvent(loginId, calendarDTO);
 
