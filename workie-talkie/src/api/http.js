@@ -29,3 +29,4 @@ export const PAGE = `${SERVER_HOST}/page`;
 
 export const CALENDAR_ADD = `${CALENDAR}/add`;
 export const PAGE_ADD = `${PAGE}/add`;
+export const PAGE_FAVORITE = `${PAGE}/favorite`;

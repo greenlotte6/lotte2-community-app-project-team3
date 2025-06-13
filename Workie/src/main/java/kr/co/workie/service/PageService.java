@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -41,4 +42,10 @@ public class PageService {
                 .collect(Collectors.toList());
     }
 
+    public int addFavorite(int pno, boolean favorite) {
+        Page page = pageRepository.findById(pno).orElseThrow();
+        page.setFavorite(favorite);
+        pageRepository.save(page);
+        return pno;
+    }
 }

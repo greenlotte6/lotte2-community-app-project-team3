@@ -32,4 +32,6 @@ public class Page {
 
     private int parentPage;
     private boolean isDeleted;
+    private boolean isFavorite;
+    private boolean isShared;
 }
