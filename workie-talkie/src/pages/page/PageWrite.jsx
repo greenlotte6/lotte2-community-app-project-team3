@@ -29,6 +29,9 @@ export const PageWrite = () => {
     const requestData = {
       title: formData.title,
       content: formData.body,
+      isDeleted: formData.deleted,
+      isShared: formData.shared,
+      isFavorite: formData.favorite,
     };
 
     //전송

@@ -10,6 +10,7 @@ import {
   SETTING_PROFILE,
   PAGE,
   PAGE_ADD,
+  PAGE_FAVORITE,
 } from "./http";
 
 //회원 관련
@@ -148,6 +149,20 @@ export const getPage = async () => {
 export const postPage = async (data) => {
   try {
     const response = await axios.post(`${PAGE_ADD}`, data, {
+      withCredentials: true,
+    });
+    console.log(response);
+
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+export const patchPage = async (data) => {
+  try {
+    const response = await axios.put(`${PAGE_FAVORITE}`, data, {
       withCredentials: true,
     });
     console.log(response);

@@ -96,7 +96,12 @@ public class AppController {
 
     //페이지 공유 멤버 추가 - 일단 보류!
 
-
+    //즐겨찾기
+    @PutMapping("/page/favorite/{pno}")
+    public ResponseEntity<?> favorite(@PathVariable int pno,  @RequestBody PageDTO pageDTO) {
+        int result = pageService.addFavorite(pno, pageDTO.isFavorite());
+        return ResponseEntity.ok(result);
+    }
     
     /* Board */
     

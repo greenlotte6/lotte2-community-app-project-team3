@@ -127,13 +127,21 @@ export const Profile = () => {
                   onChange={changeHandler}
                 />
 
-                <h4>사내번호</h4>
-                <input
-                  type="text"
-                  name="office"
-                  value={modifyUser?.office}
-                  onChange={changeHandler}
-                />
+                <h4>사내번호 / 개인번호</h4>
+                <div className="input-row">
+                  <input
+                    type="text"
+                    name="office"
+                    value={modifyUser?.office}
+                    onChange={changeHandler}
+                  />
+                  <input
+                    type="text"
+                    name="hp"
+                    value={modifyUser?.hp}
+                    onChange={changeHandler}
+                  />
+                </div>
 
                 <h4>부서</h4>
                 <input
