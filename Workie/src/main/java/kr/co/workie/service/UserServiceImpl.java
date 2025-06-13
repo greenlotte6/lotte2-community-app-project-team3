@@ -247,7 +247,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUid(String uid) {
-        return userRepository.findById(uid)  // ✅ 수정완료
+        return userRepository.findById(uid)
                 .orElseThrow(() -> new RuntimeException("해당 사용자를 찾을 수 없습니다."));
     }
 

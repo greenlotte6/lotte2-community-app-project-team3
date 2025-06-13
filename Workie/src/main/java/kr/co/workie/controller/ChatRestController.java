@@ -44,7 +44,7 @@ public class ChatRestController {
     @GetMapping("/recent/{roomId}")
     public ResponseEntity<List<ChatMessageDTO.Response>> getRecentMessages(
             @PathVariable String roomId,
-            @RequestParam(defaultValue = "50") int limit) {
+            @RequestParam(defaultValue = "200") int limit) {
 
         try {
             log.info("최근 메시지 조회 요청 - 방: {}, 제한: {}", roomId, limit);

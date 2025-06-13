@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;  // 🔥 추가
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +42,12 @@ public class ChatService {
     public List<ChatMessage> getRecentMessages(String roomId, int limit) {
         // int limit를 Pageable로 변환
         Pageable pageable = PageRequest.of(0, limit);
-        return chatMessageRepository.findRecentMessagesByRoomId(roomId, pageable);
+        List<ChatMessage> messages = chatMessageRepository.findRecentMessagesByRoomId(roomId, pageable);
+
+        // 🔥 최신 50개를 가져온 후 오래된 순으로 정렬
+        return messages.stream()
+                .sorted((a, b) -> a.getCreatedAt().compareTo(b.getCreatedAt()))
+                .collect(Collectors.toList());
     }
 
     /**

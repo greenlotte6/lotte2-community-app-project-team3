@@ -59,49 +59,6 @@ const MessageItem = ({ message, currentUser }) => {
       String(message.senderId) === String(currentUser.id) ||
       String(message.senderId) === String(currentUser.employeeId));
 
-  // 🔍 상세 디버깅용 로그
-  console.log("=== 📨 MessageItem 상세 디버깅 ===");
-  console.log("1. 메시지 전체:", JSON.stringify(message, null, 2));
-  console.log("2. 현재 사용자 전체:", JSON.stringify(currentUser, null, 2));
-  console.log("3. 비교 결과:");
-  console.log(
-    "   - message.senderId:",
-    `"${message.senderId}"`,
-    typeof message.senderId
-  );
-  console.log(
-    "   - message.senderName:",
-    `"${message.senderName}"`,
-    typeof message.senderName
-  );
-  console.log(
-    "   - currentUser.id:",
-    `"${currentUser?.id}"`,
-    typeof currentUser?.id
-  );
-  console.log(
-    "   - currentUser.name:",
-    `"${currentUser?.name}"`,
-    typeof currentUser?.name
-  );
-  console.log(
-    "   - currentUser.employeeId:",
-    `"${currentUser?.employeeId}"`,
-    typeof currentUser?.employeeId
-  );
-  console.log("4. 매칭 테스트:");
-  console.log("   - senderId === id?", message.senderId === currentUser?.id);
-  console.log(
-    "   - senderId === employeeId?",
-    message.senderId === currentUser?.employeeId
-  );
-  console.log(
-    "   - senderName === name?",
-    message.senderName === currentUser?.name
-  );
-  console.log("5. 최종 isOwn:", isOwn);
-  console.log("======================================");
-
   const getMessageTypeClass = (type) => {
     switch (type) {
       case "JOIN":
@@ -201,6 +158,7 @@ const ChatArea = () => {
   const messagesEndRef = useRef(null);
   const currentRoomRef = useRef(null);
   const subscriptionRef = useRef(null);
+  const globalHandlerRef = useRef(null); // 🔥 전역 핸들러 ref 추가
 
   // 🔥 컴포넌트 마운트 시 현재 사용자 정보 조회
   useEffect(() => {
@@ -280,6 +238,18 @@ const ChatArea = () => {
       try {
         console.log("🔄 WebSocket 연결 시도...");
 
+        // 🔥 전역 핸들러 먼저 등록
+        if (!globalHandlerRef.current) {
+          const globalMessageHandler = (message) => {
+            console.log("📨 전역 핸들러에서 메시지 수신:", message);
+            addMessage(message);
+          };
+
+          webSocketService.addMessageHandler(globalMessageHandler);
+          globalHandlerRef.current = globalMessageHandler;
+          console.log("📝 전역 메시지 핸들러 등록됨 (연결 전)");
+        }
+
         if (!webSocketService.isConnected()) {
           await webSocketService.connect();
         }
@@ -290,7 +260,12 @@ const ChatArea = () => {
         console.error("❌ WebSocket 연결 실패:", error);
         setWsConnected(false);
 
-        // 연결 실패 시 재시도 로직 (선택사항)
+        // 연결 실패 시 핸들러 제거
+        if (globalHandlerRef.current) {
+          webSocketService.removeMessageHandler(globalHandlerRef.current);
+          globalHandlerRef.current = null;
+        }
+
         console.log("🔄 3초 후 재연결 시도...");
         setTimeout(() => {
           initWebSocket();
@@ -298,7 +273,6 @@ const ChatArea = () => {
       }
     };
 
-    // 🔥 사용자 정보가 로드된 후에만 WebSocket 연결 시도
     if (!userLoading && currentUser) {
       initWebSocket();
     }
@@ -309,13 +283,20 @@ const ChatArea = () => {
         subscriptionRef.current.unsubscribe();
         subscriptionRef.current = null;
       }
+
+      // 🔥 전역 핸들러 제거
+      if (globalHandlerRef.current) {
+        webSocketService.removeMessageHandler(globalHandlerRef.current);
+        globalHandlerRef.current = null;
+      }
+
       if (webSocketService.isConnected()) {
         webSocketService.disconnect();
       }
       currentRoomRef.current = null;
       setWsConnected(false);
     };
-  }, [userLoading, currentUser]); // 🔥 의존성 배열에 userLoading, currentUser 추가
+  }, [userLoading, currentUser]);
 
   // 채팅방 변경 시 처리
   useEffect(() => {
@@ -352,21 +333,19 @@ const ChatArea = () => {
     // 채팅 히스토리 로드
     loadChatHistory(roomId);
 
-    // 새 방 참여 및 메시지 구독
-    const messageHandler = (message) => {
-      console.log("📨 WebSocket 메시지 수신:", message);
-      addMessage(message);
-    };
-
-    try {
-      subscriptionRef.current = webSocketService.joinRoom(
-        roomId,
-        messageHandler
-      );
-      console.log("✅ 방 참여 완료:", roomId);
-    } catch (error) {
-      console.error("❌ 방 참여 실패:", error);
-    }
+    // 🔥 잠시 대기 후 방 참여 (WebSocket 연결 안정화)
+    setTimeout(() => {
+      try {
+        subscriptionRef.current = webSocketService.joinRoom(roomId);
+        console.log("✅ 방 참여 완료:", roomId);
+        console.log(
+          "🔍 등록된 핸들러 개수:",
+          webSocketService.messageHandlers.size
+        );
+      } catch (error) {
+        console.error("❌ 방 참여 실패:", error);
+      }
+    }, 100);
 
     // cleanup 함수
     return () => {
@@ -445,25 +424,6 @@ const ChatArea = () => {
 
   return (
     <div className="chat-area">
-      {/* 🔍 임시 디버깅 정보 표시 */}
-      {process.env.NODE_ENV === "development" && currentUser && (
-        <div
-          style={{
-            position: "fixed",
-            top: "10px",
-            right: "10px",
-            background: "#333",
-            color: "white",
-            padding: "10px",
-            borderRadius: "5px",
-            fontSize: "12px",
-            zIndex: 9999,
-          }}
-        >
-          현재 사용자: {currentUser.name} ({currentUser.id})
-        </div>
-      )}
-
       {/* 채팅 헤더 */}
       {currentChat && (
         <ChatHeader currentChat={currentChat} activeChat={activeChat} />
@@ -499,7 +459,7 @@ const ChatArea = () => {
                 <MessageItem
                   key={messageKey}
                   message={message}
-                  currentUser={currentUser} // 🔥 직접 조회한 사용자 정보 전달
+                  currentUser={currentUser}
                 />
               );
             })}

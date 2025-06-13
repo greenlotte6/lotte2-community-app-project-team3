@@ -16,11 +16,13 @@ public interface ChatMessageRepository extends JpaRepository<ChatMessage, Long> 
     // 특정 룸의 메시지 조회 (최신순, 페이징)
     Page<ChatMessage> findByRoomIdOrderByCreatedAtDesc(String roomId, Pageable pageable);
 
-    // 특정 룸의 최신 메시지 조회 (개수 제한)
+   // ✅ 수정 (오래된 메시지가 먼저)
     @Query("SELECT cm FROM ChatMessage cm " +
             "WHERE cm.roomId = :roomId " +
-            "ORDER BY cm.createdAt DESC")
+            "ORDER BY cm.createdAt ASC")
     List<ChatMessage> findRecentMessagesByRoomId(@Param("roomId") String roomId, Pageable pageable);
+
+
 
     // 1. 특정 룸의 메시지를 오래된 순으로 조회
     List<ChatMessage> findByRoomIdOrderByCreatedAtAsc(String roomId);
