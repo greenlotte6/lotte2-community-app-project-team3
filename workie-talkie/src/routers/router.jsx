@@ -30,6 +30,8 @@ import { PricingPage } from "../pages/landing/PricingPage";
 import { FAQPage } from "../pages/landing/FAQPage";
 import { AuthWrapper } from "../components/auth/AuthWrapper";
 import { Test } from "../pages/board/Test";
+import { PageMain } from "../pages/page/PageMain";
+import { PageWrite } from "../pages/page/PageWrite";
 
 //라우터 생성
 
@@ -44,7 +46,7 @@ const router = createBrowserRouter([
     element: <AuthWrapper />,
     children: [
       { path: "/dashboard/main", element: <Main /> },
-      { path: "/setting/profile/:id", element: <Profile /> },
+      { path: "/setting/profile", element: <Profile /> },
       { path: "/setting/page", element: <Page /> },
       { path: "/setting/message", element: <Message /> },
       { path: "/setting/autoMessage", element: <AutoMessage /> },
@@ -57,6 +59,8 @@ const router = createBrowserRouter([
       { path: "/board/main", element: <BoardMain /> },
       { path: "/board/list", element: <BoardList /> },
       { path: "/board/test", element: <Test /> },
+      { path: "/page", element: <PageMain /> },
+      { path: "/page/new", element: <PageWrite /> },
       { path: "/drive", element: <Drivepage /> },
       { path: "/chat", element: <ChatPage /> },
       { path: "/calendar", element: <CalendarPage /> },

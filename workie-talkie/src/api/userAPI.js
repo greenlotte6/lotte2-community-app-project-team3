@@ -7,6 +7,7 @@ import {
   USER_LOGOUT,
   USER_REGISTER,
   USER_TERMS,
+  SETTING_PROFILE,
 } from "./http";
 
 //회원 관련
@@ -64,7 +65,33 @@ export const getUserLogout = async () => {
   }
 };
 
-//기능 관련
+// 프로필 조회
+export const getProfile = async () => {
+  try {
+    const response = await axios.get(`${SETTING_PROFILE}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.error("프로필 요청 실패", err);
+    throw err;
+  }
+};
+
+// 프로필 수정
+export const putProfile = async (data) => {
+  try {
+    const response = await axios.put(`${SETTING_PROFILE}`, data, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.error("프로필 수정 실패", err);
+    throw err;
+  }
+};
+
+//캘린더 관련
 export const getCalendar = async () => {
   try {
     const response = await axios.get(`${CALENDAR}`, {

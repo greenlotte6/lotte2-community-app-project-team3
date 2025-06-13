@@ -7,6 +7,7 @@ import "./styles/imports/settings.scss";
 import "./styles/imports/dashboards.scss";
 import "./styles/imports/boards.scss";
 import "./styles/imports/users.scss";
+import "./styles/imports/pages.scss";
 import "./styles/imports/drive.scss";
 import "./styles/imports/chats.scss";
 import "./styles/imports/landings.scss";
