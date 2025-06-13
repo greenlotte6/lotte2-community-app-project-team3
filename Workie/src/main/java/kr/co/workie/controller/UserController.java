@@ -104,11 +104,61 @@ public class UserController {
 
     @PostMapping("/user/register")
     public Map<String, String> register(@RequestBody UserDTO userDTO){
+        log.info("=== 🔍 회원가입 요청 수신 ===");
+        log.info("🔍 전체 UserDTO: {}", userDTO);
 
-        log.info(userDTO);
+        // 🔥 각 필드별 상세 로깅
+        log.info("🔍 받은 필드들:");
+        log.info("  - id: '{}'", userDTO.getId());
+        log.info("  - pass: '{}'", userDTO.getPass() != null ? "***있음***" : "null");
+        log.info("  - name: '{}'", userDTO.getName());
+        log.info("  - email: '{}'", userDTO.getEmail());
+        log.info("  - employeeId: '{}'", userDTO.getEmployeeId());
+        log.info("  - department: '{}'", userDTO.getDepartment());
+        log.info("  - position: '{}'", userDTO.getPosition());
+        log.info("  - office: '{}'", userDTO.getOffice());
+        log.info("  - hp: '{}'", userDTO.getHp());
+        log.info("  - role: '{}'", userDTO.getRole());
+        log.info("  - companyName: '{}'", userDTO.getCompanyName());
 
-        String Id = userService.register(userDTO);
-        return Map.of("userid", Id);
+        // 🔥 비어있는 필드들 체크
+        if (userDTO.getName() == null || userDTO.getName().trim().isEmpty()) {
+            log.warn("⚠️ name 필드가 비어있습니다!");
+        }
+        if (userDTO.getEmail() == null || userDTO.getEmail().trim().isEmpty()) {
+            log.warn("⚠️ email 필드가 비어있습니다!");
+        }
+        if (userDTO.getDepartment() == null || userDTO.getDepartment().trim().isEmpty()) {
+            log.warn("⚠️ department 필드가 비어있습니다!");
+        }
+
+        try {
+            String userId = userService.register(userDTO);
+
+            log.info("✅ 회원가입 성공! 생성된 사용자 ID: {}", userId);
+
+            // 🔥 저장 후 실제 DB 데이터 확인
+            User savedUser = userRepository.findById(userId).orElse(null);
+            if (savedUser != null) {
+                log.info("=== 🔍 실제 저장된 데이터 확인 ===");
+                log.info("🔍 저장된 사용자: {}", savedUser);
+                log.info("🔍 저장된 name: '{}'", savedUser.getName());
+                log.info("🔍 저장된 email: '{}'", savedUser.getEmail());
+                log.info("🔍 저장된 employeeId: '{}'", savedUser.getEmployeeId());
+                log.info("🔍 저장된 department: '{}'", savedUser.getDepartment());
+                log.info("🔍 저장된 position: '{}'", savedUser.getPosition());
+                log.info("🔍 저장된 role: '{}'", savedUser.getRole());
+                log.info("===============================");
+            } else {
+                log.error("❌ 저장된 사용자를 찾을 수 없습니다!");
+            }
+
+            return Map.of("userid", userId);
+
+        } catch (Exception e) {
+            log.error("❌ 회원가입 실패: {}", e.getMessage(), e);
+            return Map.of("error", "회원가입 실패: " + e.getMessage());
+        }
     }
 
     @GetMapping("/user/check")
@@ -152,9 +202,22 @@ public class UserController {
         try {
             log.info("현재 사용자 정보 조회 요청");
             UserDTO currentUser = userService.getCurrentUser();
+
+            // 🔥 현재 사용자 정보 상세 로깅
+            log.info("=== 🔍 현재 사용자 정보 ===");
+            log.info("🔍 사용자 DTO: {}", currentUser);
+            log.info("🔍 ID: '{}'", currentUser.getId());
+            log.info("🔍 이름: '{}'", currentUser.getName());
+            log.info("🔍 사원번호: '{}'", currentUser.getEmployeeId());
+            log.info("🔍 이메일: '{}'", currentUser.getEmail());
+            log.info("🔍 역할: '{}'", currentUser.getRole());
+            log.info("🔍 부서: '{}'", currentUser.getDepartment());
+            log.info("🔍 직책: '{}'", currentUser.getPosition());
+            log.info("=======================");
+
             return ResponseEntity.ok(currentUser);
         } catch (Exception e) {
-            log.error("현재 사용자 정보 조회 실패: {}", e.getMessage());
+            log.error("현재 사용자 정보 조회 실패: {}", e.getMessage(), e);
             return ResponseEntity.badRequest().build();
         }
     }
