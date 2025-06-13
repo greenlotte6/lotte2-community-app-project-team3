@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { postCalendar, putCalendar } from "../../api/userAPI";
-import { useNavigate } from "react-router-dom";
-import { CALENDAR } from "../../api/http";
 
 const initState = {
   writer: "",

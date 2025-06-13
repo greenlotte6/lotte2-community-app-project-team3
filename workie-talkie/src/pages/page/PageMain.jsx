@@ -2,33 +2,30 @@ import React, { useEffect } from "react"; // useEffect 훅을 임포트
 import { MainLayout } from "../../layouts/MainLayout";
 import { Link } from "react-router-dom";
 import { Aside } from "../../components/page/Aside";
+import { getPage } from "../../api/userAPI";
+//사이드바 타이틀 누르면 숨겨지는거도 해보기!
 
-export const PageMain = () => {
-  // useEffect 훅을 사용하여 DOMContentLoaded와 유사한 기능 구현
+export const PageMain = (pages, setPages) => {
   useEffect(() => {
-    // Collapsible Sidebar Sections (for Notion-style sidebar)
-    // QuerySelectorAll은 NodeList를 반환하므로 forEach를 사용
-    document
-      .querySelectorAll(".notion-style-sidebar .section-title")
-      .forEach((title) => {
-        const handleClick = () => {
-          // 이벤트 리스너 함수를 분리하여 메모리 누수 방지
-          const targetId = title.dataset.target;
-          const content = document.getElementById(targetId);
-          if (content) {
-            content.classList.toggle("collapsed");
-            title.classList.toggle("collapsed");
-          }
-        };
+    const loadPages = async () => {
+      try {
+        const data = await getPage();
+        console.log(data);
 
-        title.addEventListener("click", handleClick);
+        const converted = data.map((item) => ({
+          id: item.pno,
+          title: item.title,
+          content: item.content,
+        }));
 
-        // 컴포넌트 언마운트 시 이벤트 리스너 제거 (클린업 함수)
-        return () => {
-          title.removeEventListener("click", handleClick);
-        };
-      });
-  }, []); // 빈 의존성 배열은 컴포넌트가 처음 마운트될 때 한 번만 실행됨을 의미
+        setPages(converted);
+      } catch (err) {
+        console.error("페이지 불러오기 실패", err);
+      }
+    };
+
+    loadPages();
+  }, []);
 
   const samplePages = [
     {
