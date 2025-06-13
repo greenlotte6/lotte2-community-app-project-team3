@@ -203,6 +203,12 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(user, UserDTO.class);
     }
 
+    @Override
+    public User getUserByUid(String uid) {
+        return userRepository.findByUid(uid)
+                .orElseThrow(() -> new RuntimeException("해당 사용자를 찾을 수 없습니다."));
+    }
+
 /*
     @Override
     public TermsDTO terms() {

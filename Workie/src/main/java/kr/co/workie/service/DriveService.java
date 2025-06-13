@@ -32,14 +32,16 @@ public class DriveService {
     }
 
     public DriveItem createFolder(User user, String name, Long parentId) {
-        return driveItemRepository.save(DriveItem.builder()
+        DriveItem folder = DriveItem.builder()
+                .user(user)
                 .name(name)
                 .type(DriveItem.fileType.FOLDER)
-                .user(user)
                 .parentId(parentId)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .build());
+                .build();
+
+        return driveItemRepository.save(folder);
     }
 
     public void deleteDriveItem(Long dno) {

@@ -25,7 +25,7 @@ export const DriveHeader = ({
   }, []);
 
   return (
-    <header className="header">
+    <header className="header" style={{ background: "none" }}>
       <h2 id="main-title">
         {activeTab}
         {!isTrash && (
