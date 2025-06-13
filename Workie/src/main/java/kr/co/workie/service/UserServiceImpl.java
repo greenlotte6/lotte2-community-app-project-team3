@@ -160,24 +160,66 @@ public class UserServiceImpl implements UserService {
     // 현재 사용자 정보 조회 (채팅용)
     @Override
     public UserDTO getCurrentUser() {
-        User currentUser = getCurrentUserEntity();
+        System.out.println("=== getCurrentUser() 시작 ===");
 
-        // 🔍 디버깅 로그 추가
-        System.out.println("=== UserService 디버깅 ===");
-        System.out.println("🔍 User 엔티티: " + currentUser);
-        System.out.println("🔍 User.getName(): " + currentUser.getName());
-        System.out.println("🔍 User.getId(): " + currentUser.getId());
+        try {
+            // 1. Authentication 객체 확인
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            System.out.println("🔍 Authentication: " + auth);
+            System.out.println("🔍 Authentication.getName(): " + (auth != null ? auth.getName() : "null"));
+            System.out.println("🔍 Authentication.getPrincipal(): " + (auth != null ? auth.getPrincipal() : "null"));
 
-        // ModelMapper 사용
-        UserDTO dto = modelMapper.map(currentUser, UserDTO.class);
+            // 2. getCurrentUserEntity() 호출
+            User currentUser = getCurrentUserEntity();
+            System.out.println("🔍 getCurrentUserEntity() 결과:");
+            System.out.println("   - User 객체: " + currentUser);
+            System.out.println("   - getId(): " + (currentUser != null ? currentUser.getId() : "null"));
+            System.out.println("   - getName(): " + (currentUser != null ? currentUser.getName() : "null"));
+            System.out.println("   - getEmployeeId(): " + (currentUser != null ? currentUser.getEmployeeId() : "null"));
+            System.out.println("   - getEmail(): " + (currentUser != null ? currentUser.getEmail() : "null"));
+            System.out.println("   - getRole(): " + (currentUser != null ? currentUser.getRole() : "null"));
 
-        // 🔍 매핑 결과 확인
-        System.out.println("🔍 매핑된 DTO: " + dto);
-        System.out.println("🔍 DTO.getName(): " + dto.getName());
-        System.out.println("🔍 DTO.getId(): " + dto.getId());
-        System.out.println("===============================");
+            if (currentUser == null) {
+                throw new RuntimeException("getCurrentUserEntity()가 null을 반환했습니다!");
+            }
 
-        return modelMapper.map(currentUser, UserDTO.class);
+            // 3. 직접 DB에서 조회해보기
+            System.out.println("🔍 직접 DB 조회 시도...");
+            Optional<User> dbUser = userRepository.findById(currentUser.getId());
+            if (dbUser.isPresent()) {
+                User user = dbUser.get();
+                System.out.println("   - DB에서 조회한 User:");
+                System.out.println("   - getId(): " + user.getId());
+                System.out.println("   - getName(): " + user.getName());
+                System.out.println("   - getEmployeeId(): " + user.getEmployeeId());
+                System.out.println("   - getEmail(): " + user.getEmail());
+                System.out.println("   - getRole(): " + user.getRole());
+
+                // DB에서 가져온 데이터를 사용
+                currentUser = user;
+            } else {
+                System.out.println("   - ❌ DB에서 사용자를 찾을 수 없음!");
+            }
+
+            // 4. ModelMapper 매핑
+            UserDTO dto = modelMapper.map(currentUser, UserDTO.class);
+            System.out.println("🔍 ModelMapper 매핑 결과:");
+            System.out.println("   - getId(): " + dto.getId());
+            System.out.println("   - getName(): " + dto.getName());
+            System.out.println("   - getEmployeeId(): " + dto.getEmployeeId());
+            System.out.println("   - getEmail(): " + dto.getEmail());
+            System.out.println("   - getRole(): " + dto.getRole());
+
+            System.out.println("=== getCurrentUser() 완료 ===");
+            return dto;
+
+        } catch (Exception e) {
+            System.out.println("❌ getCurrentUser() 에러: " + e.getMessage());
+            e.printStackTrace();
+            throw e;
+        }
+
+
     }
 
     // 멤버 선택을 위한 사용자 목록 조회 (채팅용)
