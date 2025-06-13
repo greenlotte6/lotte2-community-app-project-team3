@@ -12,7 +12,7 @@ export const Aside = () => {
           <div className="section-title">SETTINGS</div>
           <ul>
             <li>
-              <Link to={`/setting/profile/${user.username}`}>👤프로필</Link>
+              <Link to="/setting/profile">👤프로필</Link>
             </li>
             <li>
               <Link to="/setting/message">💬메시지</Link>

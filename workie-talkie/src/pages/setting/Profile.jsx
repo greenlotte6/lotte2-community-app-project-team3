@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { SettingLayout } from "../../layouts/SettingLayout";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLoginStore } from "../../stores/useLoginStore";
 import axios from "axios";
 import { SETTING_PROFILE } from "../../api/http";
+import { getProfile, putProfile } from "../../api/userAPI";
 
 export const Profile = () => {
   const user = useLoginStore((state) => state.user);
@@ -27,7 +28,7 @@ export const Profile = () => {
   });
 
   //const [searchParams] = useSearchParams();
-  const { id } = useParams();
+  const id = user?.id;
 
   //const id = searchParams.get("id");
   console.log("id: " + id);
@@ -37,50 +38,36 @@ export const Profile = () => {
     if (!user) {
       navigate("/user/login");
     }
+
+    getProfile()
+      .then((data) => setModifyUser((prev) => ({ ...prev, ...data })))
+      .catch((err) => console.error(err));
   }, [user, navigate]);
-
-  useEffect(() => {
-    axios
-      .get(`${SETTING_PROFILE}/${id}`)
-      .then((response) => {
-        console.log(response);
-
-        //state 초기화
-        setModifyUser((prev) => ({
-          ...prev,
-          ...response.data,
-        }));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [id]);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     const { pass1, pass2, ...finalUser } = modifyUser;
 
-    if (pass1 !== pass2) {
-      alert("비밀번호가 일치하지 않습니다.");
-      return;
+    if (pass1 || pass2) {
+      if (pass1 !== pass2) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return;
+      }
+
+      if (pass2.length < 8) {
+        alert("비밀번호는 8자리 이상이어야 합니다.");
+        return;
+      }
     }
 
-    if (pass2.length < 8) {
-      alert("비밀번호는 8자리 이상이어야 합니다.");
-      return;
+    if (!pass1 || !pass2) {
+      delete finalUser.pass;
     }
 
-    axios
-      .put(SETTING_PROFILE, finalUser)
-      .then((response) => {
-        console.log(response.data);
-
-        navigate(SETTING_PROFILE / { id });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    putProfile(finalUser)
+      .then(() => navigate("/setting/profile"))
+      .catch((err) => console.error(err));
   };
 
   const changeHandler = (e) => {
