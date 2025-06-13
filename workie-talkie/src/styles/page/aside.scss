@@ -1,0 +1,143 @@
+#writes,
+#page {
+  /* 사이드바 + 페이지 리스트 */
+  .notion-style-sidebar {
+    width: 256px;
+    background-color: #374151;
+    border-right: 1px solid #e0e0e0;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-shrink: 0;
+    color: #ffffff;
+  }
+
+  .notion-style-sidebar-header {
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .notion-style-sidebar-header h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #bebebe;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+  }
+  .notion-style-sidebar-header h2 span {
+    font-size: 14px;
+    color: #999;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+    color: #888;
+  }
+
+  .search-box input {
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    margin-left: 0.5rem;
+    font-size: 14px;
+    color: #333;
+    background: transparent;
+  }
+
+  .search-box input::placeholder {
+    color: #bbb;
+  }
+
+  .sidebar-section {
+    margin-bottom: 0.5rem;
+  }
+
+  /* section-title for sidebar */
+  .notion-style-sidebar .section-title {
+    font-size: 12px;
+    color: #888;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  .notion-style-sidebar .section-title i {
+    font-size: 10px;
+    transition: transform 0.2s;
+  }
+  .notion-style-sidebar .section-title.collapsed i {
+    transform: rotate(-90deg);
+  }
+
+  .page-list {
+    list-style: none;
+    padding: 0;
+    font-size: 14px;
+  }
+  .notion-style-sidebar .page-list li {
+    /* Specific styles for Notion-style sidebar's list items */
+    padding: 0.5rem 1rem 0.5rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.1s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+  .notion-style-sidebar .page-list li:hover {
+    background-color: #6d7f9b;
+  }
+  .notion-style-sidebar .page-list li.active {
+    background-color: #6d7f9b;
+    color: #ffffff;
+  }
+  .notion-style-sidebar .page-list li.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: #c5d7ee;
+    border-radius: 0 3px 3px 0;
+  }
+  .notion-style-sidebar .page-list .icon {
+    color: #999;
+    font-size: 12px;
+  }
+  .notion-style-sidebar .page-list .add-page {
+    color: #666;
+    font-style: italic;
+  }
+
+  .create-page-btn-wrapper {
+    margin-top: auto;
+    padding: 1rem;
+  }
+  .create-page-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #4f83f1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .create-page-btn:hover {
+    background-color: #3b6edc;
+  }
+}

@@ -8,6 +8,8 @@ import {
   USER_REGISTER,
   USER_TERMS,
   SETTING_PROFILE,
+  PAGE,
+  PAGE_ADD,
 } from "./http";
 
 //회원 관련
@@ -123,6 +125,33 @@ export const putCalendar = async (data) => {
     const response = await axios.put(`${CALENDAR}/${data.cno}`, data, {
       withCredentials: true,
     });
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+//페이지 관련
+export const getPage = async () => {
+  try {
+    const response = await axios.get(`${PAGE}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.error("page 요청 실패", err);
+    throw err;
+  }
+};
+
+export const postPage = async (data) => {
+  try {
+    const response = await axios.post(`${PAGE_ADD}`, data, {
+      withCredentials: true,
+    });
+    console.log(response);
+
     return response.data;
   } catch (err) {
     console.log(err);

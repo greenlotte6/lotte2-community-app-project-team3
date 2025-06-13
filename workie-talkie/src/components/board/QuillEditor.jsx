@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 
@@ -7,6 +7,7 @@ import "quill/dist/quill.snow.css";
  * @param {object} props
  * @param {(fieldName: string, value: any) => void} props.change_field - 부모 컴포넌트의 상태를 업데이트할 콜백 함수
  */
+
 export const QuillEditor = ({ change_field }) => {
   const quillElement = useRef(null); // 에디터가 렌더링될 DOM 엘리먼트 참조
   const quillInstance = useRef(null); // Quill 인스턴스 참조
@@ -14,19 +15,22 @@ export const QuillEditor = ({ change_field }) => {
   useEffect(() => {
     if (quillInstance.current || quillElement.current?.firstChild) return;
 
+    const toolbarOptions = [
+      [{ header: ["1", "2", "3", false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["blockquote", "code-block", "link", "image", "video"],
+      [{ align: [] }, { color: [] }, { background: [] }, { font: [] }],
+    ];
+
     // Quill 에디터 초기화
     quillInstance.current = new Quill(quillElement.current, {
       theme: "snow", // 테마 설정
       placeholder: "내용을 입력하세요.", // 플레이스홀더 텍스트
       modules: {
-        toolbar: [
-          // 툴바 옵션
-          [{ header: ["1", "2", "3", false] }],
-          ["bold", "italic", "underline", "strike"],
-          [{ list: "ordered" }, { list: "bullet" }],
-          ["blockquote", "code-block", "link", "image", "video"],
-          [{ align: [] }, { color: [] }, { background: [] }, { font: [] }],
-        ],
+        toolbar: {
+          container: "#quill-toolbar", // 외부 툴바 연결
+        },
       },
     });
 

@@ -1,10 +1,8 @@
 package kr.co.workie.service;
 
 import kr.co.workie.dto.CalendarDTO;
-import kr.co.workie.dto.UserDTO;
 import kr.co.workie.entity.Calendar;
 import kr.co.workie.repository.CalendarRepository;
-import kr.co.workie.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,7 +15,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CalendarService {
 
-    private final UserRepository userRepository;
     private final CalendarRepository calendarRepository;
     private final ModelMapper modelMapper;
 
@@ -34,7 +31,7 @@ public class CalendarService {
     
     //일정 수정하기
     @Transactional
-    public void  updateEvent(int cno, CalendarDTO calendarDTO) {
+    public void updateEvent(int cno, CalendarDTO calendarDTO) {
         Calendar calendar = calendarRepository.findById(cno).get();
         
         //기존의 writer 유지
@@ -44,6 +41,9 @@ public class CalendarService {
 
         calendar.setWriter(originalWriter);
     }
+
+    //일정 삭제하기
+    
     
     //일정 불러오기
     public List<CalendarDTO> getEventsByWriter(String loginId) {

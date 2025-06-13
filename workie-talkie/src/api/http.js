@@ -25,5 +25,7 @@ export const SETTING_PLAN = `${SETTING}/plan`; //요금제
 
 //app
 export const CALENDAR = `${SERVER_HOST}/calendar`;
+export const PAGE = `${SERVER_HOST}/page`;
 
 export const CALENDAR_ADD = `${CALENDAR}/add`;
+export const PAGE_ADD = `${PAGE}/add`;
