@@ -251,6 +251,29 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("해당 사용자를 찾을 수 없습니다."));
     }
 
+    @Override
+    public List<UserDTO> getAllActiveUsers() {
+        List<User> users = userRepository.findAll(); // 또는 활성 사용자만 조회하는 쿼리
+        return users.stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UserDTO> searchUsersByName(String searchQuery) {
+        // 이름으로 사용자 검색 (대소문자 무시, 부분 일치)
+        List<User> users = userRepository.findByNameContainingIgnoreCase(searchQuery);
+
+        // 현재 사용자 제외
+        String currentUserId = getCurrentUserId();
+
+        return users.stream()
+                .filter(user -> !user.getId().equals(currentUserId)) // 자신 제외
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
+    }
+
+
 /*
     @Override
     public TermsDTO terms() {

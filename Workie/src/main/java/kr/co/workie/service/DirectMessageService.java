@@ -3,6 +3,7 @@ package kr.co.workie.service;
 import kr.co.workie.dto.DirectMessageDTO;
 import kr.co.workie.dto.UserDTO;
 import kr.co.workie.entity.DirectMessage;
+import kr.co.workie.entity.User;
 import kr.co.workie.repository.DirectMessageRepository;
 import kr.co.workie.security.MyUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -26,10 +27,16 @@ public class DirectMessageService {
     // 현재 로그인된 사용자 정보 가져오기
     private String getCurrentUserId() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails userDetails = (MyUserDetails) auth.getPrincipal();
-        return userDetails.getUser().getId();
-    }
+        Object principal = auth.getPrincipal();
 
+        if (principal instanceof MyUserDetails) {
+            return ((MyUserDetails) principal).getUsername();
+        } else if (principal instanceof User) {
+            return ((User) principal).getId(); // User 객체의 ID 필드 사용
+        }
+
+        throw new IllegalStateException("예상하지 못한 Principal 타입: " + principal.getClass());
+    }
     // DM 시작하기
     @Transactional
     public DirectMessageDTO.Response startDirectMessage(DirectMessageDTO.CreateRequest request) {

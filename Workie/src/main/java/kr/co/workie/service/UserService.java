@@ -17,7 +17,6 @@ public interface UserService {
 
     //public TermsDTO terms();
 
-
     // 현재 사용자 정보 조회 (채팅용)
     public UserDTO getCurrentUser();
 
@@ -28,4 +27,10 @@ public interface UserService {
     public UserDTO getUserById(String userId);
 
     User getUserByUid(String uid);
+
+    // ✅ 추가: 모든 활성 사용자 조회 (채널 멤버 추가용)
+    List<UserDTO> getAllActiveUsers();
+
+    // ✅ 추가: 사용자 검색 (이름으로)
+    List<UserDTO> searchUsersByName(String searchQuery);
 }
