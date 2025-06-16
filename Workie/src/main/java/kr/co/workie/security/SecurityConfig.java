@@ -73,6 +73,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:5173", // 프론트엔드 개발 서버
+                "https://workie-talkie.site",
                 "https://lotte2-community-app-project-team3-lac.vercel.app", // Vercel 배포 주소
                 "https://workie-talkie-personal-kappa.vercel.app" // Vercel 배포 주소
         ));
