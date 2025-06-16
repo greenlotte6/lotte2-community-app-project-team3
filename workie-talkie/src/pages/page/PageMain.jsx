@@ -82,7 +82,11 @@ export const PageMain = () => {
             <h3>최근 방문</h3>
             <div className="page-grid">
               {pages.map((page) => (
-                <div className="page-card tooltip-wrapper" key={page.pno}>
+                <Link
+                  to={`/page/${page.pno}`}
+                  className="page-card tooltip-wrapper"
+                  key={page.pno}
+                >
                   <div className="card-header">
                     <div className="status-bar">
                       {/* 콘솔에 실제로 찍히는 명? 이름으로 조건 걸어야 함! */}
@@ -93,7 +97,11 @@ export const PageMain = () => {
                       )}
                       <button
                         className="favorite-btn"
-                        onClick={() => toggleFavorite(page.pno)}
+                        onClick={(e) => {
+                          e.preventDefault(); // 중요
+                          e.stopPropagation();
+                          toggleFavorite(page.pno);
+                        }}
                       >
                         {page.favorite ? (
                           <img
@@ -113,6 +121,7 @@ export const PageMain = () => {
 
                   {/* 툴팁용 숨겨진 정보 */}
                   <div className="tooltip-content">
+                    <p>제목: {page.title}</p>
                     <p>작성자: {page.writer}</p>
                     <p>수정일: {formatDateTime(page.modDate)}</p>
                     <div className="tag-list">
@@ -123,7 +132,7 @@ export const PageMain = () => {
                       ))}
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
             <h3> 즐겨찾는 페이지</h3>
@@ -141,7 +150,11 @@ export const PageMain = () => {
                         )}
                         <button
                           className="favorite-btn"
-                          onClick={() => toggleFavorite(page.pno)}
+                          onClick={(e) => {
+                            e.preventDefault(); // 중요
+                            e.stopPropagation();
+                            toggleFavorite(page.pno);
+                          }}
                         >
                           {page.favorite ? (
                             <img
@@ -161,6 +174,7 @@ export const PageMain = () => {
 
                     {/* 툴팁용 숨겨진 정보 */}
                     <div className="tooltip-content">
+                      <p>제목: {page.title}</p>
                       <p>작성자: {page.writer}</p>
                       <p>수정일: {formatDateTime(page.modDate)}</p>
                       <div className="tag-list">

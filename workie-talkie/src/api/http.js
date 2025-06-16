@@ -28,5 +28,9 @@ export const CALENDAR = `${SERVER_HOST}/calendar`;
 export const PAGE = `${SERVER_HOST}/page`;
 
 export const CALENDAR_ADD = `${CALENDAR}/add`;
+
 export const PAGE_ADD = `${PAGE}/add`;
 export const PAGE_FAVORITE = `${PAGE}/favorite`;
+export const PAGE_TOTAL = `${PAGE}/count`;
+export const PAGE_RECENT = `${PAGE}/recent`;
+export const PAGE_PARENT = `${PAGE}/parent`;

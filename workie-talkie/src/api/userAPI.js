@@ -11,6 +11,9 @@ import {
   PAGE,
   PAGE_ADD,
   PAGE_FAVORITE,
+  PAGE_TOTAL,
+  PAGE_RECENT,
+  PAGE_PARENT,
 } from "./http";
 
 //회원 관련
@@ -170,6 +173,66 @@ export const patchPage = async (data) => {
     return response.data;
   } catch (err) {
     console.log(err);
+    throw err;
+  }
+};
+
+export const putPage = async (data) => {
+  try {
+    const response = await axios.put(`${PAGE}/${data.pno}`, data, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+export const getPageByPno = async (pno) => {
+  try {
+    const response = await axios.get(`${PAGE}/${pno}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+export const getTotal = async () => {
+  try {
+    const response = await axios.get(`${PAGE_TOTAL}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.error("페이지 총 갯수 요청 실패", err);
+    throw err;
+  }
+};
+
+export const getRecent = async () => {
+  try {
+    const response = await axios.get(`${PAGE_RECENT}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.error("최근페이지 요청 실패", err);
+    throw err;
+  }
+};
+
+export const getParent = async () => {
+  try {
+    const response = await axios.get(`${PAGE_PARENT}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.error("부모페이지 요청 실패", err);
     throw err;
   }
 };

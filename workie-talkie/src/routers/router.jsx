@@ -32,6 +32,7 @@ import { AuthWrapper } from "../components/auth/AuthWrapper";
 import { Test } from "../pages/board/Test";
 import { PageMain } from "../pages/page/PageMain";
 import { PageWrite } from "../pages/page/PageWrite";
+import { PageView } from "../pages/page/PageView";
 
 //라우터 생성
 
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
       { path: "/project/details", element: <ProjectDetails /> },
     ],
   },
+  { path: "/page/:pno", element: <PageView /> },
   //{ path: "*", element: <Navigate to="/" replace /> },
 
   // 랜딩 페이지들
