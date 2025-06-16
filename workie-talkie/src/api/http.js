@@ -5,7 +5,7 @@ const isHttps = window.location.protocol === "https:";
 // 배포 환경 서버 호스트 지정
 const SERVER_HOST = isLocalhost
   ? "http://localhost:8080"
-  : "http://3.36.66.1:8080"; // 운영(프론트/백 분리면 경로 맞춰줘야 함)
+  : "https://3.36.66.1:8080"; // 운영(프론트/백 분리면 경로 맞춰줘야 함)
 
 const WS_HOST = isLocalhost ? "localhost:8080" : "3.36.66.1:8080";
 const HTTP_PROTOCOL = isHttps ? "https" : "http";
