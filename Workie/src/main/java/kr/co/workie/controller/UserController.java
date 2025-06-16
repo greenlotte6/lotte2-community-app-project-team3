@@ -57,17 +57,19 @@ public class UserController {
 
             // httpOnly cookie 생성
             ResponseCookie accessTokenCookie = ResponseCookie.from("access_token", access)
-                    .httpOnly(true)
-                    .secure(false)
-                    .path("/")
-                    .maxAge(Duration.ofDays(1))
+
+                    .httpOnly(true) //** httpOnly Cookie 생성 위함 (XSS 방지)
+                    .secure(true)  //https 보안 프로토콜 적용
+                    .sameSite("None")
+                    .path("/")  //쿠키 경로
+                    .maxAge(Duration.ofDays(1)) //쿠키 수명
                     .build();
 
             ResponseCookie refreshTokenCookie = ResponseCookie.from("refresh_token", refresh)
-                    .httpOnly(true)
-                    .secure(false)
-                    .path("/")
-                    .maxAge(Duration.ofDays(7))
+                    .httpOnly(true) //** httpOnly Cookie 생성 위함 (XSS 방지)
+                    .secure(true)  //https 보안 프로토콜 적용
+                    .path("/")  //쿠키 경로
+                    .maxAge(Duration.ofDays(7)) //쿠키 수명
                     .build();
 
             // 쿠키를 Response 헤더에 추가
