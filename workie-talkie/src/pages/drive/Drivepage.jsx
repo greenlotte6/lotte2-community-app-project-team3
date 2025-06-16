@@ -4,7 +4,7 @@ import { DriveHeader } from "../../components/drive/DriveHeader";
 import { DriveTable } from "../../components/drive/DriveTable";
 import { FolderModal } from "../../components/drive/FolderModal";
 import { RenameModal } from "../../components/drive/RenameModal";
-import axios from "axios";
+import axiosInstance from "@/api/axiosInstance";
 
 const Drivepage = () => {
   const [activeTab, setActiveTab] = useState("⭐ 내 드라이브");
@@ -19,13 +19,13 @@ const Drivepage = () => {
   useEffect(() => {
     const fetchFolders = async () => {
       try {
-        const response = await axios.get("/drive", {
+        const response = await axiosInstance.get("/drive", {
           params: { parentId: null },
-          withCredentials: true,
         });
         setFolders(response.data);
       } catch (error) {
         console.error("폴더 조회 실패:", error);
+        alert("폴더 데이터를 불러오지 못했습니다.");
       }
     };
 
@@ -37,12 +37,11 @@ const Drivepage = () => {
   // ✅ 폴더 생성
   const handleAddFolder = async (name) => {
     try {
-      const response = await axios.post("/drive/folder", null, {
+      const response = await axiosInstance.post("/drive/folder", null, {
         params: {
           name,
           parentId: null,
         },
-        withCredentials: true,
       });
 
       const newFolderId = response.data;
@@ -51,19 +50,22 @@ const Drivepage = () => {
       const newFolder = {
         dno: newFolderId,
         name,
+        type: "FOLDER",
+        parentId: null,
         createdAt: now,
         modifiedAt: now,
-        type: "FOLDER",
+        size: 0,
       };
 
       setFolders((prev) => [...prev, newFolder]);
       setShowFolderModal(false);
     } catch (error) {
       console.error("폴더 생성 실패:", error);
+      alert("폴더 생성 중 오류가 발생했습니다.");
     }
   };
 
-  // ✅ 이름 변경 (임시 - 추후 API 연동 가능)
+  // ✅ 이름 변경 (임시 로컬 상태 변경, 추후 API 연동 필요)
   const handleRenameFolder = (newName) => {
     const updated = [...folders];
     updated[renameIndex].name = newName;
@@ -73,20 +75,22 @@ const Drivepage = () => {
     setShowRenameModal(false);
   };
 
-  // ✅ 삭제 (추후 API 연동 필요)
+  // ✅ 삭제 (현재 로컬 상태만 조작, 추후 API 연동 필요)
   const handleDelete = (indexes) => {
     const toTrash = indexes.map((i) => folders[i]);
     setTrash([...trash, ...toTrash]);
     setFolders(folders.filter((_, i) => !indexes.includes(i)));
     setSelectedIndexes([]);
+    // TODO: 백엔드 삭제 연동 필요
   };
 
-  // ✅ 복원 (추후 API 연동 필요)
+  // ✅ 복원 (현재 로컬 상태만 조작, 추후 API 연동 필요)
   const handleRestore = (indexes) => {
     const toRestore = indexes.map((i) => trash[i]);
     setFolders([...folders, ...toRestore]);
     setTrash(trash.filter((_, i) => !indexes.includes(i)));
     setSelectedIndexes([]);
+    // TODO: 백엔드 복원 연동 필요
   };
 
   return (
@@ -112,6 +116,8 @@ const Drivepage = () => {
           setRenameIndex(index);
           setShowRenameModal(true);
         }}
+        onRequestRestore={handleRestore}
+        onRequestDelete={handleDelete}
       />
       {showFolderModal && (
         <FolderModal

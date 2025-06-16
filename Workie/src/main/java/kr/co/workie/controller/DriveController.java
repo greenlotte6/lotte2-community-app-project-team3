@@ -35,6 +35,8 @@ public class DriveController {
     public ResponseEntity<?> createFolder(@RequestParam String name,
                                           @RequestParam(required = false) Long parentId,
                                           Principal principal) {
+
+        System.out.println(">> principal.getName() = " + principal.getName());
         User user = userService.getUserByUid(principal.getName());
         DriveItem folder = driveService.createFolder(user, name, parentId);
         return ResponseEntity.ok(folder.getDno());

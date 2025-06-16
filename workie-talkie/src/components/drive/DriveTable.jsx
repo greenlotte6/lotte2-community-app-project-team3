@@ -1,10 +1,10 @@
-import React, { useState, useRef } from "react";
-import { ContextMenu } from "./ContextMenu"; // 우클릭 메뉴 컴포넌트
+import React, { useState, useRef, useEffect } from "react";
+import { ContextMenu } from "./ContextMenu";
 
 export const DriveTable = ({
   activeTab,
-  folders,
-  trash,
+  folders = [],
+  trash = [],
   selectedIndexes,
   setSelectedIndexes,
   onRequestRename,
@@ -13,11 +13,7 @@ export const DriveTable = ({
 }) => {
   const dropRef = useRef(null);
   const isTrash = activeTab === "🗑️ 휴지통";
-  const data = Array.isArray(isTrash ? trash : folders)
-    ? isTrash
-      ? trash
-      : folders
-    : [];
+  const data = isTrash ? trash : folders;
 
   const [contextMenu, setContextMenu] = useState({
     visible: false,
@@ -25,6 +21,16 @@ export const DriveTable = ({
     y: 0,
     index: null,
   });
+
+  // 외부 클릭 시 ContextMenu 닫기
+  useEffect(() => {
+    const handleClickOutside = () => {
+      if (contextMenu.visible)
+        setContextMenu((prev) => ({ ...prev, visible: false }));
+    };
+    window.addEventListener("click", handleClickOutside);
+    return () => window.removeEventListener("click", handleClickOutside);
+  }, [contextMenu.visible]);
 
   const handleContextMenu = (e, index) => {
     e.preventDefault();
@@ -36,22 +42,18 @@ export const DriveTable = ({
     });
   };
 
-  const handleCloseContextMenu = () => {
-    setContextMenu((prev) => ({ ...prev, visible: false }));
-  };
-
   const handleCheckboxChange = (index, checked) => {
     setSelectedIndexes((prev) =>
       checked ? [...prev, index] : prev.filter((i) => i !== index)
     );
   };
 
+  const handleCloseContextMenu = () => {
+    setContextMenu((prev) => ({ ...prev, visible: false }));
+  };
+
   const handleSelectAll = (checked) => {
-    if (checked) {
-      setSelectedIndexes(data.map((_, i) => i));
-    } else {
-      setSelectedIndexes([]);
-    }
+    setSelectedIndexes(checked ? data.map((_, i) => i) : []);
   };
 
   return (
@@ -66,78 +68,84 @@ export const DriveTable = ({
         </div>
       )}
 
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                checked={
-                  selectedIndexes.length === data.length && data.length > 0
-                }
-                onChange={(e) => handleSelectAll(e.target.checked)}
-              />
-            </th>
-            {!isTrash && <th>종류</th>}
-            <th>이름</th>
-            {!isTrash && <th>크기</th>}
-            <th>수정한 날짜</th>
-            {!isTrash && <th>수정한 사람</th>}
-            <th>생성한 날짜</th>
-            {isTrash && <th>복원</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr
-              key={item.dno || index}
-              onContextMenu={(e) => handleContextMenu(e, index)}
-            >
-              <td>
+      {data.length === 0 ? (
+        <div className="empty-state">표시할 항목이 없습니다.</div>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>
                 <input
                   type="checkbox"
-                  checked={selectedIndexes.includes(index)}
-                  onChange={(e) =>
-                    handleCheckboxChange(index, e.target.checked)
+                  checked={
+                    selectedIndexes.length === data.length && data.length > 0
                   }
+                  onChange={(e) => handleSelectAll(e.target.checked)}
                 />
-              </td>
-              {!isTrash && (
+              </th>
+              {!isTrash && <th>종류</th>}
+              <th>이름</th>
+              {!isTrash && <th>크기</th>}
+              <th>수정한 날짜</th>
+              {!isTrash && <th>수정한 사람</th>}
+              <th>생성한 날짜</th>
+              {isTrash && <th>복원</th>}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr
+                key={item.dno}
+                onContextMenu={(e) => handleContextMenu(e, index)}
+              >
                 <td>
-                  <i
-                    className={
-                      item.type === "FILE" ? "fas fa-file" : "fas fa-folder"
+                  <input
+                    type="checkbox"
+                    checked={selectedIndexes.includes(index)}
+                    onChange={(e) =>
+                      handleCheckboxChange(index, e.target.checked)
                     }
                   />
                 </td>
-              )}
-              <td>{item.name}</td>
-              {!isTrash && <td>{item.size || "-"}</td>}
-              <td>
-                {item.modifiedAt
-                  ? new Date(item.modifiedAt).toLocaleString()
-                  : "-"}
-              </td>
-              {!isTrash && <td>-</td>}
-              <td>
-                {item.createdAt
-                  ? new Date(item.createdAt).toLocaleString()
-                  : "-"}
-              </td>
-              {isTrash && (
+                {!isTrash && (
+                  <td>
+                    <i
+                      className={
+                        item.type === "FILE" ? "fas fa-file" : "fas fa-folder"
+                      }
+                    />
+                  </td>
+                )}
+                <td>{item.name}</td>
+                {!isTrash && <td>{item.size || "-"}</td>}
                 <td>
-                  <button onClick={() => onRequestRestore(index)}>복원</button>
+                  {item.modifiedAt
+                    ? new Date(item.modifiedAt).toLocaleString()
+                    : "-"}
                 </td>
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                {!isTrash && <td>-</td>}
+                <td>
+                  {item.createdAt
+                    ? new Date(item.createdAt).toLocaleString()
+                    : "-"}
+                </td>
+                {isTrash && (
+                  <td>
+                    <button onClick={() => onRequestRestore(index)}>
+                      복원
+                    </button>
+                  </td>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
 
       <ContextMenu
         visible={contextMenu.visible}
         position={{ x: contextMenu.x, y: contextMenu.y }}
-        onClose={handleCloseContextMenu}
+        onClose={() => setContextMenu({ ...contextMenu, visible: false })}
         onDelete={() => {
           handleCloseContextMenu();
           if (onRequestDelete) onRequestDelete([contextMenu.index]);
