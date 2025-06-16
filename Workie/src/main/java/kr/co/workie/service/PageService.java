@@ -8,8 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -31,7 +31,19 @@ public class PageService {
 
     public void addMember(){}
 
-    public void modifyPage(){}
+    public void updatePage(int pno, PageDTO pageDTO) {
+        Page page = pageRepository.findById(pno).orElseThrow();
+
+        //기존의 writer 유지
+        String originalWriter = page.getWriter();
+
+        modelMapper.map(pageDTO, page);
+
+        page.setWriter(originalWriter);
+        page.setModDate(LocalDateTime.now());
+
+        pageRepository.save(page);
+    }
 
     public void deletePage(){}
 
@@ -48,4 +60,27 @@ public class PageService {
         pageRepository.save(page);
         return pno;
     }
+
+    public PageDTO findPage(int pno) {
+        Page page = pageRepository.findById(pno).orElseThrow();
+        return modelMapper.map(page, PageDTO.class);
+    }
+
+
+    public int countPagesByWriter(String id) {
+        int pageCount = pageRepository.countByWriter(id); // 수정된 Repository 메서드 호출
+        log.info("💡 Writer {} has {} pages.", id, pageCount); // 로그 추가 (선택 사항)
+        return pageCount;
+    }
+
+    public List<PageDTO> getRecentPages(String loginId) {
+        return pageRepository.findTop3ByWriterOrderByModDateDesc(loginId)
+                .stream().map(p -> modelMapper.map(p, PageDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<Page> getPagesByParent(String loginId) {
+        return pageRepository.findByWriterAndParentPage(loginId, 0);
+    }
+
 }

@@ -1,18 +1,54 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { MainLayout } from "../../layouts/MainLayout";
 import { Aside } from "../../components/page/Aside";
-import { QuillEditor } from "../../components/board/QuillEditor";
+import { useNavigate, useParams } from "react-router-dom";
+import { getPageByPno, putPage } from "../../api/userAPI";
 import { ShareModal } from "../../components/page/ShareModal";
-import { postPage } from "../../api/userAPI";
-import { useNavigate } from "react-router-dom";
+import { QuillEditor } from "../../components/board/QuillEditor";
 
-export const PageWrite = () => {
+console.log("📦 PageView 렌더링 시도됨");
+
+export const PageView = () => {
+  const { pno } = useParams();
+  const [page, setPage] = useState(null);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    title: "", // 게시글 제목 필드
-    content: "", // Quill 에디터의 내용을 저장할 필드
+    title: "",
+    content: "", // 여기서 body라고 쓸 거면 아래도 body로 유지해야 함
+    deleted: false,
+    shared: false,
+    favorite: false,
   });
+
+  useEffect(() => {
+    console.log("🎯 useEffect 진입, pno:", pno);
+
+    if (!pno || pno === "undefined") {
+      console.warn("🚫 pno 값이 유효하지 않음:", pno);
+      return;
+    }
+
+    getPageByPno(pno)
+      .then((data) => {
+        console.log("✅ getPageByPno 성공:", data);
+        setPage(data);
+      })
+      .catch((err) => {
+        console.error("❌ getPageByPno 실패:", err);
+      });
+  }, [pno]);
+
+  useEffect(() => {
+    if (page) {
+      setFormData({
+        title: page.title || "",
+        content: page.content || "",
+        deleted: page.deleted,
+        shared: page.shared,
+        favorite: page.favorite,
+      });
+    }
+  }, [page]);
 
   // 폼 데이터 업데이트를 위한 콜백 함수
   const change_field = useCallback((fieldName, value) => {
@@ -28,7 +64,16 @@ export const PageWrite = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    // ✨ pno를 숫자로 변환하고 유효성 검사 ✨
+    const parsedPno = parseInt(pno, 10); // 10진수로 변환
+    if (isNaN(parsedPno)) {
+      console.error("🚫 pno가 유효한 숫자가 아닙니다:", pno);
+      alert("페이지 번호가 올바르지 않아 저장할 수 없습니다.");
+      return; // 유효하지 않으면 저장 요청을 보내지 않음
+    }
+
     const requestData = {
+      pno: parsedPno, // ✨ 변환된 pno 사용 ✨
       title: formData.title,
       content: formData.content,
       isDeleted: formData.deleted,
@@ -39,21 +84,9 @@ export const PageWrite = () => {
     //전송
     const fetchData = async () => {
       try {
-        const data = await postPage(requestData);
-        const newPno = data.pno;
-
+        const data = await putPage(requestData);
         console.log(data);
-
-        if (newPno) {
-          alert("페이지가 성공적으로 작성되었습니다!");
-          // 새로 생성된 페이지의 pno를 사용하여 동적 경로로 이동
-          navigate(`/page/${newPno}`);
-        } else {
-          console.error("❌ 응답에서 pno를 찾을 수 없습니다.");
-          alert("페이지 작성은 성공했으나, 페이지 이동에 문제가 발생했습니다.");
-          // pno를 찾지 못했을 경우, 페이지 목록 등으로 이동하는 대안
-          navigate("/page");
-        }
+        alert("페이지가 성공적으로 수정되었습니다!");
       } catch (err) {
         console.error(err);
       }
@@ -69,7 +102,6 @@ export const PageWrite = () => {
           <div className="notion-style-sidebar">
             <Aside />
           </div>
-
           <div className="main-editor-area">
             <main className="main-content" id="page-writes-container">
               <div className="quill-field">
@@ -122,14 +154,17 @@ export const PageWrite = () => {
                     id="title-input"
                     type="text"
                     placeholder="제목을 입력하세요"
-                    value={formData.title}
+                    value={formData.title || ""}
                     onChange={(e) => change_field("title", e.target.value)}
                   />
                 </div>
 
                 {/* Quill 에디터 컴포넌트 사용 */}
                 <div className="content-field">
-                  <QuillEditor change_field={change_field} />
+                  <QuillEditor
+                    value={formData.content}
+                    change_field={change_field}
+                  />
                   {/* QuillEditor에 change_field 함수 전달 */}
                 </div>
               </div>

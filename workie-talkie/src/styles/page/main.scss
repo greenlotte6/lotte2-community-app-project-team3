@@ -11,7 +11,7 @@
   /* Main Content Area (Card Grid) */
   .main-editor-area {
     flex: 1; /* Takes remaining horizontal space */
-    padding: 2rem;
+    padding: 2%;
     overflow-y: auto;
   }
 
@@ -55,9 +55,11 @@
   }
 
   .page-grid {
-    display: flex;
-    flex-direction: row;
-    gap: 12px; /* 카드 간 간격 */
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 12px;
+    overflow-y: auto; /* 수직 스크롤 */
+    padding: 0 20px; /* 스크롤바 때문에 오른쪽 여백 확보 */
   }
 
   .page-card {
@@ -85,17 +87,18 @@
   .tooltip-content {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
+    top: 20%;
+    left: -10%;
     width: max-content;
     background: #fff;
     border: 1px solid #ddd;
     border-radius: 6px;
-    padding: 10px;
+    padding: 5px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     z-index: 10;
     font-size: 14px;
-    white-space: nowrap;
+    width: 160px;
+    overflow: hidden;
   }
 
   /* 마우스 올리면 보이기 */
@@ -150,5 +153,14 @@
     right: 0px;
     display: flex;
     align-items: center;
+  }
+
+  @media (max-width: 1200px) {
+    .page-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      padding: 0 20px; /* 스크롤바 때문에 오른쪽 여백 확보 */
+    }
   }
 }
