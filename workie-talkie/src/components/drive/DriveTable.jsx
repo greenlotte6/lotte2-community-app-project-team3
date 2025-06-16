@@ -9,10 +9,15 @@ export const DriveTable = ({
   setSelectedIndexes,
   onRequestRename,
   onRequestRestore,
+  onRequestDelete,
 }) => {
   const dropRef = useRef(null);
   const isTrash = activeTab === "🗑️ 휴지통";
-  const data = isTrash ? trash : folders;
+  const data = Array.isArray(isTrash ? trash : folders)
+    ? isTrash
+      ? trash
+      : folders
+    : [];
 
   const [contextMenu, setContextMenu] = useState({
     visible: false,
@@ -84,7 +89,10 @@ export const DriveTable = ({
         </thead>
         <tbody>
           {data.map((item, index) => (
-            <tr key={index} onContextMenu={(e) => handleContextMenu(e, index)}>
+            <tr
+              key={item.dno || index}
+              onContextMenu={(e) => handleContextMenu(e, index)}
+            >
               <td>
                 <input
                   type="checkbox"
@@ -96,14 +104,26 @@ export const DriveTable = ({
               </td>
               {!isTrash && (
                 <td>
-                  <i className="fas fa-folder" />
+                  <i
+                    className={
+                      item.type === "FILE" ? "fas fa-file" : "fas fa-folder"
+                    }
+                  />
                 </td>
               )}
               <td>{item.name}</td>
               {!isTrash && <td>{item.size || "-"}</td>}
-              <td>{item.modifiedAt}</td>
+              <td>
+                {item.modifiedAt
+                  ? new Date(item.modifiedAt).toLocaleString()
+                  : "-"}
+              </td>
               {!isTrash && <td>-</td>}
-              <td>{item.createdAt}</td>
+              <td>
+                {item.createdAt
+                  ? new Date(item.createdAt).toLocaleString()
+                  : "-"}
+              </td>
               {isTrash && (
                 <td>
                   <button onClick={() => onRequestRestore(index)}>복원</button>
@@ -120,7 +140,7 @@ export const DriveTable = ({
         onClose={handleCloseContextMenu}
         onDelete={() => {
           handleCloseContextMenu();
-          // 추후 삭제 기능 연결
+          if (onRequestDelete) onRequestDelete([contextMenu.index]);
         }}
         onRename={() => {
           handleCloseContextMenu();

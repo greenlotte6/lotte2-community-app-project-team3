@@ -4,56 +4,84 @@ import { DriveHeader } from "../../components/drive/DriveHeader";
 import { DriveTable } from "../../components/drive/DriveTable";
 import { FolderModal } from "../../components/drive/FolderModal";
 import { RenameModal } from "../../components/drive/RenameModal";
+import axios from "axios";
 
 const Drivepage = () => {
   const [activeTab, setActiveTab] = useState("⭐ 내 드라이브");
-  const [folders, setFolders] = useState(() => {
-    return JSON.parse(localStorage.getItem("folders")) || [];
-  });
-  const [trash, setTrash] = useState(() => {
-    return JSON.parse(localStorage.getItem("trash")) || [];
-  });
+  const [folders, setFolders] = useState([]);
+  const [trash, setTrash] = useState([]);
   const [selectedIndexes, setSelectedIndexes] = useState([]);
   const [showFolderModal, setShowFolderModal] = useState(false);
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(null);
 
-  // 저장
+  // ✅ 폴더 목록 불러오기
   useEffect(() => {
-    localStorage.setItem("folders", JSON.stringify(folders));
-    localStorage.setItem("trash", JSON.stringify(trash));
-  }, [folders, trash]);
+    const fetchFolders = async () => {
+      try {
+        const response = await axios.get("/drive", {
+          params: { parentId: null },
+          withCredentials: true,
+        });
+        setFolders(response.data);
+      } catch (error) {
+        console.error("폴더 조회 실패:", error);
+      }
+    };
 
-  // 새 폴더 생성
-  const handleAddFolder = (name) => {
-    const now = new Date().toLocaleString();
-    setFolders([...folders, { name, createdAt: now, modifiedAt: now }]);
-    setShowFolderModal(false);
+    if (activeTab === "⭐ 내 드라이브") {
+      fetchFolders();
+    }
+  }, [activeTab]);
+
+  // ✅ 폴더 생성
+  const handleAddFolder = async (name) => {
+    try {
+      const response = await axios.post("/drive/folder", null, {
+        params: {
+          name,
+          parentId: null,
+        },
+        withCredentials: true,
+      });
+
+      const newFolderId = response.data;
+      const now = new Date().toISOString();
+
+      const newFolder = {
+        dno: newFolderId,
+        name,
+        createdAt: now,
+        modifiedAt: now,
+        type: "FOLDER",
+      };
+
+      setFolders((prev) => [...prev, newFolder]);
+      setShowFolderModal(false);
+    } catch (error) {
+      console.error("폴더 생성 실패:", error);
+    }
   };
 
-  // 이름 변경
+  // ✅ 이름 변경 (임시 - 추후 API 연동 가능)
   const handleRenameFolder = (newName) => {
     const updated = [...folders];
     updated[renameIndex].name = newName;
-    updated[renameIndex].modifiedAt = new Date().toLocaleString();
+    updated[renameIndex].modifiedAt = new Date().toISOString();
     setFolders(updated);
     setRenameIndex(null);
     setShowRenameModal(false);
   };
 
-  // 삭제
+  // ✅ 삭제 (추후 API 연동 필요)
   const handleDelete = (indexes) => {
-    if (activeTab === "🗑️ 휴지통") {
-      setTrash(trash.filter((_, i) => !indexes.includes(i)));
-    } else {
-      const toTrash = indexes.map((i) => folders[i]);
-      setTrash([...trash, ...toTrash]);
-      setFolders(folders.filter((_, i) => !indexes.includes(i)));
-    }
+    const toTrash = indexes.map((i) => folders[i]);
+    setTrash([...trash, ...toTrash]);
+    setFolders(folders.filter((_, i) => !indexes.includes(i)));
     setSelectedIndexes([]);
   };
 
-  // 복원
+  // ✅ 복원 (추후 API 연동 필요)
   const handleRestore = (indexes) => {
     const toRestore = indexes.map((i) => trash[i]);
     setFolders([...folders, ...toRestore]);
