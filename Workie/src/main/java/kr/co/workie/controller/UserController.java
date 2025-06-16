@@ -61,14 +61,15 @@ public class UserController {
             // -> "쿠키 저장 명"
             ResponseCookie accessTokenCookie = ResponseCookie.from("access_token", access)
                     .httpOnly(true) //** httpOnly Cookie 생성 위함 (XSS 방지)
-                    .secure(false)  //https 보안 프로토콜 적용
+                    .secure(true)  //https 보안 프로토콜 적용
+                    .sameSite("None")
                     .path("/")  //쿠키 경로
                     .maxAge(Duration.ofDays(1)) //쿠키 수명
                     .build();
 
             ResponseCookie refreshTokenCookie = ResponseCookie.from("refresh_token", refresh)
                     .httpOnly(true) //** httpOnly Cookie 생성 위함 (XSS 방지)
-                    .secure(false)  //https 보안 프로토콜 적용
+                    .secure(true)  //https 보안 프로토콜 적용
                     .path("/")  //쿠키 경로
                     .maxAge(Duration.ofDays(7)) //쿠키 수명
                     .build();
