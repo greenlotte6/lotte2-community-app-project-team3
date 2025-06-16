@@ -22,6 +22,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 public class SecurityConfig {
@@ -67,19 +68,18 @@ public class SecurityConfig {
     }
 
     // CORS 설정 Bean 추가
-    //******확인*********
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList(
+        configuration.setAllowedOrigins(List.of(
                 "http://localhost:5173", // 프론트엔드 개발 서버
                 "https://workie-talkie.site",
                 "https://lotte2-community-app-project-team3-lac.vercel.app", // Vercel 배포 주소
                 "https://workie-talkie-personal-kappa.vercel.app" // Vercel 배포 주소
         ));
 
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 허용할 HTTP 메서드
-        configuration.setAllowedHeaders(Arrays.asList("*")); // 모든 헤더 허용
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 허용할 HTTP 메서드
+        configuration.setAllowedHeaders(List.of("*")); // 모든 헤더 허용
         configuration.setAllowCredentials(true); // 자격 증명(쿠키, 인증 헤더 등)을 허용 (JWT 사용 시 필요)
         configuration.setMaxAge(3600L); // Pre-flight 요청 결과 캐시 시간 (초)
 
