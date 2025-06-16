@@ -1,19 +1,34 @@
-// services/channelService.js - 채널 관련 API 호출
+// services/channelService.js - 수정된 채널 관련 API 호출
 class ChannelService {
   constructor() {
-    this.baseURL = "/api/channels";
+    this.baseURL = "http://localhost:8080";
   }
 
-  // 채널 생성
+  // 🔥 JWT 토큰 헤더 생성 헬퍼 메서드
+  getAuthHeaders() {
+    const token = localStorage.getItem("token");
+    return {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+  }
+
+  // 🔥 채널 생성 (경로 수정: /channels 추가)
   async createChannel(channelData) {
     try {
-      const response = await fetch(this.baseURL, {
+      console.log("🚀 채널 생성 요청:", channelData);
+
+      const response = await fetch(`${this.baseURL}/channels`, {
+        // 경로 수정
         method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: this.getAuthHeaders(), // JWT 토큰 헤더 사용
         body: JSON.stringify(channelData),
+      });
+
+      console.log("📥 채널 생성 응답:", {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
       });
 
       if (response.ok) {
@@ -21,8 +36,17 @@ class ChannelService {
         console.log("✅ 채널 생성 성공:", channel);
         return channel;
       } else {
-        const error = await response.json();
-        throw new Error(error.message || `채널 생성 실패: ${response.status}`);
+        let errorMessage = `채널 생성 실패: ${response.status}`;
+
+        try {
+          const error = await response.json();
+          errorMessage = error.error || error.message || errorMessage;
+        } catch (jsonError) {
+          // JSON 파싱 실패 시 기본 메시지 사용
+          console.warn("에러 응답 JSON 파싱 실패:", jsonError);
+        }
+
+        throw new Error(errorMessage);
       }
     } catch (error) {
       console.error("❌ 채널 생성 오류:", error);
@@ -30,15 +54,13 @@ class ChannelService {
     }
   }
 
-  // 사용자의 채널 목록 조회
+  // 🔥 사용자의 채널 목록 조회 (경로 수정)
   async getUserChannels() {
     try {
-      const response = await fetch(`${this.baseURL}/my`, {
+      const response = await fetch(`${this.baseURL}/channels`, {
+        // 경로 수정
         method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: this.getAuthHeaders(),
       });
 
       if (response.ok) {
@@ -54,25 +76,31 @@ class ChannelService {
     }
   }
 
-  // 채널에 멤버 추가
+  // 🔥 채널에 멤버 추가 (경로 수정)
   async addMemberToChannel(channelId, userId) {
     try {
-      const response = await fetch(`${this.baseURL}/${channelId}/members`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId }),
-      });
+      const response = await fetch(
+        `${this.baseURL}/channels/${channelId}/members`,
+        {
+          method: "POST",
+          headers: this.getAuthHeaders(),
+          body: JSON.stringify({ memberIds: [userId] }), // 백엔드 API에 맞게 수정
+        }
+      );
 
       if (response.ok) {
         const result = await response.json();
         console.log("✅ 멤버 추가 성공:", result);
         return result;
       } else {
-        const error = await response.json();
-        throw new Error(error.message || `멤버 추가 실패: ${response.status}`);
+        let errorMessage = `멤버 추가 실패: ${response.status}`;
+        try {
+          const error = await response.json();
+          errorMessage = error.error || error.message || errorMessage;
+        } catch (jsonError) {
+          console.warn("에러 응답 JSON 파싱 실패:", jsonError);
+        }
+        throw new Error(errorMessage);
       }
     } catch (error) {
       console.error("❌ 멤버 추가 오류:", error);
@@ -80,17 +108,14 @@ class ChannelService {
     }
   }
 
-  // 채널에서 멤버 제거
+  // 🔥 채널에서 멤버 제거 (경로 수정)
   async removeMemberFromChannel(channelId, userId) {
     try {
       const response = await fetch(
-        `${this.baseURL}/${channelId}/members/${userId}`,
+        `${this.baseURL}/channels/${channelId}/members/${userId}`,
         {
           method: "DELETE",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: this.getAuthHeaders(),
         }
       );
 
@@ -98,8 +123,14 @@ class ChannelService {
         console.log("✅ 멤버 제거 성공");
         return true;
       } else {
-        const error = await response.json();
-        throw new Error(error.message || `멤버 제거 실패: ${response.status}`);
+        let errorMessage = `멤버 제거 실패: ${response.status}`;
+        try {
+          const error = await response.json();
+          errorMessage = error.error || error.message || errorMessage;
+        } catch (jsonError) {
+          console.warn("에러 응답 JSON 파싱 실패:", jsonError);
+        }
+        throw new Error(errorMessage);
       }
     } catch (error) {
       console.error("❌ 멤버 제거 오류:", error);
@@ -107,16 +138,16 @@ class ChannelService {
     }
   }
 
-  // 채널 멤버 목록 조회
+  // 🔥 채널 멤버 목록 조회 (경로 수정)
   async getChannelMembers(channelId) {
     try {
-      const response = await fetch(`${this.baseURL}/${channelId}/members`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${this.baseURL}/channels/${channelId}/members`,
+        {
+          method: "GET",
+          headers: this.getAuthHeaders(),
+        }
+      );
 
       if (response.ok) {
         const members = await response.json();
@@ -131,25 +162,30 @@ class ChannelService {
     }
   }
 
-  // 채널 나가기
+  // 🔥 채널 나가기 (경로 및 메서드 수정)
   async leaveChannel(channelId) {
     try {
-      const response = await fetch(`${this.baseURL}/${channelId}/leave`, {
-        method: "DELETE",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${this.baseURL}/channels/${channelId}/leave`,
+        {
+          method: "POST", // DELETE → POST로 변경 (백엔드와 일치)
+          headers: this.getAuthHeaders(),
+        }
+      );
 
       if (response.ok) {
-        console.log("✅ 채널 나가기 성공");
-        return true;
+        const result = await response.json();
+        console.log("✅ 채널 나가기 성공:", result);
+        return result;
       } else {
-        const error = await response.json();
-        throw new Error(
-          error.message || `채널 나가기 실패: ${response.status}`
-        );
+        let errorMessage = `채널 나가기 실패: ${response.status}`;
+        try {
+          const error = await response.json();
+          errorMessage = error.error || error.message || errorMessage;
+        } catch (jsonError) {
+          console.warn("에러 응답 JSON 파싱 실패:", jsonError);
+        }
+        throw new Error(errorMessage);
       }
     } catch (error) {
       console.error("❌ 채널 나가기 오류:", error);
@@ -157,15 +193,12 @@ class ChannelService {
     }
   }
 
-  // 채널 정보 수정
+  // 🔥 채널 정보 수정 (경로 수정)
   async updateChannel(channelId, updateData) {
     try {
-      const response = await fetch(`${this.baseURL}/${channelId}`, {
+      const response = await fetch(`${this.baseURL}/channels/${channelId}`, {
         method: "PUT",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: this.getAuthHeaders(),
         body: JSON.stringify(updateData),
       });
 
@@ -174,8 +207,14 @@ class ChannelService {
         console.log("✅ 채널 수정 성공:", channel);
         return channel;
       } else {
-        const error = await response.json();
-        throw new Error(error.message || `채널 수정 실패: ${response.status}`);
+        let errorMessage = `채널 수정 실패: ${response.status}`;
+        try {
+          const error = await response.json();
+          errorMessage = error.error || error.message || errorMessage;
+        } catch (jsonError) {
+          console.warn("에러 응답 JSON 파싱 실패:", jsonError);
+        }
+        throw new Error(errorMessage);
       }
     } catch (error) {
       console.error("❌ 채널 수정 오류:", error);
@@ -183,28 +222,74 @@ class ChannelService {
     }
   }
 
-  // 채널 삭제 (소유자만)
+  // 🔥 채널 삭제 (소유자만) (경로 수정)
   async deleteChannel(channelId) {
     try {
-      const response = await fetch(`${this.baseURL}/${channelId}`, {
+      const response = await fetch(`${this.baseURL}/channels/${channelId}`, {
         method: "DELETE",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: this.getAuthHeaders(),
       });
 
       if (response.ok) {
         console.log("✅ 채널 삭제 성공");
         return true;
       } else {
-        const error = await response.json();
-        throw new Error(error.message || `채널 삭제 실패: ${response.status}`);
+        let errorMessage = `채널 삭제 실패: ${response.status}`;
+        try {
+          const error = await response.json();
+          errorMessage = error.error || error.message || errorMessage;
+        } catch (jsonError) {
+          console.warn("에러 응답 JSON 파싱 실패:", jsonError);
+        }
+        throw new Error(errorMessage);
       }
     } catch (error) {
       console.error("❌ 채널 삭제 오류:", error);
       throw error;
     }
+  }
+
+  // 🔥 추가: 사용자 검색 기능 (Modals.jsx에서 사용)
+  async searchUsers(query) {
+    try {
+      console.log("🔍 사용자 검색 요청:", query);
+
+      const response = await fetch(
+        `${this.baseURL}/users/search?q=${encodeURIComponent(query)}`,
+        {
+          method: "GET",
+          headers: this.getAuthHeaders(),
+        }
+      );
+
+      console.log("📥 사용자 검색 응답:", {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
+      });
+
+      if (response.ok) {
+        const users = await response.json();
+        console.log("✅ 사용자 검색 성공:", users);
+        return users;
+      } else {
+        throw new Error(`사용자 검색 실패: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("❌ 사용자 검색 오류:", error);
+      throw error;
+    }
+  }
+
+  // 🔥 디버그용: 토큰 상태 확인
+  checkAuthStatus() {
+    const token = localStorage.getItem("token");
+    console.log("🔐 인증 상태 확인:", {
+      hasToken: !!token,
+      tokenLength: token ? token.length : 0,
+      tokenPreview: token ? `${token.substring(0, 20)}...` : "null",
+    });
+    return !!token;
   }
 }
 
