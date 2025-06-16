@@ -954,4 +954,459 @@
       }
     }
   }
+
+  /* ===== 개선된 모달 스타일 추가 ===== */
+
+  #chat-page {
+    /* 사용자 검색 컴포넌트 */
+    .user-search {
+      position: relative;
+
+      .search-input-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        .search-input {
+          width: 100%;
+          padding: 12px 16px 12px 44px !important;
+          border: 2px solid #e5e7eb;
+          border-radius: 10px !important;
+          font-size: 16px !important;
+          transition: all 0.2s ease;
+          background: white;
+          box-sizing: border-box;
+
+          &:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+          }
+
+          &::placeholder {
+            color: #9ca3af;
+            font-size: 15px !important;
+          }
+        }
+
+        .search-icon {
+          position: absolute;
+          left: 14px;
+          width: 16px !important;
+          height: 16px !important;
+          color: #9ca3af;
+          z-index: 1;
+        }
+
+        .loading-icon {
+          position: absolute;
+          right: 14px;
+          width: 16px !important;
+          height: 16px !important;
+          color: #3b82f6;
+        }
+      }
+
+      .search-results {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #d1d5db;
+        border-top: none;
+        border-radius: 0 0 10px 10px !important;
+        max-height: 200px !important;
+        overflow-y: auto;
+        z-index: 10;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+        .search-result-item {
+          display: flex;
+          align-items: center;
+          gap: 12px !important;
+          padding: 12px 16px !important;
+          cursor: pointer;
+          transition: background-color 0.2s ease;
+          border-bottom: 1px solid #f3f4f6;
+
+          &:hover {
+            background: #f8fafc;
+          }
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .user-avatar {
+            width: 40px !important;
+            height: 40px !important;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600 !important;
+            font-size: 16px !important;
+            flex-shrink: 0;
+          }
+
+          .user-info {
+            flex: 1;
+            min-width: 0;
+
+            .user-name {
+              font-weight: 500 !important;
+              color: #111827 !important;
+              font-size: 15px !important;
+              margin-bottom: 2px;
+            }
+
+            .user-email {
+              font-size: 13px !important;
+              color: #6b7280 !important;
+            }
+          }
+        }
+      }
+
+      .no-results {
+        padding: 16px !important;
+        text-align: center;
+        color: #6b7280 !important;
+        font-size: 14px !important;
+        background: white;
+        border: 1px solid #d1d5db;
+        border-top: none;
+        border-radius: 0 0 10px 10px !important;
+      }
+
+      .search-error {
+        display: flex;
+        align-items: center;
+        gap: 8px !important;
+        padding: 12px 16px !important;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-radius: 8px !important;
+        color: #dc2626 !important;
+        font-size: 14px !important;
+        margin-top: 8px !important;
+
+        .error-icon {
+          width: 16px !important;
+          height: 16px !important;
+          flex-shrink: 0;
+        }
+      }
+    }
+
+    /* 선택된 멤버 표시 */
+    .selected-members {
+      margin-top: 16px !important;
+
+      .members-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px !important;
+
+        .members-count {
+          font-weight: 500 !important;
+          color: #374151 !important;
+          font-size: 14px !important;
+        }
+
+        .limit-warning {
+          font-size: 12px !important;
+          color: #dc2626 !important;
+          font-weight: 500 !important;
+        }
+      }
+
+      .members-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px !important;
+
+        .member-chip {
+          display: flex;
+          align-items: center;
+          gap: 8px !important;
+          background: #f1f5f9;
+          border: 1px solid #e2e8f0;
+          border-radius: 20px !important;
+          padding: 6px 12px !important;
+          font-size: 14px !important;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: #e2e8f0;
+          }
+
+          .member-name {
+            color: #374151 !important;
+            font-weight: 500 !important;
+          }
+
+          .remove-member-btn {
+            background: none;
+            border: none;
+            padding: 2px !important;
+            border-radius: 50%;
+            cursor: pointer;
+            color: #6b7280;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+              color: #dc2626;
+            }
+
+            .remove-icon {
+              width: 14px !important;
+              height: 14px !important;
+            }
+          }
+        }
+      }
+    }
+
+    /* 개선된 모달 메시지들 */
+    .error-message {
+      display: flex;
+      align-items: center;
+      gap: 8px !important;
+      padding: 12px 16px !important;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px !important;
+      color: #dc2626 !important;
+      font-size: 14px !important;
+      margin-bottom: 16px !important;
+
+      .error-icon {
+        width: 16px !important;
+        height: 16px !important;
+        flex-shrink: 0;
+      }
+    }
+
+    .creating-message {
+      display: flex;
+      align-items: center;
+      gap: 12px !important;
+      padding: 16px !important;
+      background: #f0f9ff;
+      border-radius: 8px !important;
+      color: #0369a1 !important;
+      font-size: 14px !important;
+      margin-bottom: 16px !important;
+
+      .loading-icon {
+        width: 20px !important;
+        height: 20px !important;
+      }
+    }
+
+    /* 문자 수 카운터 */
+    .char-count {
+      text-align: right;
+      font-size: 12px !important;
+      color: #6b7280 !important;
+      margin-top: 4px !important;
+    }
+
+    /* 모달 대형 사이즈 */
+    .modal-large {
+      width: 600px !important;
+    }
+
+    /* 개선된 모달 액션 버튼들 */
+    .modal .modal-actions {
+      .btn {
+        display: flex;
+        align-items: center;
+        gap: 8px !important;
+        justify-content: center;
+        min-height: 48px !important;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+          );
+          transition: left 0.5s ease;
+        }
+
+        &:hover::before {
+          left: 100%;
+        }
+
+        &:disabled {
+          opacity: 0.5 !important;
+          cursor: not-allowed !important;
+
+          &:hover::before {
+            left: -100%;
+          }
+        }
+
+        .btn-icon {
+          width: 16px !important;
+          height: 16px !important;
+        }
+
+        &.btn-primary {
+          background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+          color: white !important;
+          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+
+          &:hover:not(:disabled) {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+          }
+
+          &:active {
+            transform: translateY(0);
+          }
+        }
+
+        &.btn-secondary {
+          background: #f1f5f9 !important;
+          color: #475569 !important;
+          border: 1px solid #e2e8f0 !important;
+
+          &:hover {
+            background: #e2e8f0 !important;
+            color: #334155 !important;
+          }
+        }
+
+        &.btn-danger {
+          background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+          color: white !important;
+          box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+
+          &:hover:not(:disabled) {
+            background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
+          }
+
+          &:active {
+            transform: translateY(0);
+          }
+        }
+      }
+    }
+
+    /* 확인 모달 개선 */
+    .confirm-modal {
+      .modal-content {
+        padding: 24px 28px !important;
+      }
+
+      .confirm-text {
+        color: #6b7280 !important;
+        margin-bottom: 0 !important;
+        font-size: 15px !important;
+        line-height: 1.6 !important;
+      }
+    }
+
+    /* 애니메이션 */
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+
+    /* 스크롤바 개선 */
+    .search-results::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .search-results::-webkit-scrollbar-track {
+      background: #f8f9fa;
+    }
+
+    .search-results::-webkit-scrollbar-thumb {
+      background: #d1d5db;
+      border-radius: 3px;
+
+      &:hover {
+        background: #9ca3af;
+      }
+    }
+
+    /* 반응형 개선 */
+    @media (max-width: 640px) {
+      .modal {
+        width: 95vw !important;
+        margin: 0 10px !important;
+      }
+
+      .modal-large {
+        width: 95vw !important;
+      }
+
+      .selected-members .members-list {
+        gap: 6px !important;
+
+        .member-chip {
+          font-size: 13px !important;
+          padding: 5px 10px !important;
+        }
+      }
+
+      .search-result-item {
+        padding: 10px 12px !important;
+
+        .user-avatar {
+          width: 36px !important;
+          height: 36px !important;
+          font-size: 14px !important;
+        }
+
+        .user-info .user-name {
+          font-size: 14px !important;
+        }
+
+        .user-info .user-email {
+          font-size: 12px !important;
+        }
+      }
+
+      .modal .modal-actions {
+        flex-direction: column;
+        gap: 10px !important;
+
+        .btn {
+          width: 100%;
+          min-height: 44px !important;
+        }
+      }
+    }
+  }
 }

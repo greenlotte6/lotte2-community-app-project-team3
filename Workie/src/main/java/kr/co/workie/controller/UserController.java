@@ -196,7 +196,9 @@ public class UserController {
 
     // ======== 채팅용 API 추가 ========
 
-    // 현재 사용자 정보 조회 (채팅용)
+    /**
+     * 현재 사용자 정보 조회 (채팅용)
+     */
     @GetMapping("/api/users/me")
     public ResponseEntity<UserDTO> getCurrentUser() {
         try {
@@ -218,11 +220,52 @@ public class UserController {
             return ResponseEntity.ok(currentUser);
         } catch (Exception e) {
             log.error("현재 사용자 정보 조회 실패: {}", e.getMessage(), e);
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
-    // 멤버 선택을 위한 사용자 목록 조회 (채팅용)
+    /**
+     * 사용자 검색 API (DM/채널 멤버 추가용)
+     */
+    @GetMapping("/api/users/search")
+    public ResponseEntity<List<UserDTO>> searchUsers(@RequestParam("q") String query) {
+        try {
+            log.info("사용자 검색 요청: query='{}'", query);
+
+            if (query == null || query.trim().isEmpty()) {
+                log.warn("검색어가 비어있습니다");
+                return ResponseEntity.badRequest().build();
+            }
+
+            List<UserDTO> users = userService.searchUsersByName(query.trim());
+            log.info("사용자 검색 성공: {}개 결과", users.size());
+
+            return ResponseEntity.ok(users);
+        } catch (Exception e) {
+            log.error("사용자 검색 실패: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    /**
+     * 모든 활성 사용자 조회 (관리자용)
+     */
+    @GetMapping("/api/users/active")
+    public ResponseEntity<List<UserDTO>> getAllActiveUsers() {
+        try {
+            log.info("모든 활성 사용자 조회 요청");
+            List<UserDTO> users = userService.getAllActiveUsers();
+            log.info("활성 사용자 조회 성공: {}명", users.size());
+            return ResponseEntity.ok(users);
+        } catch (Exception e) {
+            log.error("활성 사용자 조회 실패: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    /**
+     * 멤버 선택을 위한 사용자 목록 조회 (채팅용)
+     */
     @GetMapping("/api/users/members")
     public ResponseEntity<List<UserDTO>> getAvailableMembers() {
         try {
@@ -231,21 +274,48 @@ public class UserController {
             log.info("멤버 목록 조회 성공, 개수: {}", members.size());
             return ResponseEntity.ok(members);
         } catch (Exception e) {
-            log.error("멤버 목록 조회 실패: {}", e.getMessage());
-            return ResponseEntity.badRequest().build();
+            log.error("멤버 목록 조회 실패: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    // 특정 사용자 정보 조회 (채팅용)
+    /**
+     * 특정 사용자 정보 조회 (채팅용)
+     */
     @GetMapping("/api/users/{userId}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable String userId) {
         try {
             log.info("사용자 정보 조회 요청: userId={}", userId);
             UserDTO user = userService.getUserById(userId);
+            log.info("사용자 정보 조회 성공: {}", user.getName());
             return ResponseEntity.ok(user);
         } catch (Exception e) {
-            log.error("사용자 정보 조회 실패: {}", e.getMessage());
-            return ResponseEntity.badRequest().build();
+            log.error("사용자 정보 조회 실패: userId={}, error={}", userId, e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    /**
+     * 여러 사용자의 온라인 상태 조회 (DM용)
+     */
+    @PostMapping("/api/users/online-status")
+    public ResponseEntity<Map<String, Boolean>> getUserOnlineStatus(@RequestBody Map<String, List<String>> request) {
+        try {
+            List<String> userIds = request.get("userIds");
+            log.info("온라인 상태 조회 요청: {} 명", userIds.size());
+
+            // 현재는 모든 사용자를 온라인으로 처리 (실제로는 WebSocket 연결 상태 확인)
+            Map<String, Boolean> statusMap = new HashMap<>();
+            for (String userId : userIds) {
+                // TODO: 실제 온라인 상태 확인 로직 구현
+                statusMap.put(userId, Math.random() > 0.5); // 임시로 랜덤 상태
+            }
+
+            log.info("온라인 상태 조회 완료");
+            return ResponseEntity.ok(statusMap);
+        } catch (Exception e) {
+            log.error("온라인 상태 조회 실패: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
@@ -257,7 +327,6 @@ public class UserController {
 
         return ResponseEntity.ok(termsDTO);
     }
-
  */
 
 }
