@@ -55,33 +55,30 @@ public class UserController {
             String access  = jwtProvider.createToken(user, 1); // 1일
             String refresh = jwtProvider.createToken(user, 7); // 7일
 
-            // 리프레쉬 토큰 DB 저장
-
             // httpOnly cookie 생성
-            // -> "쿠키 저장 명"
             ResponseCookie accessTokenCookie = ResponseCookie.from("access_token", access)
-                    .httpOnly(true) //** httpOnly Cookie 생성 위함 (XSS 방지)
-                    .secure(false)  //https 보안 프로토콜 적용
-                    .path("/")  //쿠키 경로
-                    .maxAge(Duration.ofDays(1)) //쿠키 수명
+                    .httpOnly(true)
+                    .secure(false)
+                    .path("/")
+                    .maxAge(Duration.ofDays(1))
                     .build();
 
             ResponseCookie refreshTokenCookie = ResponseCookie.from("refresh_token", refresh)
-                    .httpOnly(true) //** httpOnly Cookie 생성 위함 (XSS 방지)
-                    .secure(false)  //https 보안 프로토콜 적용
-                    .path("/")  //쿠키 경로
-                    .maxAge(Duration.ofDays(7)) //쿠키 수명
+                    .httpOnly(true)
+                    .secure(false)
+                    .path("/")
+                    .maxAge(Duration.ofDays(7))
                     .build();
 
             // 쿠키를 Response 헤더에 추가
             HttpHeaders headers = new HttpHeaders();
-
             headers.add(HttpHeaders.SET_COOKIE, accessTokenCookie.toString());
             headers.add(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString());
 
-            // 액세스 토큰 클라이언트 전송
+            // 🔥 액세스 토큰을 응답 본문에도 포함 (프론트엔드에서 localStorage 저장용)
             Map<String, Object> map = new HashMap<>();
             map.put("grantType", "Bearer");
+            map.put("token", access);  // 🔥 추가: JWT 토큰
             map.put("username", user.getId());
             map.put("name", user.getName());
             map.put("position", user.getPosition());
@@ -101,6 +98,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("user not found");
         }
     }
+
 
     @PostMapping("/user/register")
     public Map<String, String> register(@RequestBody UserDTO userDTO){
@@ -227,10 +225,10 @@ public class UserController {
     /**
      * 사용자 검색 API (DM/채널 멤버 추가용)
      */
-    @GetMapping("/api/users/search")
-    public ResponseEntity<List<UserDTO>> searchUsers(@RequestParam("q") String query) {
+    @GetMapping("/users/search")  // 🔥 /api 제거
+    public ResponseEntity<List<UserDTO>> searchUsersForFrontend(@RequestParam("q") String query) {
         try {
-            log.info("사용자 검색 요청: query='{}'", query);
+            log.info("프론트엔드용 사용자 검색 요청: query='{}'", query);
 
             if (query == null || query.trim().isEmpty()) {
                 log.warn("검색어가 비어있습니다");

@@ -1,90 +1,202 @@
+// 1. ChannelController.java 수정
 package kr.co.workie.controller;
 
 import kr.co.workie.dto.ChannelDTO;
+import kr.co.workie.security.MyUserDetails;
 import kr.co.workie.service.ChannelService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/channels")
+@RequestMapping("/channels") // 🔥 /api 제거 - 프론트엔드와 일치
+@CrossOrigin(origins = "*") // 개발용
 public class ChannelController {
 
     private final ChannelService channelService;
 
+    // 🏥 헬스 체크 추가
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> health() {
+        return ResponseEntity.ok(Map.of(
+                "status", "OK",
+                "service", "channels",
+                "timestamp", java.time.LocalDateTime.now().toString()
+        ));
+    }
+
     // 채널 생성
     @PostMapping
-    public ResponseEntity<ChannelDTO.Response> createChannel(@RequestBody ChannelDTO.CreateRequest request) {
+    public ResponseEntity<?> createChannel(
+            @RequestBody ChannelDTO.CreateRequest request,
+            Authentication authentication) { // 🔥 인증 정보 추가
         try {
             log.info("채널 생성 요청: {}", request);
-            ChannelDTO.Response response = channelService.createChannel(request);
+
+            // 🔥 인증 확인
+            if (authentication == null || !authentication.isAuthenticated()) {
+                log.warn("인증되지 않은 사용자의 채널 생성 시도");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("error", "인증이 필요합니다."));
+            }
+
+            String currentUserId = getCurrentUserId(authentication);
+            log.info("현재 사용자: {}", currentUserId);
+
+            // 🔥 서비스 호출 시 현재 사용자 정보 전달
+            ChannelDTO.Response response = channelService.createChannel(request, currentUserId);
+
             log.info("채널 생성 성공: {}", response);
             return ResponseEntity.ok(response);
+
+        } catch (IllegalArgumentException e) {
+            log.error("잘못된 요청: {}", e.getMessage());
+            return ResponseEntity.badRequest()
+                    .body(Map.of("error", e.getMessage()));
         } catch (Exception e) {
-            log.error("채널 생성 실패: {}", e.getMessage());
-            return ResponseEntity.badRequest().build();
+            log.error("채널 생성 실패: ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "채널 생성에 실패했습니다."));
         }
     }
 
     // 사용자가 참여한 채널 목록 조회
     @GetMapping
-    public ResponseEntity<List<ChannelDTO.ListResponse>> getUserChannels() {
+    public ResponseEntity<?> getUserChannels(Authentication authentication) {
         try {
             log.info("사용자 채널 목록 조회 요청");
-            List<ChannelDTO.ListResponse> channels = channelService.getUserChannels();
+
+            // 🔥 인증 확인
+            if (authentication == null || !authentication.isAuthenticated()) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("error", "인증이 필요합니다."));
+            }
+
+            String currentUserId = getCurrentUserId(authentication);
+            log.info("사용자 {} 채널 목록 조회", currentUserId);
+
+            List<ChannelDTO.ListResponse> channels = channelService.getUserChannels(currentUserId);
             log.info("채널 목록 조회 성공, 개수: {}", channels.size());
             return ResponseEntity.ok(channels);
+
         } catch (Exception e) {
-            log.error("채널 목록 조회 실패: {}", e.getMessage());
-            return ResponseEntity.badRequest().build();
+            log.error("채널 목록 조회 실패: ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "채널 목록을 불러올 수 없습니다."));
         }
     }
 
     // 채널 상세 정보 조회
     @GetMapping("/{channelId}")
-    public ResponseEntity<ChannelDTO.Response> getChannelById(@PathVariable Long channelId) {
+    public ResponseEntity<?> getChannelById(
+            @PathVariable Long channelId,
+            Authentication authentication) {
         try {
             log.info("채널 상세 조회 요청: channelId={}", channelId);
-            ChannelDTO.Response response = channelService.getChannelById(channelId);
+
+            if (authentication == null || !authentication.isAuthenticated()) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("error", "인증이 필요합니다."));
+            }
+
+            String currentUserId = getCurrentUserId(authentication);
+            ChannelDTO.Response response = channelService.getChannelById(channelId, currentUserId);
+
             log.info("채널 상세 조회 성공: {}", response);
             return ResponseEntity.ok(response);
+
         } catch (Exception e) {
-            log.error("채널 상세 조회 실패: {}", e.getMessage());
-            return ResponseEntity.badRequest().build();
+            log.error("채널 상세 조회 실패: ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "채널 정보를 불러올 수 없습니다."));
         }
     }
 
-    // 채널 나가기
-    @DeleteMapping("/{channelId}/leave")
-    public ResponseEntity<Void> leaveChannel(@PathVariable Long channelId) {
+    // 채널 나가기 (POST로 변경 - 프론트엔드와 일치)
+    @PostMapping("/{channelId}/leave")
+    public ResponseEntity<?> leaveChannel(
+            @PathVariable Long channelId,
+            Authentication authentication) {
         try {
             log.info("채널 나가기 요청: channelId={}", channelId);
-            channelService.leaveChannel(channelId);
+
+            if (authentication == null || !authentication.isAuthenticated()) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("error", "인증이 필요합니다."));
+            }
+
+            String currentUserId = getCurrentUserId(authentication);
+            channelService.leaveChannel(channelId, currentUserId);
+
             log.info("채널 나가기 성공: channelId={}", channelId);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(Map.of("message", "채널에서 나갔습니다."));
+
         } catch (Exception e) {
-            log.error("채널 나가기 실패: {}", e.getMessage());
-            return ResponseEntity.badRequest().build();
+            log.error("채널 나가기 실패: ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "채널 나가기에 실패했습니다."));
         }
+    }
+
+    // 🔥 기존 DELETE 메서드도 유지 (하위 호환성)
+    @DeleteMapping("/{channelId}/leave")
+    public ResponseEntity<?> leaveChannelDelete(
+            @PathVariable Long channelId,
+            Authentication authentication) {
+        return leaveChannel(channelId, authentication);
     }
 
     // 채널 관리자 이임
     @PutMapping("/{channelId}/transfer")
-    public ResponseEntity<Void> transferOwnership(@PathVariable Long channelId,
-                                                  @RequestBody ChannelDTO.TransferOwnershipRequest request) {
+    public ResponseEntity<?> transferOwnership(
+            @PathVariable Long channelId,
+            @RequestBody ChannelDTO.TransferOwnershipRequest request,
+            Authentication authentication) {
         try {
             log.info("채널 관리자 이임 요청: channelId={}, newOwnerId={}", channelId, request.getNewOwnerId());
-            channelService.transferOwnership(channelId, request);
+
+            if (authentication == null || !authentication.isAuthenticated()) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(Map.of("error", "인증이 필요합니다."));
+            }
+
+            String currentUserId = getCurrentUserId(authentication);
+            channelService.transferOwnership(channelId, request, currentUserId);
+
             log.info("채널 관리자 이임 성공: channelId={}", channelId);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(Map.of("message", "관리자 권한이 이전되었습니다."));
+
         } catch (Exception e) {
-            log.error("채널 관리자 이임 실패: {}", e.getMessage());
-            return ResponseEntity.badRequest().build();
+            log.error("채널 관리자 이임 실패: ", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "관리자 권한 이전에 실패했습니다."));
+        }
+    }
+
+    // 🔧 안전한 사용자 ID 추출
+    private String getCurrentUserId(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("인증되지 않은 사용자입니다.");
+        }
+
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof MyUserDetails) {
+            MyUserDetails userDetails = (MyUserDetails) principal;
+            return userDetails.getUser().getId(); // User 객체에서 ID 추출
+        } else if (principal instanceof String) {
+            return (String) principal;
+        } else {
+            log.warn("알 수 없는 principal 타입: {}", principal.getClass());
+            return principal.toString();
         }
     }
 }
