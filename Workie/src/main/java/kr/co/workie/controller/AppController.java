@@ -9,6 +9,7 @@ import kr.co.workie.service.CalendarService;
 import kr.co.workie.service.PageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,17 @@ public class AppController {
     private final CalendarService calendarService;
     private final PageService pageService;
     private final PageRepository pageRepository;
+
+
+
+    @Value("${spring.application.version}")
+    private String appVersion;
+
+    @GetMapping("/")
+    public String index(){
+        //System.out.println("appVersion : " + appVersion);
+        return "appVersion : " + appVersion;
+    }
 
     /* Calendar */
     // 캘린더 조회
