@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLoginStore } from "@/stores/useLoginStore";
+
 import { DriveLayout } from "../../layouts/DriveLayout";
 import { DriveHeader } from "../../components/drive/DriveHeader";
 import { DriveTable } from "../../components/drive/DriveTable";
@@ -7,6 +10,8 @@ import { RenameModal } from "../../components/drive/RenameModal";
 import axiosInstance from "@/api/axiosInstance";
 
 const Drivepage = () => {
+  const navigate = useNavigate();
+  const user = useLoginStore((state) => state.user); // 로그인 여부 확인
   const [activeTab, setActiveTab] = useState("⭐ 내 드라이브");
   const [folders, setFolders] = useState([]);
   const [trash, setTrash] = useState([]);
@@ -15,11 +20,19 @@ const Drivepage = () => {
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [renameIndex, setRenameIndex] = useState(null);
 
+  // ✅ 로그인 확인
+  useEffect(() => {
+    if (!user) {
+      alert("로그인이 필요한 기능입니다.");
+      navigate("/user/login");
+    }
+  }, [user, navigate]);
+
   // ✅ 폴더 목록 불러오기
   useEffect(() => {
     const fetchFolders = async () => {
       try {
-        const response = await axiosInstance.get("/drive", {
+        const response = await axiosInstance.get("/api/drive", {
           params: { parentId: null },
         });
         setFolders(response.data);
@@ -65,7 +78,7 @@ const Drivepage = () => {
     }
   };
 
-  // ✅ 이름 변경 (임시 로컬 상태 변경, 추후 API 연동 필요)
+  // ✅ 이름 변경 (로컬 상태)
   const handleRenameFolder = (newName) => {
     const updated = [...folders];
     updated[renameIndex].name = newName;
@@ -75,25 +88,23 @@ const Drivepage = () => {
     setShowRenameModal(false);
   };
 
-  // ✅ 삭제 (현재 로컬 상태만 조작, 추후 API 연동 필요)
+  // ✅ 삭제 (로컬 상태)
   const handleDelete = (indexes) => {
     const toTrash = indexes.map((i) => folders[i]);
     setTrash([...trash, ...toTrash]);
     setFolders(folders.filter((_, i) => !indexes.includes(i)));
     setSelectedIndexes([]);
-    // TODO: 백엔드 삭제 연동 필요
   };
 
-  // ✅ 복원 (현재 로컬 상태만 조작, 추후 API 연동 필요)
+  // ✅ 복원 (로컬 상태)
   const handleRestore = (indexes) => {
     const toRestore = indexes.map((i) => trash[i]);
     setFolders([...folders, ...toRestore]);
     setTrash(trash.filter((_, i) => !indexes.includes(i)));
     setSelectedIndexes([]);
-    // TODO: 백엔드 복원 연동 필요
   };
 
-  return (
+  return user ? (
     <DriveLayout activeTab={activeTab} setActiveTab={setActiveTab}>
       <DriveHeader
         activeTab={activeTab}
@@ -133,7 +144,7 @@ const Drivepage = () => {
         />
       )}
     </DriveLayout>
-  );
+  ) : null;
 };
 
 export default Drivepage;
