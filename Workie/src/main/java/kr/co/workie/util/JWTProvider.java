@@ -1,57 +1,54 @@
 package kr.co.workie.util;
 
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import kr.co.workie.entity.User;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Log4j2
 @Getter
 @Component
 public class JWTProvider {
 
-    private String issuer;
-    private SecretKey secretKey;
+    private final String issuer;
+    private final SecretKey secretKey;
+    private final UserDetailsService userDetailsService; // ✅ 주입 추가
 
-    public JWTProvider(@Value("${jwt.issuer}") String issuer,
-                       @Value("${jwt.secret}") String secretKey){
+    public JWTProvider(
+            @Value("${jwt.issuer}") String issuer,
+            @Value("${jwt.secret}") String secretKey,
+            UserDetailsService userDetailsService // ✅ 주입 받기
+    ) {
         this.issuer = issuer;
         this.secretKey = Keys.hmacShaKeyFor(secretKey.getBytes());
+        this.userDetailsService = userDetailsService;
     }
 
-
-    public String createToken(User user, int days){
-
-        // 발급일, 만료일 생성
+    /**
+     * JWT 생성
+     */
+    public String createToken(kr.co.workie.entity.User user, int days) {
         Date issuedDate = new Date();
         Date expireDate = new Date(issuedDate.getTime() + Duration.ofDays(days).toMillis());
-        //Date expireDate = new Date();
-        //expireDate.setHours(expireDate.getHours() + 1);
 
-        // 클레임 생성
         Claims claims = Jwts.claims();
         claims.put("username", user.getId());
         claims.put("role", user.getRole());
 
-        // 토큰 생성
-        String token = Jwts.builder()
+        return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setIssuer(issuer)
                 .setIssuedAt(issuedDate)
@@ -59,51 +56,47 @@ public class JWTProvider {
                 .addClaims(claims)
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
-
-        return token;
     }
 
-    public Claims getClaims(String token){
-        return Jwts
-                .parserBuilder()
+    /**
+     * 클레임 추출
+     */
+    public Claims getClaims(String token) {
+        return Jwts.parserBuilder()
                 .setSigningKey(secretKey)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
 
-    public Authentication getAuthentication(String token){
-
-        // 클레임에서 사용자, 권한 가져오기
+    /**
+     * 인증 객체 반환
+     */
+    public Authentication getAuthentication(String token) {
         Claims claims = getClaims(token);
-        String Id  = (String) claims.get("username");
-        String role = (String) claims.get("role");
+        String username = (String) claims.get("username");
 
-        // 권한목록 생성
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(role));
+        // ✅ UserDetails를 통해 인증 정보 가져오기
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-        // 사용자 인증객체 생성
-        User principal = User.builder()
-                .id(Id)
-                .role(role)
-                .build();
-
-        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+        return new UsernamePasswordAuthenticationToken(
+                userDetails,
+                token,
+                userDetails.getAuthorities()
+        );
     }
 
+    /**
+     * JWT 유효성 검사
+     */
     public void validateToken(String token) throws Exception {
-
         try {
             Jwts.parserBuilder()
                     .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(token);
-
-        }catch (Exception e){
-            // 잘못된 JWT일 경우
-            throw new Exception(e);
+        } catch (Exception e) {
+            throw new Exception("Invalid JWT token: " + e.getMessage());
         }
     }
-
 }

@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("accessToken"); // 또는 sessionStorage
+    const token = localStorage.getItem("access_token"); // 또는 sessionStorage
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
