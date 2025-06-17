@@ -2,6 +2,7 @@
 package kr.co.workie.controller;
 
 import kr.co.workie.dto.ChannelDTO;
+import kr.co.workie.entity.User;
 import kr.co.workie.security.MyUserDetails;
 import kr.co.workie.service.ChannelService;
 import lombok.RequiredArgsConstructor;
@@ -182,20 +183,54 @@ public class ChannelController {
     }
 
     // 🔧 안전한 사용자 ID 추출
+    // ChannelController.java의 getCurrentUserId 메서드 수정
+
+    // 🔧 안전한 사용자 ID 추출 (User 객체 처리 강화)
     private String getCurrentUserId(Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
             throw new RuntimeException("인증되지 않은 사용자입니다.");
         }
 
         Object principal = authentication.getPrincipal();
+        log.info("🔍 Principal 타입: {}", principal.getClass().getName());
 
         if (principal instanceof MyUserDetails) {
             MyUserDetails userDetails = (MyUserDetails) principal;
-            return userDetails.getUser().getId(); // User 객체에서 ID 추출
+            String userId = userDetails.getUser().getId();
+            log.info("✅ MyUserDetails에서 추출한 사용자 ID: {}", userId);
+            return userId;
         } else if (principal instanceof String) {
+            log.info("✅ String 타입 사용자 ID: {}", principal);
             return (String) principal;
+        } else if (principal instanceof User) {
+            // 🔥 User 객체인 경우 ID만 추출
+            User user = (User) principal;
+            String userId = user.getId();
+            log.info("✅ User 객체에서 추출한 사용자 ID: {}", userId);
+            return userId;
         } else {
-            log.warn("알 수 없는 principal 타입: {}", principal.getClass());
+            // 🔥 기타 경우: toString()에서 ID 추출 시도
+            String principalStr = principal.toString();
+            log.info("🔍 Principal toString: {}", principalStr);
+
+            // User 객체의 toString에서 id= 부분 찾기
+            if (principalStr.contains("id=")) {
+                try {
+                    int startIdx = principalStr.indexOf("id=") + 3;
+                    int endIdx = principalStr.indexOf(",", startIdx);
+                    if (endIdx == -1) endIdx = principalStr.indexOf(")", startIdx);
+                    if (endIdx == -1) endIdx = principalStr.indexOf(" ", startIdx);
+                    if (endIdx == -1) endIdx = principalStr.length();
+
+                    String userId = principalStr.substring(startIdx, endIdx).trim();
+                    log.info("✅ toString에서 추출한 사용자 ID: {}", userId);
+                    return userId;
+                } catch (Exception e) {
+                    log.error("❌ ID 추출 실패: {}", e.getMessage());
+                }
+            }
+
+            log.warn("⚠️ 알 수 없는 principal 타입, toString 반환: {}", principal.getClass());
             return principal.toString();
         }
     }
