@@ -5,8 +5,42 @@ class DMService {
   }
 
   // JWT 토큰 헤더 생성
+  // dmService.js에서 getAuthHeaders() 메소드만 이것으로 교체
+
   getAuthHeaders() {
-    const token = localStorage.getItem("token");
+    let token = null;
+
+    // 1. 기본 토큰 위치들 확인
+    token =
+      localStorage.getItem("token") ||
+      localStorage.getItem("access_token") ||
+      localStorage.getItem("jwt");
+
+    // 2. 🔥 login-storage에서 토큰 추출 (핵심 수정사항!)
+    if (!token) {
+      try {
+        const loginStorage = localStorage.getItem("login-storage");
+        if (loginStorage) {
+          const parsed = JSON.parse(loginStorage);
+          const userToken = parsed?.state?.user?.token;
+          if (userToken) {
+            token = userToken;
+            console.log("✅ login-storage에서 토큰 발견");
+
+            // 편의를 위해 token 키에도 저장
+            localStorage.setItem("token", userToken);
+          }
+        }
+      } catch (error) {
+        console.error("login-storage 파싱 오류:", error);
+      }
+    }
+
+    console.log(
+      "🔑 사용할 토큰:",
+      token ? `${token.substring(0, 20)}...` : "null"
+    );
+
     return {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -50,23 +84,28 @@ class DMService {
     try {
       console.log("💬 DM 룸 생성/조회:", targetUserId);
 
-      const response = await fetch(`${this.baseURL}/dm/create`, {
+      // ✅ 올바른 백엔드 경로로 수정: /api/dm
+      const response = await fetch(`${this.baseURL}/api/dm`, {
         method: "POST",
         headers: this.getAuthHeaders(),
         body: JSON.stringify({
-          targetUserId: targetUserId,
+          targetUserId: targetUserId, // ✅ 백엔드 DTO와 일치
         }),
       });
+
+      console.log("📥 DM 생성 응답:", response.status, response.statusText);
 
       if (response.ok) {
         const result = await response.json();
         console.log("✅ DM 룸 생성/조회 성공:", result);
         return result;
       } else {
-        let errorMessage = "DM 시작에 실패했습니다.";
+        const errorText = await response.text();
+        console.log("❌ DM 생성 실패 응답:", errorText);
 
+        let errorMessage = "DM 시작에 실패했습니다.";
         try {
-          const errorData = await response.json();
+          const errorData = JSON.parse(errorText);
           errorMessage = errorData.error || errorMessage;
         } catch (jsonError) {
           errorMessage = `서버 오류 (${response.status}): ${response.statusText}`;
@@ -76,6 +115,82 @@ class DMService {
       }
     } catch (error) {
       console.error("❌ DM 생성 오류:", error);
+      throw error;
+    }
+  }
+
+  // dmService.js에 다음 메소드들을 추가하세요
+
+  // 🔥 DM 목록 조회 (누락된 메소드)
+  async getUserDMList() {
+    try {
+      console.log("📱 DM 목록 조회 요청");
+
+      const response = await fetch(`${this.baseURL}/api/dm/list`, {
+        method: "GET",
+        headers: this.getAuthHeaders(),
+      });
+
+      console.log("📥 DM 목록 응답:", {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
+      });
+
+      if (response.ok) {
+        const dmList = await response.json();
+        console.log("✅ DM 목록 조회 성공:", dmList);
+        return dmList;
+      } else {
+        throw new Error(`DM 목록 조회 실패: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("❌ DM 목록 조회 오류:", error);
+      throw error;
+    }
+  }
+
+  // 🔥 DM 상세 조회 (roomId로)
+  async getDMByRoomId(roomId) {
+    try {
+      console.log("🔍 DM 상세 조회:", roomId);
+
+      const response = await fetch(`${this.baseURL}/api/dm/room/${roomId}`, {
+        method: "GET",
+        headers: this.getAuthHeaders(),
+      });
+
+      if (response.ok) {
+        const dm = await response.json();
+        console.log("✅ DM 상세 조회 성공:", dm);
+        return dm;
+      } else {
+        throw new Error(`DM 상세 조회 실패: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("❌ DM 상세 조회 오류:", error);
+      throw error;
+    }
+  }
+
+  // 🔥 DM 삭제
+  async deleteDM(dmId) {
+    try {
+      console.log("🗑️ DM 삭제:", dmId);
+
+      const response = await fetch(`${this.baseURL}/api/dm/${dmId}`, {
+        method: "DELETE",
+        headers: this.getAuthHeaders(),
+      });
+
+      if (response.ok) {
+        console.log("✅ DM 삭제 성공");
+        return true;
+      } else {
+        throw new Error(`DM 삭제 실패: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("❌ DM 삭제 오류:", error);
       throw error;
     }
   }
@@ -91,6 +206,20 @@ class DMService {
     return !!token;
   }
 }
+
+export const getUserOnlineStatus = async (userIds) => {
+  try {
+    // 일단 모든 사용자를 온라인으로 표시
+    const status = {};
+    userIds.forEach((id) => {
+      status[id] = true; // 또는 false
+    });
+    return status;
+  } catch (error) {
+    console.log("온라인 상태 조회 오류:", error);
+    return {};
+  }
+};
 
 export default new DMService();
 

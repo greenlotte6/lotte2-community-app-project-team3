@@ -77,13 +77,21 @@ const ChannelItem = ({ channel }) => {
         {channel.memberCount && (
           <span className="member-count">{channel.memberCount}</span>
         )}
-        {isOwner && (
-          <LogOut
-            className="leave-icon"
-            onClick={handleLeaveClick}
-            title="채널 나가기"
-          />
-        )}
+        <LogOut
+          className="leave-icon"
+          onClick={handleLeaveClick}
+          title={isOwner ? "채널 삭제" : "채널 나가기"}
+          style={{
+            width: "14px",
+            height: "14px",
+            color: "#f87171",
+            cursor: "pointer",
+            marginLeft: "8px",
+            opacity: 1, // 🔥 강제 표시
+            visibility: "visible", // 🔥 강제 표시
+            display: "inline-block",
+          }}
+        />
       </div>
     </div>
   );

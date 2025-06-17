@@ -35,23 +35,52 @@ public class SecurityConfig {
 
         // 토큰기반 인증 시큐리티 설정
         httpSecurity
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))      //******확인*********
-                .csrf(CsrfConfigurer::disable)              // 사이트 위변조 방지
-                .httpBasic(HttpBasicConfigurer::disable)    // 기본 HTTP 인증 방식 비활성
-                .formLogin(FormLoginConfigurer::disable)    // form 이 아닌 토큰 기반이므로 폼인증 비활성
-                .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 비활성
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(CsrfConfigurer::disable)
+                .httpBasic(HttpBasicConfigurer::disable)
+                .formLogin(FormLoginConfigurer::disable)
+                .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // 토큰 검사 필터 등록
                 .addFilterBefore(new JWTAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
 
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        //.requestMatchers("/article/**").hasAnyRole("ADMIN", "USER") <- 프론트에서 테스트할 때 인가 처리 아래처럼 수정
-                        .requestMatchers(HttpMethod.GET,"/article/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/article/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET,"/product/**").permitAll()
-                        .requestMatchers(HttpMethod.POST,"/product/**").hasRole("ADMIN")
-                        .anyRequest().permitAll());
+                        // 🔧 인증이 필요하지 않은 경로들
+                        .requestMatchers("/", "/login", "/signup", "/user/login", "/user/signup").permitAll()
+                        .requestMatchers("/favicon.ico", "/css/**", "/js/**", "/images/**").permitAll()
 
+                        // 🔧 관리자 권한 필요
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+
+                        // 🔧 기존 설정 유지
+                        .requestMatchers(HttpMethod.GET, "/article/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/article/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/product/**").hasRole("ADMIN")
+
+                        // 🔧 새로 추가: 인증이 필요한 경로들
+                        .requestMatchers("/page/**").authenticated()
+                        .requestMatchers("/calendar/**").authenticated()
+                        .requestMatchers("/user/profile/**").authenticated()
+                        .requestMatchers("/chat/**").authenticated()
+                        .requestMatchers("/channel/**").authenticated()
+                        .requestMatchers("/dm/**").authenticated()
+
+                        // ✅ 새로 추가: DM 및 채널 API 경로들 (핵심 수정!)
+                        .requestMatchers("/api/dm/**").authenticated()          // DM API
+                        .requestMatchers("/channels/**").authenticated()        // 채널 API
+                        .requestMatchers("/channels/health").permitAll()        // 헬스체크는 허용
+
+
+                        // ✅ API 경로들만 새로 추가 (문제 해결용)
+                        .requestMatchers("/users/search").authenticated()
+                        .requestMatchers("/api/users/me").authenticated()
+                        .requestMatchers("/api/channels/**").authenticated()
+                        .requestMatchers("/api/messages/**").authenticated()
+                        .requestMatchers("/api/users/search").authenticated()
+
+                        // 🔧 나머지는 인증 필요로 변경 (보안 강화)
+                        .anyRequest().authenticated()
+                );
 
         return httpSecurity.build();
     }
@@ -74,18 +103,17 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:5173", // 프론트엔드 개발 서버
                 "https://workie-talkie.site",
-                "https://lotte2-community-app-project-team3-lac.vercel.app", // Vercel 배포 주소
-                "https://workie-talkie-personal-kappa.vercel.app" // Vercel 배포 주소
+                "https://lotte2-community-app-project-team3-lac.vercel.app",
+                "https://workie-talkie-personal-kappa.vercel.app"
         ));
 
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // 허용할 HTTP 메서드
-        configuration.setAllowedHeaders(List.of("*")); // 모든 헤더 허용
-        configuration.setAllowCredentials(true); // 자격 증명(쿠키, 인증 헤더 등)을 허용 (JWT 사용 시 필요)
-        configuration.setMaxAge(3600L); // Pre-flight 요청 결과 캐시 시간 (초)
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); // 모든 경로에 CORS 설정 적용
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-    
 }

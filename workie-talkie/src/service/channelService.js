@@ -6,7 +6,39 @@ class ChannelService {
 
   // 🔥 JWT 토큰 헤더 생성 헬퍼 메서드
   getAuthHeaders() {
-    const token = localStorage.getItem("token");
+    let token = null;
+
+    // 1. 기본 토큰 위치들 확인
+    token =
+      localStorage.getItem("token") ||
+      localStorage.getItem("access_token") ||
+      localStorage.getItem("jwt");
+
+    // 2. 🔥 login-storage에서 토큰 추출 (핵심 수정!)
+    if (!token) {
+      try {
+        const loginStorage = localStorage.getItem("login-storage");
+        if (loginStorage) {
+          const parsed = JSON.parse(loginStorage);
+          const userToken = parsed?.state?.user?.token;
+          if (userToken) {
+            token = userToken;
+            console.log("✅ channelService: login-storage에서 토큰 발견");
+
+            // 편의를 위해 token 키에도 저장
+            localStorage.setItem("token", userToken);
+          }
+        }
+      } catch (error) {
+        console.error("login-storage 파싱 오류:", error);
+      }
+    }
+
+    console.log(
+      "🔑 channelService 토큰:",
+      token ? `${token.substring(0, 20)}...` : "null"
+    );
+
     return {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
