@@ -3,7 +3,7 @@ import React from "react";
 export const AddModal = ({ onClose }) => {
   return (
     <div className="modal-overlay" id="projectModal" onClick={onClose}>
-      <div className="project-modal" onClick={(e) => e.stopPropagation()}>
+      <div className="project-modal " onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <div className="modal-icon">📁</div>
           <div className="modal-title">새 프로젝트 생성</div>
