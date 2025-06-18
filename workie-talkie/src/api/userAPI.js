@@ -40,9 +40,15 @@ export const postUser = async (data) => {
 };
 
 export const checkUserId = async (id) => {
-  const resp = await fetch(`${USER_CHECKED}?id=${id}`);
+  const resp = await fetch(`${USER_CHECKED}?id=${id}`, {
+    method: "GET",
+    credentials: "omit", // 인증 관련 쿠키 아예 안 보냄
+  });
+
+  if (!resp.ok) throw new Error("ID 체크 실패");
+
   const exists = await resp.json();
-  return exists; // true 또는 false
+  return exists;
 };
 
 export const postUserLogin = async (data) => {
@@ -163,13 +169,13 @@ export const postPage = async (data) => {
   }
 };
 
-export const patchPage = async (data) => {
+export const putFavoritePage = async (data) => {
+  console.log("userAPI.js putFavoritePage 내부 data:", data); // ✨ 이 로그 추가 ✨
   try {
-    const response = await axios.put(`${PAGE_FAVORITE}`, data, {
+    const response = await axios.put(`${PAGE_FAVORITE}/${data.pno}`, data, {
       withCredentials: true,
     });
     console.log(response);
-
     return response.data;
   } catch (err) {
     console.log(err);

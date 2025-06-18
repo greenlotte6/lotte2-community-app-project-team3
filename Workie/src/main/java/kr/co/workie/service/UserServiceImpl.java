@@ -77,6 +77,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO modify(UserDTO userDTO) {
         if(userRepository.existsById(userDTO.getId())) {
+            if (userDTO.getRole().startsWith("ROLE_")) {
+                userDTO.setRole(userDTO.getRole().substring(5));
+            }
+
             User user = modelMapper.map(userDTO, User.class);
 
             // 비밀번호 변경 요청이 있는 경우에만 암호화해서 저장
@@ -95,6 +99,22 @@ public class UserServiceImpl implements UserService {
             return modelMapper.map(savedUser, UserDTO.class);
         }
         return null;
+    }
+
+    public boolean validateInviteCode(String joinCode) {
+        return companyRepository.findByJoinCode(joinCode).isPresent();
+    }
+
+    @Override
+    public UserDTO generalRegister(UserDTO userDTO, String inviteCode) {
+        if (!validateInviteCode(inviteCode)) {
+            throw new IllegalArgumentException("Invalid or expired invite code");
+        }
+
+        userDTO.setRole("MEMBER");
+        User user = modelMapper.map(userDTO, User.class);
+        userRepository.save(user);
+        return modelMapper.map(user, UserDTO.class);
     }
 
     // ======== 채팅용 메서드들 추가 ========

@@ -27,7 +27,11 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+    // 🔽 추가: 새로고침 시 라우팅 문제 해결
+    historyApiFallback: true,
   },
+  // 🔽 추가: base 경로 설정 (정적 자산 경로가 꼬이는 걸 방지)
+  base: "/",
   // 채팅 설정 추가
   optimizeDeps: {
     esbuildOptions: {

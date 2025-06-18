@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -27,32 +28,22 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private static final String AUTH_HEADER = "Authorization";
     private static final String TOKEN_PREFIX = "Bearer ";
 
-    // 🔧 정확한 인증 불필요 경로들만 설정 (완전 일치)
-    private static final List<String> EXCLUDED_PATHS = Arrays.asList(
-            "/",
-            "/login",
-            "/signup",
-            "/user/login",
-            "/user/signup",
-            "/favicon.ico"
-    );
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String requestURI = request.getRequestURI();
         log.info("doFilterInternal...1 : {}", requestURI);
 
-        // 🔧 정적 리소스 체크
-        if (isStaticResource(requestURI)) {
-            log.info("doFilterInternal...정적 리소스: {}", requestURI);
+        // 🔧 인증 불필요 경로 체크 (정확한 매칭)
+        if (shouldSkipFiltering(requestURI)) {
+            log.info("doFilterInternal...인증 불필요 경로: {}", requestURI);
             filterChain.doFilter(request, response);
             return;
         }
 
-        // 🔧 인증 불필요 경로 체크 (정확한 매칭)
-        if (shouldSkipFiltering(requestURI)) {
-            log.info("doFilterInternal...인증 불필요 경로: {}", requestURI);
+        // 🔧 정적 리소스 체크
+        if (isStaticResource(requestURI)) {
+            log.info("doFilterInternal...정적 리소스: {}", requestURI);
             filterChain.doFilter(request, response);
             return;
         }
@@ -123,13 +114,13 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
      * 🔧 인증 불필요 경로 체크 - 완전 일치만 허용
      */
     private boolean shouldSkipFiltering(String requestURI) {
-        boolean skip = EXCLUDED_PATHS.contains(requestURI);
-        if (skip) {
-            log.info("✅ 인증 불필요 경로 확인: {}", requestURI);
-        } else {
-            log.info("🔒 인증 필요 경로: {}", requestURI);
-        }
-        return skip;
+        return requestURI.startsWith("/user") ||
+                requestURI.startsWith("/css") ||
+                requestURI.startsWith("/js") ||
+                requestURI.startsWith("/images") ||
+                requestURI.equals("/") ||
+                requestURI.equals("/favicon.ico") ||
+                requestURI.startsWith("/static/");
     }
 
     /**

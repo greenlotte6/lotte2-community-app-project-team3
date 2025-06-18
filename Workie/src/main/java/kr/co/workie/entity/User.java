@@ -1,5 +1,6 @@
 package kr.co.workie.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -28,6 +29,8 @@ public class User {
     private String employeeId;
     private String email;
     private String hp;
+    // 이렇게 단순하게 두면 됨
+    @Setter
     private String role;
     private String position;
     private String office;
@@ -36,13 +39,16 @@ public class User {
     private String addr1;
     private String addr2;
     private String image;
+    private String joinCode;
 
     //추가필드?
     private String sms;
     private String provider;
 
+    @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime regDate;
+
     private LocalDateTime leaveDate;
 
 
@@ -50,6 +56,7 @@ public class User {
 //    public String getRole() {
 //        return "ROLE_"+role;
 //    }
+
 
     public String getRole() {
         // 🔥 ROLE 중복 방지 로직 추가
@@ -65,6 +72,5 @@ public class User {
         // ROLE_가 없으면 추가
         return "ROLE_" + role;
     }
-
 
 }

@@ -13,6 +13,7 @@ import { Main } from "../pages/dashboard/Main";
 import { BoardMain } from "../pages/board/BoardMain";
 import { BoardList } from "../pages/board/BoardList";
 import { Login } from "../pages/user/Login";
+import { General } from "../pages/user/General";
 import { Policies } from "../pages/user/Policies";
 import { Register } from "../pages/user/Register";
 import { FindId } from "../pages/user/FindId";
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
   { path: "/user/login", element: <Login /> },
   { path: "/user/policies", element: <Policies /> },
   { path: "/user/register", element: <Register /> },
+  { path: "/user/general", element: <General /> },
   { path: "/user/findId", element: <FindId /> },
   { path: "/user/findPw", element: <FindPw /> },
   { path: "/user/findResult", element: <FindResult /> },

@@ -34,12 +34,11 @@ public class UserDTO {
     private String sms;
     private String image;
 
+    private String joinCode;
+
     //추가필드
     private String companyName;
     private String CEOId;
-
-
-
 
 
 }

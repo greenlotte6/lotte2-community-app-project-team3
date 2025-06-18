@@ -15,6 +15,8 @@ public interface UserService {
 
     public UserDTO modify(UserDTO userDTO);
 
+    public UserDTO generalRegister(UserDTO userDTO, String inviteCode);
+
     //public TermsDTO terms();
 
     // 현재 사용자 정보 조회 (채팅용)

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Aside } from "../../components/page/Aside";
 import { getPage } from "../../api/userAPI";
 import { useLoginStore } from "../../stores/useLoginStore";
-import { PAGE_FAVORITE } from "../../api/http";
+import { putFavoritePage } from "../../api/userAPI";
 //사이드바 타이틀 누르면 숨겨지는거도 해보기!
 
 export const PageMain = () => {
@@ -44,23 +44,30 @@ export const PageMain = () => {
   }, [user, navigate]);
 
   const toggleFavorite = async (pno) => {
-    // 페이지 복사 후 업데이트
+    console.log("toggleFavorite 호출, pno:", pno); // ✨ 이 로그 추가 ✨
+
+    const target = pages.find((p) => p.pno === pno);
+    if (!target) return;
+
+    const updatedFavorite = !target.favorite;
+
+    // optimistic UI update
     const updatedPages = pages.map((page) =>
-      page.pno === pno ? { ...page, favorite: !page.favorite } : page
+      page.pno === pno ? { ...page, favorite: updatedFavorite } : page
     );
     setPages(updatedPages);
 
     try {
-      await fetch(`${PAGE_FAVORITE}/${pno}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          favorite: updatedPages.find((p) => p.pno === pno).favorite,
-        }),
-      });
+      const requestData = { pno, favorite: updatedFavorite };
+      console.log("putFavoritePage에 전달할 데이터:", requestData); // ✨ 이 로그 추가 ✨
+      // 서버에 반영 (userAPI 함수 사용)
+      await putFavoritePage({ pno, favorite: updatedFavorite });
+      console.log("✅ 즐겨찾기 상태 서버 반영 완료");
     } catch (error) {
-      console.error("서버에 즐겨찾기 상태 반영 실패", error);
-      // 실패 시 롤백 (옵션)
+      console.error("❌ 서버에 즐겨찾기 상태 반영 실패", error);
+
+      // 실패 시 원래대로 롤백 (선택)
+      setPages(pages);
     }
   };
 

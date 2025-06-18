@@ -1,8 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { SettingLayout } from "../../layouts/SettingLayout";
+import { useLoginStore } from "../../stores/useLoginStore";
+import { useNavigate } from "react-router-dom";
 
 export const Member = () => {
-  return (
+  const [showModal, setShowModal] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState("");
+
+  const navigate = useNavigate();
+
+  const user = useLoginStore((state) => state.user);
+  console.log("user in Profile:", user);
+
+  const id = user?.username;
+  console.log("id: " + id);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/user/login");
+    }
+  }, [user, navigate]);
+
+  const handleInviteClick = () => {
+    setShowModal(true);
+  };
+
+  const handleInviteSubmit = async () => {
+    if (!inviteEmail.includes("@")) {
+      alert("유효한 이메일을 입력해주세요.");
+      return;
+    }
+
+    try {
+      const res = await axios.post("/api/invite", { email: inviteEmail });
+      alert("초대 이메일이 발송되었습니다.");
+      setShowModal(false);
+      setInviteEmail("");
+    } catch (err) {
+      alert("이메일 발송에 실패했습니다.");
+      console.error(err);
+    }
+  };
+
+  return user ? (
     <SettingLayout>
       <main className="main-content" id="member-container">
         <article className="main-content">
@@ -15,7 +56,7 @@ export const Member = () => {
                 <div>
                   <p>회원 목록, 회원 초대 및 회원 수정을 할 수 있습니다.</p>
                 </div>
-                <button>INVITE</button>
+                <button onClick={handleInviteClick}>INVITE</button>
               </div>
 
               <div className="body">
@@ -51,7 +92,26 @@ export const Member = () => {
             </div>
           </div>
         </article>
+
+        {/* 🔽 모달 UI */}
+        {showModal && (
+          <div className="modal">
+            <div className="modal-content">
+              <h2>회원 초대</h2>
+              <input
+                type="email"
+                placeholder="이메일 주소 입력"
+                value={inviteEmail}
+                onChange={(e) => setInviteEmail(e.target.value)}
+              />
+              <div className="modal-actions">
+                <button onClick={handleInviteSubmit}>초대하기</button>
+                <button onClick={() => setShowModal(false)}>취소</button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </SettingLayout>
-  );
+  ) : null;
 };

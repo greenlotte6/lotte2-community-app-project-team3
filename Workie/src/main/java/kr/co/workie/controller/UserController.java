@@ -1,9 +1,12 @@
 package kr.co.workie.controller;
 
 import kr.co.workie.dto.UserDTO;
+import kr.co.workie.entity.Company;
 import kr.co.workie.entity.User;
+import kr.co.workie.repository.CompanyRepository;
 import kr.co.workie.repository.UserRepository;
 import kr.co.workie.security.MyUserDetails;
+import kr.co.workie.service.EmailService;
 import kr.co.workie.service.UserService;
 import kr.co.workie.util.JWTProvider;
 import lombok.RequiredArgsConstructor;
@@ -12,12 +15,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +36,10 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final JWTProvider jwtProvider;
     private final UserRepository userRepository;
+    private final CompanyRepository companyRepository;
+    private final EmailService emailService;
 
+    //로그인
     @PostMapping("/user/login")
     public ResponseEntity login(@RequestBody UserDTO userDTO){
         log.info("login...1 : " + userDTO);
@@ -101,25 +109,11 @@ public class UserController {
         }
     }
 
-
+    //회원가입(사업자)
     @PostMapping("/user/register")
     public Map<String, String> register(@RequestBody UserDTO userDTO){
         log.info("=== 🔍 회원가입 요청 수신 ===");
         log.info("🔍 전체 UserDTO: {}", userDTO);
-
-        // 🔥 각 필드별 상세 로깅
-        log.info("🔍 받은 필드들:");
-        log.info("  - id: '{}'", userDTO.getId());
-        log.info("  - pass: '{}'", userDTO.getPass() != null ? "***있음***" : "null");
-        log.info("  - name: '{}'", userDTO.getName());
-        log.info("  - email: '{}'", userDTO.getEmail());
-        log.info("  - employeeId: '{}'", userDTO.getEmployeeId());
-        log.info("  - department: '{}'", userDTO.getDepartment());
-        log.info("  - position: '{}'", userDTO.getPosition());
-        log.info("  - office: '{}'", userDTO.getOffice());
-        log.info("  - hp: '{}'", userDTO.getHp());
-        log.info("  - role: '{}'", userDTO.getRole());
-        log.info("  - companyName: '{}'", userDTO.getCompanyName());
 
         // 🔥 비어있는 필드들 체크
         if (userDTO.getName() == null || userDTO.getName().trim().isEmpty()) {
@@ -139,19 +133,6 @@ public class UserController {
 
             // 🔥 저장 후 실제 DB 데이터 확인
             User savedUser = userRepository.findById(userId).orElse(null);
-            if (savedUser != null) {
-                log.info("=== 🔍 실제 저장된 데이터 확인 ===");
-                log.info("🔍 저장된 사용자: {}", savedUser);
-                log.info("🔍 저장된 name: '{}'", savedUser.getName());
-                log.info("🔍 저장된 email: '{}'", savedUser.getEmail());
-                log.info("🔍 저장된 employeeId: '{}'", savedUser.getEmployeeId());
-                log.info("🔍 저장된 department: '{}'", savedUser.getDepartment());
-                log.info("🔍 저장된 position: '{}'", savedUser.getPosition());
-                log.info("🔍 저장된 role: '{}'", savedUser.getRole());
-                log.info("===============================");
-            } else {
-                log.error("❌ 저장된 사용자를 찾을 수 없습니다!");
-            }
 
             return Map.of("userid", userId);
 
@@ -161,6 +142,84 @@ public class UserController {
         }
     }
 
+    //회원가입 - 초대코드(일반 회원)
+    @PostMapping("/user/general")
+    public Map<String, String> general(@RequestBody UserDTO userDTO){
+        log.info("=== 🔍 회원가입 요청 수신 ===");
+        log.info("🔍 전체 UserDTO: {}", userDTO);
+
+        // 🔥 비어있는 필드들 체크
+        if (userDTO.getName() == null || userDTO.getName().trim().isEmpty()) {
+            log.warn("⚠️ name 필드가 비어있습니다!");
+        }
+        if (userDTO.getEmail() == null || userDTO.getEmail().trim().isEmpty()) {
+            log.warn("⚠️ email 필드가 비어있습니다!");
+        }
+        if (userDTO.getDepartment() == null || userDTO.getDepartment().trim().isEmpty()) {
+            log.warn("⚠️ department 필드가 비어있습니다!");
+        }
+        if (userDTO.getJoinCode() == null || userDTO.getJoinCode().trim().isEmpty()) {
+            return Map.of("error", "초대코드가 필요합니다.");
+        }
+
+        boolean isValid = companyRepository.existsByJoinCode(userDTO.getJoinCode());
+        if (!isValid) {
+            return Map.of("error", "유효하지 않은 초대코드입니다.");
+        }
+
+        try {
+            // 일반 회원은 무조건 MEMBER
+            userDTO.setRole("MEMBER");
+
+            // 회원 등록
+            String userId = userService.register(userDTO);
+            log.info("✅ 회원가입 성공: {}", userId);
+
+            return Map.of("userid", userId);
+        } catch (Exception e) {
+            log.error("❌ 회원가입 실패: {}", e.getMessage());
+            return Map.of("error", "회원가입 실패: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/api/invite")
+    public ResponseEntity<?> inviteUser(@RequestBody Map<String, String> payload, Authentication authentication) {
+        String email = payload.get("email");
+
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+
+            throw new AccessDeniedException("User not authenticated"); // 또는 throw new AccessDeniedException("User not authenticated");
+        }
+
+        // MyUserDetails 객체를 가져온 후, 그 안에서 실제 User 엔티티를 추출
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+        String loginId = user.getId();
+
+        Company company = companyRepository.findByCeoId(loginId);
+        String joinCode = company.getJoinCode();
+
+        String subject = "Workie 팀 초대 메일";
+        String link = "http://localhost:5173/user/general?invite=" + joinCode;
+
+        String htmlContent = """
+            워크이에 초대되었습니다 🎉
+            안녕하세요, %s 님께서 팀에 초대하셨습니다.
+            아래 버튼을 눌러 회원가입을 완료해 주세요.
+            %s
+            초대받아 가입하기
+            이 메일은 워크이 시스템에서 자동으로 발송되었습니다.
+
+      
+    """.formatted(user.getName(), link); // 초대한 사람 이름과 링크 삽입
+
+        emailService.send(email, subject, htmlContent);
+
+        return ResponseEntity.ok().build();
+    }
+
+    //아이디 중복 검사
     @GetMapping("/user/check")
     public ResponseEntity<Boolean> checkUserId(@RequestParam("id") String id) {
         boolean exists = userRepository.existsById(id);
