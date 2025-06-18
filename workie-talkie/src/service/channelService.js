@@ -1,7 +1,21 @@
 // services/channelService.js - 수정된 채널 관련 API 호출
 class ChannelService {
   constructor() {
-    this.baseURL = "http://localhost:8080";
+    // 🔥 이 부분을 수정!
+    this.baseURL = this.getServerURL();
+  }
+
+  // 🔥 환경에 따른 서버 주소 결정 메서드 추가
+  getServerURL() {
+    const isLocalhost =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1";
+
+    if (isLocalhost) {
+      return "http://localhost:8080";
+    } else {
+      return "http://3.36.66.1:8080";
+    }
   }
 
   // 🔥 JWT 토큰 헤더 생성 헬퍼 메서드

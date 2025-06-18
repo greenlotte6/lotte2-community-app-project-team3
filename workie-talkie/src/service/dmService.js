@@ -1,7 +1,21 @@
 // 1. dmService.js 수정 - URL 문제 해결
 class DMService {
   constructor() {
-    this.baseURL = "http://localhost:8080"; // 🔥 올바른 백엔드 URL
+    // 🔥 이 부분을 수정!
+    this.baseURL = this.getServerURL();
+  }
+
+  // 🔥 환경에 따른 서버 주소 결정 메서드 추가
+  getServerURL() {
+    const isLocalhost =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1";
+
+    if (isLocalhost) {
+      return "http://localhost:8080";
+    } else {
+      return "http://3.36.66.1:8080";
+    }
   }
 
   // JWT 토큰 헤더 생성
@@ -223,11 +237,24 @@ export const getUserOnlineStatus = async (userIds) => {
 
 export default new DMService();
 
+// 🔥 환경에 따른 서버 URL 결정 함수 (테스트용)
+function getServerURL() {
+  const isLocalhost =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1";
+
+  return isLocalhost ? "http://localhost:8080" : "http://3.36.66.1:8080";
+}
+
 // 2. 브라우저에서 즉시 실행할 로그인 및 테스트 함수
 function quickLoginAndTest() {
   console.clear();
   console.log("🚀 빠른 로그인 및 테스트");
   console.log("========================");
+
+  // 🔥 현재 환경에 맞는 서버 URL 사용
+  const serverURL = getServerURL();
+  console.log("🔗 사용할 서버:", serverURL);
 
   // 토큰 확인
   const token = localStorage.getItem("token");
@@ -235,16 +262,17 @@ function quickLoginAndTest() {
 
   if (!token) {
     console.log("🔑 자동 로그인 시도...");
-    tryLogin();
+    tryLogin(serverURL);
   } else {
     console.log("✅ 토큰 존재, 사용자 검색 테스트 시작");
-    testUserSearch();
+    testUserSearch(serverURL);
   }
 }
 
-async function tryLogin() {
+async function tryLogin(serverURL = getServerURL()) {
   try {
-    const response = await fetch("http://localhost:8080/user/login", {
+    // 🔥 동적 서버 URL 사용
+    const response = await fetch(`${serverURL}/user/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -264,7 +292,7 @@ async function tryLogin() {
         console.log("✅ 토큰 저장 완료");
 
         // 로그인 성공 후 사용자 검색 테스트
-        setTimeout(() => testUserSearch(), 500);
+        setTimeout(() => testUserSearch(serverURL), 500);
       } else {
         console.log("❌ 응답에 토큰이 없습니다:", data);
       }
@@ -277,7 +305,7 @@ async function tryLogin() {
   }
 }
 
-async function testUserSearch() {
+async function testUserSearch(serverURL = getServerURL()) {
   const token = localStorage.getItem("token");
 
   if (!token) {
@@ -288,8 +316,8 @@ async function testUserSearch() {
   console.log("🔍 사용자 검색 테스트...");
 
   try {
-    // 사용자 검색 테스트
-    const response = await fetch("http://localhost:8080/users/search?q=user", {
+    // 🔥 동적 서버 URL 사용
+    const response = await fetch(`${serverURL}/users/search?q=user`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -309,69 +337,6 @@ async function testUserSearch() {
   }
 }
 
-// 3. 백엔드에 없을 수도 있는 사용자 검색 API 임시 구현
-// UserService.java에 추가할 메서드들
-
-/*
-// UserService.java에 추가
-@Transactional(readOnly = true)
-public List<UserDTO> searchUsersByName(String query) {
-    log.info("사용자 검색: query='{}'", query);
-    
-    try {
-        // 🔥 실제 DB 검색 (이름으로)
-        List<User> users = userRepository.findByNameContainingIgnoreCase(query);
-        
-        // DTO 변환
-        List<UserDTO> userDTOs = users.stream()
-            .map(this::convertToDTO)
-            .collect(Collectors.toList());
-            
-        log.info("검색 결과: {}명", userDTOs.size());
-        return userDTOs;
-        
-    } catch (Exception e) {
-        log.error("사용자 검색 실패: {}", e.getMessage(), e);
-        throw new RuntimeException("사용자 검색 중 오류가 발생했습니다.");
-    }
-}
-
-private UserDTO convertToDTO(User user) {
-    return UserDTO.builder()
-        .id(user.getId())
-        .name(user.getName())
-        .email(user.getEmail())
-        .employeeId(user.getEmployeeId())
-        .department(user.getDepartment())
-        .position(user.getPosition())
-        .role(user.getRole())
-        .build();
-}
-*/
-
-/*
-// UserRepository.java에 추가할 메서드
-public interface UserRepository extends JpaRepository<User, String> {
-    
-    // 이름으로 검색 (대소문자 무시)
-    List<User> findByNameContainingIgnoreCase(String name);
-    
-    // ID 또는 이름으로 검색
-    @Query("SELECT u FROM User u WHERE " +
-           "LOWER(u.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
-           "LOWER(u.id) LIKE LOWER(CONCAT('%', :query, '%'))")
-    List<User> searchByNameOrId(@Param("query") String query);
-}
-*/
-
-// 4. 즉시 실행
-quickLoginAndTest();
-
-console.log("\n🛠️  사용 가능한 함수들:");
-console.log("quickLoginAndTest() - 빠른 로그인 및 테스트");
-console.log("tryLogin() - 로그인 시도");
-console.log("testUserSearch() - 사용자 검색 테스트");
-
 // 5. 프론트엔드에서 실제 사용자 정보 입력받기
 function setUserCredentials() {
   const userId = prompt("사용자 ID를 입력하세요:");
@@ -380,7 +345,10 @@ function setUserCredentials() {
   if (userId && password) {
     console.log("입력된 정보로 로그인 시도...");
 
-    fetch("http://localhost:8080/user/login", {
+    // 🔥 동적 서버 URL 사용
+    const serverURL = getServerURL();
+
+    fetch(`${serverURL}/user/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -405,4 +373,11 @@ function setUserCredentials() {
   }
 }
 
+// 4. 즉시 실행
+quickLoginAndTest();
+
+console.log("\n🛠️  사용 가능한 함수들:");
+console.log("quickLoginAndTest() - 빠른 로그인 및 테스트");
+console.log("tryLogin() - 로그인 시도");
+console.log("testUserSearch() - 사용자 검색 테스트");
 console.log("\n실제 계정으로 로그인하려면: setUserCredentials() 실행");
