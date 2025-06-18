@@ -9,20 +9,36 @@ class WebSocketService {
     this.connected = false;
     this.currentRoomId = null;
     this.messageHandlers = new Set();
+
+    // 🔥 WebSocket URL 동적 설정
+    this.wsURL = this.getWebSocketURL();
+  }
+
+  // 🔥 환경에 따른 WebSocket URL 결정 메서드 추가
+  getWebSocketURL() {
+    const isLocalhost =
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1";
+
+    if (isLocalhost) {
+      return "http://localhost:8080/ws";
+    } else {
+      return "http://3.36.66.1:8080/ws";
+    }
   }
 
   // WebSocket 연결 - JWT 토큰 포함
   connect() {
     return new Promise((resolve, reject) => {
       try {
-        console.log("🔄 WebSocket 연결 시도...");
+        console.log("🔄 WebSocket 연결 시도...", this.wsURL);
 
         // JWT 토큰 가져오기
         const token = this.getAuthToken();
         console.log("🔑 JWT 토큰:", token ? "존재" : "없음");
 
-        // SockJS를 통한 WebSocket 연결
-        const socket = new SockJS("http://localhost:8080/ws");
+        // 🔥 동적 URL을 사용한 SockJS 연결
+        const socket = new SockJS(this.wsURL);
         this.stompClient = Stomp.over(() => socket);
 
         // 디버그 로그 활성화
@@ -112,6 +128,7 @@ class WebSocketService {
   // 🔥 디버깅 메서드 추가
   testConnection() {
     console.log("=== WebSocket 연결 상태 테스트 ===");
+    console.log("WebSocket URL:", this.wsURL); // 🔥 현재 사용 중인 URL 표시
     console.log("연결 상태:", this.connected);
     console.log("STOMP 클라이언트:", this.stompClient ? "존재" : "없음");
     console.log("현재 방 ID:", this.currentRoomId);
@@ -126,6 +143,7 @@ class WebSocketService {
   // 🔥 구독 상태 확인 메서드
   getSubscriptionInfo() {
     return {
+      wsURL: this.wsURL, // 🔥 WebSocket URL 정보 추가
       connected: this.connected,
       currentRoomId: this.currentRoomId,
       handlerCount: this.messageHandlers.size,
