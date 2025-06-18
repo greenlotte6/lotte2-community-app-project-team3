@@ -1,4 +1,4 @@
-/* 채팅 페이지 전용 스타일 */
+/* 🎨 채팅 페이지 완전한 스타일 - 버튼 겹침 문제 해결 */
 #chat-page {
   /* Header는 제외하고 채팅 컨테이너만 스타일 적용 */
   #chat-container * {
@@ -34,7 +34,7 @@
     background-color: #f8f9fa;
   }
 
-  /* 헤더 스타일 (기존과 동일) */
+  /* ===== 헤더 스타일 ===== */
   .header-wrapper {
     display: flex;
     justify-content: center;
@@ -111,22 +111,21 @@
     }
   }
 
-  /* 채팅 컨테이너 */
+  /* ===== 채팅 컨테이너 ===== */
   #chat-container {
     flex: 1;
     display: flex;
-    height: calc(100vh - 70px - 60px); /* 헤더와 푸터 높이 제외 */
+    height: calc(100vh - 70px - 60px);
     background-color: #f3f4f6;
 
-    /* 사이드바 */
+    /* ===== 사이드바 ===== */
     .sidebar {
-      width: 256px; /* 16rem = 256px */
+      width: 256px;
       background-color: #374151;
       color: white;
       display: flex;
       flex-direction: column;
 
-      /* 사용자 프로필 */
       .user-profile {
         padding: 16px;
         border-bottom: 1px solid #4b5563;
@@ -185,7 +184,6 @@
         }
       }
 
-      /* 채널/DM 섹션 */
       .chat-sections {
         flex: 1;
         overflow-y: auto;
@@ -206,14 +204,23 @@
             }
 
             .add-icon {
-              width: 16px;
-              height: 16px;
+              width: 20px;
+              height: 20px;
               color: #9ca3af;
               cursor: pointer;
-              transition: color 0.2s;
+              transition: all 0.2s ease;
+              padding: 4px;
+              border-radius: 6px;
+              background: transparent;
 
               &:hover {
-                color: white;
+                color: #60a5fa;
+                background: rgba(59, 130, 246, 0.2);
+                transform: scale(1.1);
+              }
+
+              &:active {
+                transform: scale(0.95);
               }
             }
           }
@@ -226,7 +233,6 @@
         }
       }
 
-      /* 채널 아이템 */
       .channel-item {
         display: flex;
         align-items: center;
@@ -268,7 +274,6 @@
         }
       }
 
-      /* DM 아이템 */
       .dm-item {
         display: flex;
         align-items: center;
@@ -315,7 +320,6 @@
         }
       }
 
-      /* 프리미엄 업그레이드 섹션 */
       .premium-upgrade {
         padding: 12px;
         background-color: #111827;
@@ -346,19 +350,18 @@
       }
     }
 
-    /* ===== 채팅 영역 (수정된 부분) ===== */
+    /* ===== 채팅 영역 ===== */
     .chat-area {
       flex: 1;
       display: flex;
       flex-direction: column;
-      height: 100%; /* 전체 높이 사용 */
+      height: 100%;
 
-      /* 채팅 헤더 (고정) */
       .chat-header {
         background-color: white;
         border-bottom: 1px solid #e5e7eb;
         padding: 16px;
-        flex-shrink: 0; /* 크기 고정 */
+        flex-shrink: 0;
 
         .header-content {
           display: flex;
@@ -408,34 +411,22 @@
         }
       }
 
-      /* 메시지 영역 (스크롤 가능한 중간 영역) */
       .messages-area {
-        flex: 1; /* 남은 공간 모두 차지 */
+        flex: 1;
         background-color: white;
-        overflow-y: auto; /* 스크롤 가능 */
+        overflow-y: auto;
         display: flex;
         flex-direction: column;
 
-        .empty-state {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 100%;
-          color: #6b7280;
-          font-size: 16px;
-        }
-
-        /* 메시지 리스트 */
         .messages-list {
           padding: 16px;
           display: flex;
           flex-direction: column;
           gap: 12px;
-          min-height: 100%; /* 최소 높이 보장 */
+          min-height: 100%;
         }
       }
 
-      /* 메시지 아이템 스타일 */
       .message-item {
         display: flex;
         flex-direction: column;
@@ -459,15 +450,14 @@
             margin-top: 4px;
           }
 
-          /* 🔥 내가 보낸 메시지 (오른쪽 정렬) */
           &.own {
-            align-items: flex-end; /* 전체를 오른쪽으로 */
+            align-items: flex-end;
 
             .message-content {
               background-color: #007bff;
               color: white;
               border-bottom-right-radius: 4px;
-              align-self: flex-end; /* 말풍선을 오른쪽으로 */
+              align-self: flex-end;
             }
 
             .message-time {
@@ -475,15 +465,13 @@
               align-self: flex-end;
             }
 
-            /* 내 메시지에는 발신자 이름 표시 안함 */
             .message-sender {
               display: none;
             }
           }
 
-          /* 🔥 상대방 메시지 (왼쪽 정렬) */
           &.other {
-            align-items: flex-start; /* 전체를 왼쪽으로 */
+            align-items: flex-start;
 
             .message-sender {
               font-size: 13px;
@@ -497,7 +485,7 @@
               background-color: #f1f3f4;
               color: #374151;
               border-bottom-left-radius: 4px;
-              align-self: flex-start; /* 말풍선을 왼쪽으로 */
+              align-self: flex-start;
             }
 
             .message-time {
@@ -533,12 +521,11 @@
         }
       }
 
-      /* 메시지 입력창 (고정) */
       .message-input {
         background-color: white;
         border-top: 1px solid #e5e7eb;
         padding: 16px;
-        flex-shrink: 0; /* 크기 고정 */
+        flex-shrink: 0;
 
         .message-form {
           display: flex;
@@ -601,7 +588,7 @@
     }
   }
 
-  /* 스크롤바 커스터마이징 */
+  /* ===== 스크롤바 커스터마이징 ===== */
   .messages-area::-webkit-scrollbar {
     width: 8px;
   }
@@ -619,20 +606,20 @@
     }
   }
 
-  /* 모달 스타일 - 기존과 동일 */
+  /* ===== 🚨 모달 스타일 - 버튼 겹침 문제 완전 해결 ===== */
   .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    backdrop-filter: blur(4px);
-    animation: fadeIn 0.2s ease-out;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 1000 !important;
+    backdrop-filter: blur(4px) !important;
+    animation: fadeIn 0.2s ease-out !important;
 
     /* 모달 내부 요소들은 기본 설정 초기화 */
     * {
@@ -642,6 +629,572 @@
     }
   }
 
+  .modal {
+    background-color: white !important;
+    border-radius: 12px !important;
+    padding: 0 !important;
+    width: 480px !important;
+    max-width: 90vw !important;
+    max-height: 80vh !important;
+    overflow: hidden !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+    animation: slideIn 0.3s ease-out !important;
+    display: flex !important;
+    flex-direction: column !important;
+
+    &.modal-large {
+      width: 600px !important;
+      max-height: 85vh !important;
+    }
+
+    &.confirm-modal {
+      width: 450px !important;
+    }
+
+    .modal-header {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding: 24px 28px !important;
+      border-bottom: 1px solid #f1f5f9 !important;
+      background: #fafbfc !important;
+      flex-shrink: 0 !important;
+
+      .modal-title {
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        color: #1e293b !important;
+        margin: 0 !important;
+      }
+
+      .close-button {
+        background: none !important;
+        border: none !important;
+        cursor: pointer !important;
+        padding: 4px !important;
+        border-radius: 6px !important;
+        transition: all 0.2s ease !important;
+
+        &:hover {
+          background-color: #e2e8f0 !important;
+        }
+
+        .close-icon {
+          width: 24px !important;
+          height: 24px !important;
+          color: #64748b !important;
+
+          &:hover {
+            color: #334155 !important;
+          }
+        }
+      }
+    }
+
+    /* 🔥 모달 컨텐츠 - 스크롤 가능, 버튼 영역 고정 */
+    .modal-content {
+      padding: 28px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 24px !important;
+      overflow-y: auto !important;
+      flex: 1 !important;
+      min-height: 0 !important;
+
+      .form-group {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+
+        .label {
+          font-size: 16px !important;
+          font-weight: 600 !important;
+          color: #374151 !important;
+          margin: 0 !important;
+        }
+
+        .input {
+          width: 100% !important;
+          padding: 14px 18px !important;
+          border: 2px solid #e5e7eb !important;
+          border-radius: 10px !important;
+          font-size: 16px !important;
+          background: white !important;
+          box-sizing: border-box !important;
+          transition: all 0.2s ease !important;
+
+          &:focus {
+            outline: none !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+          }
+
+          &::placeholder {
+            color: #9ca3af !important;
+          }
+        }
+
+        .char-count {
+          text-align: right !important;
+          font-size: 12px !important;
+          color: #6b7280 !important;
+          margin-top: 4px !important;
+        }
+      }
+
+      .confirm-text {
+        color: #6b7280 !important;
+        font-size: 15px !important;
+        line-height: 1.6 !important;
+        margin: 0 !important;
+      }
+    }
+
+    /* 🚨 모달 액션 버튼 - 항상 고정 위치, 절대 겹치지 않음 */
+    .modal-actions {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      gap: 14px !important;
+      padding: 24px 28px !important;
+      background: #fafbfc !important;
+      border-top: 1px solid #f1f5f9 !important;
+      flex-shrink: 0 !important;
+      /* 🔥 sticky 제거하고 자연스러운 플로우로 */
+      position: relative !important;
+      z-index: 10 !important;
+      margin-top: auto !important;
+
+      /* 절대 숨겨지지 않도록 강제 설정 */
+      &[style*="display: none"] {
+        display: flex !important;
+      }
+
+      &[style*="visibility: hidden"] {
+        visibility: visible !important;
+      }
+
+      /* 모든 버튼 기본 스타일 */
+      button,
+      .btn {
+        flex: 1 !important;
+        padding: 14px 24px !important;
+        border-radius: 10px !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        min-height: 48px !important;
+        cursor: pointer !important;
+        border: none !important;
+        transition: all 0.2s ease !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+
+        /* 인라인 스타일로 숨겨져도 강제 표시 */
+        &[style*="display: none"] {
+          display: flex !important;
+        }
+
+        &[style*="visibility: hidden"] {
+          visibility: visible !important;
+        }
+
+        /* Primary 버튼 (채널 만들기, 나가기 등) */
+        &.btn-primary {
+          background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+          color: white !important;
+          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+
+          &:hover:not(:disabled) {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4) !important;
+          }
+
+          &:disabled {
+            background: #9ca3af !important;
+            cursor: not-allowed !important;
+            opacity: 0.7 !important;
+            display: flex !important;
+            visibility: visible !important;
+          }
+
+          .btn-icon {
+            width: 16px !important;
+            height: 16px !important;
+          }
+        }
+
+        /* Secondary 버튼 (취소) */
+        &.btn-secondary {
+          background: #f1f5f9 !important;
+          color: #475569 !important;
+          border: 1px solid #e2e8f0 !important;
+
+          &:hover {
+            background: #e2e8f0 !important;
+            color: #334155 !important;
+          }
+        }
+
+        /* Danger 버튼 (나가기) */
+        &.btn-danger {
+          background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+          color: white !important;
+          box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3) !important;
+
+          &:hover:not(:disabled) {
+            background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4) !important;
+          }
+
+          &:disabled {
+            background: #9ca3af !important;
+            cursor: not-allowed !important;
+            opacity: 0.7 !important;
+            display: flex !important;
+            visibility: visible !important;
+          }
+
+          .btn-icon {
+            width: 16px !important;
+            height: 16px !important;
+          }
+        }
+      }
+    }
+  }
+
+  /* ===== 🔥 사용자 검색 컴포넌트 - 겹침 방지 ===== */
+  .user-search {
+    position: relative !important;
+    /* 🚨 중요: 버튼 영역에 충분한 여백 확보 */
+    margin-bottom: 20px !important;
+
+    .search-input-container {
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      margin-bottom: 8px !important;
+
+      .search-input {
+        width: 100% !important;
+        padding: 14px 16px 14px 48px !important;
+        border: 2px solid #e5e7eb !important;
+        border-radius: 12px !important;
+        font-size: 15px !important;
+        background: #fafbfc !important;
+        box-sizing: border-box !important;
+        transition: all 0.3s ease !important;
+
+        &:focus {
+          outline: none !important;
+          border-color: #3b82f6 !important;
+          box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1) !important;
+          background: white !important;
+        }
+
+        &::placeholder {
+          color: #9ca3af !important;
+          font-size: 14px !important;
+        }
+      }
+
+      .search-icon {
+        position: absolute !important;
+        left: 16px !important;
+        width: 18px !important;
+        height: 18px !important;
+        color: #6b7280 !important;
+        z-index: 1 !important;
+      }
+
+      .loading-icon {
+        position: absolute !important;
+        right: 16px !important;
+        width: 18px !important;
+        height: 18px !important;
+        color: #3b82f6 !important;
+      }
+    }
+
+    /* 🚨 검색 결과 - 버튼과 겹치지 않게 위치 조정 */
+    .search-results {
+      position: relative !important; /* ← absolute를 relative로 변경 */
+      /* top, left, right 제거 */
+      background: white !important;
+      border: 1px solid #e5e7eb !important;
+      border-radius: 12px !important;
+      max-height: 240px !important;
+      overflow-y: auto !important;
+      z-index: 1 !important;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+      margin-top: 8px !important;
+      margin-bottom: 16px !important;
+      /* 🔥 자연스러운 애니메이션 추가 */
+      animation: slideDown 0.3s ease-out !important;
+
+      .search-result-item {
+        display: flex !important;
+        align-items: center !important;
+        gap: 16px !important;
+        padding: 16px 20px !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        border-bottom: 1px solid #f3f4f6 !important;
+
+        &:hover {
+          background: linear-gradient(135deg, #f8fafc, #f1f5f9) !important;
+        }
+
+        &:last-child {
+          border-bottom: none !important;
+        }
+
+        .user-avatar {
+          width: 44px !important;
+          height: 44px !important;
+          background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+          color: white !important;
+          border-radius: 12px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          font-weight: 700 !important;
+          font-size: 16px !important;
+          flex-shrink: 0 !important;
+          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25) !important;
+        }
+
+        .user-info {
+          flex: 1 !important;
+          min-width: 0 !important;
+
+          .user-name {
+            font-weight: 600 !important;
+            color: #1f2937 !important;
+            font-size: 15px !important;
+            margin-bottom: 4px !important;
+            line-height: 1.3 !important;
+          }
+
+          .user-email {
+            font-size: 13px !important;
+            color: #6b7280 !important;
+            line-height: 1.2 !important;
+            opacity: 0.8 !important;
+          }
+        }
+      }
+    }
+
+    .no-results {
+      padding: 24px !important;
+      text-align: center !important;
+      color: #6b7280 !important;
+      font-size: 14px !important;
+      background: white !important;
+      border: 1px solid #e5e7eb !important;
+      border-radius: 12px !important;
+      margin-top: 4px !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+
+      &::before {
+        content: "🔍" !important;
+        display: block !important;
+        font-size: 24px !important;
+        margin-bottom: 8px !important;
+        opacity: 0.5 !important;
+      }
+    }
+
+    .search-error {
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      padding: 16px 20px !important;
+      background: #fef2f2 !important;
+      border: 1px solid #fecaca !important;
+      border-radius: 12px !important;
+      color: #dc2626 !important;
+      font-size: 14px !important;
+      margin-top: 8px !important;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1) !important;
+
+      .error-icon {
+        width: 18px !important;
+        height: 18px !important;
+        flex-shrink: 0 !important;
+      }
+    }
+  }
+
+  /* ===== 🔥 선택된 멤버 표시 - 겹침 방지 ===== */
+  .selected-members {
+    margin-top: 20px !important;
+    /* 🚨 중요: 버튼 영역에 충분한 여백 확보 */
+    margin-bottom: 20px !important;
+
+    .members-header {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      margin-bottom: 16px !important;
+
+      .members-count {
+        font-weight: 600 !important;
+        color: #374151 !important;
+        font-size: 15px !important;
+      }
+
+      .limit-warning {
+        font-size: 12px !important;
+        color: #dc2626 !important;
+        font-weight: 500 !important;
+        background: #fef2f2 !important;
+        padding: 4px 8px !important;
+        border-radius: 6px !important;
+        border: 1px solid #fecaca !important;
+      }
+    }
+
+    .members-list {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 10px !important;
+
+      .member-chip {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        background: linear-gradient(135deg, #f1f5f9, #e2e8f0) !important;
+        border: 1px solid #cbd5e1 !important;
+        border-radius: 25px !important;
+        padding: 8px 14px !important;
+        font-size: 14px !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+
+        &:hover {
+          background: linear-gradient(135deg, #e2e8f0, #cbd5e1) !important;
+          transform: translateY(-1px) !important;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .member-name {
+          color: #475569 !important;
+          font-weight: 500 !important;
+        }
+
+        .remove-member-btn {
+          background: none !important;
+          border: none !important;
+          padding: 4px !important;
+          border-radius: 50% !important;
+          cursor: pointer !important;
+          color: #64748b !important;
+          transition: all 0.2s ease !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+
+          &:hover {
+            color: #dc2626 !important;
+            background: rgba(220, 38, 38, 0.1) !important;
+          }
+
+          .remove-icon {
+            width: 14px !important;
+            height: 14px !important;
+          }
+        }
+      }
+    }
+  }
+
+  /* ===== 🔥 에러 및 로딩 메시지 ===== */
+  .error-message {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 12px 16px !important;
+    background: #fef2f2 !important;
+    border: 1px solid #fecaca !important;
+    border-radius: 8px !important;
+    color: #dc2626 !important;
+    font-size: 14px !important;
+    margin-bottom: 16px !important;
+
+    .error-icon {
+      width: 16px !important;
+      height: 16px !important;
+      flex-shrink: 0 !important;
+    }
+  }
+
+  .creating-message {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    background: #f0f9ff !important;
+    border-radius: 8px !important;
+    color: #0369a1 !important;
+    font-size: 14px !important;
+    margin-bottom: 16px !important;
+
+    .loading-icon {
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+
+  /* ===== 스크롤바 개선 ===== */
+  .search-results {
+    &::-webkit-scrollbar {
+      width: 6px !important;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f8fafc !important;
+      border-radius: 3px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #cbd5e1, #94a3b8) !important;
+      border-radius: 3px !important;
+
+      &:hover {
+        background: linear-gradient(135deg, #94a3b8, #64748b) !important;
+      }
+    }
+  }
+
+  .modal-content {
+    &::-webkit-scrollbar {
+      width: 8px !important;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f8fafc !important;
+      border-radius: 4px !important;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #cbd5e1 !important;
+      border-radius: 4px !important;
+
+      &:hover {
+        background: #94a3b8 !important;
+      }
+    }
+  }
+
+  /* ===== 애니메이션 ===== */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -662,262 +1215,20 @@
     }
   }
 
-  .modal {
-    background-color: white;
-    border-radius: 12px;
-    padding: 0;
-    width: 480px !important;
-    max-width: 90vw;
-    max-height: 80vh;
-    overflow: hidden;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-      0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    animation: slideIn 0.3s ease-out;
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 28px !important;
-      border-bottom: 1px solid #f1f5f9;
-      background: #fafbfc;
-
-      .modal-title {
-        font-size: 20px !important;
-        font-weight: 700 !important;
-        color: #1e293b !important;
-        margin: 0 !important;
-      }
-
-      .close-icon {
-        width: 24px !important;
-        height: 24px !important;
-        cursor: pointer;
-        color: #64748b;
-        transition: all 0.2s ease;
-        border-radius: 6px;
-        padding: 4px;
-
-        &:hover {
-          color: #334155;
-          background-color: #e2e8f0;
-        }
-      }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
     }
-
-    .modal-content {
-      padding: 28px !important;
-      display: flex;
-      flex-direction: column;
-      gap: 24px !important;
-      max-height: calc(80vh - 160px);
-      overflow-y: auto;
-
-      .form-group {
-        .label {
-          display: block;
-          font-size: 16px !important;
-          font-weight: 600 !important;
-          margin-bottom: 10px !important;
-          color: #374151 !important;
-        }
-
-        .input,
-        .select {
-          width: 100%;
-          padding: 14px 18px !important;
-          border: 2px solid #e5e7eb;
-          border-radius: 10px !important;
-          outline: none;
-          transition: all 0.2s ease;
-          font-size: 16px !important;
-          background: white;
-          min-height: 48px;
-          box-sizing: border-box;
-
-          &:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-          }
-
-          &::placeholder {
-            color: #9ca3af;
-            font-size: 15px !important;
-          }
-        }
-
-        .select {
-          cursor: pointer;
-          appearance: none;
-          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-          background-position: right 12px center;
-          background-repeat: no-repeat;
-          background-size: 16px;
-          padding-right: 40px !important;
-        }
-
-        .member-list {
-          display: flex;
-          flex-direction: column;
-          gap: 10px !important;
-          max-height: 200px !important;
-          overflow-y: auto;
-          border: 1px solid #e5e7eb;
-          border-radius: 10px !important;
-          padding: 16px !important;
-          background: #f9fafb;
-
-          &::-webkit-scrollbar {
-            width: 8px;
-          }
-
-          &::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 4px;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-
-            &:hover {
-              background: #94a3b8;
-            }
-          }
-
-          .member-item {
-            display: flex;
-            align-items: center;
-            gap: 12px !important;
-            cursor: pointer;
-            padding: 10px 14px !important;
-            border-radius: 8px !important;
-            transition: background-color 0.2s ease;
-
-            &:hover {
-              background-color: white;
-            }
-
-            .checkbox {
-              width: 18px !important;
-              height: 18px !important;
-              accent-color: #3b82f6;
-              cursor: pointer;
-            }
-
-            .member-name {
-              font-size: 15px !important;
-              color: #374151 !important;
-              font-weight: 500 !important;
-            }
-          }
-        }
-      }
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 14px !important;
-      padding: 24px 28px !important;
-      background: #fafbfc;
-      border-top: 1px solid #f1f5f9;
-
-      .btn {
-        flex: 1;
-        padding: 14px 24px !important;
-        border-radius: 10px !important;
-        transition: all 0.2s ease;
-        cursor: pointer;
-        border: none;
-        font-size: 16px !important;
-        font-weight: 600 !important;
-        position: relative;
-        overflow: hidden;
-        min-height: 48px;
-
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.2),
-            transparent
-          );
-          transition: left 0.5s;
-        }
-
-        &:hover::before {
-          left: 100%;
-        }
-
-        &.btn-primary {
-          background: linear-gradient(135deg, #3b82f6, #2563eb);
-          color: white !important;
-          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-
-          &:hover {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
-          }
-
-          &:active {
-            transform: translateY(0);
-          }
-        }
-
-        &.btn-secondary {
-          background: #f1f5f9 !important;
-          color: #475569 !important;
-          border: 1px solid #e2e8f0;
-
-          &:hover {
-            background: #e2e8f0 !important;
-            color: #334155 !important;
-          }
-        }
-
-        &.btn-danger {
-          background: linear-gradient(135deg, #ef4444, #dc2626) !important;
-          color: white !important;
-          box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-
-          &:hover {
-            background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
-          }
-
-          &:active {
-            transform: translateY(0);
-          }
-        }
-      }
+    to {
+      transform: rotate(360deg);
     }
   }
 
-  /* 확인 모달 */
-  .confirm-modal {
-    width: 450px !important;
-
-    .confirm-text {
-      color: #6b7280 !important;
-      margin-bottom: 0 !important;
-      font-size: 15px !important;
-      line-height: 1.6 !important;
-    }
-
-    .modal-content {
-      padding: 24px 28px !important;
-    }
+  .animate-spin {
+    animation: spin 1s linear infinite !important;
   }
 
-  /* 푸터 (기존과 동일) */
+  /* ===== 푸터 ===== */
   footer {
     height: 60px;
     background-color: #333;
@@ -929,7 +1240,7 @@
     font-size: 14px;
   }
 
-  /* 반응형 */
+  /* ===== 반응형 디자인 ===== */
   @media (max-width: 768px) {
     #chat-container {
       .sidebar {
@@ -953,460 +1264,408 @@
         height: calc(100vh - 70px - 60px - 200px);
       }
     }
+
+    .modal {
+      width: 95vw !important;
+      margin: 0 10px !important;
+      max-height: 90vh !important;
+    }
+
+    .modal-large {
+      width: 95vw !important;
+    }
+
+    .search-result-item {
+      padding: 12px 16px !important;
+
+      .user-avatar {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 14px !important;
+        border-radius: 10px !important;
+      }
+
+      .user-info .user-name {
+        font-size: 14px !important;
+      }
+
+      .user-info .user-email {
+        font-size: 12px !important;
+      }
+    }
+
+    .selected-members .members-list {
+      gap: 8px !important;
+
+      .member-chip {
+        font-size: 13px !important;
+        padding: 6px 12px !important;
+      }
+    }
+
+    .modal-actions {
+      flex-direction: column !important;
+      gap: 10px !important;
+
+      button,
+      .btn {
+        width: 100% !important;
+        min-height: 44px !important;
+        display: flex !important;
+        visibility: visible !important;
+      }
+    }
+
+    /* 🔥 모바일에서 검색 결과 높이 조정 */
+    .user-search .search-results {
+      max-height: 150px !important;
+    }
+  }
+}
+
+/* ===== 🚨 전역 강제 설정 (React 컴포넌트용) ===== */
+.modal-actions,
+.modal-actions button,
+.modal-actions .btn {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* React 인라인 스타일 무시 */
+[style*="display: none"].modal-actions,
+[style*="display: none"].btn {
+  display: flex !important;
+}
+
+[style*="visibility: hidden"].modal-actions,
+[style*="visibility: hidden"].btn {
+  visibility: visible !important;
+}
+
+/* 🔥 검색 중일 때도 버튼 영역 보호 */
+.modal-content:has(.search-results) {
+  padding-bottom: 100px !important;
+}
+
+/* 🔥 추가 안전장치: 버튼 영역이 절대 가려지지 않게 */
+.modal .modal-actions {
+  position: sticky !important;
+  bottom: 0 !important;
+  background: #fafbfc !important;
+  border-top: 1px solid #f1f5f9 !important;
+  z-index: 1001 !important;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 240px;
+  }
+}
+
+/* 🎨 채널 만들기 & DM 버튼 깔끔한 디자인 */
+
+/* ===== 기본 버튼 스타일 리셋 ===== */
+.add-button,
+.empty-action-btn,
+.upgrade-button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* ===== 1. 섹션 헤더의 + 버튼 (채널, DM 추가) ===== */
+.section-header .add-button {
+  width: 24px;
+  height: 24px;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #22c55e;
+  transition: all 0.2s ease;
+
+  /* 아이콘 크기 */
+  .add-icon {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5;
   }
 
-  /* ===== 개선된 모달 스타일 추가 ===== */
+  /* 호버 효과 */
+  &:hover {
+    background: rgba(34, 197, 94, 0.25);
+    border-color: #22c55e;
+    color: #16a34a;
+    transform: scale(1.1);
+    box-shadow: 0 3px 12px rgba(34, 197, 94, 0.4);
+  }
 
-  #chat-page {
-    /* 사용자 검색 컴포넌트 */
-    .user-search {
+  /* 클릭 효과 */
+  &:active {
+    transform: scale(0.95);
+    background: rgba(34, 197, 94, 0.35);
+  }
+}
+
+/* ===== 2. 빈 상태일 때의 액션 버튼 ===== */
+.empty-action-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+  margin-top: 16px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  min-height: 48px;
+
+  /* 아이콘 */
+  .plus-icon {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5;
+  }
+
+  /* 호버 효과 */
+  &:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
+    border-color: #10b981;
+  }
+
+  /* 클릭 효과 */
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+/* ===== 3. 빈 상태 컨테이너 스타일 ===== */
+.empty-state {
+  padding: 24px 12px;
+  text-align: center;
+
+  .empty-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .empty-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e5e7eb;
+      margin-bottom: 4px;
+    }
+
+    .empty-description {
+      font-size: 12px;
+      color: #d1d5db;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+  }
+}
+
+/* ===== 4. 프리미엄 업그레이드 버튼 ===== */
+.upgrade-button {
+  width: 100%;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  padding: 16px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 16px;
+  box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 호버 효과 */
+  &:hover {
+    background: linear-gradient(135deg, #d97706, #b45309);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.5);
+    border-color: #f59e0b;
+  }
+
+  /* 클릭 효과 */
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+/* ===== 5. 프리미엄 업그레이드 섹션 전체 스타일 ===== */
+.premium-upgrade {
+  padding: 16px;
+  background: linear-gradient(135deg, #111827, #1f2937);
+  border-top: 1px solid #374151;
+  border-radius: 0 0 8px 8px;
+
+  .upgrade-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .crown-icon {
+      width: 16px;
+      height: 16px;
+      color: #facc15;
+      margin-right: 6px;
+    }
+
+    .upgrade-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #facc15;
+    }
+  }
+
+  .upgrade-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px 0;
+
+    li {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-bottom: 4px;
+      padding-left: 8px;
       position: relative;
 
-      .search-input-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-
-        .search-input {
-          width: 100%;
-          padding: 12px 16px 12px 44px !important;
-          border: 2px solid #e5e7eb;
-          border-radius: 10px !important;
-          font-size: 16px !important;
-          transition: all 0.2s ease;
-          background: white;
-          box-sizing: border-box;
-
-          &:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-          }
-
-          &::placeholder {
-            color: #9ca3af;
-            font-size: 15px !important;
-          }
-        }
-
-        .search-icon {
-          position: absolute;
-          left: 14px;
-          width: 16px !important;
-          height: 16px !important;
-          color: #9ca3af;
-          z-index: 1;
-        }
-
-        .loading-icon {
-          position: absolute;
-          right: 14px;
-          width: 16px !important;
-          height: 16px !important;
-          color: #3b82f6;
-        }
-      }
-
-      .search-results {
+      &::before {
+        content: "✓";
         position: absolute;
-        top: 100%;
         left: 0;
-        right: 0;
-        background: white;
-        border: 1px solid #d1d5db;
-        border-top: none;
-        border-radius: 0 0 10px 10px !important;
-        max-height: 200px !important;
-        overflow-y: auto;
-        z-index: 10;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-        .search-result-item {
-          display: flex;
-          align-items: center;
-          gap: 12px !important;
-          padding: 12px 16px !important;
-          cursor: pointer;
-          transition: background-color 0.2s ease;
-          border-bottom: 1px solid #f3f4f6;
-
-          &:hover {
-            background: #f8fafc;
-          }
-
-          &:last-child {
-            border-bottom: none;
-          }
-
-          .user-avatar {
-            width: 40px !important;
-            height: 40px !important;
-            background: #3b82f6;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600 !important;
-            font-size: 16px !important;
-            flex-shrink: 0;
-          }
-
-          .user-info {
-            flex: 1;
-            min-width: 0;
-
-            .user-name {
-              font-weight: 500 !important;
-              color: #111827 !important;
-              font-size: 15px !important;
-              margin-bottom: 2px;
-            }
-
-            .user-email {
-              font-size: 13px !important;
-              color: #6b7280 !important;
-            }
-          }
-        }
-      }
-
-      .no-results {
-        padding: 16px !important;
-        text-align: center;
-        color: #6b7280 !important;
-        font-size: 14px !important;
-        background: white;
-        border: 1px solid #d1d5db;
-        border-top: none;
-        border-radius: 0 0 10px 10px !important;
-      }
-
-      .search-error {
-        display: flex;
-        align-items: center;
-        gap: 8px !important;
-        padding: 12px 16px !important;
-        background: #fef2f2;
-        border: 1px solid #fecaca;
-        border-radius: 8px !important;
-        color: #dc2626 !important;
-        font-size: 14px !important;
-        margin-top: 8px !important;
-
-        .error-icon {
-          width: 16px !important;
-          height: 16px !important;
-          flex-shrink: 0;
-        }
-      }
-    }
-
-    /* 선택된 멤버 표시 */
-    .selected-members {
-      margin-top: 16px !important;
-
-      .members-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px !important;
-
-        .members-count {
-          font-weight: 500 !important;
-          color: #374151 !important;
-          font-size: 14px !important;
-        }
-
-        .limit-warning {
-          font-size: 12px !important;
-          color: #dc2626 !important;
-          font-weight: 500 !important;
-        }
-      }
-
-      .members-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px !important;
-
-        .member-chip {
-          display: flex;
-          align-items: center;
-          gap: 8px !important;
-          background: #f1f5f9;
-          border: 1px solid #e2e8f0;
-          border-radius: 20px !important;
-          padding: 6px 12px !important;
-          font-size: 14px !important;
-          transition: all 0.2s ease;
-
-          &:hover {
-            background: #e2e8f0;
-          }
-
-          .member-name {
-            color: #374151 !important;
-            font-weight: 500 !important;
-          }
-
-          .remove-member-btn {
-            background: none;
-            border: none;
-            padding: 2px !important;
-            border-radius: 50%;
-            cursor: pointer;
-            color: #6b7280;
-            transition: color 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            &:hover {
-              color: #dc2626;
-            }
-
-            .remove-icon {
-              width: 14px !important;
-              height: 14px !important;
-            }
-          }
-        }
-      }
-    }
-
-    /* 개선된 모달 메시지들 */
-    .error-message {
-      display: flex;
-      align-items: center;
-      gap: 8px !important;
-      padding: 12px 16px !important;
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      border-radius: 8px !important;
-      color: #dc2626 !important;
-      font-size: 14px !important;
-      margin-bottom: 16px !important;
-
-      .error-icon {
-        width: 16px !important;
-        height: 16px !important;
-        flex-shrink: 0;
-      }
-    }
-
-    .creating-message {
-      display: flex;
-      align-items: center;
-      gap: 12px !important;
-      padding: 16px !important;
-      background: #f0f9ff;
-      border-radius: 8px !important;
-      color: #0369a1 !important;
-      font-size: 14px !important;
-      margin-bottom: 16px !important;
-
-      .loading-icon {
-        width: 20px !important;
-        height: 20px !important;
-      }
-    }
-
-    /* 문자 수 카운터 */
-    .char-count {
-      text-align: right;
-      font-size: 12px !important;
-      color: #6b7280 !important;
-      margin-top: 4px !important;
-    }
-
-    /* 모달 대형 사이즈 */
-    .modal-large {
-      width: 600px !important;
-    }
-
-    /* 개선된 모달 액션 버튼들 */
-    .modal .modal-actions {
-      .btn {
-        display: flex;
-        align-items: center;
-        gap: 8px !important;
-        justify-content: center;
-        min-height: 48px !important;
-        position: relative;
-        overflow: hidden;
-
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.2),
-            transparent
-          );
-          transition: left 0.5s ease;
-        }
-
-        &:hover::before {
-          left: 100%;
-        }
-
-        &:disabled {
-          opacity: 0.5 !important;
-          cursor: not-allowed !important;
-
-          &:hover::before {
-            left: -100%;
-          }
-        }
-
-        .btn-icon {
-          width: 16px !important;
-          height: 16px !important;
-        }
-
-        &.btn-primary {
-          background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
-          color: white !important;
-          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-
-          &:hover:not(:disabled) {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
-          }
-
-          &:active {
-            transform: translateY(0);
-          }
-        }
-
-        &.btn-secondary {
-          background: #f1f5f9 !important;
-          color: #475569 !important;
-          border: 1px solid #e2e8f0 !important;
-
-          &:hover {
-            background: #e2e8f0 !important;
-            color: #334155 !important;
-          }
-        }
-
-        &.btn-danger {
-          background: linear-gradient(135deg, #ef4444, #dc2626) !important;
-          color: white !important;
-          box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-
-          &:hover:not(:disabled) {
-            background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
-          }
-
-          &:active {
-            transform: translateY(0);
-          }
-        }
-      }
-    }
-
-    /* 확인 모달 개선 */
-    .confirm-modal {
-      .modal-content {
-        padding: 24px 28px !important;
-      }
-
-      .confirm-text {
-        color: #6b7280 !important;
-        margin-bottom: 0 !important;
-        font-size: 15px !important;
-        line-height: 1.6 !important;
-      }
-    }
-
-    /* 애니메이션 */
-    @keyframes spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .animate-spin {
-      animation: spin 1s linear infinite;
-    }
-
-    /* 스크롤바 개선 */
-    .search-results::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .search-results::-webkit-scrollbar-track {
-      background: #f8f9fa;
-    }
-
-    .search-results::-webkit-scrollbar-thumb {
-      background: #d1d5db;
-      border-radius: 3px;
-
-      &:hover {
-        background: #9ca3af;
-      }
-    }
-
-    /* 반응형 개선 */
-    @media (max-width: 640px) {
-      .modal {
-        width: 95vw !important;
-        margin: 0 10px !important;
-      }
-
-      .modal-large {
-        width: 95vw !important;
-      }
-
-      .selected-members .members-list {
-        gap: 6px !important;
-
-        .member-chip {
-          font-size: 13px !important;
-          padding: 5px 10px !important;
-        }
-      }
-
-      .search-result-item {
-        padding: 10px 12px !important;
-
-        .user-avatar {
-          width: 36px !important;
-          height: 36px !important;
-          font-size: 14px !important;
-        }
-
-        .user-info .user-name {
-          font-size: 14px !important;
-        }
-
-        .user-info .user-email {
-          font-size: 12px !important;
-        }
-      }
-
-      .modal .modal-actions {
-        flex-direction: column;
-        gap: 10px !important;
-
-        .btn {
-          width: 100%;
-          min-height: 44px !important;
-        }
+        color: #4ade80;
+        font-weight: bold;
       }
     }
   }
+}
+
+/* ===== 6. 반응형 디자인 ===== */
+@media (max-width: 768px) {
+  .section-header .add-button {
+    width: 32px;
+    height: 32px;
+
+    .add-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .empty-action-btn {
+    padding: 18px 24px;
+    font-size: 15px;
+    min-height: 52px;
+
+    .plus-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .upgrade-button {
+    padding: 18px 24px;
+    font-size: 15px;
+    min-height: 52px;
+  }
+}
+
+/* ===== 7. 다크 모드 지원 ===== */
+@media (prefers-color-scheme: dark) {
+  .empty-state {
+    .empty-title {
+      color: #d1d5db;
+    }
+
+    .empty-description {
+      color: #9ca3af;
+    }
+  }
+
+  .section-header .add-button {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #4ade80;
+
+    &:hover {
+      background: rgba(34, 197, 94, 0.3);
+      color: #22c55e;
+      border-color: #22c55e;
+    }
+  }
+}
+
+/* ===== 8. 접근성 개선 ===== */
+.add-button:focus-visible,
+.empty-action-btn:focus-visible,
+.upgrade-button:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* ===== 9. 로딩 상태 (옵션) ===== */
+.add-button.loading,
+.empty-action-btn.loading,
+.upgrade-button.loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+
+  &::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border: 2px solid currentColor;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 6px;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== 10. 버튼 그룹 정렬 ===== */
+.button-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.button-group .add-button,
+.button-group .empty-action-btn {
+  flex: 1;
+  min-width: 0;
 }

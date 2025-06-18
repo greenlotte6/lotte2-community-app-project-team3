@@ -49,7 +49,7 @@ public class ChannelDTO {
         private boolean isOnline;      // 온라인 상태 (나중에 WebSocket으로 관리)
     }
 
-    // 채널 목록 응답 DTO (간소화된 버전)
+    // 🔥 채널 목록 응답 DTO (수정된 버전)
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
@@ -61,6 +61,7 @@ public class ChannelDTO {
         private String lastMessage;    // 마지막 메시지 (선택사항)
         private LocalDateTime lastMessageAt;
         private boolean isOwner;       // 현재 사용자가 소유자인지
+        private String ownerId;        // 🔥 채널 소유자 ID 추가!
         private String roomId;
     }
 

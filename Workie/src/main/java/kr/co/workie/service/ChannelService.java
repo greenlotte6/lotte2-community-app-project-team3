@@ -162,6 +162,7 @@ public class ChannelService {
                                 .name(channel.getName())
                                 .memberCount((int) memberCount)
                                 .isOwner(isOwner)
+                                .ownerId(channel.getOwnerId())
                                 .lastMessage("최근 메시지...") // 실제로는 메시지 테이블에서 조회
                                 .lastMessageAt(channel.getUpdatedAt()) // 채널 마지막 업데이트 시간 사용
                                 .roomId("channel_" + channel.getId())
@@ -245,9 +246,9 @@ public class ChannelService {
                 .orElseThrow(() -> new IllegalArgumentException("채널을 찾을 수 없습니다."));
 
         // 소유자는 나갈 수 없음 (기존 Repository 메서드로 확인)
-        if (channelMemberRepository.isOwnerOfChannel(channelId, currentUserId)) {
-            throw new IllegalArgumentException("채널 소유자는 나갈 수 없습니다. 소유권을 먼저 이전해주세요.");
-        }
+//        if (channelMemberRepository.isOwnerOfChannel(channelId, currentUserId)) {
+//            throw new IllegalArgumentException("채널 소유자는 나갈 수 없습니다. 소유권을 먼저 이전해주세요.");
+//        }
 
         // 멤버십 제거 (기존 Repository 메서드)
         channelMemberRepository.deleteByChannelIdAndUserId(channelId, currentUserId);
