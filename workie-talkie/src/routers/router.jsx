@@ -33,6 +33,7 @@ import { Test } from "../pages/board/Test";
 import { PageMain } from "../pages/page/PageMain";
 import { PageWrite } from "../pages/page/PageWrite";
 import { PageView } from "../pages/page/PageView";
+import TokenTest from "../pages/TokenTest";
 
 //라우터 생성
 
@@ -76,6 +77,7 @@ const router = createBrowserRouter([
   { path: "/", element: <IntroPage /> },
   { path: "/pricing", element: <PricingPage /> },
   { path: "/faq", element: <FAQPage /> },
+  { path: "/token-test", element: <TokenTest /> },
 ]);
 
 // 라우터 내보내기
