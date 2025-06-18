@@ -1,18 +1,16 @@
 package kr.co.workie.controller;
 
 import kr.co.workie.dto.DriveItemDTO;
-import kr.co.workie.dto.UserDTO;
 import kr.co.workie.entity.DriveItem;
 import kr.co.workie.entity.User;
+import kr.co.workie.security.MyUserDetails;
 import kr.co.workie.service.DriveService;
-import kr.co.workie.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @Log4j2
@@ -21,23 +19,23 @@ import java.util.List;
 @RestController
 public class DriveController {
 
-    private final UserService userService;
     private final DriveService driveService;
 
     @GetMapping
     public List<DriveItemDTO> list(@RequestParam(required = false) Long parentId,
-                                   Principal principal) {
-        User user = userService.getUserByUid(principal.getName());
+                                   Authentication authentication) {
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
         return driveService.listDriveItems(user, parentId);
     }
 
     @PostMapping("/folder")
     public ResponseEntity<?> createFolder(@RequestParam String name,
                                           @RequestParam(required = false) Long parentId,
-                                          Principal principal) {
+                                          Authentication authentication) {
 
-        System.out.println(">> principal.getName() = " + principal.getName());
-        User user = userService.getUserByUid(principal.getName());
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
         DriveItem folder = driveService.createFolder(user, name, parentId);
         return ResponseEntity.ok(folder.getDno());
     }
@@ -48,4 +46,3 @@ public class DriveController {
         return ResponseEntity.ok().build();
     }
 }
-
