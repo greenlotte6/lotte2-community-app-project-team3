@@ -7,6 +7,9 @@ server:
       timeout: 4h #remove after development
 
 spring:
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
   servlet:
     multipart:
       location: uploads
@@ -15,8 +18,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: dns05156@gmail.com
-    password:
+    username: tkdenddl1324@gmail.com
+    password: uqah bwso jvdl evbm
     properties:
       mail:
         smtp:

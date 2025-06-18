@@ -11,7 +11,6 @@ export const Profile = () => {
   console.log("user in Profile:", user);
 
   const navigate = useNavigate();
-  const role = user?.role?.replace("ROLE_", ""); // 결과: "ADMIN"
 
   const [modifyUser, setModifyUser] = useState({
     id: "",
@@ -26,7 +25,6 @@ export const Profile = () => {
     department: "",
     position: "",
     ssn: "",
-    role: role,
   });
 
   //const [searchParams] = useSearchParams();
@@ -68,7 +66,10 @@ export const Profile = () => {
     }
 
     putProfile(finalUser)
-      .then(() => navigate("/setting/profile"))
+      .then(() => {
+        alert("변경이 완료되었습니다.");
+        navigate("/setting/profile");
+      })
       .catch((err) => console.error(err));
   };
 

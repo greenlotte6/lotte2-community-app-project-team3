@@ -15,6 +15,7 @@ export const USER = `${SERVER_HOST}/user`;
 
 export const USER_TERMS = `${USER}/policies`; //약관
 export const USER_REGISTER = `${USER}/register`; //실제 회원가입 요청 API
+export const USER_GENERAL = `${USER}/general`; //일반 회원가입 요청 API
 export const USER_CHECKED = `${USER}/check`; //사용자 ID 중복 확인 API
 export const USER_LOGIN = `${USER}/login`; //로그인
 export const USER_LOGOUT = `${USER}/logout`; //로그아웃
