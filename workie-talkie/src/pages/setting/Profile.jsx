@@ -11,6 +11,7 @@ export const Profile = () => {
   console.log("user in Profile:", user);
 
   const navigate = useNavigate();
+  const role = user?.role?.replace("ROLE_", ""); // 결과: "ADMIN"
 
   const [modifyUser, setModifyUser] = useState({
     id: "",
@@ -25,6 +26,7 @@ export const Profile = () => {
     department: "",
     position: "",
     ssn: "",
+    role: role,
   });
 
   //const [searchParams] = useSearchParams();

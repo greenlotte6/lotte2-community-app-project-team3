@@ -11,9 +11,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import kr.co.workie.security.MyUserDetails;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,10 +29,9 @@ public class AppController {
     private final PageService pageService;
     private final PageRepository pageRepository;
 
-
-
     @Value("${spring.application.version}")
     private String appVersion;
+
 
     @GetMapping("/")
     public String index(){
@@ -37,11 +39,22 @@ public class AppController {
         return "appVersion : " + appVersion;
     }
 
+
+
     /* Calendar */
     // 캘린더 조회
     @GetMapping("/calendar")
     public List<CalendarDTO> calendar(Authentication authentication) {
-        User user = (User) authentication.getPrincipal(); // 🔧 여기 수정
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 경우 처리 (예: 로그인 페이지로 리다이렉트 또는 401 Unauthorized 반환)
+            // 여기서는 예시로 빈 리스트 반환
+            return new ArrayList<>(); // 또는 throw new AccessDeniedException("User not authenticated");
+        }
+
+        // MyUserDetails 객체를 가져온 후, 그 안에서 실제 User 엔티티를 추출
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+
         String loginId = user.getId();
 
         log.info("✅ 현재 로그인 ID = {}", loginId);
@@ -53,8 +66,15 @@ public class AppController {
     @PostMapping("/calendar/add")
     public Map<String, Integer> addCalendar(Authentication authentication, @RequestBody CalendarDTO calendarDTO) {
         log.info("📩 calendarDTO = {}", calendarDTO);
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 경우 처리 (예: 로그인 페이지로 리다이렉트 또는 401 Unauthorized 반환)
+            // 여기서는 예시로 빈 리스트 반환
+            throw new AccessDeniedException("User not authenticated"); // 또는 throw new AccessDeniedException("User not authenticated");
+        }
 
-        User user = (User) authentication.getPrincipal(); // 🔧 여기 수정
+        // MyUserDetails 객체를 가져온 후, 그 안에서 실제 User 엔티티를 추출
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
         String loginId = user.getId();
 
         log.info("⛳ 작성자 ID = {}", loginId);
@@ -78,7 +98,16 @@ public class AppController {
     //페이지 조회
     @GetMapping("/page")
     public List<Page> page(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 경우 처리 (예: 로그인 페이지로 리다이렉트 또는 401 Unauthorized 반환)
+            // 여기서는 예시로 빈 리스트 반환
+            return new ArrayList<>(); // 또는 throw new AccessDeniedException("User not authenticated");
+        }
+
+        // MyUserDetails 객체를 가져온 후, 그 안에서 실제 User 엔티티를 추출
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+
         String loginId = user.getId();
         log.info("✅ 현재 로그인 ID = {}", loginId);
 
@@ -89,7 +118,15 @@ public class AppController {
     @PostMapping("/page/add")
     public Map<String, Integer> addPage(Authentication authentication, @RequestBody PageDTO pageDTO) {
         log.info("pageDTO = {}", pageDTO);
-        User user = (User) authentication.getPrincipal();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 경우 처리 (예: 로그인 페이지로 리다이렉트 또는 401 Unauthorized 반환)
+            // 여기서는 예시로 빈 리스트 반환
+            throw new AccessDeniedException("User not authenticated"); // 또는 throw new AccessDeniedException("User not authenticated");
+        }
+
+        // MyUserDetails 객체를 가져온 후, 그 안에서 실제 User 엔티티를 추출
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
         String loginId = user.getId();
 
         log.info("작성자 ID = {}", loginId);
@@ -129,20 +166,37 @@ public class AppController {
 
     //페이지 사이드바 - 작성자별 총 갯수
     @GetMapping("/page/count")
-    public ResponseEntity<Integer> getPageCountByCurrentUser(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+    public int  getPageCountByCurrentUser(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 경우 처리 (예: 로그인 페이지로 리다이렉트 또는 401 Unauthorized 반환)
+            // 여기서는 예시로 빈 리스트 반환
+            return 0; // 또는 throw new AccessDeniedException("User not authenticated");
+        }
+
+        // MyUserDetails 객체를 가져온 후, 그 안에서 실제 User 엔티티를 추출
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+
         String loginId = user.getId();
         log.info("✅ Current user ID for page count: {}", loginId);
 
-        int count = pageService.countPagesByWriter(loginId);
-        return ResponseEntity.ok(count);
+        return pageService.countPagesByWriter(user.getId());
     }
 
 
     //페이지 사이드바 - 작성자별 최근 페이지
     @GetMapping("/page/recent")
     public List<PageDTO> recentPages(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 경우 처리 (예: 로그인 페이지로 리다이렉트 또는 401 Unauthorized 반환)
+            // 여기서는 예시로 빈 리스트 반환
+            return new ArrayList<>(); // 또는 throw new AccessDeniedException("User not authenticated");
+        }
+
+        // MyUserDetails 객체를 가져온 후, 그 안에서 실제 User 엔티티를 추출
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+
         String loginId = user.getId();
 
         return pageService.getRecentPages(loginId);
@@ -151,7 +205,17 @@ public class AppController {
     //페이지 사이드바 - 작성자별 부모 페이지
     @GetMapping("/page/parent")
     public List<Page> getRootPages(Authentication authentication) {
-        String loginId = ((User) authentication.getPrincipal()).getId();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 경우 처리 (예: 로그인 페이지로 리다이렉트 또는 401 Unauthorized 반환)
+            // 여기서는 예시로 빈 리스트 반환
+            return new ArrayList<>(); // 또는 throw new AccessDeniedException("User not authenticated");
+        }
+
+        // MyUserDetails 객체를 가져온 후, 그 안에서 실제 User 엔티티를 추출
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+
+        String loginId = user.getId();
         return pageService.getPagesByParent(loginId);
     }
 /*
