@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,10 +68,11 @@ public class PageService {
     }
 
 
-    public int countPagesByWriter(String id) {
+    public int  countPagesByWriter(String id) {
         int pageCount = pageRepository.countByWriter(id); // 수정된 Repository 메서드 호출
         log.info("💡 Writer {} has {} pages.", id, pageCount); // 로그 추가 (선택 사항)
-        return pageCount;
+
+        return pageRepository.countByWriter(id);
     }
 
     public List<PageDTO> getRecentPages(String loginId) {

@@ -146,6 +146,9 @@ export const PageView = () => {
                   >
                     <img src="/images/share.png" alt="공유" />
                   </button>
+                  <button className="delete-btn" onClick={null}>
+                    <img src="/images/trashcan.png" alt="삭제" />
+                  </button>
                 </div>
 
                 {/* 제목 입력 필드 */}
