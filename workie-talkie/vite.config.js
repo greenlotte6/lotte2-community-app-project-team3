@@ -22,10 +22,6 @@ export default defineConfig({
         target: "http://localhost:8080",
         changeOrigin: true,
       },
-      "/user": {
-        target: "http://localhost:8080",
-        changeOrigin: true,
-      },
     },
     // 🔽 추가: 새로고침 시 라우팅 문제 해결
     historyApiFallback: true,
