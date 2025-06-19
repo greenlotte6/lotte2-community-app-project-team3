@@ -12,10 +12,9 @@ import lombok.*;
 @Entity
 @Table(name = "Company")
 public class Company {
-
-    @Id
     private String tax;
 
+    @Id
     private String ceoId;
     private String joinCode;
     private String companyName;

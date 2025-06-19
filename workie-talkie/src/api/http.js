@@ -19,6 +19,7 @@ export const USER_GENERAL = `${USER}/general`; //일반 회원가입 요청 API
 export const USER_CHECKED = `${USER}/check`; //사용자 ID 중복 확인 API
 export const USER_LOGIN = `${USER}/login`; //로그인
 export const USER_LOGOUT = `${USER}/logout`; //로그아웃
+export const USER_INVITE = `${USER}/invite`; //로그아웃
 
 //setting
 export const SETTING = `${SERVER_HOST}/setting`;
@@ -28,9 +29,8 @@ export const SETTING_MESSAGE = `${SETTING}/message`; //프로필설정
 export const SETTING_CALENDAR = `${SETTING}/calendar`; //프로필설정
 export const SETTING_PAGE = `${SETTING}/page`; //페이지
 export const SETTING_DRIVE = `${SETTING}/drive`; //프로필설정
-
 export const SETTING_PROJECT = `${SETTING}/project`; //프로젝트
-export const SETTING_MEMBER = `${SETTING}/member`; //프로젝트
+export const SETTING_MEMBERS = `${SETTING}/member`; //회원관리
 export const SETTING_BOARD = `${SETTING}/board`; //게시판
 export const SETTING_PLAN = `${SETTING}/plan`; //요금제
 

@@ -17,6 +17,10 @@ public interface UserService {
 
     public UserDTO generalRegister(UserDTO userDTO, String inviteCode);
 
+    public List<UserDTO> findMembersByJoinCode(String joinCode);
+
+    String findJoinCodeByCeoId(String loginId);
+
     //public TermsDTO terms();
 
     // 현재 사용자 정보 조회 (채팅용)
@@ -35,4 +39,6 @@ public interface UserService {
 
     // ✅ 추가: 사용자 검색 (이름으로)
     List<UserDTO> searchUsersByName(String searchQuery);
+
+
 }

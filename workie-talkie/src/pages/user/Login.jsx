@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LandingLayout } from "../../layouts/LandingLayout";
-import { Link, useNavigate } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
 import { useLoginStore } from "../../stores/useLoginStore";
 import { postUserLogin } from "../../api/userAPI";
 
@@ -25,13 +25,22 @@ export const Login = () => {
     e.preventDefault();
 
     const fetchData = async () => {
+      const token = data.token;
+
       try {
         const data = await postUserLogin(user);
 
-        if (data.username) {
-          login(data);
-          navigate("/dashboard/main");
+        // 🔽 data가 없으면 처리 중단
+        if (!data || !data.username) {
+          throw new Error("로그인 응답이 올바르지 않습니다");
         }
+
+        if (token) {
+          localStorage.setItem("token", token);
+        }
+
+        login(data);
+        navigate("/dashboard/main");
       } catch (err) {
         alert("아이디/비밀번호를 확인해주세요");
         console.error(err);

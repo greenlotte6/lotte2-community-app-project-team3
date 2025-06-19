@@ -15,7 +15,7 @@ const initState = {
   office: "",
   department: "",
   rating: "",
-  inviteCode: "",
+  joinCode: "",
 };
 
 export const General = () => {
@@ -27,22 +27,22 @@ export const General = () => {
   const [user, setUser] = useState({ ...initState });
 
   const [params] = useSearchParams();
-  const inviteCode = params.get("invite");
+  const joinCode = params.get("invite");
 
-  console.log("📌 초대코드:", inviteCode); // 👉 실제 값 확인
+  console.log("📌 초대코드:", joinCode); // 👉 실제 값 확인
 
   const navigate = useNavigate();
 
-  // 초대코드가 있을 경우 자동으로 role, inviteCode 설정
+  // 초대코드가 있을 경우 자동으로 role, joinCode 설정
   useEffect(() => {
-    if (inviteCode) {
+    if (joinCode) {
       setUser((prev) => ({
         ...prev,
         role: "MEMBER",
-        inviteCode: inviteCode,
+        joinCode: joinCode,
       }));
     }
-  }, [inviteCode]);
+  }, [joinCode]);
 
   const changeHandler = (e) => {
     e.preventDefault();
@@ -95,8 +95,8 @@ export const General = () => {
       try {
         const userWithRole = {
           ...user,
-          role: inviteCode ? "MEMBER" : user.role,
-          inviteCode: inviteCode || null,
+          role: joinCode ? "MEMBER" : user.role,
+          joinCode: joinCode || null,
         };
 
         await postUser(userWithRole);

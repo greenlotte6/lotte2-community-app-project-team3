@@ -117,7 +117,10 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         return requestURI.startsWith("/user/") ||  // 🔥 /user/ 로 변경 (뒤에 슬래시 추가)
                 requestURI.equals("/user") ||       // 🔥 정확히 /user 인 경우만
                 requestURI.startsWith("/css") ||
-                requestURI.startsWith("/api") ||
+                requestURI.equals("/api/user/check") ||
+                requestURI.equals("/api/user/register") ||
+                requestURI.equals("/api/user/login") ||
+                //requestURI.startsWith("/api") ||
                 requestURI.startsWith("/js") ||
                 requestURI.startsWith("/images") ||
                 requestURI.equals("/") ||
