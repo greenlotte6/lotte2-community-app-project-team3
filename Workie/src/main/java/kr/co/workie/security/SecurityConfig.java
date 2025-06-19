@@ -45,7 +45,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(authorize -> authorize
                         // 🔧 인증이 필요하지 않은 경로들
-                        .requestMatchers("/", "/user/**").permitAll()
+                        .requestMatchers("/", "/user/**", "/api/user/**").permitAll()
                         .requestMatchers("/favicon.ico", "/css/**", "/js/**", "/images/**").permitAll()
 
                         // 🔧 관리자 권한 필요
