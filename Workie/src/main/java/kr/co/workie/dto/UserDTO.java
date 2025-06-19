@@ -23,9 +23,6 @@ public class UserDTO {
     private String position;
     private String office;
     private String department;
-    private String zip;
-    private String addr1;
-    private String addr2;
 
     private String regDate;
     private String leaveDate;

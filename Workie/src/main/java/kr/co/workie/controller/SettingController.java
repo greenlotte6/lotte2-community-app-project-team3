@@ -16,6 +16,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Log4j2
 @RequiredArgsConstructor
 @RequestMapping("/setting")
@@ -58,5 +60,33 @@ public class SettingController {
 
         UserDTO modifiedUser = userService.modify(userDTO);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(modifiedUser);
+    }
+
+    @GetMapping("/member")
+    public List<UserDTO> getMember(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new AccessDeniedException("User not authenticated");
+        }
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+        String loginId = user.getId();
+        log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        log.info("✅ 조회된 아이디: {}",userService.findById(loginId));
+
+        // ✅ UserService를 통해 joinCode 조회
+        String joinCode = userService.findJoinCodeByCeoId(loginId);
+        log.info("🏢 회사의 JoinCode: {}", joinCode);
+
+        List<UserDTO> members = userService.findMembersByJoinCode(joinCode);
+        log.info("✅ 조회된 구성원 수: {}", members.size());
+
+        return members;
+    }
+
+    @PutMapping("/member/{id}")
+    public ResponseEntity<?> modifyUser(@PathVariable String id, @RequestBody UserDTO userDTO) {
+        userDTO.setId(id);
+        userService.modify(userDTO);
+        return ResponseEntity.ok().build();
     }
 }

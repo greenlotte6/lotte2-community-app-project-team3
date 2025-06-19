@@ -45,6 +45,19 @@ public class UserController {
         log.info("login...1 : " + userDTO);
 
         try {
+
+            // 🔍 디버깅 로그 시작
+            log.info("입력 아이디: {}", userDTO.getId());
+            log.info("입력 비밀번호: {}", userDTO.getPass());
+            User user1 = userRepository.findById(userDTO.getId()).orElse(null);
+            if (user1 != null) {
+                log.info("DB에서 찾은 유저: {}", user1);
+                log.info("DB의 암호화된 비번: {}", user1.getPass());
+            } else {
+                log.warn("해당 ID의 유저를 찾을 수 없습니다");
+            }
+
+
             // Security 인증 처리
             UsernamePasswordAuthenticationToken authToken
                     = new UsernamePasswordAuthenticationToken(userDTO.getId(), userDTO.getPass());
@@ -147,6 +160,8 @@ public class UserController {
     public Map<String, String> general(@RequestBody UserDTO userDTO){
         log.info("=== 🔍 회원가입 요청 수신 ===");
         log.info("🔍 전체 UserDTO: {}", userDTO);
+        log.info("🔍 전달된 joinCode: {}", userDTO.getJoinCode()); // ⬅️ 여기 추가
+
 
         // 🔥 비어있는 필드들 체크
         if (userDTO.getName() == null || userDTO.getName().trim().isEmpty()) {
@@ -157,14 +172,6 @@ public class UserController {
         }
         if (userDTO.getDepartment() == null || userDTO.getDepartment().trim().isEmpty()) {
             log.warn("⚠️ department 필드가 비어있습니다!");
-        }
-        if (userDTO.getJoinCode() == null || userDTO.getJoinCode().trim().isEmpty()) {
-            return Map.of("error", "초대코드가 필요합니다.");
-        }
-
-        boolean isValid = companyRepository.existsByJoinCode(userDTO.getJoinCode());
-        if (!isValid) {
-            return Map.of("error", "유효하지 않은 초대코드입니다.");
         }
 
         try {
@@ -200,16 +207,16 @@ public class UserController {
         Company company = companyRepository.findByCeoId(loginId);
         String joinCode = company.getJoinCode();
 
-        String subject = "Workie 팀 초대 메일";
+        String subject = "Workie-Talkie 팀 초대 메일";
         String link = "http://localhost:5173/user/general?invite=" + joinCode;
 
         String htmlContent = """
-            워크이에 초대되었습니다 🎉
+            Workie-Talkie에 초대되었습니다 🎉
             안녕하세요, %s 님께서 팀에 초대하셨습니다.
             아래 버튼을 눌러 회원가입을 완료해 주세요.
             %s
             초대받아 가입하기
-            이 메일은 워크이 시스템에서 자동으로 발송되었습니다.
+            이 메일은 Workie-Talkie 시스템에서 자동으로 발송되었습니다.
 
       
     """.formatted(user.getName(), link); // 초대한 사람 이름과 링크 삽입
@@ -218,6 +225,8 @@ public class UserController {
 
         return ResponseEntity.ok().build();
     }
+
+
 
     //아이디 중복 검사
     @GetMapping("/api/user/check")

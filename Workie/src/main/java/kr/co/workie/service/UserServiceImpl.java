@@ -8,6 +8,7 @@ import kr.co.workie.repository.UserRepository;
 import kr.co.workie.util.GenerateCode;
 import kr.co.workie.security.MyUserDetails; // 추가
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication; // 추가
 import org.springframework.security.core.context.SecurityContextHolder; // 추가
@@ -18,6 +19,7 @@ import java.util.List; // 추가
 import java.util.Optional;
 import java.util.stream.Collectors; // 추가
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,6 +33,8 @@ public class UserServiceImpl implements UserService {
     // 기존 메서드들...
     @Override
     public String register(UserDTO userDTO) {
+        log.info("🔧 register() 호출됨");
+        log.info("🔧 userDTO.getJoinCode(): {}", userDTO.getJoinCode()); // ⬅️ 여기 추가
         //비밀번호 암호화
         String encoded = passwordEncoder.encode(userDTO.getPass());
         userDTO.setPass(encoded);
@@ -38,6 +42,11 @@ public class UserServiceImpl implements UserService {
         //DTO -> Entity 변환
         User user = modelMapper.map(userDTO, User.class);
         Company company = modelMapper.map(userDTO, Company.class);
+
+        // 명시적으로 joinCode 할당
+        user.setJoinCode(userDTO.getJoinCode());
+
+        log.info("🔧 user.getJoinCode() before save: {}", user.getJoinCode()); // ⬅️ 여기 추가
 
         //사원번호 생성
         String department = user.getDepartment();
@@ -115,6 +124,32 @@ public class UserServiceImpl implements UserService {
         User user = modelMapper.map(userDTO, User.class);
         userRepository.save(user);
         return modelMapper.map(user, UserDTO.class);
+    }
+
+    @Override
+    public List<UserDTO> findMembersByJoinCode(String joinCode) {
+        List<User> users = userRepository.findByJoinCode(joinCode);
+
+        // Entity → DTO 변환
+        return users.stream()
+                .map(user -> {
+                    UserDTO dto = modelMapper.map(user, UserDTO.class);
+                    // 🔻 ROLE_ 접두사 제거
+                    if (dto.getRole() != null && dto.getRole().startsWith("ROLE_")) {
+                        dto.setRole(dto.getRole().substring(5));
+                    }
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String findJoinCodeByCeoId(String ceoId) {
+        Company company = companyRepository.findByCeoId(ceoId);
+        if (company == null) {
+            throw new IllegalStateException("해당 ID에 대한 회사 정보가 없습니다: " + ceoId);
+        }
+        return company.getJoinCode();
     }
 
     // ======== 채팅용 메서드들 추가 ========

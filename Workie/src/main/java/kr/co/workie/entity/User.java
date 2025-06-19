@@ -35,9 +35,6 @@ public class User {
     private String position;
     private String office;
     private String department;
-    private String zip;
-    private String addr1;
-    private String addr2;
     private String image;
     private String joinCode;
 

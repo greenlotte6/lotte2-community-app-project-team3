@@ -16,7 +16,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     Optional<User> findByEmployeeId(String employeeId);
     Optional<User> findByEmail(String email);
     Optional<User> findByName(String name);
-    Optional<User> findByid(String id);
+    Optional<User> findById(String id);
 
 
 
@@ -24,4 +24,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
 
     List<User> findByEmailContainingIgnoreCase(String email);
+
+    List<User> findByJoinCode(String joinCode);
 }

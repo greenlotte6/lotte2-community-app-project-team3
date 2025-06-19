@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CompanyDTO {
     private String tax;
-    private String ceiId;
+    private String ceoId;
     private String joinCode;
     private String companyName;
 
