@@ -11,7 +11,7 @@ const HTTP_PROTOCOL = isHttps ? "https" : "http";
 const WS_PROTOCOL = isHttps ? "wss" : "ws";
 
 //user
-export const USER = `${SERVER_HOST}/user`;
+export const USER = `${SERVER_HOST}/api/user`;
 
 export const USER_TERMS = `${USER}/policies`; //약관
 export const USER_REGISTER = `${USER}/register`; //실제 회원가입 요청 API

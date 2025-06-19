@@ -116,6 +116,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     private boolean shouldSkipFiltering(String requestURI) {
         return requestURI.startsWith("/user") ||
                 requestURI.startsWith("/css") ||
+                requestURI.startsWith("/api") ||
                 requestURI.startsWith("/js") ||
                 requestURI.startsWith("/images") ||
                 requestURI.equals("/") ||
