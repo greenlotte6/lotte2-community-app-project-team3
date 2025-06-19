@@ -114,7 +114,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
      * 🔧 인증 불필요 경로 체크 - 완전 일치만 허용
      */
     private boolean shouldSkipFiltering(String requestURI) {
-        return requestURI.startsWith("/user") ||
+        return requestURI.startsWith("/user/") ||  // 🔥 /user/ 로 변경 (뒤에 슬래시 추가)
+                requestURI.equals("/user") ||       // 🔥 정확히 /user 인 경우만
                 requestURI.startsWith("/css") ||
                 requestURI.startsWith("/js") ||
                 requestURI.startsWith("/images") ||

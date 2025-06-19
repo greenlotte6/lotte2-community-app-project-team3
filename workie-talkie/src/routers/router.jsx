@@ -70,6 +70,7 @@ const router = createBrowserRouter([
       { path: "/calendar", element: <CalendarPage /> },
       { path: "/project", element: <ProjectMain /> },
       { path: "/project/details", element: <ProjectDetails /> },
+      { path: "/project/kanban/:projectId", element: <ProjectDetails /> },
     ],
   },
   { path: "/page/:pno", element: <PageView /> },
