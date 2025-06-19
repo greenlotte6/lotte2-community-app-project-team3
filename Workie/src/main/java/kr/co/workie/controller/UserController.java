@@ -40,7 +40,7 @@ public class UserController {
     private final EmailService emailService;
 
     //로그인
-    @PostMapping("/user/login")
+    @PostMapping("/api/user/login")
     public ResponseEntity login(@RequestBody UserDTO userDTO){
         log.info("login...1 : " + userDTO);
 
@@ -110,7 +110,7 @@ public class UserController {
     }
 
     //회원가입(사업자)
-    @PostMapping("/user/register")
+    @PostMapping("/api/user/register")
     public Map<String, String> register(@RequestBody UserDTO userDTO){
         log.info("=== 🔍 회원가입 요청 수신 ===");
         log.info("🔍 전체 UserDTO: {}", userDTO);
@@ -143,7 +143,7 @@ public class UserController {
     }
 
     //회원가입 - 초대코드(일반 회원)
-    @PostMapping("/user/general")
+    @PostMapping("/api/user/general")
     public Map<String, String> general(@RequestBody UserDTO userDTO){
         log.info("=== 🔍 회원가입 요청 수신 ===");
         log.info("🔍 전체 UserDTO: {}", userDTO);
@@ -220,14 +220,14 @@ public class UserController {
     }
 
     //아이디 중복 검사
-    @GetMapping("/user/check")
+    @GetMapping("/api/user/check")
     public ResponseEntity<Boolean> checkUserId(@RequestParam("id") String id) {
         boolean exists = userRepository.existsById(id);
         return ResponseEntity.ok(exists);
     }
 
     //로그아웃 위한 쿠키 삭제
-    @GetMapping("/user/logout")
+    @GetMapping("/api/user/logout")
     public ResponseEntity logout(){
         // httpOnly cookie 생성
         ResponseCookie accessTokenCookie = ResponseCookie.from("access_token", "")        // -> "쿠키 저장 명"
