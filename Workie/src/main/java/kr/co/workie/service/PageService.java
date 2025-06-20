@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -46,7 +47,21 @@ public class PageService {
         pageRepository.save(page);
     }
 
-    public void deletePage(){}
+    //일정 삭제하기
+    public void deletePage(int pno){
+        pageRepository.deleteById(pno);
+    }
+
+    @Transactional
+    public void trashPage(int pno) {
+        Page page = pageRepository.findById(pno)
+                .orElseThrow(() -> new IllegalArgumentException("페이지가 존재하지 않습니다."));
+
+        page.setDeleted(true); // 또는 page.setIsDeleted(1);
+        pageRepository.save(page); // 상태만 변경하여 저장
+    }
+
+
 
     public List<Page> getPageByWriter(String loginId) {
         List<Page> pageList = pageRepository.findAllByWriter(loginId);

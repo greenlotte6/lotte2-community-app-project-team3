@@ -2,9 +2,6 @@ server:
   port: 8080
   servlet:
     context-path: /
-  reactive:
-    session:
-      timeout: 4h #remove after development
 
 spring:
   mvc:

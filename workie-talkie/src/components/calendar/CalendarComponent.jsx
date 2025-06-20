@@ -4,7 +4,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { EventModal } from "./EventModal";
-import { getCalendar } from "../../api/userAPI";
+import { deleteCalendar, getCalendar } from "../../api/userAPI";
 
 export const CalendarComponent = ({ events, setEvents }) => {
   const calendarRef = useRef(null);
@@ -77,11 +77,18 @@ export const CalendarComponent = ({ events, setEvents }) => {
     setIsDetailModalOpen(true);
   };
 
-  const deleteEvent = () => {
+  const deleteEvent = async () => {
     if (selectedEvent && window.confirm("정말 이 일정을 삭제하시겠습니까?")) {
-      selectedEvent.remove();
-      setIsDetailModalOpen(false);
-      setSelectedEvent(null);
+      try {
+        await deleteCalendar(selectedEvent.id); // ✅ 백엔드에 삭제 요청
+        console.log("삭제 요청 ID:", selectedEvent.id);
+
+        selectedEvent.remove(); // ✅ 성공하면 캘린더에서 제거
+        setIsDetailModalOpen(false);
+        setSelectedEvent(null);
+      } catch (err) {
+        alert("일정 삭제 중 오류가 발생했습니다.");
+      }
     }
   };
 

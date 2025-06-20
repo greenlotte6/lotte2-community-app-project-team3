@@ -41,8 +41,6 @@ export const Profile = () => {
       navigate("/user/login");
     }
 
-    alert("hihi");
-
     getProfile()
       .then((data) => setModifyUser((prev) => ({ ...prev, ...data })))
       .catch((err) => console.error(err));

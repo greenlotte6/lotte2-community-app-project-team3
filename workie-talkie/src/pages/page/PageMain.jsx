@@ -88,64 +88,67 @@ export const PageMain = () => {
             </div>
             <h3>최근 방문</h3>
             <div className="page-grid">
-              {pages.map((page) => (
-                <Link
-                  to={`/page/${page.pno}`}
-                  className="page-card tooltip-wrapper"
-                  key={page.pno}
-                >
-                  <div className="card-header">
-                    <div className="status-bar">
-                      {/* 콘솔에 실제로 찍히는 명? 이름으로 조건 걸어야 함! */}
-                      {page.shared && (
-                        <span className="tag shared">
-                          <img src="/images/share.png" alt="공유됨" />
-                        </span>
-                      )}
-                      <button
-                        className="favorite-btn"
-                        onClick={(e) => {
-                          e.preventDefault(); // 중요
-                          e.stopPropagation();
-                          toggleFavorite(page.pno);
-                        }}
-                      >
-                        {page.favorite ? (
-                          <img
-                            src="/images/favoriteActive.png"
-                            alt="즐겨찾기"
-                          />
-                        ) : (
-                          <img
-                            src="/images/favoriteBtn.png"
-                            alt="즐겨찾기버튼"
-                          />
+              {pages
+                .filter((page) => !page.deleted)
+                .map((page) => (
+                  <Link
+                    to={`/page/${page.pno}`}
+                    className="page-card tooltip-wrapper"
+                    key={page.pno}
+                  >
+                    <div className="card-header">
+                      <div className="status-bar">
+                        {/* 콘솔에 실제로 찍히는 명? 이름으로 조건 걸어야 함! */}
+                        {page.shared && (
+                          <span className="tag shared">
+                            <img src="/images/share.png" alt="공유됨" />
+                          </span>
                         )}
-                      </button>
+                        <button
+                          className="favorite-btn"
+                          onClick={(e) => {
+                            e.preventDefault(); // 중요
+                            e.stopPropagation();
+                            toggleFavorite(page.pno);
+                          }}
+                        >
+                          {page.favorite ? (
+                            <img
+                              src="/images/favoriteActive.png"
+                              alt="즐겨찾기"
+                            />
+                          ) : (
+                            <img
+                              src="/images/favoriteBtn.png"
+                              alt="즐겨찾기버튼"
+                            />
+                          )}
+                        </button>
+                      </div>
+                      <h3>{page.title}</h3>
                     </div>
-                    <h3>{page.title}</h3>
-                  </div>
 
-                  {/* 툴팁용 숨겨진 정보 */}
-                  <div className="tooltip-content">
-                    <p>제목: {page.title}</p>
-                    <p>작성자: {page.writer}</p>
-                    <p>수정일: {formatDateTime(page.modDate)}</p>
-                    <div className="tag-list">
-                      {page.tags?.map((tag, idx) => (
-                        <span className="tag" key={idx}>
-                          #{tag}
-                        </span>
-                      ))}
+                    {/* 툴팁용 숨겨진 정보 */}
+                    <div className="tooltip-content">
+                      <p>제목: {page.title}</p>
+                      <p>작성자: {page.writer}</p>
+                      <p>수정일: {formatDateTime(page.modDate)}</p>
+                      <div className="tag-list">
+                        {page.tags?.map((tag, idx) => (
+                          <span className="tag" key={idx}>
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))}
             </div>
             <h3> 즐겨찾는 페이지</h3>
             <div className="page-grid">
-              {pages.map((page) =>
-                page.favorite ? (
+              {pages
+                .filter((page) => page.favorite && !page.deleted)
+                .map((page) => (
                   <div className="page-card tooltip-wrapper" key={page.pno}>
                     <div className="card-header">
                       <div className="status-bar">
@@ -193,8 +196,7 @@ export const PageMain = () => {
                       </div>
                     </div>
                   </div>
-                ) : null
-              )}
+                ))}
             </div>
           </div>
         </div>

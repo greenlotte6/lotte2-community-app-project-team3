@@ -43,7 +43,9 @@ public class CalendarService {
     }
 
     //일정 삭제하기
-    
+    public void deleteCalendar(int cno) {
+        calendarRepository.deleteById(cno);
+    }
     
     //일정 불러오기
     public List<CalendarDTO> getEventsByWriter(String loginId) {
@@ -52,7 +54,5 @@ public class CalendarService {
                 .map(calendar -> modelMapper.map(calendar, CalendarDTO.class))
                 .toList();
     }
-
-
 
 }

@@ -2,7 +2,12 @@ import React, { useCallback, useEffect, useState } from "react";
 import { MainLayout } from "../../layouts/MainLayout";
 import { Aside } from "../../components/page/Aside";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPageByPno, putPage } from "../../api/userAPI";
+import {
+  deletePageByPno,
+  getPageByPno,
+  putPage,
+  softDeletePage,
+} from "../../api/userAPI";
 import { ShareModal } from "../../components/page/ShareModal";
 import { QuillEditor } from "../../components/board/QuillEditor";
 
@@ -11,7 +16,9 @@ console.log("📦 PageView 렌더링 시도됨");
 export const PageView = () => {
   const { pno } = useParams();
   const [page, setPage] = useState(null);
+  const [selectedPage, setSelectedPage] = useState(null);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     content: "", // 여기서 body라고 쓸 거면 아래도 body로 유지해야 함
@@ -95,6 +102,48 @@ export const PageView = () => {
     fetchData();
   };
 
+  //휴지통으로 이동 -> 수정하기
+  const softDeletePage = async () => {
+    const parsedPno = parseInt(pno, 10);
+
+    if (isNaN(parsedPno)) {
+      alert("삭제할 페이지 번호가 잘못되었습니다.");
+      return;
+    }
+
+    if (window.confirm("정말 이 노트를 삭제하시겠습니까?")) {
+      try {
+        await softDeletePage(parsedPno); // ✅ API 호출
+        alert("페이지가 삭제되었습니다.");
+        navigate("/page");
+      } catch (err) {
+        console.error("❌ 페이지 삭제 중 오류", err);
+        alert("노트 삭제 중 오류가 발생했습니다.");
+      }
+    }
+  };
+
+  //휴지통에서 삭제
+  const deletePage = async () => {
+    const parsedPno = parseInt(pno, 10);
+
+    if (isNaN(parsedPno)) {
+      alert("삭제할 페이지 번호가 잘못되었습니다.");
+      return;
+    }
+
+    if (window.confirm("정말 이 노트를 삭제하시겠습니까?")) {
+      try {
+        await deletePageByPno(parsedPno); // ✅ API 호출
+        alert("페이지가 삭제되었습니다.");
+        navigate("/page");
+      } catch (err) {
+        console.error("❌ 페이지 삭제 중 오류", err);
+        alert("노트 삭제 중 오류가 발생했습니다.");
+      }
+    }
+  };
+
   return (
     <MainLayout>
       <main className="main-content" id="writes">
@@ -146,7 +195,7 @@ export const PageView = () => {
                   >
                     <img src="/images/share.png" alt="공유" />
                   </button>
-                  <button className="delete-btn" onClick={null}>
+                  <button className="delete-btn" onClick={softDeletePage}>
                     <img src="/images/trashcan.png" alt="삭제" />
                   </button>
                 </div>
