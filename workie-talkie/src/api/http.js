@@ -37,6 +37,7 @@ export const SETTING_PLAN = `${SETTING}/plan`; //요금제
 //app
 export const CALENDAR = `${SERVER_HOST}/calendar`;
 export const PAGE = `${SERVER_HOST}/page`;
+export const BOARD = `${SERVER_HOST}/board`;
 
 export const CALENDAR_ADD = `${CALENDAR}/add`;
 
@@ -47,3 +48,7 @@ export const PAGE_RECENT = `${PAGE}/recent`;
 export const PAGE_PARENT = `${PAGE}/parent`;
 
 //drive
+
+//board
+export const BOARD_MAIN = `${BOARD}/main`;
+export const BOARD_WRITE = `${BOARD}/write`;

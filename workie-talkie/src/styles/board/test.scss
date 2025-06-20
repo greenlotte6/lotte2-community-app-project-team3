@@ -1,36 +1,112 @@
 #test-container {
+  max-height: 100vh; // 💡 전체 높이 제한
+  overflow-y: hidden; // 💡 스크롤 막기
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #333;
+  }
+
   .title-field {
-    background-color: #ffffff;
-    border-radius: 20px;
-  }
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
 
-  .content-field {
-    border: 1px solid red;
-    background-color: #ffffff;
-    border-radius: 20px;
-    height: 60vh;
-  }
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #555;
+    }
 
-  .category,
-  .master {
-    margin: 20px 0;
-  }
-
-  .category select {
-    height: 50px;
-  }
-
-  .master select {
-    height: 50px;
-  }
-
-  #title-input {
-    width: 60%;
-    height: 50px;
+    #title-input {
+      width: 100%;
+      height: 45px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+    }
   }
 
   .selection {
     display: flex;
-    gap: 10px;
+    gap: 20px;
+    margin-bottom: 20px;
+
+    .category,
+    .master {
+      flex: 1;
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #555;
+      }
+
+      select {
+        width: 100%;
+        height: 45px;
+        padding: 8px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .content-field {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px 10px 60px 10px;
+    height: 400px; // 💡 고정된 높이
+    overflow-y: auto; // 💡 내부만 스크롤되게
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: #555;
+    }
+  }
+
+  .submit {
+    padding: 12px 28px;
+    background-color: #104e4a;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0c3e3a;
+    }
+  }
+
+  .menuTable {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+  .ql-editor table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .ql-editor th,
+  .ql-editor td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
   }
 }
