@@ -27,6 +27,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(
+        origins = {
+                "https://lotte2-community-app-project-team3-lac.vercel.app",
+                "https://workie-talkie.site"
+        },
+        allowCredentials = "true"
+)
 @Log4j2
 @RequiredArgsConstructor
 @RestController

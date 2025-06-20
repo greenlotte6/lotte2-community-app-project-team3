@@ -1,4 +1,4 @@
-/*package kr.co.workie.config;
+package kr.co.workie.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -24,6 +24,4 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("forward:/index.html");
     }
 }
-
- */
 
