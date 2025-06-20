@@ -126,7 +126,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                 requestURI.startsWith("/images") ||
                 requestURI.equals("/") ||
                 requestURI.equals("/favicon.ico") ||
-                requestURI.startsWith("/board") ||
+                //requestURI.startsWith("/board") ||
                 requestURI.startsWith("/static/");
     }
 

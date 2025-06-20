@@ -310,11 +310,10 @@ export const postBoard = async (boardData) => {
 
 export const getBoardList = async (category) => {
   try {
-    const response = await fetch(`${BOARD}/${category}`, {
-      credentials: "include",
+    const response = await axios.get(`${BOARD}/${category}`, {
+      withCredentials: true,
     });
-    const data = await response.json();
-    return data;
+    return response.data;
   } catch (error) {
     console.error("리스트 불러오기 실패:", error);
     throw error;
