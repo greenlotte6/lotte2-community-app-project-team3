@@ -1,14 +1,9 @@
 // 베포 테스트
-const isHttps = window.location.protocol === "https:";
 const isLocalhost = window.location.hostname.includes("localhost");
 
 const SERVER_HOST = isLocalhost
   ? "http://localhost:8080"
   : "https://workie-talkie.site"; // 운영(프론트/백 분리면 경로 맞춰줘야 함)
-
-const WS_HOST = isLocalhost ? "localhost:8080" : "workie-talkie.site";
-const HTTP_PROTOCOL = isHttps ? "https" : "http";
-const WS_PROTOCOL = isHttps ? "wss" : "ws";
 
 //user
 export const USER = `${SERVER_HOST}/api/user`;
