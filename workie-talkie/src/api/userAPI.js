@@ -16,6 +16,8 @@ import {
   PAGE_PARENT,
   USER_INVITE,
   SETTING_MEMBERS,
+  BOARD,
+  BOARD_WRITE,
 } from "./http";
 
 const token = localStorage.getItem("token");
@@ -290,5 +292,31 @@ export const getParent = async () => {
   } catch (err) {
     console.error("부모페이지 요청 실패", err);
     throw err;
+  }
+};
+
+//게시판 관련
+export const postBoard = async (boardData) => {
+  try {
+    const res = await axios.post(`${BOARD_WRITE}`, boardData, {
+      withCredentials: true,
+    });
+    return res.data;
+  } catch (error) {
+    console.error("게시글 저장 실패:", error);
+    throw error;
+  }
+};
+
+export const getBoardList = async (category) => {
+  try {
+    const response = await fetch(`${BOARD}/${category}`, {
+      credentials: "include",
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("리스트 불러오기 실패:", error);
+    throw error;
   }
 };

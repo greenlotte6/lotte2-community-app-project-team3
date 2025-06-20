@@ -19,13 +19,13 @@ export const Aside = () => {
               <Link to="/board/main">🏠메인</Link>
             </li>
             <li>
-              <Link to="/board/list">📢공지사항</Link>
+              <Link to="/board/notice">📢공지사항</Link>
             </li>
             <li>
-              <Link to="/board/list">💬자유게시판</Link>
+              <Link to="/board/free">💬자유게시판</Link>
             </li>
             <li>
-              <Link to="/board/list">🍱식단표</Link>
+              <Link to="/board/menu">🍱식단표</Link>
             </li>
 
             {/* 관리자 전용 메뉴 */}
