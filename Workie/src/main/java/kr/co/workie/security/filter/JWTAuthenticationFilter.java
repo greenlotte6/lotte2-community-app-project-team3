@@ -89,6 +89,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
      * 토큰 추출
      */
     private String extractToken(HttpServletRequest request) {
+
         // 1. Authorization 헤더에서 추출
         String header = request.getHeader(AUTH_HEADER);
         log.info("doFilterInternal...2 : {}", header);
@@ -125,6 +126,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                 requestURI.startsWith("/images") ||
                 requestURI.equals("/") ||
                 requestURI.equals("/favicon.ico") ||
+                requestURI.startsWith("/board") ||
                 requestURI.startsWith("/static/");
     }
 

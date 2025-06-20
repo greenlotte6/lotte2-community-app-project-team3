@@ -47,6 +47,8 @@ public class SecurityConfig {
                         // 🔧 인증이 필요하지 않은 경로들
                         .requestMatchers("/api/user/check").permitAll()
                         .requestMatchers("/api/user/register").permitAll()
+                        .requestMatchers("/board/{category}").permitAll()
+                        .requestMatchers("/board/**").permitAll()
                         .requestMatchers("/", "/user/**", "/api/user/**").permitAll()
                         .requestMatchers("/favicon.ico", "/css/**", "/js/**", "/images/**").permitAll()
 
@@ -59,7 +61,7 @@ public class SecurityConfig {
 
                         // 🔧 기존 설정 유지
                         .requestMatchers(HttpMethod.GET, "/article/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/article/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.POST, "/article/**").hasAnyRole("ADMIN", "MEMBER", "MASTER")
 
                         // 🔧 새로 추가: 인증이 필요한 경로들
                         .requestMatchers("/page/**").authenticated()

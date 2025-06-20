@@ -1,10 +1,12 @@
 package kr.co.workie.controller;
 
+import kr.co.workie.dto.BoardDTO;
 import kr.co.workie.dto.CalendarDTO;
 import kr.co.workie.dto.PageDTO;
 import kr.co.workie.entity.Page;
 import kr.co.workie.entity.User;
 import kr.co.workie.repository.PageRepository;
+import kr.co.workie.service.BoardService;
 import kr.co.workie.service.CalendarService;
 import kr.co.workie.service.PageService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,7 @@ public class AppController {
     private final CalendarService calendarService;
     private final PageService pageService;
     private final PageRepository pageRepository;
+    private final BoardService boardService;
 
     @Value("${spring.application.version}")
     private String appVersion;
@@ -243,5 +246,30 @@ public class AppController {
 
      */
     /* Board */
+
+    //게시판
+    @PostMapping("/board/write")
+    public Map<String, Integer> createArticle(Authentication authentication,@RequestBody BoardDTO boardDTO) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 경우 처리 (예: 로그인 페이지로 리다이렉트 또는 401 Unauthorized 반환)
+            // 여기서는 예시로 빈 리스트 반환
+            throw new AccessDeniedException("User not authenticated"); // 또는 throw new AccessDeniedException("User not authenticated");
+        }
+
+        // MyUserDetails 객체를 가져온 후, 그 안에서 실제 User 엔티티를 추출
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+        String loginId = user.getId();
+        int no = boardService.addArticle(loginId, boardDTO);
+        return Map.of("ano", no);
+    }
+
+
+    @GetMapping("/board/{category}")
+    public ResponseEntity<?> getBoardsByCategory(@PathVariable String category) {
+        List<BoardDTO> list = boardService.getBoardsByCategory(category);
+        return ResponseEntity.ok(list);
+    }
+
 
 }

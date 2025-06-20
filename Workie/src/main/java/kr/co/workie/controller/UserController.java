@@ -113,6 +113,7 @@ public class UserController {
             map.put("department", user.getDepartment());
             map.put("hp", user.getHp());
             map.put("regDate", user.getRegDate());
+            map.put("role", user.getRole());
 
             return ResponseEntity.ok().headers(headers).body(map);
 
@@ -208,7 +209,7 @@ public class UserController {
         String joinCode = company.getJoinCode();
 
         String subject = "Workie-Talkie 팀 초대 메일";
-        String link = "http://localhost:5173/user/general?invite=" + joinCode;
+        String link = "https://workie-talkie-personal-kappa.vercel.app/user/general?invite=" + joinCode;
 
         String htmlContent = """
             Workie-Talkie에 초대되었습니다 🎉

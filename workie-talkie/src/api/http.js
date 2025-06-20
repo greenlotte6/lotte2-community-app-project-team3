@@ -6,7 +6,7 @@ const SERVER_HOST = isLocalhost
   ? "http://localhost:8080"
   : "https://workie-talkie.site"; // 운영(프론트/백 분리면 경로 맞춰줘야 함)
 
-const WS_HOST = isLocalhost ? "localhost:8080" : "3.36.66.1:8080";
+const WS_HOST = isLocalhost ? "localhost:8080" : "workie-talkie.site";
 const HTTP_PROTOCOL = isHttps ? "https" : "http";
 const WS_PROTOCOL = isHttps ? "wss" : "ws";
 

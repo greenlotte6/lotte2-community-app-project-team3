@@ -29,9 +29,16 @@ public class User {
     private String employeeId;
     private String email;
     private String hp;
+
     // 이렇게 단순하게 두면 됨
-    @Setter
-    private String role;
+    @Getter(AccessLevel.NONE) // 👈 Lombok의 자동 getter 생성 막기
+    private String role;       // 👇 아래에서 수동 getter 정의
+    public String getRole() {
+        if (role == null) return "ROLE_MEMBER";
+        if (role.startsWith("ROLE_")) return role;
+        return "ROLE_" + role;
+    }
+
     private String position;
     private String office;
     private String department;
@@ -53,21 +60,5 @@ public class User {
 //    public String getRole() {
 //        return "ROLE_"+role;
 //    }
-
-
-    public String getRole() {
-        // 🔥 ROLE 중복 방지 로직 추가
-        if (role == null) {
-            return "ROLE_USER"; // 기본값
-        }
-
-        // 이미 ROLE_로 시작하면 그대로 반환
-        if (role.startsWith("ROLE_")) {
-            return role;
-        }
-
-        // ROLE_가 없으면 추가
-        return "ROLE_" + role;
-    }
 
 }
