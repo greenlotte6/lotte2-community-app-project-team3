@@ -18,6 +18,7 @@ import {
   SETTING_MEMBERS,
   BOARD,
   BOARD_WRITE,
+  PAGE_DELETE,
 } from "./http";
 
 const token = localStorage.getItem("token");
@@ -194,6 +195,18 @@ export const putCalendar = async (data) => {
   }
 };
 
+export const deleteCalendar = async (cno) => {
+  try {
+    const response = await axios.delete(`${CALENDAR}/${cno}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.error("❌ 일정 삭제 실패", err);
+    throw err;
+  }
+};
+
 //페이지 관련
 export const getPage = async () => {
   try {
@@ -293,6 +306,24 @@ export const getParent = async () => {
     console.error("부모페이지 요청 실패", err);
     throw err;
   }
+};
+
+export const deletePageByPno = async (pno) => {
+  try {
+    const response = await axios.delete(`${PAGE}/${pno}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (err) {
+    console.error("❌ 페이지 삭제 실패", err);
+    throw err;
+  }
+};
+
+export const softDeletePage = async (pno) => {
+  return await axios.put(`${PAGE_DELETE}/${pno}`, null, {
+    withCredentials: true,
+  });
 };
 
 //게시판 관련

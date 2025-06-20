@@ -100,6 +100,7 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
+
     // CORS 설정 Bean 추가
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -112,7 +113,7 @@ public class SecurityConfig {
         ));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
 

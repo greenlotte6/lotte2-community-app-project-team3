@@ -95,7 +95,12 @@ public class AppController {
         return ResponseEntity.ok().build();
     }
 
-    //일정 삭제 - 일단 보류!
+    //일정 삭제
+    @DeleteMapping("/calendar/{cno}")
+    public ResponseEntity<?> deleteCalendar(@PathVariable int cno) {
+        calendarService.deleteCalendar(cno);
+        return ResponseEntity.ok().build();
+    }
 
     /* Page */
     //페이지 조회
@@ -155,7 +160,22 @@ public class AppController {
     }
 
 
-    //페이지 삭제 - 일단 보류!
+    //페이지 삭제
+    @DeleteMapping("/page/delete/{pno}")
+    public ResponseEntity<?> deletePage(@PathVariable int pno) {
+        pageService.trashPage(pno); // 이제는 삭제가 아닌 상태 변경
+
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/page/{pno}")
+    public ResponseEntity<?> actualDeletePage(@PathVariable int pno) {
+        pageService.deletePage(pno);
+
+        return ResponseEntity.ok().build();
+    }
+
+
 
 
     //페이지 공유 멤버 추가 - 일단 보류!
@@ -221,30 +241,7 @@ public class AppController {
         String loginId = user.getId();
         return pageService.getPagesByParent(loginId);
     }
-/*
-    //페이지 사이드바 - 작성자별 즐겨찾기 페이지 갯수
-    @GetMapping("/page/favorite")
-    public List<PageDTO> getFavoritePages(Authentication auth) {
-        String loginId = ((User) auth.getPrincipal()).getId();
-        return pageRepository.findByWriterAndFavoriteTrue(loginId);
-    }
 
-    //페이지 사이드바 - 작성자별 공유된 페이지 갯수
-    @GetMapping("/page/shared")
-    public List<PageDTO> getSharedPages(Authentication auth) {
-        String loginId = ((User) auth.getPrincipal()).getId();
-        return pageRepository.findByWriterAndSharedTrue(loginId);
-    }
-
-
-    //페이지 사이드바 - 작성자별 휴지통 페이지 갯수
-    @GetMapping("/page/deleted")
-    public int getDeletedCount(Authentication auth) {
-        String loginId = ((User) auth.getPrincipal()).getId();
-        return pageRepository.countByWriterAndDeletedTrue(loginId);
-    }
-
-     */
     /* Board */
 
     //게시판

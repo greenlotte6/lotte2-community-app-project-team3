@@ -7,27 +7,14 @@ export const useLoginStore = create(
       user: null,
       login: (userData) => set({ user: userData }),
       logout: () => set({ user: null }),
-      _hasHydrated: false,
-      setHasHydrated: () => set({ _hasHydrated: true }),
+      _hasHydrated: false, // 스토어 상태 복원 여부 추적
+      setHasHydrated: () => set({ _hasHydrated: true }), // 복원 완료 시 호출 함수
     }),
     {
-      name: "login-storage", // localStorage에 저장됨
+      name: "login-storage", // 로컬 스토리지에 저장될 키 이름
       onRehydrateStorage: () => (state) => {
-        state?.setHasHydrated();
+        state?.setHasHydrated(); // 상태 복원 완료 후 _hasHydrated를 true로 설정
       },
     }
   )
 );
-
-{
-  /* 
-  작업하는동안 로그아웃 방지용으로 주석처리. 추후 다시 사용예정
-
-  export const useLoginStore = create((set) => ({
-    user: null,
-    login: (userData) => set({ user: userData }),
-    logout: () => set({ user: null }),
-  }));
-  
-  */
-}
