@@ -7,9 +7,14 @@ export const useLoginStore = create(
       user: null,
       login: (userData) => set({ user: userData }),
       logout: () => set({ user: null }),
+      _hasHydrated: false,
+      setHasHydrated: () => set({ _hasHydrated: true }),
     }),
     {
       name: "login-storage", // localStorage에 저장됨
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated();
+      },
     }
   )
 );

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { SettingLayout } from "../../layouts/SettingLayout";
 import { useNavigate } from "react-router-dom";
 import { useLoginStore } from "../../stores/useLoginStore";
-import axios from "axios";
-import { SETTING_PROFILE } from "../../api/http";
 import { getProfile, putProfile } from "../../api/userAPI";
 
 export const Profile = () => {
@@ -25,13 +23,17 @@ export const Profile = () => {
     department: "",
     position: "",
     ssn: "",
+    role: "",
   });
 
   //const [searchParams] = useSearchParams();
-  const id = user?.id;
+  const id = user?.username;
+  const info = useLoginStore.getState().user;
 
   //const id = searchParams.get("id");
   console.log("id: " + id);
+  console.log("info: " + info);
+  console.log("info stringified: ", JSON.stringify(info, null, 2));
 
   //로그아웃 되면 로그인 창으로 이동
   useEffect(() => {
@@ -97,6 +99,9 @@ export const Profile = () => {
       }));
     }
   };
+
+  console.log("ROLE : " + user?.role);
+  console.log("ROLE : " + user?.role);
 
   return user ? (
     <SettingLayout>

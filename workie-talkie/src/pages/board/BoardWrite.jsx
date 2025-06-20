@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import { BoardLayout } from "../../layouts/BoardLayout";
 import { QuillEditor } from "../../components/board/QuillEditor";
 
-export const Test = () => {
+export const BoardWrite = () => {
   const [formData, setFormData] = useState({
     title: "", // 게시글 제목 필드
     body: "", // Quill 에디터의 내용을 저장할 필드
@@ -40,6 +40,25 @@ export const Test = () => {
               value={formData.title}
               onChange={(e) => change_field("title", e.target.value)}
             />
+          </div>
+
+          <div className="selection">
+            <div className="category">
+              <label>게시판 : </label>
+              <select>
+                <option value="notice">공지사항</option>
+                <option value="free">자유게시판</option>
+                <option value="menu">식단표</option>
+              </select>
+            </div>
+            <div className="master">
+              <label>게시판 관리자 : </label>
+              <select>
+                <option value="notice">공지사항</option>
+                <option value="free">자유게시판</option>
+                <option value="menu">식단표</option>
+              </select>
+            </div>
           </div>
 
           {/* Quill 에디터 컴포넌트 사용 */}
