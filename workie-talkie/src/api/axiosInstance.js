@@ -12,7 +12,7 @@ const getServerURL = () => {
     return "http://localhost:8080";
   } else {
     // 운영 환경 - 실제 서버 IP
-    return "http://3.36.66.1:8080";
+    return "https://workie-talkie.site";
   }
 };
 

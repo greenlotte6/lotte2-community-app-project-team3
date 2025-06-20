@@ -14,7 +14,7 @@ class ChannelService {
     if (isLocalhost) {
       return "http://localhost:8080";
     } else {
-      return "http://3.36.66.1:8080";
+      return "https://workie-talkie.site";
     }
   }
 

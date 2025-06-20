@@ -23,7 +23,7 @@ class WebSocketService {
     if (isLocalhost) {
       return "http://localhost:8080/ws";
     } else {
-      return "http://3.36.66.1:8080/ws";
+      return "https://workie-talkie.site";
     }
   }
 
