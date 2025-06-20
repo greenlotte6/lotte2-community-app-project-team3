@@ -59,6 +59,7 @@ export const BoardList = () => {
                     <td>{boards.length - idx}</td>
                     <td>{post.title}</td>
                     <td>{post.writer}</td>
+                    <td>0</td>
                     <td>{new Date(post.wDate).toLocaleDateString()}</td>
                   </tr>
                 ))}
