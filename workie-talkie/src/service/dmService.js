@@ -14,7 +14,7 @@ class DMService {
     if (isLocalhost) {
       return "http://localhost:8080";
     } else {
-      return "http://3.36.66.1:8080";
+      return "https://workie-talkie.site";
     }
   }
 
@@ -243,7 +243,7 @@ function getServerURL() {
     window.location.hostname === "localhost" ||
     window.location.hostname === "127.0.0.1";
 
-  return isLocalhost ? "http://localhost:8080" : "http://3.36.66.1:8080";
+  return isLocalhost ? "http://localhost:8080" : "https://workie-talkie.site";
 }
 
 // 2. 브라우저에서 즉시 실행할 로그인 및 테스트 함수
