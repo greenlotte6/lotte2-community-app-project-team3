@@ -44,6 +44,9 @@ public class SecurityConfig {
                 .addFilterBefore(new JWTAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
 
                 .authorizeHttpRequests(authorize -> authorize
+                        // CORS Preflight 허용
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
                         // 🔧 인증이 필요하지 않은 경로들
                         .requestMatchers("/api/user/check").permitAll()
                         .requestMatchers("/api/user/register").permitAll()
