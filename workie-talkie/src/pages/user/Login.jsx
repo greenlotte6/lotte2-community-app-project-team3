@@ -39,7 +39,19 @@ export const Login = () => {
           localStorage.setItem("token", token);
         }
 
-        login(data);
+        // ✅ 필요한 필드만 골라 명시적으로 상태에 저장
+        const userData = {
+          username: data.username,
+          name: data.name,
+          email: data.email,
+          role: data.role, // ✅ 여기!
+          token: data.token,
+          position: data.position,
+          employeeId: data.employeeId,
+          department: data.department,
+        };
+
+        login(userData);
         navigate("/dashboard/main");
       } catch (err) {
         alert("아이디/비밀번호를 확인해주세요");
@@ -61,7 +73,7 @@ export const Login = () => {
             <input
               type="id"
               name="id"
-              value={user.uid}
+              value={user.id}
               onChange={changeHandler}
               placeholder="ID"
             />

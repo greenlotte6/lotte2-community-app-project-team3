@@ -30,7 +30,7 @@ import { IntroPage } from "../pages/landing/IntroPage";
 import { PricingPage } from "../pages/landing/PricingPage";
 import { FAQPage } from "../pages/landing/FAQPage";
 import { AuthWrapper } from "../components/auth/AuthWrapper";
-import { Test } from "../pages/board/Test";
+import { BoardWrite } from "../pages/board/BoardWrite";
 import { PageMain } from "../pages/page/PageMain";
 import { PageWrite } from "../pages/page/PageWrite";
 import { PageView } from "../pages/page/PageView";
@@ -62,7 +62,7 @@ const router = createBrowserRouter([
       { path: "/setting/member", element: <Member /> },
       { path: "/board/main", element: <BoardMain /> },
       { path: "/board/list", element: <BoardList /> },
-      { path: "/board/test", element: <Test /> },
+      { path: "/board/write", element: <BoardWrite /> },
       { path: "/page", element: <PageMain /> },
       { path: "/page/new", element: <PageWrite /> },
       { path: "/drive", element: <Drivepage /> },
