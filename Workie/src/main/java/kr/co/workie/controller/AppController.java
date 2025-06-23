@@ -160,14 +160,23 @@ public class AppController {
     }
 
 
-    //페이지 삭제
-    @DeleteMapping("/page/delete/{pno}")
+    //페이지 삭제(임시)
+    @PutMapping("/page/delete/{pno}")
     public ResponseEntity<?> deletePage(@PathVariable int pno) {
-        pageService.trashPage(pno); // 이제는 삭제가 아닌 상태 변경
+        pageService. trashPage(pno); //상태 변경
 
         return ResponseEntity.ok().build();
     }
 
+    //페이지 복구
+    @PutMapping("/page/recover/{pno}")
+    public ResponseEntity<?> recoveryPage(@PathVariable int pno) {
+        pageService.recoveryPage(pno); //상태 변경
+
+        return ResponseEntity.ok().build();
+    }
+
+    //페이지 삭제(완전삭제)
     @DeleteMapping("/page/{pno}")
     public ResponseEntity<?> actualDeletePage(@PathVariable int pno) {
         pageService.deletePage(pno);
@@ -244,7 +253,7 @@ public class AppController {
 
     /* Board */
 
-    //게시판
+    //게시판 글쓰기
     @PostMapping("/board/write")
     public Map<String, Integer> createArticle(Authentication authentication,@RequestBody BoardDTO boardDTO) {
         if (authentication == null || !authentication.isAuthenticated()) {
@@ -261,11 +270,51 @@ public class AppController {
         return Map.of("ano", no);
     }
 
-
+    //게시판 글 리스트 (게시판 별)
     @GetMapping("/board/{category}")
     public ResponseEntity<?> getBoardsByCategory(@PathVariable String category) {
         List<BoardDTO> list = boardService.getBoardsByCategory(category);
         return ResponseEntity.ok(list);
+    }
+
+    //게시판 글 리스트 (메인)
+    @GetMapping("/board/notices")
+    public void getTop5Notices(){
+
+    }
+
+    @GetMapping("/board/required")
+    public void getRequiredNotices(){
+
+    }
+
+    @GetMapping("/board/frees")
+    public void getTop3frees() {
+
+    }
+
+    //게시판 글 보기
+    @GetMapping("/board/{category}/{ano}")
+    public void viewArticle(@PathVariable int ano) {
+
+    }
+
+    //게시판 글 삭제
+    @DeleteMapping("/board/delete/{ano}")
+    public void deleteArticle(@PathVariable int ano){
+
+    }
+
+    //게시판 글 수정
+    @PutMapping("/board/{ano}")
+    public void modifyArticle(@PathVariable int ano){
+
+    }
+
+    //게시판 글 고정하기(공지사항)
+    @PutMapping("/page/pinned/{ano}")
+    public void pinnedNotice(@PathVariable int ano){
+
     }
 
 

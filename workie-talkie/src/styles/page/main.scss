@@ -137,14 +137,21 @@
     width: 80px;
   }
 
-  .favorite-btn {
+  .favorite-btn,
+  .recovery,
+  .delete-btn {
     background: none;
     border: none;
     cursor: pointer;
   }
 
-  .favorite-btn img {
-    width: 35px;
+  .favorite-btn img,
+  .recovery img {
+    width: 32px;
+  }
+
+  .delete-btn img {
+    width: 28px;
   }
 
   .status-bar {

@@ -25,7 +25,6 @@ public class Board {
     private String category;
     private String writer;
     private String ability;
-    private String master;
     private String title;
     private String content;
     private String comments;
@@ -37,6 +36,9 @@ public class Board {
 
     @CreationTimestamp
     private LocalDateTime wDate;
+
+    private boolean isPinned;
+    //private boolean isShared;
 
 
 }

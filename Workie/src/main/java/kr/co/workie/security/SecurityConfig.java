@@ -51,6 +51,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/user/check").permitAll()
                         .requestMatchers("/api/user/register").permitAll()
                         .requestMatchers("/api/user/login").permitAll()
+                        //.requestMatchers("/page/delete").permitAll()
                         .requestMatchers("/", "/user/**", "/api/user/**").permitAll()
                         .requestMatchers("/favicon.ico", "/css/**", "/js/**", "/images/**").permitAll()
 

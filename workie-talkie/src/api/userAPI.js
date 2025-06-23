@@ -19,6 +19,7 @@ import {
   BOARD,
   BOARD_WRITE,
   PAGE_DELETE,
+  PAGE_RECOVER,
 } from "./http";
 
 const token = localStorage.getItem("token");
@@ -321,9 +322,36 @@ export const deletePageByPno = async (pno) => {
 };
 
 export const softDeletePage = async (pno) => {
-  return await axios.put(`${PAGE_DELETE}/${pno}`, null, {
-    withCredentials: true,
-  });
+  try {
+    const response = await axios.put(
+      `${PAGE_DELETE}/${pno}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
+export const recoveryPage = async (pno) => {
+  try {
+    const response = await axios.put(
+      `${PAGE_RECOVER}/${pno}`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    console.log("PAGE_RECOVER:", PAGE_RECOVER);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
 };
 
 //게시판 관련

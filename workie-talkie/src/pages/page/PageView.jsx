@@ -65,7 +65,7 @@ export const PageView = () => {
     }));
   }, []);
 
-  console.log("현재 게시글 내용 (body): ", formData.body); // 디버깅용
+  console.log("현재 게시글 내용 (content): ", formData.content); // 디버깅용
 
   // 폼 제출 핸들러
   const submitHandler = (e) => {
@@ -103,7 +103,7 @@ export const PageView = () => {
   };
 
   //휴지통으로 이동 -> 수정하기
-  const softDeletePage = async () => {
+  const pageIntoTrash = async () => {
     const parsedPno = parseInt(pno, 10);
 
     if (isNaN(parsedPno)) {
@@ -114,27 +114,6 @@ export const PageView = () => {
     if (window.confirm("정말 이 노트를 삭제하시겠습니까?")) {
       try {
         await softDeletePage(parsedPno); // ✅ API 호출
-        alert("페이지가 삭제되었습니다.");
-        navigate("/page");
-      } catch (err) {
-        console.error("❌ 페이지 삭제 중 오류", err);
-        alert("노트 삭제 중 오류가 발생했습니다.");
-      }
-    }
-  };
-
-  //휴지통에서 삭제
-  const deletePage = async () => {
-    const parsedPno = parseInt(pno, 10);
-
-    if (isNaN(parsedPno)) {
-      alert("삭제할 페이지 번호가 잘못되었습니다.");
-      return;
-    }
-
-    if (window.confirm("정말 이 노트를 삭제하시겠습니까?")) {
-      try {
-        await deletePageByPno(parsedPno); // ✅ API 호출
         alert("페이지가 삭제되었습니다.");
         navigate("/page");
       } catch (err) {
@@ -156,15 +135,19 @@ export const PageView = () => {
               <div className="quill-field">
                 <div id="quill-toolbar">
                   <span className="ql-formats">
-                    <select className="ql-header" defaultValue="">
-                      <option value="1"></option>
-                      <option value="2"></option>
-                      <option value=""></option>
+                    <select className="ql-size">
+                      <option value="small"></option>
+                      <option defaultValue></option> {/* 기본 (normal) */}
+                      <option value="large"></option>
+                      <option value="huge"></option>
                     </select>
+                  </span>
+                  <span className="ql-formats">
                     <button className="ql-bold" />
                     <button className="ql-italic" />
                     <button className="ql-underline" />
                     <button className="ql-strike" />
+                    <button className="ql-clean" />
                   </span>
                   <span className="ql-formats">
                     <button className="ql-list" value="ordered" />
@@ -195,7 +178,7 @@ export const PageView = () => {
                   >
                     <img src="/images/share.png" alt="공유" />
                   </button>
-                  <button className="delete-btn" onClick={softDeletePage}>
+                  <button className="delete-btn" onClick={pageIntoTrash}>
                     <img src="/images/trashcan.png" alt="삭제" />
                   </button>
                 </div>

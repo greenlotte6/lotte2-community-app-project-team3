@@ -35,6 +35,7 @@ import { PageMain } from "../pages/page/PageMain";
 import { PageWrite } from "../pages/page/PageWrite";
 import { PageView } from "../pages/page/PageView";
 import TokenTest from "../pages/TokenTest";
+import { PageTrash } from "../pages/page/PageTrash";
 
 //라우터 생성
 
@@ -75,6 +76,7 @@ const router = createBrowserRouter([
     ],
   },
   { path: "/page/:pno", element: <PageView /> },
+  { path: "/page/trash", element: <PageTrash /> },
   //{ path: "*", element: <Navigate to="/" replace /> },
 
   // 랜딩 페이지들

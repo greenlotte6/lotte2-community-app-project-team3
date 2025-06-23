@@ -17,14 +17,14 @@ export const Notices = () => {
         <tbody>
           <tr>
             <td>1</td>
-            <td>공지사항입니다1</td>
+            <td>★공지사항입니다1★</td>
             <td>내용입니다1 (10)</td>
             <td>50</td>
             <td>2025.06.03</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>공지사항입니다2</td>
+            <td>★공지사항입니다2★</td>
             <td>내용입니다2 (8)</td>
             <td>30</td>
             <td>2025.06.03</td>
@@ -45,6 +45,20 @@ export const Notices = () => {
           </tr>
           <tr>
             <td>5</td>
+            <td>공지사항입니다2</td>
+            <td>내용입니다2 (8)</td>
+            <td>30</td>
+            <td>2025.06.03</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>공지사항입니다2</td>
+            <td>내용입니다2 (8)</td>
+            <td>30</td>
+            <td>2025.06.03</td>
+          </tr>
+          <tr>
+            <td>7</td>
             <td>공지사항입니다2</td>
             <td>내용입니다2 (8)</td>
             <td>30</td>

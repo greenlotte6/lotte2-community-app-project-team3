@@ -5,7 +5,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
-
+/*
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -24,4 +24,6 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowCredentials(true)     // 자격 증명 허용
                 .maxAge(3600);              // pre-flight 요청의 유효시간 설정
     }
+
+ */
 }

@@ -25,8 +25,29 @@ export const QuillEditor = ({ value = "", change_field }) => {
             container: "#quill-toolbar", // ✨ 중요한 부분: 외부 툴바 ID 지정 ✨
           },
         },
-      });
 
+        formats: [
+          "header", // 제목
+          "font", // 폰트
+          "size", // 크기
+          "bold",
+          "italic",
+          "underline",
+          "strike", // 텍스트 스타일
+          "blockquote",
+          "code-block", // 블록
+          "list",
+          "bullet",
+          "indent", // 리스트
+          "link",
+          "image",
+          "video", // 삽입
+          "color",
+          "background", // 색상
+          "align", // 정렬
+          "clean", // 초기화
+        ],
+      });
       const quill = quillInstance.current;
 
       // 초기값 설정 (최초 마운트 시에만)
