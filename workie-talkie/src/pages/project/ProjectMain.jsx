@@ -220,24 +220,6 @@ export const ProjectMain = () => {
             <span>➕</span>
             NEW PROJECT
           </button>
-
-          {/* 디버깅 정보 */}
-          <div
-            style={{
-              marginTop: "20px",
-              padding: "10px",
-              backgroundColor: "#f8f9fa",
-              borderRadius: "5px",
-              fontSize: "12px",
-            }}
-          >
-            <strong>🔍 디버깅 정보:</strong>
-            <br />
-            전체 프로젝트: {projects.length}개<br />
-            표시 프로젝트: {filteredProjects.length}개<br />
-            검색어: "{searchTerm || "없음"}"<br />
-            모달 상태: {isAddModalOpen ? "열림" : "닫힘"}
-          </div>
         </aside>
 
         <main>
