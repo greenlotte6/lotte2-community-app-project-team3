@@ -234,4 +234,24 @@
   .share-permission-options li:hover {
     background-color: #f1f3f5;
   }
+
+  /* 글자 크기 조절용 */
+  .ql-editor .ql-size-small {
+    font-size: 0.75em;
+  }
+  .ql-editor .ql-size-large {
+    font-size: 1.5em;
+  }
+  .ql-editor .ql-size-huge {
+    font-size: 2.5em;
+  }
+  .ql-editor strong {
+    font-weight: bold !important;
+  }
+  .ql-editor em {
+    font-style: italic !important;
+  }
+  .ql-editor u {
+    text-decoration: underline !important;
+  }
 }

@@ -9,37 +9,18 @@
     color: #333;
   }
 
-  .title-field {
+  .selection {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+
     background-color: #fff;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
 
-    label {
-      display: block;
-      font-weight: 500;
-      margin-bottom: 8px;
-      color: #555;
-    }
-
-    #title-input {
-      width: 100%;
-      height: 45px;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-  }
-
-  .selection {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-
-    .category,
-    .master {
+    .category {
       flex: 1;
 
       label {
@@ -58,13 +39,35 @@
         font-size: 14px;
       }
     }
+
+    .master {
+      margin-top: 30px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; // ✅ 오른쪽 정렬
+      background-color: #374151;
+      border-radius: 15px;
+      justify-content: center; // ✅ 세로 가운데
+      align-items: center; // ✅ 가로 가운데
+
+      img {
+        width: 25px;
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
+
+  .main-area {
+    padding: 20px 40px;
   }
 
   .content-field {
     background-color: #fff;
     border-radius: 12px;
-    padding: 20px 10px 60px 10px;
-    height: 400px; // 💡 고정된 높이
+    padding: 20px 10px;
+    height: 580px;
     overflow-y: auto; // 💡 내부만 스크롤되게
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     margin-bottom: 30px;
@@ -75,11 +78,28 @@
       margin-bottom: 12px;
       color: #555;
     }
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    #title-input {
+      width: 100%;
+      height: 45px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
   }
 
   .submit {
     padding: 12px 28px;
-    background-color: #104e4a;
+    background-color: #374151;
     color: #fff;
     font-size: 16px;
     border: none;
@@ -88,7 +108,7 @@
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #0c3e3a;
+      background-color: #1d232c;
     }
   }
 
@@ -102,11 +122,34 @@
     width: 100%;
     border-collapse: collapse;
   }
+  .ql-container {
+    height: 395px;
+  }
 
   .ql-editor th,
   .ql-editor td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
+  }
+
+  /* 글자 크기 조절용 */
+  .ql-editor .ql-size-small {
+    font-size: 0.75em;
+  }
+  .ql-editor .ql-size-large {
+    font-size: 1.5em;
+  }
+  .ql-editor .ql-size-huge {
+    font-size: 2.5em;
+  }
+  .ql-editor strong {
+    font-weight: bold !important;
+  }
+  .ql-editor em {
+    font-style: italic !important;
+  }
+  .ql-editor u {
+    text-decoration: underline !important;
   }
 }

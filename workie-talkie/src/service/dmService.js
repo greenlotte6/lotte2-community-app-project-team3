@@ -262,13 +262,15 @@ function quickLoginAndTest() {
 
   if (!token) {
     console.log("🔑 자동 로그인 시도...");
-    tryLogin(serverURL);
+    //tryLogin(serverURL);
   } else {
     console.log("✅ 토큰 존재, 사용자 검색 테스트 시작");
     testUserSearch(serverURL);
   }
 }
 
+{
+  /*}
 async function tryLogin(serverURL = getServerURL()) {
   try {
     // 🔥 동적 서버 URL 사용
@@ -303,6 +305,8 @@ async function tryLogin(serverURL = getServerURL()) {
   } catch (error) {
     console.error("❌ 로그인 오류:", error);
   }
+}
+*/
 }
 
 async function testUserSearch(serverURL = getServerURL()) {
@@ -376,8 +380,8 @@ function setUserCredentials() {
 // 4. 즉시 실행
 quickLoginAndTest();
 
-console.log("\n🛠️  사용 가능한 함수들:");
-console.log("quickLoginAndTest() - 빠른 로그인 및 테스트");
-console.log("tryLogin() - 로그인 시도");
-console.log("testUserSearch() - 사용자 검색 테스트");
-console.log("\n실제 계정으로 로그인하려면: setUserCredentials() 실행");
+//console.log("\n🛠️  사용 가능한 함수들:");
+//console.log("quickLoginAndTest() - 빠른 로그인 및 테스트");
+//console.log("tryLogin() - 로그인 시도");
+//console.log("testUserSearch() - 사용자 검색 테스트");
+//console.log("\n실제 계정으로 로그인하려면: setUserCredentials() 실행");

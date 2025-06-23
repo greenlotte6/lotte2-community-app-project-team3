@@ -1,6 +1,7 @@
 package kr.co.workie.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,4 +31,10 @@ public class BoardDTO {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
     private LocalDateTime wDate;
+
+    @JsonProperty("pinned")
+    private boolean isPinned;
+
+    //@JsonProperty("shared")
+    //private boolean isShared;
 }

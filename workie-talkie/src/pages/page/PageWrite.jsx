@@ -75,15 +75,19 @@ export const PageWrite = () => {
               <div className="quill-field">
                 <div id="quill-toolbar">
                   <span className="ql-formats">
-                    <select className="ql-header" defaultValue="">
-                      <option value="1"></option>
-                      <option value="2"></option>
-                      <option value=""></option>
+                    <select className="ql-size">
+                      <option value="small"></option>
+                      <option defaultValue></option> {/* 기본 (normal) */}
+                      <option value="large"></option>
+                      <option value="huge"></option>
                     </select>
+                  </span>
+                  <span className="ql-formats">
                     <button className="ql-bold" />
                     <button className="ql-italic" />
                     <button className="ql-underline" />
                     <button className="ql-strike" />
+                    <button className="ql-clean" />
                   </span>
                   <span className="ql-formats">
                     <button className="ql-list" value="ordered" />

@@ -47,11 +47,12 @@ public class PageService {
         pageRepository.save(page);
     }
 
-    //일정 삭제하기
+    //페이지 삭제하기 (영구)
     public void deletePage(int pno){
         pageRepository.deleteById(pno);
     }
 
+    //페이지 삭제하기 (임시)
     @Transactional
     public void trashPage(int pno) {
         Page page = pageRepository.findById(pno)
@@ -61,6 +62,15 @@ public class PageService {
         pageRepository.save(page); // 상태만 변경하여 저장
     }
 
+    //페이지 복구하기
+    @Transactional
+    public void recoveryPage(int pno) {
+        Page page = pageRepository.findById(pno)
+                .orElseThrow(() -> new IllegalArgumentException("페이지가 존재하지 않습니다."));
+
+        page.setDeleted(false); // 또는 page.setIsDeleted(1);
+        pageRepository.save(page); // 상태만 변경하여 저장
+    }
 
 
     public List<Page> getPageByWriter(String loginId) {

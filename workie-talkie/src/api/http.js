@@ -42,6 +42,7 @@ export const PAGE_TOTAL = `${PAGE}/count`;
 export const PAGE_RECENT = `${PAGE}/recent`;
 export const PAGE_PARENT = `${PAGE}/parent`;
 export const PAGE_DELETE = `${PAGE}/delete`;
+export const PAGE_RECOVER = `${PAGE}/recover`;
 
 //drive
 
