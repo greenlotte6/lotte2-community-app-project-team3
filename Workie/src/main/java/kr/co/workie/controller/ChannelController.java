@@ -19,7 +19,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/channels") // 🔥 /api 제거 - 프론트엔드와 일치
-@CrossOrigin(origins = "*") // 개발용
+//@CrossOrigin(origins = "*") // 개발용
 public class ChannelController {
 
     private final ChannelService channelService;
