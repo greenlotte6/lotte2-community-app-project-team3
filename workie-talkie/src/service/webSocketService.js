@@ -23,7 +23,9 @@ class WebSocketService {
     if (isLocalhost) {
       return "http://localhost:8080/ws";
     } else {
-      return "https://workie-talkie.site";
+      //   return "https://workie-talkie.site";
+      return "https://workie-talkie.site/ws";
+      //WebSocket은 특별한 통신 방식이라서, 서버에서 지정한 전용 경로(/ws)로 연결해야함. 마치 집 주소에서 '몇 동 몇 호'까지 정확히 써야 하는 것처럼, WebSocket도 정확한 경로가 필요함"
     }
   }
 
