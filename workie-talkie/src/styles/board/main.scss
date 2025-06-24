@@ -14,7 +14,7 @@ body {
 
 main.main-content {
   flex: 1;
-  padding: 20px 30px;
+  padding: 10px 30px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -25,7 +25,7 @@ main.main-content {
 .menu,
 .notices {
   background: white;
-  padding: 20px;
+  padding: 10px 20px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
@@ -62,6 +62,15 @@ main.main-content {
   background: #374151;
   color: white;
   height: 50px;
+}
+
+.notices table tbody tr.importance td {
+  font-weight: bold; /* 글씨 굵게 */
+}
+
+.notices table tbody tr.importance td:nth-child(2):before {
+  content: "📌"; /* 별 아이콘 */
+  margin-right: 5px;
 }
 
 .section-container {

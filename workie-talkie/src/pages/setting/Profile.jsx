@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { SettingLayout } from "../../layouts/SettingLayout";
 import { useNavigate } from "react-router-dom";
 import { useLoginStore } from "../../stores/useLoginStore";
-import { getProfile, putProfile } from "../../api/userAPI";
+import { getProfile, putProfile } from "../../api/settingAPI";
 
 export const Profile = () => {
   const user = useLoginStore((state) => state.user);

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { SettingLayout } from "../../layouts/SettingLayout";
-import { Link } from "react-router-dom";
 import { AddBoardModal } from "../../components/setting/AddBoardModal";
 import { ModifyBoardModal } from "../../components/setting/ModifyBoardModal";
 

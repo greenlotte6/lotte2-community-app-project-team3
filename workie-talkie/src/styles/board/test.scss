@@ -67,7 +67,7 @@
     background-color: #fff;
     border-radius: 12px;
     padding: 20px 10px;
-    height: 580px;
+    height: 480px; //집에선 580px
     overflow-y: auto; // 💡 내부만 스크롤되게
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     margin-bottom: 30px;
@@ -92,7 +92,7 @@
       padding: 10px;
       border: 1px solid #ddd;
       border-radius: 8px;
-      font-size: 16px;
+      font-size: 14px;
       margin-bottom: 20px;
     }
   }
@@ -112,10 +112,12 @@
     }
   }
 
-  .menuTable {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: center;
+  .form {
+    border: 1px solid #dfdfdf;
+    margin-top: 5px;
+    border-radius: 10px;
+    padding: 3px 10px;
+    font-size: 12.5px;
   }
 
   .ql-editor table {
@@ -123,7 +125,7 @@
     border-collapse: collapse;
   }
   .ql-container {
-    height: 395px;
+    height: 280px; //집에선 395px
   }
 
   .ql-editor th,

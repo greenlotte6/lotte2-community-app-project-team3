@@ -5,6 +5,7 @@ import kr.co.workie.dto.CalendarDTO;
 import kr.co.workie.dto.PageDTO;
 import kr.co.workie.entity.Page;
 import kr.co.workie.entity.User;
+import kr.co.workie.repository.BoardRepository;
 import kr.co.workie.repository.PageRepository;
 import kr.co.workie.service.BoardService;
 import kr.co.workie.service.CalendarService;
@@ -12,6 +13,7 @@ import kr.co.workie.service.PageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
@@ -29,7 +31,6 @@ public class AppController {
 
     private final CalendarService calendarService;
     private final PageService pageService;
-    private final PageRepository pageRepository;
     private final BoardService boardService;
 
     @Value("${spring.application.version}")
@@ -279,42 +280,84 @@ public class AppController {
 
     //게시판 글 리스트 (메인)
     @GetMapping("/board/notices")
-    public void getTop5Notices(){
+    public ResponseEntity<?> getTop5Notices(){
+        List<BoardDTO> notices = boardService.getNotices("notice");
+
+        return ResponseEntity.ok(notices);
 
     }
 
     @GetMapping("/board/required")
-    public void getRequiredNotices(){
+    public ResponseEntity<?> getRequiredNotices(){
+        List<BoardDTO> pinnedNotices = boardService.getPinnedNotices(true);
 
+        return ResponseEntity.ok(pinnedNotices);
     }
 
     @GetMapping("/board/frees")
-    public void getTop3frees() {
+    public ResponseEntity<?> getTop3frees() {
+        List<BoardDTO> frees = boardService.getFrees("free");
 
+        return ResponseEntity.ok(frees);
+    }
+
+    @GetMapping("/board/menus")
+    public ResponseEntity<?> getTop3menus() {
+        List<BoardDTO> menus = boardService.getMenus("menu");
+
+        return ResponseEntity.ok(menus);
+    }
+
+    @GetMapping("/board/recent")
+    public ResponseEntity<?> getTop3recent() {
+        List<BoardDTO> recent = boardService.getRecent();
+
+        return ResponseEntity.ok(recent);
     }
 
     //게시판 글 보기
     @GetMapping("/board/{category}/{ano}")
-    public void viewArticle(@PathVariable int ano) {
+    public ResponseEntity<BoardDTO> viewArticle(@PathVariable int ano, @PathVariable String category, Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new AccessDeniedException("User not authenticated");
+        }
 
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+        String loginId = user.getId();
+
+        BoardDTO boardDTO = boardService.findById(ano);
+
+        return new ResponseEntity<>(boardDTO, HttpStatus.OK);
     }
 
     //게시판 글 삭제
     @DeleteMapping("/board/delete/{ano}")
-    public void deleteArticle(@PathVariable int ano){
+    public ResponseEntity<?> deleteArticle(@PathVariable int ano){
+        boardService.deleteArticle(ano);
+
+        return ResponseEntity.ok().build();
 
     }
 
     //게시판 글 수정
     @PutMapping("/board/{ano}")
-    public void modifyArticle(@PathVariable int ano){
+    public ResponseEntity<?> modifyArticle(@PathVariable int ano, @RequestBody BoardDTO boardDTO) {
+        boardService.updateArticle(ano,boardDTO);
 
+        return ResponseEntity.ok().build();
     }
 
     //게시판 글 고정하기(공지사항)
     @PutMapping("/page/pinned/{ano}")
-    public void pinnedNotice(@PathVariable int ano){
-
+    public ResponseEntity<?> pinnedNotice(@PathVariable int ano, @RequestBody BoardDTO boardDTO) {
+        try {
+            int result = boardService.pinnedArticle(ano, boardDTO.isPinned());
+            return ResponseEntity.ok(result);
+        } catch (IllegalStateException e) {
+            // 이미 고정된 게시물이 2개 이상일 경우
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
 

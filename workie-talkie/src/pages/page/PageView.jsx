@@ -2,12 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { MainLayout } from "../../layouts/MainLayout";
 import { Aside } from "../../components/page/Aside";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  deletePageByPno,
-  getPageByPno,
-  putPage,
-  softDeletePage,
-} from "../../api/userAPI";
+import { getPageByPno, putPage, softDeletePage } from "../../api/pageAPI";
 import { ShareModal } from "../../components/page/ShareModal";
 import { QuillEditor } from "../../components/board/QuillEditor";
 

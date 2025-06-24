@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react"; // useEffect 훅을 임포�
 import { MainLayout } from "../../layouts/MainLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { Aside } from "../../components/page/Aside";
-import { getPage } from "../../api/userAPI";
+import { getPage, putFavoritePage } from "../../api/pageAPI";
 import { useLoginStore } from "../../stores/useLoginStore";
-import { putFavoritePage } from "../../api/userAPI";
 //사이드바 타이틀 누르면 숨겨지는거도 해보기!
 
 export const PageMain = () => {
@@ -60,7 +59,7 @@ export const PageMain = () => {
     try {
       const requestData = { pno, favorite: updatedFavorite };
       console.log("putFavoritePage에 전달할 데이터:", requestData); // ✨ 이 로그 추가 ✨
-      // 서버에 반영 (userAPI 함수 사용)
+      // 서버에 반영
       await putFavoritePage({ pno, favorite: updatedFavorite });
       console.log("✅ 즐겨찾기 상태 서버 반영 완료");
     } catch (error) {

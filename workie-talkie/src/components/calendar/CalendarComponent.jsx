@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { EventModal } from "./EventModal";
-import { deleteCalendar, getCalendar } from "../../api/userAPI";
+import { deleteCalendar, getCalendar } from "../../api/calendarAPI";
 
 export const CalendarComponent = ({ events, setEvents }) => {
   const calendarRef = useRef(null);

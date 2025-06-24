@@ -37,7 +37,7 @@ public class Board {
     @CreationTimestamp
     private LocalDateTime wDate;
 
-    private boolean isPinned;
+    private boolean pinned;
     //private boolean isShared;
 
 

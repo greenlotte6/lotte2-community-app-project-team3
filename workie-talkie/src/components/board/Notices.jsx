@@ -1,6 +1,22 @@
-import React from "react";
+export const Notices = ({ notices, importances }) => {
+  // 1. importances 배열 자체를 wDate 최신순으로 정렬 (고정된 공지사항 내에서의 순서)
+  const sortedImportances = [...importances].sort(
+    (a, b) => new Date(b.wDate) - new Date(a.wDate)
+  );
 
-export const Notices = () => {
+  // 2. notices 배열에서 importances에 이미 있는 게시물을 제외합니다.
+  const filteredNotices = notices.filter(
+    (notice) => !importances.some((imp) => imp.ano === notice.ano)
+  );
+
+  // 3. 필터링된 notices를 wDate 최신순으로 정렬합니다.
+  const sortedNormalNotices = [...filteredNotices].sort(
+    (a, b) => new Date(b.wDate) - new Date(a.wDate)
+  );
+
+  // 4. 정렬된 importances를 먼저 두고, 그 뒤에 정렬된 일반 공지사항을 합칩니다.
+  const finalNoticesList = [...sortedImportances, ...sortedNormalNotices];
+
   return (
     <div className="notices">
       <h3>📢 공지사항</h3>
@@ -10,60 +26,34 @@ export const Notices = () => {
             <th>글번호</th>
             <th>제목</th>
             <th>내용</th>
-            <th>조회수</th>
+            <th>댓글수</th>
             <th>작성일</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>★공지사항입니다1★</td>
-            <td>내용입니다1 (10)</td>
-            <td>50</td>
-            <td>2025.06.03</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>★공지사항입니다2★</td>
-            <td>내용입니다2 (8)</td>
-            <td>30</td>
-            <td>2025.06.03</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>공지사항입니다2</td>
-            <td>내용입니다2 (8)</td>
-            <td>30</td>
-            <td>2025.06.03</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>공지사항입니다2</td>
-            <td>내용입니다2 (8)</td>
-            <td>30</td>
-            <td>2025.06.03</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>공지사항입니다2</td>
-            <td>내용입니다2 (8)</td>
-            <td>30</td>
-            <td>2025.06.03</td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td>공지사항입니다2</td>
-            <td>내용입니다2 (8)</td>
-            <td>30</td>
-            <td>2025.06.03</td>
-          </tr>
-          <tr>
-            <td>7</td>
-            <td>공지사항입니다2</td>
-            <td>내용입니다2 (8)</td>
-            <td>30</td>
-            <td>2025.06.03</td>
-          </tr>
+          {finalNoticesList.length === 0 ? (
+            <tr>
+              <td colSpan="5">공지사항이 없습니다.</td>
+            </tr>
+          ) : (
+            finalNoticesList.map((notice, index) => {
+              const isImportance = importances.some(
+                (imp) => imp.ano === notice.ano
+              );
+              return (
+                <tr
+                  key={notice.ano}
+                  className={isImportance ? "importance" : ""}
+                >
+                  <td>{index + 1}</td>
+                  <td>{notice.title}</td>
+                  <td>{notice.content}</td>
+                  <td>{notice.comments ? notice.comments : 0}</td>
+                  <td>{new Date(notice.wDate).toLocaleDateString()}</td>
+                </tr>
+              );
+            })
+          )}
         </tbody>
       </table>
     </div>

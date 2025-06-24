@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getPage, getParent, getRecent, getTotal } from "../../api/userAPI";
+import { getPage, getParent, getRecent, getTotal } from "../../api/pageAPI";
 
 export const Aside = () => {
   const [total, setTotal] = useState(0);
