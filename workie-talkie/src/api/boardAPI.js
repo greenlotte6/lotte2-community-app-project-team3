@@ -9,6 +9,7 @@ import {
   BOARD_IMPORTANT,
   BOARD_RECENT,
   BOARD_DELETE,
+  BOARD_COMMENTS,
 } from "./http";
 
 //게시판 관련
@@ -140,6 +141,55 @@ export const getRecent = async () => {
     return response.data;
   } catch (error) {
     console.error("최근 게시물 불러오기 실패:", error);
+    throw error;
+  }
+};
+
+//댓글
+export const getComments = async (ano) => {
+  try {
+    const response = await axios.get(`${BOARD_COMMENTS}/${ano}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("댓글 조회 실패:", error);
+    throw error;
+  }
+};
+
+export const postComment = async (ano, comment) => {
+  try {
+    const response = await axios.post(`${BOARD_COMMENTS}/${ano}`, comment, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("댓글 작성 실패:", error);
+    throw error;
+  }
+};
+
+export const putComment = async (data) => {
+  try {
+    const response = await axios.put(`${BOARD_COMMENTS}/${data.cno}`, data, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("댓글 수정 실패:", error);
+    throw error;
+  }
+};
+
+export const deleteComment = async (cno) => {
+  try {
+    const response = await axios.delete(`${BOARD_COMMENTS}/${cno}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("댓글 삭제 실패", error);
     throw error;
   }
 };

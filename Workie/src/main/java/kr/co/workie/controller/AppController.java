@@ -2,6 +2,7 @@ package kr.co.workie.controller;
 
 import kr.co.workie.dto.BoardDTO;
 import kr.co.workie.dto.CalendarDTO;
+import kr.co.workie.dto.CommentDTO;
 import kr.co.workie.dto.PageDTO;
 import kr.co.workie.entity.Page;
 import kr.co.workie.entity.User;
@@ -349,7 +350,7 @@ public class AppController {
     }
 
     //게시판 글 고정하기(공지사항)
-    @PutMapping("/page/pinned/{ano}")
+    @PutMapping("/board/pinned/{ano}")
     public ResponseEntity<?> pinnedNotice(@PathVariable int ano, @RequestBody BoardDTO boardDTO) {
         try {
             int result = boardService.pinnedArticle(ano, boardDTO.isPinned());
@@ -358,6 +359,39 @@ public class AppController {
             // 이미 고정된 게시물이 2개 이상일 경우
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+    //댓글 출력
+    @GetMapping("/board/comments/{ano}")
+    public List<CommentDTO> commentsList(@PathVariable int ano) {
+        return boardService.getComments(ano);
+
+    }
+
+    //댓글 달기
+    @PostMapping("/board/comments/{ano}")
+    public void addComments(@PathVariable int ano, @RequestBody CommentDTO commentDTO, Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new AccessDeniedException("User not authenticated");
+        }
+
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+        String loginId = user.getId();
+
+        boardService.addComment(loginId, ano, commentDTO);
+    }
+
+    //댓글 수정
+    @PutMapping("/board/comments/{cno}")
+    public void modifyComment(@PathVariable int cno, @RequestBody CommentDTO commentDTO) {
+        boardService.updateComment(cno, commentDTO);
+    }
+    
+    //댓글 삭제
+    @DeleteMapping("/board/comments/{cno}")
+    public void deleteComment(@PathVariable int cno) {
+        boardService.deleteComment(cno);
     }
 
 

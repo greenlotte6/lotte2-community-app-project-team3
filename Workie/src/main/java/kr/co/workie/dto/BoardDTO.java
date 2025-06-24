@@ -35,6 +35,9 @@ public class BoardDTO {
     @JsonProperty("pinned")
     private boolean pinned;
 
+    @JsonProperty("commented")
+    private boolean commented;
+
     //@JsonProperty("shared")
     //private boolean isShared;
 }

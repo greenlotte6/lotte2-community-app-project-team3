@@ -14,6 +14,7 @@ export const BoardWrite = () => {
     content: "", // Quill 에디터의 내용을 저장할 필드
     category: "notice", // ✨ 게시판 카테고리 필드 추가 (기본값 설정) ✨
     pinned: false,
+    commented: true,
   });
 
   useEffect(() => {
@@ -46,6 +47,13 @@ export const BoardWrite = () => {
     }));
   };
 
+  const commentedHandler = () => {
+    setFormData((prev) => ({
+      ...prev,
+      commented: !prev.commented,
+    }));
+  };
+
   // 폼 제출 핸들러
   const handleSubmit = async () => {
     const payload = {
@@ -53,6 +61,7 @@ export const BoardWrite = () => {
       content: formData.content,
       category: formData.category,
       pinned: formData.pinned,
+      commented: formData.commented,
       writer: formData.writer,
     };
 
@@ -90,6 +99,7 @@ export const BoardWrite = () => {
                   <option value="menu">식단표</option>
                 </select>
               </div>
+
               {/* ✅ 공지사항일 때만 보여줌 */}
               {formData.category === "notice" && (
                 <div
@@ -117,19 +127,32 @@ export const BoardWrite = () => {
               )}
             </div>
 
-            {/* 제목 입력 필드 */}
-            <div className="title-field"></div>
-
             <div className="content-field">
               {/* Quill 에디터 컴포넌트 사용 */}
-              <label>제목:</label>
-              <input
-                id="title-input"
-                type="text"
-                placeholder="제목을 입력하세요"
-                value={formData.title}
-                onChange={(e) => change_field("title", e.target.value)}
-              />
+              <div className="title-field">
+                <label>제목:</label>
+                <input
+                  id="title-input"
+                  type="text"
+                  placeholder="제목을 입력하세요"
+                  value={formData.title}
+                  onChange={(e) => change_field("title", e.target.value)}
+                />
+              </div>
+
+              {/* ✨ 댓글 허용 여부 체크박스 추가 ✨ */}
+              <div className="comments-option">
+                <div className="allow-comments-option">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={formData.commented}
+                      onChange={commentedHandler}
+                    />
+                    댓글 허용
+                  </label>
+                </div>
+              </div>
 
               {/* ✅ 툴바 DOM 먼저 추가 */}
               <div id="quill-toolbar">

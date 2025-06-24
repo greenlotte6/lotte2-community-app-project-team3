@@ -38,6 +38,7 @@ public class Board {
     private LocalDateTime wDate;
 
     private boolean pinned;
+    private boolean commented;
     //private boolean isShared;
 
 

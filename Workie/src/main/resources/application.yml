@@ -11,6 +11,8 @@ spring:
     multipart:
       location: uploads
       max-file-size: 10MB
+  cache:
+    type: simple
 
   mail:
     host: smtp.gmail.com
