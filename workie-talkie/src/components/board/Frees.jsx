@@ -1,36 +1,23 @@
-import React from "react";
-
-export const Frees = () => {
+export const Frees = ({ frees }) => {
   return (
     <div className="free">
       <h3>💬 자유게시판</h3>
-      <div className="post-card">
-        <div className="post-title">[글번호] 제목</div>
-        <div className="post-meta">
-          <span>작성자</span>
-          <span>2025.06.03</span>
-          <span>💬 5</span>
-          <span>👀 89</span>
-        </div>
-      </div>
-      <div className="post-card">
-        <div className="post-title">[글번호] 제목</div>
-        <div className="post-meta">
-          <span>작성자</span>
-          <span>2025.06.03</span>
-          <span>💬 5</span>
-          <span>👀 89</span>
-        </div>
-      </div>
-      <div className="post-card">
-        <div className="post-title">[글번호] 제목</div>
-        <div className="post-meta">
-          <span>작성자</span>
-          <span>2025.06.03</span>
-          <span>💬 5</span>
-          <span>👀 89</span>
-        </div>
-      </div>
+      {frees.length === 0 ? (
+        <p>게시물이 없습니다.</p>
+      ) : (
+        frees.map((free) => (
+          <div key={free.ano} className="post-card">
+            <div className="post-title">{free.title}</div>
+            <div className="content-summary">{free.content}</div>
+            <div className="post-meta">
+              <span>{free.writer}</span>
+              <span>{new Date(free.wDate).toLocaleDateString()}</span>
+              <span>💬 {free.comments ? free.comments : 0}</span>
+              <span>👀 {free.views ? free.views : 0}</span>
+            </div>
+          </div>
+        ))
+      )}
     </div>
   );
 };

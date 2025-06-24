@@ -44,8 +44,14 @@ export const PAGE_PARENT = `${PAGE}/parent`;
 export const PAGE_DELETE = `${PAGE}/delete`;
 export const PAGE_RECOVER = `${PAGE}/recover`;
 
-//drive
-
 //board
 export const BOARD_MAIN = `${BOARD}/main`;
 export const BOARD_WRITE = `${BOARD}/write`;
+export const BOARD_DELETE = `${BOARD}/delete`;
+export const BOARD_PINNED = `${BOARD}/pinned`;
+
+export const BOARD_NOTICES = `${BOARD}/notices`;
+export const BOARD_IMPORTANT = `${BOARD}/required`;
+export const BOARD_FREES = `${BOARD}/frees`;
+export const BOARD_RECENT = `${BOARD}/recent`;
+export const BOARD_MENUS = `${BOARD}/menus`;

@@ -3,7 +3,7 @@ import { MainLayout } from "../../layouts/MainLayout";
 import { Aside } from "../../components/page/Aside";
 import { QuillEditor } from "../../components/board/QuillEditor";
 import { ShareModal } from "../../components/page/ShareModal";
-import { postPage } from "../../api/userAPI";
+import { postPage } from "../../api/pageAPI";
 import { useNavigate } from "react-router-dom";
 
 export const PageWrite = () => {

@@ -33,7 +33,7 @@ public class BoardDTO {
     private LocalDateTime wDate;
 
     @JsonProperty("pinned")
-    private boolean isPinned;
+    private boolean pinned;
 
     //@JsonProperty("shared")
     //private boolean isShared;

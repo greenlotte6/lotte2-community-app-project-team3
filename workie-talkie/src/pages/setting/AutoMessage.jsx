@@ -1,4 +1,3 @@
-import React from "react";
 import { SettingLayout } from "../../layouts/SettingLayout";
 import { Link } from "react-router-dom";
 

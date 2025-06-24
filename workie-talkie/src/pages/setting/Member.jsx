@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { SettingLayout } from "../../layouts/SettingLayout";
 import { useLoginStore } from "../../stores/useLoginStore";
 import { useNavigate } from "react-router-dom";
-import { getMembers, putMembers } from "../../api/userAPI";
-import { SETTING_MEMBERS } from "../../api/http";
+import { getMembers, putMembers } from "../../api/settingAPI";
 
 export const Member = () => {
   const [showModal, setShowModal] = useState(false);

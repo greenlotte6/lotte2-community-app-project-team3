@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { postCalendar, putCalendar } from "../../api/userAPI";
+import { postCalendar, putCalendar } from "../../api/calendarAPI";
 
 const initState = {
   writer: "",

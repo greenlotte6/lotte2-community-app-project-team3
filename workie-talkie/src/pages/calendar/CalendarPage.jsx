@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarLayout } from "../../layouts/CalendarLayout";
 import { CalendarComponent } from "../../components/calendar/CalendarComponent";
 import { useLoginStore } from "../../stores/useLoginStore";
 import { useNavigate } from "react-router-dom";
-import { getCalendar } from "../../api/userAPI";
+import { getCalendar } from "../../api/calendarAPI";
 import { SidePanel } from "../../components/calendar/SidePanel";
 
 export const CalendarPage = () => {

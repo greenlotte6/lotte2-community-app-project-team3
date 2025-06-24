@@ -3,7 +3,7 @@ import { BoardLayout } from "../../layouts/BoardLayout";
 import { QuillEditor } from "../../components/board/QuillEditor";
 import { useLoginStore } from "../../stores/useLoginStore";
 import { useNavigate } from "react-router-dom";
-import { postBoard } from "../../api/userAPI";
+import { postBoard } from "../../api/boardAPI";
 import "quill/dist/quill.snow.css";
 
 export const BoardWrite = () => {
@@ -103,6 +103,16 @@ export const BoardWrite = () => {
                     }
                     alt="게시물 고정"
                   />
+                </div>
+              )}
+              {/* ✅ 식단표일 때만 보여줌 */}
+              {formData.category === "menu" && (
+                <div>
+                  <p>글 양식 : </p>
+                  <div className="form">
+                    <p>[2025.06.24 (화)]</p>
+                    <p>밥, 국, 반찬1, 반찬2, 반찬3</p>
+                  </div>
                 </div>
               )}
             </div>
