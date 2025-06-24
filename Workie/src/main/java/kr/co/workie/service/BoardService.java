@@ -1,8 +1,11 @@
 package kr.co.workie.service;
 
 import kr.co.workie.dto.BoardDTO;
+import kr.co.workie.dto.CommentDTO;
 import kr.co.workie.entity.Board;
+import kr.co.workie.entity.Comment;
 import kr.co.workie.repository.BoardRepository;
+import kr.co.workie.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 public class BoardService {
     private final ModelMapper modelMapper;
     private final BoardRepository boardRepository;
+    private final CommentRepository commentRepository;
 
     public int addArticle(String loginId, BoardDTO boardDTO) {
         Board board = modelMapper.map(boardDTO, Board.class);
@@ -125,4 +129,41 @@ public class BoardService {
                 .map(board -> modelMapper.map(board, BoardDTO.class))
                 .collect(Collectors.toList());
     }
+
+
+    //댓글
+    public List<CommentDTO> getComments(int ano){
+        Pageable pageable = PageRequest.of(0, 5, Sort.by(Sort.Order.desc("regDate")));
+
+        Page<Comment> commentList = commentRepository.findAll(pageable);
+
+        return commentList.getContent().stream()
+                .map(comment -> modelMapper.map(comment, CommentDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public int addComment(String loginId, int ano, CommentDTO commentDTO) {
+        Comment comment = modelMapper.map(commentDTO, Comment.class);
+        comment.setWriter(loginId);
+        comment.setAno(ano);
+
+        Comment savedComment = commentRepository.save(comment);
+
+        return savedComment.getAno();
+    }
+
+    public void updateComment(int cno, CommentDTO commentDTO) {
+        Comment comment = commentRepository.findById(cno).orElseThrow();
+        String originalWriter = comment.getWriter();
+
+        modelMapper.map(commentDTO, comment);
+        comment.setWriter(originalWriter);
+
+        commentRepository.save(comment);
+    }
+
+    public void deleteComment(int cno) {
+        commentRepository.deleteById(cno);
+    }
+
 }

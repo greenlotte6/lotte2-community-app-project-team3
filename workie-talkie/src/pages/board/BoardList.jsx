@@ -35,8 +35,8 @@ export const BoardList = () => {
   }, [category]); // category 바뀔 때마다 다시 호출
 
   // 게시글 클릭 시 상세 페이지로 이동하는 핸들러
-  const handleRowClick = (ano) => {
-    navigate(`/board/${ano}`); // category와 ano를 URL에 포함하여 이동
+  const onClickHandlerForView = (category, ano) => {
+    navigate(`/board/${category}/${ano}`); // category와 ano를 URL에 포함하여 이동
   };
 
   return (
@@ -77,7 +77,9 @@ export const BoardList = () => {
                   <tr
                     key={post.id}
                     className={post.pinned ? "pinned-post" : ""}
-                    onClick={() => handleRowClick(post.ano)}
+                    onClick={() =>
+                      onClickHandlerForView(post.category, post.ano)
+                    }
                     style={{ cursor: "pointer" }}
                   >
                     <td>{idx + 1}</td>

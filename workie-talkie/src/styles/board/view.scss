@@ -1,0 +1,37 @@
+#board-view {
+  .board-view,
+  .comments {
+    background: white;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+  }
+
+  .comments {
+    margin-top: 10px;
+  }
+
+  .board-view h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  .board-meta {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .board-meta span {
+    margin-right: 20px;
+  }
+
+  .board-content {
+    line-height: 1.6;
+    color: #333;
+    min-height: 45vh;
+    border: 1px solid #dfdfdf;
+    padding: 10px;
+  }
+}

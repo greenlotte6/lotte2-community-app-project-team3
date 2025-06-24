@@ -1,4 +1,30 @@
-export const Notices = ({ notices, importances }) => {
+import { useState, useEffect } from "react";
+
+export const Notices = ({ notices, importances, onClickHandler }) => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // 글자 수 제한을 설정하는 로직 (창 크기에 따라 다르게 설정)
+  const getContentLimit = () => {
+    if (windowWidth > 1200) {
+      return 40; // 큰 화면에서는 100글자까지
+    } else if (windowWidth > 800) {
+      return 15; // 중간 화면에서는 75글자까지
+    } else {
+      return 10; // 작은 화면에서는 50글자까지
+    }
+  };
+
   // 1. importances 배열 자체를 wDate 최신순으로 정렬 (고정된 공지사항 내에서의 순서)
   const sortedImportances = [...importances].sort(
     (a, b) => new Date(b.wDate) - new Date(a.wDate)
@@ -44,10 +70,20 @@ export const Notices = ({ notices, importances }) => {
                 <tr
                   key={notice.ano}
                   className={isImportance ? "importance" : ""}
+                  onClick={() => onClickHandler(notice.category, notice.ano)}
+                  style={{ cursor: "pointer" }}
                 >
                   <td>{index + 1}</td>
                   <td>{notice.title}</td>
-                  <td>{notice.content}</td>
+                  <td>
+                    {notice.content
+                      .replace(/<p>/g, "")
+                      .replace(/<\/p>/g, "")
+                      .replace(/<strong>/g, "")
+                      .replace(/<\/strong>/g, "")
+                      .substr(0, getContentLimit()) +
+                      (notice.content.length > getContentLimit() ? "..." : "")}
+                  </td>
                   <td>{notice.comments ? notice.comments : 0}</td>
                   <td>{new Date(notice.wDate).toLocaleDateString()}</td>
                 </tr>

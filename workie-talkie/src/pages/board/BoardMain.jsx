@@ -50,15 +50,24 @@ export const BoardMain = () => {
     fetchData();
   }, []);
 
+  //핸들러
+  const onClickHandlerForView = (category, ano) => {
+    navigate(`/board/${category}/${ano}`);
+  };
+
   return user ? (
     <BoardLayout>
       <main className="main-content" id="board-main-container">
-        <Notices notices={notices} importances={importances} />
+        <Notices
+          notices={notices}
+          importances={importances}
+          onClickHandler={onClickHandlerForView}
+        />
 
         <div className="section-container">
-          <Frees frees={frees} />
+          <Frees frees={frees} onClickHandler={onClickHandlerForView} />
 
-          <News news={news} />
+          <News news={news} onClickHandler={onClickHandlerForView} />
 
           <Menus menus={menus} />
         </div>

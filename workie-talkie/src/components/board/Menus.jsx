@@ -1,7 +1,21 @@
+import { Link } from "react-router-dom";
+
 export const Menus = ({ menus }) => {
   return (
     <div className="menu">
-      <h3>🍱 식단표</h3>
+      <h3
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        🍱 식단표
+        <span>
+          <Link to="/board/menu">더보기</Link>
+        </span>
+      </h3>
+
       {menus.length === 0 ? (
         <p> 식단표가 없습니다. </p>
       ) : (

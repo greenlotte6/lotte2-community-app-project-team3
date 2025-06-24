@@ -55,3 +55,4 @@ export const BOARD_IMPORTANT = `${BOARD}/required`;
 export const BOARD_FREES = `${BOARD}/frees`;
 export const BOARD_RECENT = `${BOARD}/recent`;
 export const BOARD_MENUS = `${BOARD}/menus`;
+export const BOARD_COMMENTS = `${BOARD}/comments`;

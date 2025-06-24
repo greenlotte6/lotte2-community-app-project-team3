@@ -81,7 +81,7 @@ main.main-content {
 .post-card,
 .meal-card {
   border: 1px solid #e0e0e0;
-  padding: 12px;
+  padding: 6px;
   border-radius: 8px;
   margin-bottom: 12px;
   background-color: #ffffff;
@@ -98,6 +98,10 @@ main.main-content {
   color: #666;
 }
 
+h3 span {
+  font-size: 13px;
+}
+
 .meal-date {
   font-weight: 600;
   margin-bottom: 5px;
@@ -106,4 +110,30 @@ main.main-content {
 .meal-content span,
 .sides span {
   margin-right: 8px;
+}
+
+@media (max-width: 1200px) {
+  body {
+    font-size: 11px; /* 작은 화면에서는 글자 크기 줄이기 */
+  }
+
+  .free h3,
+  .new h3,
+  .menu h3,
+  .notices h3 {
+    font-size: 1rem; /* 섹션 제목 글자 크기 줄이기 */
+  }
+
+  .notices table {
+    font-size: 0.8rem; /* 테이블의 글자 크기 줄이기 */
+  }
+
+  .meal-date {
+    font-size: 0.7rem; /* 식단 날짜 글자 크기 줄이기 */
+  }
+
+  .meal-content span,
+  .sides span {
+    font-size: 0.7rem; /* 식단 내용 글자 크기 줄이기 */
+  }
 }

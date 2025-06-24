@@ -36,6 +36,7 @@ import { PageWrite } from "../pages/page/PageWrite";
 import { PageView } from "../pages/page/PageView";
 import TokenTest from "../pages/TokenTest";
 import { PageTrash } from "../pages/page/PageTrash";
+import { BoardView } from "../pages/board/BoardView";
 
 //라우터 생성
 
@@ -62,9 +63,10 @@ const router = createBrowserRouter([
       { path: "/setting/plan", element: <Plan /> },
       { path: "/setting/member", element: <Member /> },
       { path: "/board/main", element: <BoardMain /> },
-      //{ path: "/board/list", element: <BoardList /> },
       { path: "/board/:category", element: <BoardList /> },
       { path: "/board/write", element: <BoardWrite /> },
+      { path: "/board/:category/:ano", element: <BoardView /> },
+      //{ path: "/board/view", element: <BoardView /> },
       { path: "/page", element: <PageMain /> },
       { path: "/page/new", element: <PageWrite /> },
       { path: "/drive", element: <Drivepage /> },
