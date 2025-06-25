@@ -107,7 +107,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of(
+        configuration.setAllowedOriginPatterns(List.of(
                 "http://localhost:5173", // 프론트엔드 개발 서버
                 "https://workie-talkie.site",
                 "https://lotte2-community-app-project-team3-lac.vercel.app",
