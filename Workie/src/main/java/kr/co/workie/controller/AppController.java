@@ -214,7 +214,7 @@ public class AppController {
         String loginId = user.getId();
         log.info("✅ Current user ID for page count: {}", loginId);
 
-        return pageService.countPagesByWriter(user.getId());
+        return pageService.countPagesByWriter(loginId);
     }
 
 
