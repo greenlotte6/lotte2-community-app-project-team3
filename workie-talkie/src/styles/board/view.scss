@@ -30,8 +30,58 @@
   .board-content {
     line-height: 1.6;
     color: #333;
-    min-height: 45vh;
+    min-height: 40vh;
     border: 1px solid #dfdfdf;
     padding: 10px;
+  }
+
+  .comments {
+    li {
+      border-bottom: 1px solid #dfdfdf;
+      display: flex;
+    }
+
+    p.writer {
+      font-weight: 600;
+      margin-right: 5px;
+    }
+    button {
+      background-color: transparent;
+      border: none;
+    }
+
+    img {
+      width: 15px;
+    }
+
+    .comment-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    p.content {
+      width: 80%;
+    }
+
+    .comment-form {
+      padding: 5px 0px;
+      display: flex;
+      margin-top: 5px;
+
+      textarea {
+        width: 96%;
+      }
+
+      button {
+        padding: 10px;
+        margin-left: 1%;
+        border-radius: 10px;
+        background-color: #666;
+        color: #ffffff;
+      }
+    }
   }
 }

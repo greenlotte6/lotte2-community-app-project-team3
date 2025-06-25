@@ -11,6 +11,7 @@ import kr.co.workie.repository.ProjectCollaboratorRepository;
 import kr.co.workie.repository.ProjectRepository;
 import kr.co.workie.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -24,11 +25,13 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectCollaboratorRepository collaboratorRepository;
     private final TaskRepository taskRepository;
+    private final ModelMapper modelMapper;
 
-    public List<ProjectDTO> getAllProjects() {
-        return projectRepository.findAllOrderByCreatedAtDesc()
-                .stream()
-                .map(this::convertToDTO)
+    public List<Project> getAllProjects(String loginId) {
+        List<Project> projectList = projectRepository.findAllByCreator(loginId);
+
+        return projectList.stream()
+                .map(project -> modelMapper.map(project, Project.class))
                 .collect(Collectors.toList());
     }
 

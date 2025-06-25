@@ -135,6 +135,10 @@
     font-size: 0.95rem;
   }
 
+  .content p {
+    line-height: 2;
+  }
+
   .title span {
     font-weight: bold;
     margin-right: 6px;
@@ -156,8 +160,8 @@
 
   .notices2 h3 {
     font-size: 1rem;
-    margin: 10px 0 5px;
     color: #333;
+    font-weight: 600;
   }
 
   /* 진행률 막대 컨테이너 */
