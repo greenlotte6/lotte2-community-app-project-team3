@@ -27,15 +27,9 @@ export const Aside = () => {
             <li>
               <Link to="/board/menu">🍱식단표</Link>
             </li>
-
-            {/* 관리자 전용 메뉴 */}
-            {user?.role === "ROLE_ADMIN" && (
-              <>
-                <li>
-                  <Link to="/board/write">📋글 작성</Link>
-                </li>
-              </>
-            )}
+            <li>
+              <Link to="/board/write">📋글 작성</Link>
+            </li>
           </ul>
         </div>
       </aside>

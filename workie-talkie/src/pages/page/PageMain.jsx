@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"; // useEffect 훅을 임포트
+import { useEffect, useState } from "react"; // useEffect 훅을 임포트
 import { MainLayout } from "../../layouts/MainLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { Aside } from "../../components/page/Aside";

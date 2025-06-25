@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "projects")
+@Table(name = "Projects")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,19 +19,17 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(length = 500)
     private String description;
 
-    @Column(length = 20)
     private String type; // web, mobile, design, data, ai, other
 
-    @Column(name = "created_at")
+    private String creator;
+
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)

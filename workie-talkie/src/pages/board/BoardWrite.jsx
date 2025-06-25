@@ -94,9 +94,22 @@ export const BoardWrite = () => {
                   onChange={(e) => change_field("category", e.target.value)}
                 >
                   <option value="">-- 선택하세요 --</option>
-                  <option value="notice">공지사항</option>
-                  <option value="free">자유게시판</option>
-                  <option value="menu">식단표</option>
+
+                  {/* 관리자 전용 */}
+                  {user?.role === "ROLE_ADMIN" && (
+                    <>
+                      <option value="notice">공지사항</option>
+                      <option value="menu">식단표</option>
+                      <option value="free">자유게시판</option>
+                    </>
+                  )}
+
+                  {/* 일반 회원 */}
+                  {user?.role === "ROLE_MEMBER" && (
+                    <>
+                      <option value="free">자유게시판</option>
+                    </>
+                  )}
                 </select>
               </div>
 

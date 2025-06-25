@@ -104,6 +104,25 @@ public class AppController {
         return ResponseEntity.ok().build();
     }
 
+    // 🔹 다가오는 일정 3개 가져오기 (대시보드용)
+    @GetMapping("/calendar/upcoming")
+    public ResponseEntity<List<CalendarDTO>> getUpcomingEvents(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            // 인증되지 않은 경우 처리 (예: 로그인 페이지로 리다이렉트 또는 401 Unauthorized 반환)
+            // 여기서는 예시로 빈 리스트 반환
+            throw new AccessDeniedException("User not authenticated"); // 또는 throw new AccessDeniedException("User not authenticated");
+        }
+
+        // MyUserDetails 객체를 가져온 후, 그 안에서 실제 User 엔티티를 추출
+        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+        User user = userDetails.getUser();
+        String loginId = user.getId();
+
+
+        List<CalendarDTO> events = calendarService.getUpcomingEventsByWriter(loginId);
+        return ResponseEntity.ok(events);
+    }
+
     /* Page */
     //페이지 조회
     @GetMapping("/page")

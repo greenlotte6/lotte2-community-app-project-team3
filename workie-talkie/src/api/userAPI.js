@@ -6,6 +6,7 @@ import {
   USER_REGISTER,
   USER_TERMS,
   USER_INVITE,
+  CALENDAR_DASHBOARD,
 } from "./http";
 
 //회원 관련
@@ -15,8 +16,8 @@ export const getTerms = async () => {
     console.log(response);
 
     return response.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -26,8 +27,8 @@ export const postUser = async (data) => {
     console.log(response);
 
     return response.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -63,8 +64,8 @@ export const postUserLogin = async (data) => {
     console.log(response);
 
     return response.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -76,7 +77,20 @@ export const getUserLogout = async () => {
     console.log(response);
 
     return response.data;
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUpcomingEvents = async () => {
+  try {
+    const response = await axios.get(`${CALENDAR_DASHBOARD}`, {
+      withCredentials: true,
+    });
+    console.log(response);
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
   }
 };

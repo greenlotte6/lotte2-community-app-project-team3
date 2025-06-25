@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // 🔥 추가
 import { MainLayout } from "../../layouts/MainLayout";
 import { AddModal } from "../../components/project/AddModal";
 import { ModifyModal } from "../../components/project/ModifyModal";
+import { useLoginStore } from "../../stores/useLoginStore";
+import { getProject } from "../../api/projectAPI";
 
 export const ProjectMain = () => {
-  const navigate = useNavigate(); // 🔥 추가
+  const user = useLoginStore((state) => state.user);
+  const navigate = useNavigate();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isModifyModalOpen, setIsModifyModalOpen] = useState(false);
   const [projects, setProjects] = useState([]);
@@ -13,68 +16,26 @@ export const ProjectMain = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProject, setSelectedProject] = useState(null);
 
-  // 프로젝트 목록 조회
-  const fetchProjects = async () => {
-    try {
-      console.log("📡 프로젝트 목록 조회 시작...");
-
-      const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:8080/api/projects", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      console.log("📡 응답 상태:", response.status);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setProjects(data);
-      console.log("✅ 프로젝트 조회 성공:", data);
-    } catch (error) {
-      console.error("❌ 프로젝트 조회 실패:", error);
-      console.log("🔄 샘플 데이터 사용");
-      // 샘플 데이터
-      const sampleProjects = [
-        {
-          id: 1,
-          name: "워키 톡이 프로젝트",
-          description: "실시간 채팅과 협업 도구를 제공하는 워크플레이스 플랫폼",
-          type: "web",
-          createdAt: "2024-12-01T00:00:00",
-          memberCount: 5,
-        },
-        {
-          id: 2,
-          name: "모바일 앱 개발",
-          description: "iOS/Android 하이브리드 앱 개발 프로젝트",
-          type: "mobile",
-          createdAt: "2024-12-05T00:00:00",
-          memberCount: 3,
-        },
-        {
-          id: 3,
-          name: "AI 챗봇 시스템",
-          description: "고객 서비스용 AI 챗봇 개발 및 구축",
-          type: "ai",
-          createdAt: "2024-12-10T00:00:00",
-          memberCount: 4,
-        },
-      ];
-      setProjects(sampleProjects);
-    } finally {
-      setLoading(false); // 🔥 로딩 완료 처리
-    }
-  };
-
-  // 컴포넌트 마운트 시 프로젝트 목록 조회
+  //프로젝트 목록 불러오기
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    if (!user) {
+      navigate("/user/login");
+      return;
+    }
+
+    getProject()
+      .then((data) => {
+        console.log(data);
+        setProjects(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.error("프로젝트 불러오기 실패", err);
+      })
+      .finally(() => {
+        setLoading(false); // 🔥 이거 필수!
+      });
+  }, [user, navigate]);
 
   // 🔥 프로젝트 클릭 시 칸반보드로 이동
   const handleProjectClick = (project) => {
@@ -141,14 +102,6 @@ export const ProjectMain = () => {
     }
   };
 
-  // 검색 기능
-  const filteredProjects = projects.filter(
-    (project) =>
-      project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (project.description &&
-        project.description.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
-
   const typeIconMap = {
     web: "W",
     mobile: "M",
@@ -205,7 +158,7 @@ export const ProjectMain = () => {
     );
   }
 
-  return (
+  return user ? (
     <MainLayout>
       <div id="wrapper" className="project-main-container">
         <aside>
@@ -224,9 +177,7 @@ export const ProjectMain = () => {
 
         <main>
           <div className="main-header">
-            <h1 className="main-title">
-              My Project ({filteredProjects.length})
-            </h1>
+            <h1 className="main-title">My Project ()</h1>
             <div className="search-container">
               <span className="search-icon">🔍</span>
               <input
@@ -240,24 +191,23 @@ export const ProjectMain = () => {
           </div>
 
           <div className="projects-container">
-            {filteredProjects.length === 0 ? (
+            {projects.length === 0 ? (
               <div className="no-projects">
                 <div className="no-projects-icon">📁</div>
                 <div className="no-projects-text">
-                  {searchTerm
-                    ? "검색 결과가 없습니다."
-                    : "아직 프로젝트가 없습니다."}
+                  {projects
+                    ? "아직 프로젝트가 없습니다."
+                    : "검색 결과가 없습니다."}
                 </div>
                 <div className="no-projects-subtext">
-                  {searchTerm
-                    ? "다른 키워드로 검색해보세요."
-                    : '"NEW PROJECT" 버튼을 눌러 첫 번째 프로젝트를 만들어보세요!'}
+                  {projects
+                    ? '"NEW PROJECT" 버튼을 눌러 첫 번째 프로젝트를 만들어보세요!'
+                    : "다른 키워드로 검색해보세요."}
                 </div>
               </div>
             ) : (
-              filteredProjects.map((project, index) => (
-                <div key={project.id || index} className="project-item">
-                  {/* 🔥 클릭 이벤트 수정 */}
+              projects.map((project, index) => (
+                <div key={project.id} className="project-item">
                   <div
                     className="project-link"
                     onClick={() => handleProjectClick(project)}
@@ -277,7 +227,7 @@ export const ProjectMain = () => {
                           {typeNameMap[project.type] || "기타"}
                         </span>
                         <span className="project-date">
-                          {formatDate(project.createdAt) || project.date}
+                          {formatDate(project.createdAt)}
                         </span>
                       </div>
                       <div className="project-description">
@@ -344,5 +294,5 @@ export const ProjectMain = () => {
         </main>
       </div>
     </MainLayout>
-  );
+  ) : null;
 };

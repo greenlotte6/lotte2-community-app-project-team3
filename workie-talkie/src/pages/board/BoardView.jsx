@@ -113,7 +113,6 @@ export const BoardView = () => {
 
           {/* 댓글 및 관련 기능 추가 가능 */}
           <div className="comments">
-            <h3>댓글</h3>
             {Number(board.commented) === 0 ? (
               <p>댓글을 사용할 수 없습니다.</p>
             ) : (
@@ -122,20 +121,19 @@ export const BoardView = () => {
                   <li>댓글이 없습니다.</li>
                 ) : (
                   comments.map((comment, index) => (
-                    <li key={index}>
-                      <p>{comment.writer}</p>
-                      <p>{comment.content}</p>
-                      <p>{comment.regDate}</p>
-                      <button onClick={() => deleteCommentHandler(comment.cno)}>
-                        삭제
-                      </button>
-                      <button
-                        onClick={() =>
-                          updateCommentHandler(comment.cno, "새로운 내용")
-                        }
-                      >
-                        수정
-                      </button>
+                    <li key={index} className="comment-item">
+                      <p className="writer">{comment.writer}</p>
+                      <p className="content">{comment.content}</p>
+                      <p className="regDate">
+                        {new Date(comment.regDate).toLocaleDateString()}
+                      </p>
+                      <div className="comment-actions">
+                        <button
+                          onClick={() => deleteCommentHandler(comment.cno)}
+                        >
+                          <img src="/images/trashcan.png" alt="삭제" />
+                        </button>
+                      </div>
                     </li>
                   ))
                 )}
@@ -150,7 +148,7 @@ export const BoardView = () => {
                   onChange={commentHandler}
                   placeholder="댓글을 작성하세요"
                 />
-                <button onClick={submitCommentHandler}>댓글 작성</button>
+                <button onClick={submitCommentHandler}>작성</button>
               </div>
             )}
           </div>

@@ -33,8 +33,10 @@ export const SETTING_PLAN = `${SETTING}/plan`; //요금제
 export const CALENDAR = `${SERVER_HOST}/calendar`;
 export const PAGE = `${SERVER_HOST}/page`;
 export const BOARD = `${SERVER_HOST}/board`;
+export const PROJECT = `${SERVER_HOST}/api/project`;
 
 export const CALENDAR_ADD = `${CALENDAR}/add`;
+export const CALENDAR_DASHBOARD = `${CALENDAR}/upcoming`;
 
 export const PAGE_ADD = `${PAGE}/add`;
 export const PAGE_FAVORITE = `${PAGE}/favorite`;
@@ -56,3 +58,6 @@ export const BOARD_FREES = `${BOARD}/frees`;
 export const BOARD_RECENT = `${BOARD}/recent`;
 export const BOARD_MENUS = `${BOARD}/menus`;
 export const BOARD_COMMENTS = `${BOARD}/comments`;
+
+//project
+export const PROJECT_ADD = `${PROJECT}/create`;

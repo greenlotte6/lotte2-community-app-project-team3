@@ -16,6 +16,7 @@ public class ProjectDTO {
     private String type;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String creator;
     private List<TaskDTO> tasks;
     private List<CollaboratorDTO> collaborators;
     private Long todoCount;

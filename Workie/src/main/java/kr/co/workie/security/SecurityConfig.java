@@ -51,9 +51,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/user/check").permitAll()
                         .requestMatchers("/api/user/register").permitAll()
                         .requestMatchers("/api/user/login").permitAll()
-                        //.requestMatchers("/page/delete").permitAll()
+                        .requestMatchers("/calendar/upcoming").permitAll()
                         .requestMatchers("/", "/user/**", "/api/user/**").permitAll()
                         .requestMatchers("/favicon.ico", "/css/**", "/js/**", "/images/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/project", "/api/project/**").authenticated() // ⭐ 이 부분을 수정해야 합니다.
 
                         // 🔧 관리자 권한 필요
                         .requestMatchers("/admin/**").hasRole("ADMIN")
