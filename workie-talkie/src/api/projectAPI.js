@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axios";
 import { PROJECT, PROJECT_ADD } from "./http";
 
 export const postProject = async (data) => {

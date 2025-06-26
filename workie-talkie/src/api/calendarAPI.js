@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axios";
 import { CALENDAR_ADD, CALENDAR } from "./http";
 
 //캘린더 관련
