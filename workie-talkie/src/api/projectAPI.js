@@ -3,9 +3,7 @@ import { PROJECT, PROJECT_ADD } from "./http";
 
 export const postProject = async (data) => {
   try {
-    const response = await axios.post(`${PROJECT_ADD}`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.post(`${PROJECT_ADD}`, data, {});
     console.log(response);
 
     return response.data;
@@ -17,9 +15,7 @@ export const postProject = async (data) => {
 
 export const getProject = async () => {
   try {
-    const response = await axios.get(`${PROJECT}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${PROJECT}`, {});
     console.log(response);
 
     return response.data;

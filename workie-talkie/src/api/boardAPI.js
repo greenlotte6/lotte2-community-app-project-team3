@@ -15,9 +15,7 @@ import {
 //게시판 관련
 export const postBoard = async (boardData) => {
   try {
-    const response = await axios.post(`${BOARD_WRITE}`, boardData, {
-      withCredentials: true,
-    });
+    const response = await axios.post(`${BOARD_WRITE}`, boardData, {});
     return response.data;
   } catch (error) {
     console.error("게시글 저장 실패:", error);
@@ -27,9 +25,7 @@ export const postBoard = async (boardData) => {
 
 export const putArticle = async (data) => {
   try {
-    const response = await axios.put(`${BOARD}/${data.ano}`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.put(`${BOARD}/${data.ano}`, data, {});
     return response.data;
   } catch (error) {
     console.error("게시물 수정 실패:", error);
@@ -39,9 +35,7 @@ export const putArticle = async (data) => {
 
 export const deleteArticle = async (ano) => {
   try {
-    const response = await axios.delete(`${BOARD_DELETE}/${ano}`, {
-      withCredentials: true,
-    });
+    const response = await axios.delete(`${BOARD_DELETE}/${ano}`, {});
     return response.data;
   } catch (error) {
     console.error("게시물 삭제 실패:", error);
@@ -51,9 +45,7 @@ export const deleteArticle = async (ano) => {
 
 export const getBoardList = async (category) => {
   try {
-    const response = await axios.get(`${BOARD}/${category}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${BOARD}/${category}`, {});
     return response.data;
   } catch (error) {
     console.error("리스트 불러오기 실패:", error);
@@ -63,9 +55,7 @@ export const getBoardList = async (category) => {
 
 export const getArticle = async (category, ano) => {
   try {
-    const response = await axios.get(`${BOARD}/${category}/${ano}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${BOARD}/${category}/${ano}`, {});
     return response.data;
   } catch (error) {
     console.error("게시물 보기 실패:", error);
@@ -75,9 +65,7 @@ export const getArticle = async (category, ano) => {
 
 export const putPinned = async (data) => {
   try {
-    const response = await axios.put(`${BOARD_PINNED}/${data.ano}`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.put(`${BOARD_PINNED}/${data.ano}`, data, {});
     return response.data;
   } catch (error) {
     console.error("상단 고정하기 실패:", error);
@@ -87,9 +75,7 @@ export const putPinned = async (data) => {
 
 export const getNotices = async () => {
   try {
-    const response = await axios.get(`${BOARD_NOTICES}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${BOARD_NOTICES}`, {});
     return response.data;
   } catch (error) {
     console.error("공지사항 불러오기 실패:", error);
@@ -99,9 +85,7 @@ export const getNotices = async () => {
 
 export const getImportantNotices = async () => {
   try {
-    const response = await axios.get(`${BOARD_IMPORTANT}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${BOARD_IMPORTANT}`, {});
     return response.data;
   } catch (error) {
     console.error("중요공지 불러오기 실패:", error);
@@ -111,9 +95,7 @@ export const getImportantNotices = async () => {
 
 export const getFrees = async () => {
   try {
-    const response = await axios.get(`${BOARD_FREES}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${BOARD_FREES}`, {});
     return response.data;
   } catch (error) {
     console.error("자유게시판 불러오기 실패:", error);
@@ -123,9 +105,7 @@ export const getFrees = async () => {
 
 export const getMenus = async () => {
   try {
-    const response = await axios.get(`${BOARD_MENUS}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${BOARD_MENUS}`, {});
     return response.data;
   } catch (error) {
     console.error("식단표 불러오기 실패:", error);
@@ -135,9 +115,7 @@ export const getMenus = async () => {
 
 export const getRecent = async () => {
   try {
-    const response = await axios.get(`${BOARD_RECENT}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${BOARD_RECENT}`, {});
     return response.data;
   } catch (error) {
     console.error("최근 게시물 불러오기 실패:", error);
@@ -148,9 +126,7 @@ export const getRecent = async () => {
 //댓글
 export const getComments = async (ano) => {
   try {
-    const response = await axios.get(`${BOARD_COMMENTS}/${ano}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${BOARD_COMMENTS}/${ano}`, {});
     return response.data;
   } catch (error) {
     console.error("댓글 조회 실패:", error);
@@ -160,9 +136,7 @@ export const getComments = async (ano) => {
 
 export const postComment = async (ano, comment) => {
   try {
-    const response = await axios.post(`${BOARD_COMMENTS}/${ano}`, comment, {
-      withCredentials: true,
-    });
+    const response = await axios.post(`${BOARD_COMMENTS}/${ano}`, comment, {});
     return response.data;
   } catch (error) {
     console.error("댓글 작성 실패:", error);
@@ -172,9 +146,7 @@ export const postComment = async (ano, comment) => {
 
 export const putComment = async (data) => {
   try {
-    const response = await axios.put(`${BOARD_COMMENTS}/${data.cno}`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.put(`${BOARD_COMMENTS}/${data.cno}`, data, {});
     return response.data;
   } catch (error) {
     console.error("댓글 수정 실패:", error);
@@ -184,9 +156,7 @@ export const putComment = async (data) => {
 
 export const deleteComment = async (cno) => {
   try {
-    const response = await axios.delete(`${BOARD_COMMENTS}/${cno}`, {
-      withCredentials: true,
-    });
+    const response = await axios.delete(`${BOARD_COMMENTS}/${cno}`, {});
     return response.data;
   } catch (error) {
     console.error("댓글 삭제 실패", error);

@@ -4,9 +4,7 @@ import { CALENDAR_ADD, CALENDAR } from "./http";
 //캘린더 관련
 export const getCalendar = async () => {
   try {
-    const response = await axios.get(`${CALENDAR}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${CALENDAR}`, {});
     return response.data;
   } catch (err) {
     console.error("calendar 요청 실패", err);
@@ -16,9 +14,7 @@ export const getCalendar = async () => {
 
 export const postCalendar = async (data) => {
   try {
-    const response = await axios.post(`${CALENDAR_ADD}`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.post(`${CALENDAR_ADD}`, data, {});
     console.log(response);
 
     return response.data;
@@ -30,9 +26,7 @@ export const postCalendar = async (data) => {
 
 export const putCalendar = async (data) => {
   try {
-    const response = await axios.put(`${CALENDAR}/${data.cno}`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.put(`${CALENDAR}/${data.cno}`, data, {});
     return response.data;
   } catch (err) {
     console.log(err);
@@ -42,9 +36,7 @@ export const putCalendar = async (data) => {
 
 export const deleteCalendar = async (cno) => {
   try {
-    const response = await axios.delete(`${CALENDAR}/${cno}`, {
-      withCredentials: true,
-    });
+    const response = await axios.delete(`${CALENDAR}/${cno}`, {});
     return response.data;
   } catch (err) {
     console.error("❌ 일정 삭제 실패", err);

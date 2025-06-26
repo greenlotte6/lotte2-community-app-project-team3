@@ -34,9 +34,7 @@ export const postUser = async (data) => {
 
 export const postUserInvite = async (data) => {
   try {
-    const response = await axios.post(USER_INVITE, data, {
-      withCredentials: true,
-    });
+    const response = await axios.post(USER_INVITE, data, {});
     return response.data;
   } catch (error) {
     console.error("❌ 초대 실패:", error);
@@ -58,9 +56,7 @@ export const checkUserId = async (id) => {
 
 export const postUserLogin = async (data) => {
   try {
-    const response = await axios.post(`${USER_LOGIN}`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.post(`${USER_LOGIN}`, data, {});
     console.log(response);
 
     return response.data;
@@ -71,9 +67,7 @@ export const postUserLogin = async (data) => {
 
 export const getUserLogout = async () => {
   try {
-    const response = await axios.get(`${USER_LOGOUT}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${USER_LOGOUT}`, {});
     console.log(response);
 
     return response.data;
@@ -84,9 +78,7 @@ export const getUserLogout = async () => {
 
 export const getUpcomingEvents = async () => {
   try {
-    const response = await axios.get(`${CALENDAR_DASHBOARD}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${CALENDAR_DASHBOARD}`, {});
     console.log(response);
 
     return response.data;
