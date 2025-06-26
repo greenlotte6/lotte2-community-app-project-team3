@@ -25,8 +25,6 @@ export const Login = () => {
     e.preventDefault();
 
     const fetchData = async () => {
-      const token = data.token;
-
       try {
         const data = await postUserLogin(user);
 
@@ -35,8 +33,10 @@ export const Login = () => {
           throw new Error("로그인 응답이 올바르지 않습니다");
         }
 
-        if (token) {
-          localStorage.setItem("token", token);
+        if (data.token) {
+          //localStorage.setItem("token", data.token);
+          localStorage.setItem("accessToken", data.token); // 🔥 핵심 수정 포인트
+          console.log("✅ accessToken 저장됨:", data.token);
         }
 
         // ✅ 필요한 필드만 골라 명시적으로 상태에 저장
