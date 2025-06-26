@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axios";
 import { SETTING_PROFILE, SETTING_MEMBERS } from "./http";
 
 // 프로필 조회
