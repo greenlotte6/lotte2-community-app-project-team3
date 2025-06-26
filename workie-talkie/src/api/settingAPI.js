@@ -4,9 +4,7 @@ import { SETTING_PROFILE, SETTING_MEMBERS } from "./http";
 // 프로필 조회
 export const getProfile = async () => {
   try {
-    const response = await axios.get(`${SETTING_PROFILE}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${SETTING_PROFILE}`, {});
     return response.data;
   } catch (err) {
     console.error("프로필 요청 실패", err);
@@ -17,9 +15,7 @@ export const getProfile = async () => {
 // 프로필 수정
 export const putProfile = async (data) => {
   try {
-    const response = await axios.put(`${SETTING_PROFILE}`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.put(`${SETTING_PROFILE}`, data, {});
     return response.data;
   } catch (err) {
     console.error("프로필 수정 실패", err);
@@ -30,9 +26,7 @@ export const putProfile = async (data) => {
 // 멤버 리스트 조회
 export const getMembers = async () => {
   try {
-    const response = await axios.get(`${SETTING_MEMBERS}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${SETTING_MEMBERS}`, {});
 
     return response.data;
   } catch (err) {
@@ -48,9 +42,7 @@ export const putMembers = async (member) => {
     const response = await axios.put(
       `${SETTING_MEMBERS}/${member.id}`,
       member,
-      {
-        withCredentials: true,
-      }
+      {}
     );
 
     return response.data;

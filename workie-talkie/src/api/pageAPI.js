@@ -13,9 +13,7 @@ import {
 //페이지 관련
 export const getPage = async () => {
   try {
-    const response = await axios.get(`${PAGE}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${PAGE}`, {});
     return response.data;
   } catch (err) {
     console.error("page 요청 실패", err);
@@ -25,9 +23,7 @@ export const getPage = async () => {
 
 export const postPage = async (data) => {
   try {
-    const response = await axios.post(`${PAGE_ADD}`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.post(`${PAGE_ADD}`, data, {});
     console.log(response);
 
     return response.data;
@@ -40,9 +36,7 @@ export const postPage = async (data) => {
 export const putFavoritePage = async (data) => {
   console.log("putFavoritePage 내부 data:", data); // ✨ 이 로그 추가 ✨
   try {
-    const response = await axios.put(`${PAGE_FAVORITE}/${data.pno}`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.put(`${PAGE_FAVORITE}/${data.pno}`, data, {});
     console.log(response);
     return response.data;
   } catch (err) {
@@ -53,9 +47,7 @@ export const putFavoritePage = async (data) => {
 
 export const putPage = async (data) => {
   try {
-    const response = await axios.put(`${PAGE}/${data.pno}`, data, {
-      withCredentials: true,
-    });
+    const response = await axios.put(`${PAGE}/${data.pno}`, data, {});
     return response.data;
   } catch (err) {
     console.log(err);
@@ -65,9 +57,7 @@ export const putPage = async (data) => {
 
 export const getPageByPno = async (pno) => {
   try {
-    const response = await axios.get(`${PAGE}/${pno}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${PAGE}/${pno}`, {});
     return response.data;
   } catch (err) {
     console.log(err);
@@ -77,9 +67,7 @@ export const getPageByPno = async (pno) => {
 
 export const getTotal = async () => {
   try {
-    const response = await axios.get(`${PAGE_TOTAL}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${PAGE_TOTAL}`, {});
     return response.data;
   } catch (err) {
     console.error("페이지 총 갯수 요청 실패", err);
@@ -89,9 +77,7 @@ export const getTotal = async () => {
 
 export const getRecent = async () => {
   try {
-    const response = await axios.get(`${PAGE_RECENT}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${PAGE_RECENT}`, {});
     return response.data;
   } catch (err) {
     console.error("최근페이지 요청 실패", err);
@@ -101,9 +87,7 @@ export const getRecent = async () => {
 
 export const getParent = async () => {
   try {
-    const response = await axios.get(`${PAGE_PARENT}`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(`${PAGE_PARENT}`, {});
     return response.data;
   } catch (err) {
     console.error("부모페이지 요청 실패", err);
@@ -113,9 +97,7 @@ export const getParent = async () => {
 
 export const deletePageByPno = async (pno) => {
   try {
-    const response = await axios.delete(`${PAGE}/${pno}`, {
-      withCredentials: true,
-    });
+    const response = await axios.delete(`${PAGE}/${pno}`, {});
     return response.data;
   } catch (err) {
     console.error("❌ 페이지 삭제 실패", err);
@@ -125,13 +107,7 @@ export const deletePageByPno = async (pno) => {
 
 export const softDeletePage = async (pno) => {
   try {
-    const response = await axios.put(
-      `${PAGE_DELETE}/${pno}`,
-      {},
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.put(`${PAGE_DELETE}/${pno}`, {});
     return response.data;
   } catch (err) {
     console.error(err);
@@ -141,13 +117,7 @@ export const softDeletePage = async (pno) => {
 
 export const recoveryPage = async (pno) => {
   try {
-    const response = await axios.put(
-      `${PAGE_RECOVER}/${pno}`,
-      {},
-      {
-        withCredentials: true,
-      }
-    );
+    const response = await axios.put(`${PAGE_RECOVER}/${pno}`, {});
     console.log("PAGE_RECOVER:", PAGE_RECOVER);
     return response.data;
   } catch (err) {
