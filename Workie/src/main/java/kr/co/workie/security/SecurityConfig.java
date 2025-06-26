@@ -111,11 +111,12 @@ public class SecurityConfig {
                 "http://localhost:5173", // 프론트엔드 개발 서버
                 "https://workie-talkie.site",
                 "https://lotte2-community-app-project-team3-lac.vercel.app",
-                "https://workie-talkie-personal-kappa.vercel.app"
+                "https://workie-talkie-personal-kappa.vercel.app",
+                "http://3.36.66.1:8080"
         ));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
 
